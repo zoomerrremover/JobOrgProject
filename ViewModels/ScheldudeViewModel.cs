@@ -4,7 +4,7 @@ using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.ViewModels;
 
-public class ScheldudeViewModel
+public partial class ScheldudeViewModel
     : BaseViewModel
 {
     async Task GoToLogInScreen()

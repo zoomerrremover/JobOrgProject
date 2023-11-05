@@ -18,6 +18,7 @@ namespace TheJobOrganizationApp
                 });
 
             builder.Services.AddSingleton<ScheldudeViewModel>();
+            builder.Services.AddSingleton<LogInViewModel>();
             builder.Services.AddSingleton<LogInPage>();
             builder.Services.AddSingleton<ScheldudePage>();
 

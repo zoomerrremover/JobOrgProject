@@ -7,7 +7,6 @@ namespace TheJobOrganizationApp
         public AppShell()
         {
             Routing.RegisterRoute(nameof(LogInPage), typeof(LogInPage));
-            Routing.RegisterRoute(nameof(ScheldudePage), typeof(ScheldudePage));
             Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
             InitializeComponent();
         }

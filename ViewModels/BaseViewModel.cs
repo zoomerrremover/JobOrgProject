@@ -2,7 +2,7 @@
 
 namespace TheJobOrganizationApp.ViewModels
 {
-    public class BaseViewModel : ObservableObject
+    public partial class BaseViewModel : ObservableObject
     {
 
     }
