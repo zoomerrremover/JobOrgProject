@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using TheJobOrganizationApp.View;
+using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp
 {
@@ -15,8 +17,12 @@ namespace TheJobOrganizationApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<ScheldudeViewModel>();
+            builder.Services.AddSingleton<LogInPage>();
+            builder.Services.AddSingleton<ScheldudePage>();
+
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

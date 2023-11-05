@@ -1,8 +1,8 @@
 namespace TheJobOrganizationApp.View;
 
-public partial class JobCreatePage: ContentPage
+public partial class LogInPage : ContentPage
 {
-	public JobCreatePage()
+	public LogInPage()
 	{
 		InitializeComponent();
 	}

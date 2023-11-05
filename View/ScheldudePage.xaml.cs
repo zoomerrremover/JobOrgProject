@@ -1,11 +1,14 @@
-﻿namespace TheJobOrganizationApp
+﻿using TheJobOrganizationApp.ViewModels;
+
+namespace TheJobOrganizationApp
 {
-    public partial class Scheldude : ContentPage
+    public partial class ScheldudePage : ContentPage
     {
         int count = 0;
 
-        public Scheldude()
+        public ScheldudePage(ScheldudeViewModel bc)
         {
+            BindingContext = bc;
             InitializeComponent();
         }
 

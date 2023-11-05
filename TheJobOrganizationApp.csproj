@@ -55,65 +55,19 @@
 
 	<ItemGroup>
 	  <Folder Include="Services\" />
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="View\CreatePage\CustomerCreate.xaml.cs">
-	    <DependentUpon>CustomerCreate.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\CreatePage\JobDetailPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\CreatePage\LocationCreatePage.xaml.cs">
-	    <DependentUpon>LocationCreatePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\CreatePage\VehicleCreatePage.xaml.cs">
-	    <DependentUpon>VehicleCreatePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\CreatePage\WorkerCreatePage.xaml.cs">
-	    <DependentUpon>WorkerCreatePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\DetailPages\JobDetailPage.xaml.cs">
-	    <DependentUpon>JobDetailPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="View\Scheldude.xaml.cs">
-	    <DependentUpon>Scheldude.xaml</DependentUpon>
+	  <Compile Update="View\ScheldudePage.xaml.cs">
+	    <DependentUpon>ScheldudePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\CreatePage\CustomerCreate.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CreatePage\JobDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CreatePage\LocationCreatePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CreatePage\VehicleCreatePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\CreatePage\WorkerCreatePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPages\CustomerDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPages\JobDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPages\LocationDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="View\ListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPages\VehicleDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="View\DetailPages\WorkerDetailPage.xaml">
+	  <MauiXaml Update="View\LogInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
