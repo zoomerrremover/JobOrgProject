@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheJobOrganizationApp.ScheldudePage">
+             x:Class="TheJobOrganizationApp.ScheldudePage"
+             xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler">
+    <Grid RowDefinitions="45,*" ColumnDefinitions="30,240,240,*">
+        <Button Text="Workers picked" Grid.Row="0" Grid.Column="1"/>
+        <scheduler:SfScheduler Grid.Row="1" Grid.ColumnSpan="4"  AllowedViews="Day,Week,Month"/>
 
+    </Grid>
 
 
 </ContentPage>

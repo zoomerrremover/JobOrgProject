@@ -1,7 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Models
 {
-    public class Task:TConstrained
+    public class JOTask:TConstrained
     {
         List<Worker> workers;
         

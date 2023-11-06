@@ -1,7 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Models;
 
-public class Worker : IUser, IHasLocation, IHasContacts , IHasItems
+public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems
 
 {
     public string Password { get; set ; }

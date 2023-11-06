@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels;
-
+using Syncfusion.Maui.Core.Hosting;
 namespace TheJobOrganizationApp
 {
     public static class MauiProgram
@@ -9,6 +9,7 @@ namespace TheJobOrganizationApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            builder.ConfigureSyncfusionCore();
             builder
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
