@@ -26,6 +26,8 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<LogInPage>();
             builder.Services.AddSingleton<ScheldudePage>();
             builder.Services.AddSingleton<FakeDataFactory>();
+            builder.Services.AddSingleton<IDataStorage>();
+            builder.Services.AddSingleton<IAPIService>(new APITemp());
 
 #if DEBUG
             builder.Logging.AddDebug();
