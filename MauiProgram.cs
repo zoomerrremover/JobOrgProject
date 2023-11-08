@@ -2,6 +2,9 @@
 using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
+using Bogus;
+using TheJobOrganizationApp.Services;
+
 namespace TheJobOrganizationApp
 {
     public static class MauiProgram
@@ -22,6 +25,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<LogInViewModel>();
             builder.Services.AddSingleton<LogInPage>();
             builder.Services.AddSingleton<ScheldudePage>();
+            builder.Services.AddSingleton<FakeDataFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

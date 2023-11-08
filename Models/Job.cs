@@ -3,6 +3,8 @@ namespace TheJobOrganizationApp.Models
 {
     public class Job:TConstrained 
     {
-        List<JOTask> tasks;
+        public List<JOTask> Tasks;
+
+        public Contractor Contractor;
     }
 }
