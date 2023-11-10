@@ -4,6 +4,7 @@ using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using Bogus;
 using TheJobOrganizationApp.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TheJobOrganizationApp
 {
@@ -26,8 +27,9 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<LogInPage>();
             builder.Services.AddSingleton<ScheldudePage>();
             builder.Services.AddSingleton<FakeDataFactory>();
-            builder.Services.AddSingleton<IDataStorage>();
-            builder.Services.AddSingleton<IAPIService>(new APITemp());
+            builder.Services.AddSingleton<IDataStorage>(new DataStorageTemp());
+            builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(),provider.GetRequiredService<FakeDataFactory>()));
+
 
 #if DEBUG
             builder.Logging.AddDebug();

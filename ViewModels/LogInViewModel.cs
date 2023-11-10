@@ -5,6 +5,7 @@ namespace TheJobOrganizationApp.ViewModels;
 
 public partial class LogInViewModel: BaseViewModel
 {
+
     [RelayCommand]
     async Task goToScheldude()
     {

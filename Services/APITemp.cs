@@ -25,7 +25,7 @@ namespace TheJobOrganizationApp.Services
                 .SelectMany(worker => worker.Items)
                 .ToList();
             dataStorange.Contractors = dataStorange.Jobs
-                .SelectMany(job => job.Contractor)
+                .Select(job => job.Contractor)
                 .ToList();
 
 
