@@ -20,12 +20,12 @@ namespace TheJobOrganizationApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddSingleton<ScheldudeViewModel>();
-            builder.Services.AddSingleton<LogInViewModel>();
-            builder.Services.AddSingleton<WorkerPickerPage>();
+            builder.Services.AddTransient<ScheldudeViewModel>();
+            builder.Services.AddTransient<LogInViewModel>();
+            builder.Services.AddTransient<WorkerPickerPage>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
-            builder.Services.AddSingleton<LogInPage>();
-            builder.Services.AddSingleton<ScheldudePage>();
+            builder.Services.AddTransient<LogInPage>();
+            builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<FakeDataFactory>();
             builder.Services.AddSingleton<IDataStorage>(new DataStorageTemp());
             builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(),provider.GetRequiredService<FakeDataFactory>()));

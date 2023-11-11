@@ -6,6 +6,7 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
              x:DataType="viewmodels:WorkerPickerViewModel"
              Title="WorkerPicker">
+    
     <Grid RowDefinitions="60,*" ColumnDefinitions="*,60">
         <Entry Grid.Row="0" Grid.Column="0" Margin="9"/>
         <Button Grid.Row="0" Grid.Column="1" Margin="9"/>
@@ -18,7 +19,7 @@
                 <DataTemplate x:DataType="models:Worker">
                     <Frame HeightRequest="150"  Margin="0" >
                         <Grid Padding="0"
-                            ColumnDefinitions="125,125,*">
+                            ColumnDefinitions="125,240,*">
                             <CheckBox></CheckBox>
                             <VerticalStackLayout Grid.Column="1" Padding="10" VerticalOptions="Center">
                                 <Label Text="{Binding Name}" FontSize="Large" TextColor="Black"></Label>

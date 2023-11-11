@@ -10,11 +10,13 @@ public partial class ScheldudeViewModel
 {
     public ScheldudeViewModel(IAPIService apiservice)
     {
+        GoToLogInScreen();
         apiservice.Connect();
         apiservice.Initiate();
     }
     async Task GoToLogInScreen()
     {
+
         await Shell.Current.GoToAsync($"{nameof(LogInPage)}");
     }
     public ScheldudeViewModel()

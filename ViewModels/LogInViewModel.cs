@@ -5,6 +5,10 @@ namespace TheJobOrganizationApp.ViewModels;
 
 public partial class LogInViewModel: BaseViewModel
 {
+    public LogInViewModel(ScheldudeViewModel contextToPush)
+    {
+        this.contextToPush = contextToPush;
+    }
 
     [RelayCommand]
     async Task goToScheldude()
