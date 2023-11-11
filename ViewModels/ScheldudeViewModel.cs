@@ -10,7 +10,8 @@ public partial class ScheldudeViewModel
 {
     public ScheldudeViewModel(IAPIService apiservice)
     {
-        
+        apiservice.Connect();
+        apiservice.Initiate();
     }
     async Task GoToLogInScreen()
     {

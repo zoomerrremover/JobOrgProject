@@ -11,7 +11,7 @@ namespace TheJobOrganizationApp.Services
         }
         public void Initiate()
         {
-            dataStorange.Jobs = FakeDataFactory.GenerateJobs(100);
+            dataStorange.Jobs = FakeDataFactory.JobGenerator.Generate(100);
             dataStorange.Workers = dataStorange.Jobs
                 .SelectMany(job => job.Tasks)
                 .SelectMany(task => task.Workers)

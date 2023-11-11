@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.WorkerPickerPage"
+             xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
+             x:DataType="viewmodels:WorkerPickerViewModel"
+             Title="WorkerPicker">
+    <Grid RowDefinitions="60,*" ColumnDefinitions="*,60">
+        <Entry Grid.Row="0" Grid.Column="0" Margin="9"/>
+        <Button Grid.Row="0" Grid.Column="1" Margin="9"/>
+        <CollectionView 
+            ItemsSource="{Binding ObsWorkers}"
+            SelectionMode="None"
+            Grid.Row="1" 
+            Grid.ColumnSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Worker">
+                    <Frame HeightRequest="150"  Margin="0" >
+                        <Grid Padding="0"
+                            ColumnDefinitions="125,125,*">
+                            <CheckBox></CheckBox>
+                            <VerticalStackLayout Grid.Column="1" Padding="10" VerticalOptions="Center">
+                                <Label Text="{Binding Name}" FontSize="Large" TextColor="Black"></Label>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

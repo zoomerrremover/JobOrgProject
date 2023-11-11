@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.ScheldudePage"
              xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler">
-    <Grid RowDefinitions="45,*" ColumnDefinitions="30,240,240,*">
-        <Button Text="Workers picked" Grid.Row="0" Grid.Column="1"/>
+    <Grid ColumnDefinitions="30,240,240,*">
         <scheduler:SfScheduler Grid.Row="1" Grid.ColumnSpan="4"  AllowedViews="Day,Week,Month"/>
 
     </Grid>

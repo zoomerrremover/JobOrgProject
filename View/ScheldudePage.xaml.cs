@@ -1,17 +1,16 @@
 ﻿using TheJobOrganizationApp.ViewModels;
 
-namespace TheJobOrganizationApp
+namespace TheJobOrganizationApp;
+
+public partial class ScheldudePage : ContentPage
 {
-    public partial class ScheldudePage : ContentPage
+
+    public ScheldudePage(ScheldudeViewModel bc)
     {
-        int count = 0;
-
-        public ScheldudePage(ScheldudeViewModel bc)
-        {
-            BindingContext = bc;
-            InitializeComponent();
-        }
-
+        BindingContext = bc;
+        InitializeComponent();
 
     }
+
+
 }

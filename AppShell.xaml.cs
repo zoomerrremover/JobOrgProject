@@ -8,6 +8,7 @@ namespace TheJobOrganizationApp
         {
             Routing.RegisterRoute(nameof(LogInPage), typeof(LogInPage));
             Routing.RegisterRoute(nameof(ListPage), typeof(ListPage));
+            Routing.RegisterRoute(nameof(WorkerPickerPage), typeof(WorkerPickerPage));
             InitializeComponent();
         }
     }

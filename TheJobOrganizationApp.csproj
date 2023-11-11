@@ -59,6 +59,9 @@
 	  <Compile Update="View\ScheldudePage.xaml.cs">
 	    <DependentUpon>ScheldudePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\WorkerPickerPage.xaml.cs">
+	    <DependentUpon>WorkerPickerPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,7 +71,7 @@
 	  <MauiXaml Update="View\LogInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\WorkerPicker.xaml">
+	  <MauiXaml Update="View\WorkerPickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

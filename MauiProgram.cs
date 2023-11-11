@@ -2,9 +2,7 @@
 using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
-using Bogus;
 using TheJobOrganizationApp.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TheJobOrganizationApp
 {
@@ -24,6 +22,8 @@ namespace TheJobOrganizationApp
 
             builder.Services.AddSingleton<ScheldudeViewModel>();
             builder.Services.AddSingleton<LogInViewModel>();
+            builder.Services.AddSingleton<WorkerPickerPage>();
+            builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddSingleton<LogInPage>();
             builder.Services.AddSingleton<ScheldudePage>();
             builder.Services.AddSingleton<FakeDataFactory>();
