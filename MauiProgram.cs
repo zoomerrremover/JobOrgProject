@@ -29,6 +29,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<FakeDataFactory>();
             builder.Services.AddSingleton<IDataStorage>(new DataStorageTemp());
             builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(),provider.GetRequiredService<FakeDataFactory>()));
+            builder.Services.AddSingleton<GlobalControls>();
 
 
 #if DEBUG

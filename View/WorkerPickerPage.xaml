@@ -16,13 +16,14 @@
             Grid.Row="1" 
             Grid.ColumnSpan="2">
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Worker">
+                <DataTemplate x:DataType="models:WorkerUIL">
                     <Frame HeightRequest="150"  Margin="0" >
                         <Grid Padding="0"
                             ColumnDefinitions="125,240,*">
-                            <CheckBox></CheckBox>
+                            <CheckBox 
+                                      IsChecked="{Binding IsPicked}"/>
                             <VerticalStackLayout Grid.Column="1" Padding="10" VerticalOptions="Center">
-                                <Label Text="{Binding Name}" FontSize="Large" TextColor="Black"></Label>
+                                <Label Text="{Binding Worker.Name}" FontSize="Large" TextColor="Black"></Label>
                             </VerticalStackLayout>
                         </Grid>
                     </Frame>

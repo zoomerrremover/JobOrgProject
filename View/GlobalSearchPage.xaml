@@ -3,10 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.GlobalSearchPage"
              Title="GlobalSearchPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="60,60,*" >
+        <Grid ColumnDefinitions="*,60" Grid.Row="0">
+            <Entry Grid.Column="0"></Entry>
+            <Button Grid.Column="1"></Button>
+        </Grid>
+        <Grid ColumnDefinitions="400,*,240" Grid.Row="1" Margin="8" >
+            <HorizontalStackLayout Spacing="8">
+            <Button Text="Add"></Button>
+            <Button Text="Delete"></Button>
+            </HorizontalStackLayout>
+            <Picker Grid.Column="2"></Picker>
+        </Grid>
+        <CollectionView Grid.Row="2"></CollectionView>
+        
+    </Grid>
 </ContentPage>

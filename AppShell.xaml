@@ -16,6 +16,10 @@
         Title="Workers"
         ContentTemplate="{DataTemplate view:WorkerPickerPage}"
         Route="WorkerPickerPage" />
+        <ShellContent
+        Title="Database"
+        ContentTemplate="{DataTemplate view:GlobalSearchPage}"
+        Route="GlobalSearchPage" />
     </TabBar>
 
 </Shell>

@@ -5,7 +5,10 @@
              xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              Shell.TabBarIsVisible="True">
     <Grid ColumnDefinitions="30,240,240,*">
-        <scheduler:SfScheduler Grid.Row="1" Grid.ColumnSpan="4"  AllowedViews="Day,Week,Month"/>
+        <scheduler:SfScheduler Grid.Row="1"
+                               Grid.ColumnSpan="4"
+                               AllowedViews="Day,Week,Month"
+                                />
 
     </Grid>
 
