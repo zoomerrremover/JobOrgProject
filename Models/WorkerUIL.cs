@@ -11,7 +11,7 @@ namespace TheJobOrganizationApp.Models
 
         public static explicit operator WorkerUIL(Worker worker)
         {
-            return new WorkerUIL {Worker=worker,IsPicked=true};
+            return new WorkerUIL {Worker=worker,IsPicked=false};
         }
     }
 }

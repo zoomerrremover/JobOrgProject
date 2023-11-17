@@ -1,16 +1,18 @@
 ﻿
+using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Services;
 
-public class DataStorageTemp : IDataStorage
+public class DataStorageTemp : BaseViewModel ,IDataStorage
 
 {
-    public List<Item> Items { get; set; }
-    public List<Worker> Workers { get; set; }
-    public List<Job> Jobs { get ; set ; }
-    public List<JOTask> Tasks { get ; set ; }
-    public List<Contractor> Contractors { get ; set ; }
+    public ObservableCollection<Item> Items { get; set; }
+    public ObservableCollection<WorkerUIL> Workers { get; set; }
+    public ObservableCollection<Job> Jobs { get ; set ; }
+    public ObservableCollection<JOTask> Tasks { get ; set ; }
+    public ObservableCollection<Contractor> Contractors { get ; set ; }
 
     public DataStorageTemp()
     {

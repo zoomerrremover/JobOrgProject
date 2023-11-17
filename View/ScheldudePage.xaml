@@ -9,7 +9,7 @@
         <scheduler:SfScheduler Grid.Row="1"
                                Grid.ColumnSpan="4"
                                AllowedViews="Day,Week,Month"
-                               AppointmentsSource="{Binding Appointments}"/>
+                               AppointmentsSource="{Binding Controls.appointments}"/>
 
     </Grid>
 

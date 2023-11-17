@@ -23,6 +23,7 @@ namespace TheJobOrganizationApp.Services
                 .RuleFor(m => m.EmailForLogIn, (f, m) => m.Email)
                 .RuleFor(m => m.Password, f => f.Random.Word())
                 .RuleFor(m => m.Location, f => f.Address.FullAddress())
+                .RuleFor(m => m.Color, f=> f.Commerce.Color())
                 .RuleFor(m => m.Items, f => ItemGenerator.Generate(f.Random.Int(0, 20)));
             ItemGenerator = new Faker<Item>()
                 .RuleFor(m => m.Name, f => f.Commerce.Product())

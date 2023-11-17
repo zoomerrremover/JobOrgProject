@@ -1,33 +1,51 @@
 ﻿
+using System.Collections.ObjectModel;
+using TheJobOrganizationApp.Models;
+
 namespace TheJobOrganizationApp.Services
 {
     public class APITemp : IAPIService
     {
-        public APITemp(IDataStorage dataStorange,FakeDataFactory fakeDataFactory)
+        public APITemp(IDataStorage dataStorange,FakeDataFactory fakeDataFactory,int numberOfGeneratedData = 1)
         {
             this.dataStorange = dataStorange;
             FakeDataFactory = fakeDataFactory;
-            Initiate();
+            Initiate(numberOfGeneratedData);
         }
-        public void Initiate()
+        static ObservableCollection<T> ToObservableCol<T>( IEnumerable<T> listToFillFrom)
         {
-            dataStorange.Jobs = FakeDataFactory.JobGenerator.Generate(10);
-            dataStorange.Workers = dataStorange.Jobs
+            var listToFill = new ObservableCollection<T>();
+            foreach (T thing in listToFillFrom)
+            {
+                listToFill.Add(thing);
+            }
+            return listToFill;
+        }
+
+        public void Initiate(int generations)
+        {
+            var localJobs = FakeDataFactory.JobGenerator.Generate(generations);
+            var localWorker = localJobs
                 .SelectMany(job => job.Tasks)
                 .SelectMany(task => task.Workers)
+                .Select(w=> (WorkerUIL)w)
                 .ToList();
-            dataStorange.Tasks = dataStorange.Jobs
+            var localTasks = localJobs
                 .SelectMany(job => job.Tasks)
                 .ToList();
-            dataStorange.Items = dataStorange.Jobs
+            var localItems = localJobs
                 .SelectMany(job => job.Tasks)
                 .SelectMany(task => task.Workers)
                 .SelectMany(worker => worker.Items)
                 .ToList();
-            dataStorange.Contractors = dataStorange.Jobs
+            var localConts = localJobs
                 .Select(job => job.Contractor)
                 .ToList();
-
+            dataStorange.Jobs = ToObservableCol(localJobs);
+            dataStorange.Workers = ToObservableCol(localWorker);
+            dataStorange.Tasks = ToObservableCol(localTasks);
+            dataStorange.Items = ToObservableCol(localItems);
+            dataStorange.Contractors = ToObservableCol(localConts);
 
 
         }

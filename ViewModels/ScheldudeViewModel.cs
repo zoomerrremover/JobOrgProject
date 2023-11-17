@@ -11,36 +11,20 @@ namespace TheJobOrganizationApp.ViewModels;
 public partial class ScheldudeViewModel
     : BaseViewModel
 {
-    GlobalControls controls;
-
-    IDataStorage storage;
+    IDataStorage Data;
 
     [ObservableProperty]
-    ObservableCollection<SchedulerAppointment> appointments = new();
 
-    public ScheldudeViewModel(IAPIService apiservice,GlobalControls controls,IDataStorage storage)
+    GlobalControls controls;
+        
+
+    public ScheldudeViewModel(IAPIService apiservice,IDataStorage storage,GlobalControls controls)
     {
+        Data = storage;
         this.controls = controls;
-        this.storage = storage;
-        GoToLogInScreen();
+       // GoToLogInScreen();
         apiservice.Connect();
         apiservice.Initiate();
-        InitiateAppointment();
-    }
-    public void InitiateAppointment()
-    {
-        var ListofIds = controls.WorkersPicked.Select(w=>w.Worker.Id).ToList();
-        foreach (var pickedWorkerID in ListofIds)
-        {
-            foreach (var task in storage.Tasks)
-            {
-                if(ListofIds.Contains(pickedWorkerID))
-                {
-                    var NewAppointment = new SchedulerAppointment { StartTime = task.StartTime , EndTime = task.FinishTime , Subject = task.Name };
-                    Appointments.Add(NewAppointment);
-                }
-            }
-        }
     }
     async Task GoToLogInScreen()
     {

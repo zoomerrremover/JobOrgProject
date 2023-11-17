@@ -1,4 +1,7 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
@@ -7,16 +10,34 @@ namespace TheJobOrganizationApp.ViewModels;
 
 public partial class WorkerPickerViewModel : BaseViewModel
 {
-    IDataStorage Data;
+    [ObservableProperty]
+
+    IDataStorage data;
 
     GlobalControls controls;
+    [RelayCommand]
+    void UpdateList()
+    {
+        Data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
+        controls.WorkersPicked.ToList().ForEach(w =>
+        {
+            var tasks = Data.Tasks.Where(t => t.Workers.Contains(w.Worker));
+            foreach (var task in tasks)
+            {
+                if (controls.tasksOnTheScreen.Contains(task.Id)) {
+                    controls.tasksOnTheScreen.Add(task.Id);
+                    var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name , Background = w.Worker.Color};
+                    controls.appointments.Add(newAppointment);
+                }
+            }
+        });
+
+    }
 
     public WorkerPickerViewModel(IDataStorage Storange, GlobalControls controls)
     {
         Data = Storange;
         this.controls = controls;
-        controls.WorkersPicked = ObsWorkers.Where(x => x.IsPicked == true).ToList();
-
         InitiateList();
 
     }
@@ -25,7 +46,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
         ObsWorkers.Clear();
         foreach (var worker in Data.Workers)
         {
-            ObsWorkers.Add((WorkerUIL)worker);
+            ObsWorkers.Add(worker);
         }
     }
     //public void WorkerChoosen(object sender,CheckedChangedEventArgs worker)

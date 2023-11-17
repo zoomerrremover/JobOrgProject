@@ -6,12 +6,12 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
              x:DataType="viewmodels:WorkerPickerViewModel"
              Title="WorkerPicker">
-    
+
     <Grid RowDefinitions="60,*" ColumnDefinitions="*,60">
         <Entry Grid.Row="0" Grid.Column="0" Margin="9"/>
         <Button Grid.Row="0" Grid.Column="1" Margin="9"/>
         <CollectionView 
-            ItemsSource="{Binding ObsWorkers}"
+            ItemsSource="{Binding Data.Workers}"
             SelectionMode="None"
             Grid.Row="1" 
             Grid.ColumnSpan="2">
@@ -21,7 +21,14 @@
                         <Grid Padding="0"
                             ColumnDefinitions="125,240,*">
                             <CheckBox 
-                                      IsChecked="{Binding IsPicked}"/>
+                                      IsChecked="{Binding IsPicked}">
+                                <CheckBox.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WorkerPickerViewModel}}, Path=UpdateListCommand}">
+                                    </TapGestureRecognizer>
+                                </CheckBox.GestureRecognizers>
+                            </CheckBox>
+                                      
                             <VerticalStackLayout Grid.Column="1" Padding="10" VerticalOptions="Center">
                                 <Label Text="{Binding Worker.Name}" FontSize="Large" TextColor="Black"></Label>
                             </VerticalStackLayout>
