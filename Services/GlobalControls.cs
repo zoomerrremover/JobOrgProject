@@ -18,13 +18,11 @@ namespace TheJobOrganizationApp.Services
         //        return localReturn;
         //    }
         //}
-        public ObservableCollection<SchedulerAppointment> appointments { get; set; }
 
         public List <Guid> tasksOnTheScreen = new();
         public GlobalControls(IDataStorage storange)
         {
             Data = storange;
-            appointments = new ObservableCollection<SchedulerAppointment>();
             WorkersPicked = new ObservableCollection<WorkerUIL>();
         }
     }

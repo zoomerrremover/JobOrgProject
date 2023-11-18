@@ -19,18 +19,6 @@ public partial class WorkerPickerViewModel : BaseViewModel
     void UpdateList()
     {
         Data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
-        controls.WorkersPicked.ToList().ForEach(w =>
-        {
-            var tasks = Data.Tasks.Where(t => t.Workers.Contains(w.Worker));
-            foreach (var task in tasks)
-            {
-                if (controls.tasksOnTheScreen.Contains(task.Id)) {
-                    controls.tasksOnTheScreen.Add(task.Id);
-                    var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name , Background = w.Worker.Color};
-                    controls.appointments.Add(newAppointment);
-                }
-            }
-        });
 
     }
 
