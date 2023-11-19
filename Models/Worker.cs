@@ -12,5 +12,5 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems
     public string PhoneNumber { get ; set ; }
     public string Buissness { get ; set ; }
     public List<Item> Items { get ; set ; }
-    public Brush Color { get; set; }
+    public Color Color { get; set; }
 }

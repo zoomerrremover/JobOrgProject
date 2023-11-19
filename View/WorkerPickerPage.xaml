@@ -7,20 +7,25 @@
              x:DataType="viewmodels:WorkerPickerViewModel"
              Title="WorkerPicker">
 
-    <Grid RowDefinitions="60,*" ColumnDefinitions="*,60">
-        <Entry Grid.Row="0" Grid.Column="0" Margin="9"/>
-        <Button Grid.Row="0" Grid.Column="1" Margin="9"/>
+    <Grid RowDefinitions="60,60,*">
+        <Entry Grid.Row="0"  Margin="9" Text="{Binding MainEntryText}"/>
+        <HorizontalStackLayout Grid.Row="1">
+            <Button Text="Select All"/>
+            <Button Text="Filters"/>
+            <Button Text="Create"/>
+        </HorizontalStackLayout>
         <CollectionView 
-            ItemsSource="{Binding Data.Workers}"
+            ItemsSource="{Binding ObsWorkers}"
             SelectionMode="None"
-            Grid.Row="1" 
-            Grid.ColumnSpan="2">
+            Grid.Row="2" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkerUIL">
-                    <Frame HeightRequest="150"  Margin="0" >
+                    <Frame HeightRequest="150"  Margin="0">
                         <Grid Padding="0"
-                            ColumnDefinitions="125,240,*">
-                            <CheckBox 
+                            ColumnDefinitions="60,125,240,*"
+                            VerticalOptions="Fill">
+                            <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                            <CheckBox Grid.Column="1"
                                       IsChecked="{Binding IsPicked}">
                                 <CheckBox.GestureRecognizers>
                                     <TapGestureRecognizer 
@@ -28,8 +33,8 @@
                                     </TapGestureRecognizer>
                                 </CheckBox.GestureRecognizers>
                             </CheckBox>
-                                      
-                            <VerticalStackLayout Grid.Column="1" Padding="10" VerticalOptions="Center">
+
+                            <VerticalStackLayout Grid.Column="2" Padding="10" VerticalOptions="Center">
                                 <Label Text="{Binding Worker.Name}" FontSize="Large" TextColor="Black"></Label>
                             </VerticalStackLayout>
                         </Grid>

@@ -7,7 +7,7 @@ using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Services
 {
-    public class GlobalControls:BaseViewModel
+    public class SharedControls:BaseViewModel
     {
         IDataStorage Data;
         public ObservableCollection<WorkerUIL> WorkersPicked { get; set; }
@@ -19,8 +19,7 @@ namespace TheJobOrganizationApp.Services
         //    }
         //}
 
-        public List <Guid> tasksOnTheScreen = new();
-        public GlobalControls(IDataStorage storange)
+        public SharedControls(IDataStorage storange)
         {
             Data = storange;
             WorkersPicked = new ObservableCollection<WorkerUIL>();

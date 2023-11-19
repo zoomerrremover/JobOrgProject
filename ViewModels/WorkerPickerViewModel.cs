@@ -10,31 +10,40 @@ namespace TheJobOrganizationApp.ViewModels;
 
 public partial class WorkerPickerViewModel : BaseViewModel
 {
-    [ObservableProperty]
-
     IDataStorage data;
 
-    GlobalControls controls;
+    string mainEntryText = "";
+    public string MainEntryText {
+        get => mainEntryText;
+        set {
+            InitiateList(value);
+            mainEntryText = value;
+        } }
+    SharedControls controls;
     [RelayCommand]
     void UpdateList()
     {
-        Data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
+        data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
 
     }
 
-    public WorkerPickerViewModel(IDataStorage Storange, GlobalControls controls)
+    public WorkerPickerViewModel(IDataStorage Storange, SharedControls controls)
     {
-        Data = Storange;
+        data = Storange;
         this.controls = controls;
         InitiateList();
 
     }
-    void InitiateList()
+    void InitiateList(string searchPromt = "")
     {
         ObsWorkers.Clear();
-        foreach (var worker in Data.Workers)
+        searchPromt ??= "";
+        foreach (var worker in data.Workers)
         {
-            ObsWorkers.Add(worker);
+            if(worker.Worker.Name.Contains(searchPromt))
+            {
+                ObsWorkers.Add(worker);
+            }
         }
     }
     //public void WorkerChoosen(object sender,CheckedChangedEventArgs worker)
@@ -46,7 +55,6 @@ public partial class WorkerPickerViewModel : BaseViewModel
     //    }
     //    contorls.WorkersPicked.Add(worker);
     //}
-    public IEnumerable<Worker> Workers { get; private set; }
     public ObservableCollection<WorkerUIL> ObsWorkers { get; } = new();
 
 }

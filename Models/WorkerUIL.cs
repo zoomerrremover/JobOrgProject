@@ -1,6 +1,9 @@
 ﻿
 
 
+using System.Drawing;
+using Color = Microsoft.Maui.Graphics.Color;
+
 namespace TheJobOrganizationApp.Models
 {
     public class WorkerUIL
@@ -14,6 +17,8 @@ namespace TheJobOrganizationApp.Models
             return new WorkerUIL {Worker=worker,IsPicked=false};
         }
 
+        public string RGBCode { get => Worker.Color.ToHex(); }
+}
 
     }
-}
+
