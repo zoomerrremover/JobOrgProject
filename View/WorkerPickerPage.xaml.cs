@@ -1,6 +1,6 @@
 namespace TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels;
-public partial class WorkerPickerPage : ContentPage
+public partial class WorkerPickerPage
 {
 	public WorkerPickerPage(WorkerPickerViewModel bc)
 	{

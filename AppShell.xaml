@@ -13,10 +13,6 @@
         ContentTemplate="{DataTemplate local:ScheldudePage}"
         Route="ScheldudePage" />
         <ShellContent
-        Title="Workers"
-        ContentTemplate="{DataTemplate view:WorkerPickerPage}"
-        Route="WorkerPickerPage" />
-        <ShellContent
         Title="Database"
         ContentTemplate="{DataTemplate view:GlobalSearchPage}"
         Route="GlobalSearchPage" />

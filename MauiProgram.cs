@@ -3,6 +3,9 @@ using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using TheJobOrganizationApp.Services;
+using Mopups.Hosting;
+using Mopups.Interfaces;
+using Mopups.Services;
 
 namespace TheJobOrganizationApp
 {
@@ -14,15 +17,16 @@ namespace TheJobOrganizationApp
             builder.ConfigureSyncfusionCore();
             builder
                 .UseMauiApp<App>()
+                .ConfigureMopups()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
-
+            builder.Services.AddSingleton<IPopupNavigation>(MopupService.Instance);
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
-            builder.Services.AddTransient<WorkerPickerPage>();
+            builder.Services.AddSingleton<WorkerPickerPage>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();

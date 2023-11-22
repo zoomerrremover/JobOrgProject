@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Layouts;
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
@@ -13,6 +14,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
     IDataStorage data;
 
     string mainEntryText = "";
+
     public string MainEntryText {
         get => mainEntryText;
         set {
@@ -23,6 +25,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
     [RelayCommand]
     void UpdateList()
     {
+        controls.WorkersPicked.Clear();
         data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
 
     }
@@ -34,17 +37,40 @@ public partial class WorkerPickerViewModel : BaseViewModel
         InitiateList();
 
     }
-    void InitiateList(string searchPromt = "")
+    async void InitiateList(string searchPromt = "")
     {
         ObsWorkers.Clear();
         searchPromt ??= "";
-        foreach (var worker in data.Workers)
+        var totalWorkers = data.Workers.OrderByDescending(w => w.IsPicked);
+        foreach (var worker in totalWorkers)
         {
-            if(worker.Worker.Name.Contains(searchPromt))
+            if (worker.Worker.Name.Contains(searchPromt))
             {
                 ObsWorkers.Add(worker);
             }
         }
+    }
+    [RelayCommand]
+
+    void SelectAll()
+    {
+        foreach (var worker in data.Workers)
+        {
+            worker.IsPicked = true;
+        }
+        InitiateList();
+        UpdateList();
+    }
+    [RelayCommand]
+
+    void UnSelectAll()
+    {
+        foreach (var worker in data.Workers)
+        {
+            worker.IsPicked = false;
+        }
+        InitiateList();
+        UpdateList();
     }
     //public void WorkerChoosen(object sender,CheckedChangedEventArgs worker)
     //{
@@ -55,6 +81,6 @@ public partial class WorkerPickerViewModel : BaseViewModel
     //    }
     //    contorls.WorkersPicked.Add(worker);
     //}
-    public ObservableCollection<WorkerUIL> ObsWorkers { get; } = new();
+    public ObservableCollection<WorkerUIL> ObsWorkers { get; set; } = new();
 
 }

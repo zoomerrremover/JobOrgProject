@@ -1,7 +1,13 @@
 ﻿
+using TheJobOrganizationApp.Services;
+
 namespace TheJobOrganizationApp.ViewModels
 {
-    internal class GlobalSearchViewModel
+    public class GlobalSearchViewModel:BaseViewModel
     {
+        public GlobalSearchViewModel(SharedControls controls)
+        {
+            
+        }
     }
 }

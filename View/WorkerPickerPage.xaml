@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.WorkerPickerPage"
              xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
+             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
              x:DataType="viewmodels:WorkerPickerViewModel"
-             Title="WorkerPicker">
+             Title="WorkerPicker"
+             BackgroundColor="#80000000">
 
-    <Grid RowDefinitions="60,60,*">
+    <Grid RowDefinitions="60,45,*" WidthRequest="400" HeightRequest="400" Background="White">
         <Entry Grid.Row="0"  Margin="9" Text="{Binding MainEntryText}"/>
-        <HorizontalStackLayout Grid.Row="1">
-            <Button Text="Select All"/>
-            <Button Text="Filters"/>
-            <Button Text="Create"/>
-        </HorizontalStackLayout>
+        <Grid ColumnDefinitions="*,*" Grid.Row="1">
+            <Button Grid.Column="0"
+                    Text="Select All"
+                    Command="{Binding SelectAllCommand}"/>
+            <Button Grid.Column="1"
+                    Text="Unselect All"
+                    Command="{Binding UnSelectAllCommand}"/>
+        </Grid>
         <CollectionView 
             ItemsSource="{Binding ObsWorkers}"
             SelectionMode="None"
             Grid.Row="2" >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:WorkerUIL">
-                    <Frame HeightRequest="150"  Margin="0">
-                        <Grid Padding="0"
-                            ColumnDefinitions="60,125,240,*"
-                            VerticalOptions="Fill">
+                    <Frame HeightRequest="70"  Margin="0">
+                        <HorizontalStackLayout>
                             <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
-                            <CheckBox Grid.Column="1"
-                                      IsChecked="{Binding IsPicked}">
+                            <CheckBox
+                                      IsChecked="{Binding IsPicked}"
+                                      VerticalOptions="Center">
                                 <CheckBox.GestureRecognizers>
                                     <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WorkerPickerViewModel}}, Path=UpdateListCommand}">
                                     </TapGestureRecognizer>
                                 </CheckBox.GestureRecognizers>
                             </CheckBox>
-
-                            <VerticalStackLayout Grid.Column="2" Padding="10" VerticalOptions="Center">
-                                <Label Text="{Binding Worker.Name}" FontSize="Large" TextColor="Black"></Label>
-                            </VerticalStackLayout>
-                        </Grid>
+                            <Label Text="{Binding Worker.Name}"
+                                 FontSize="Micro"
+                                 TextColor="Black"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"></Label>
+                        </HorizontalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
-</ContentPage>
+</mopups:PopupPage>

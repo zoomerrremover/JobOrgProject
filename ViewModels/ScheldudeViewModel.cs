@@ -1,6 +1,8 @@
 ﻿
 
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Mopups.Interfaces;
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
 using System.Drawing;
@@ -18,10 +20,16 @@ public partial class ScheldudeViewModel
     SharedControls controls;
 
     List<Guid> tasksOnTheScreen = new();
+
+    IPopupNavigation PopUpService;
+
+    WorkerPickerViewModel WorkerPickerVM;
     public ObservableCollection<SchedulerAppointment> appointments { get; }
 
     void InitializeAppointments (object sender = null,EventArgs e = null)
     {
+        appointments.Clear ();
+        tasksOnTheScreen.Clear ();
         controls.WorkersPicked.ToList().ForEach(w =>
         {
             var tasks = Data.Tasks.Where(t => t.Workers.Contains(w.Worker));
@@ -37,16 +45,24 @@ public partial class ScheldudeViewModel
         });
     }
 
-    public ScheldudeViewModel(IAPIService apiservice,IDataStorage storage,SharedControls controls)
+    public ScheldudeViewModel(WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IAPIService apiservice,IDataStorage storage,SharedControls controls)
     {
         Data = storage;
         this.controls = controls;
         appointments = new();
+        this.WorkerPickerVM = WorkerPickerVM;
+        this.PopUpService = PopUpService;
         controls.WorkersPicked.CollectionChanged += InitializeAppointments;
        // GoToLogInScreen();
         apiservice.Connect();
         apiservice.Initiate();
         InitializeAppointments();
+    }
+    [RelayCommand]
+    void WorkerPicker()
+    {
+
+        PopUpService.PushAsync(new WorkerPickerPage(WorkerPickerVM));
     }
     async Task GoToLogInScreen()
     {
