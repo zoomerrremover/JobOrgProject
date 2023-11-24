@@ -33,6 +33,10 @@ namespace TheJobOrganizationApp.Services
             var localTasks = localJobs
                 .SelectMany(job => job.Tasks)
                 .ToList();
+            var localPlaces = localJobs
+                .SelectMany(job => job.Tasks)
+                .Select(task => task.Place)
+                .ToList();
             var localItems = localJobs
                 .SelectMany(job => job.Tasks)
                 .SelectMany(task => task.Workers)
@@ -41,9 +45,10 @@ namespace TheJobOrganizationApp.Services
             var localConts = localJobs
                 .Select(job => job.Contractor)
                 .ToList();
+            dataStorange.Places = ToObservableCol(localPlaces);
             dataStorange.Jobs = ToObservableCol(localJobs);
             dataStorange.Workers = ToObservableCol(localWorker);
-            dataStorange.Tasks = ToObservableCol(localTasks);
+            dataStorange.Assignments = ToObservableCol(localTasks);
             dataStorange.Items = ToObservableCol(localItems);
             dataStorange.Contractors = ToObservableCol(localConts);
 

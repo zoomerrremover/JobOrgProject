@@ -31,7 +31,11 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<FakeDataFactory>();
+            builder.Services.AddSingleton<GlobalSearchPage>();
+            builder.Services.AddSingleton<GlobalSearchViewModel>();
             builder.Services.AddSingleton<IDataStorage>(new DataStorageTemp());
+            builder.Services.AddSingleton<ILoadableContent>(new LoadableContent());
+            builder.Services.AddSingleton<Initializator>();
             builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(),provider.GetRequiredService<FakeDataFactory>(),10));
             builder.Services.AddSingleton<SharedControls>();
 

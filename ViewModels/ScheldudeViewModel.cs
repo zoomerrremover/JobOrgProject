@@ -32,7 +32,7 @@ public partial class ScheldudeViewModel
         tasksOnTheScreen.Clear ();
         controls.WorkersPicked.ToList().ForEach(w =>
         {
-            var tasks = Data.Tasks.Where(t => t.Workers.Contains(w.Worker));
+            var tasks = Data.Assignments.Where(t => t.Workers.Contains(w.Worker));
             foreach (var task in tasks)
             {
                 if (!tasksOnTheScreen.Contains(task.Id))
@@ -45,7 +45,7 @@ public partial class ScheldudeViewModel
         });
     }
 
-    public ScheldudeViewModel(WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IAPIService apiservice,IDataStorage storage,SharedControls controls)
+    public ScheldudeViewModel(Initializator init, WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IAPIService apiservice,IDataStorage storage,SharedControls controls)
     {
         Data = storage;
         this.controls = controls;

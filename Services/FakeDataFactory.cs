@@ -9,7 +9,7 @@ namespace TheJobOrganizationApp.Services
        public Faker<Worker> WorkerGenerator { get; set; }
        public Faker<Item> ItemGenerator { get; set; }
        public Faker<Place> PlaceGenerator { get; set; }
-       public Faker<JOTask> TaskGenerator { get; set; }
+       public Faker<Assignment> TaskGenerator { get; set; }
 
        public Faker<Job> JobGenerator { get; set; }
        public Faker<Contractor> ContractorGenerator { get; set; }
@@ -32,12 +32,12 @@ namespace TheJobOrganizationApp.Services
             PlaceGenerator = new Faker<Place>()
                 .RuleFor(m => m.Name, f => f.Address.FullAddress())
                 .RuleFor(m => m.Location, (f, m) => m.Name);
-            TaskGenerator = new Faker<JOTask>()
+            TaskGenerator = new Faker<Assignment>()
                 .RuleFor(m => m.Name, f => f.Random.Words(4))
                 .RuleFor(m => m.Description, f => f.Random.Words(30))
                 .RuleFor(m => m.StartTime, f => f.Date.Recent())
                 .RuleFor(m => m.FinishTime, f => f.Date.Soon())
-                .RuleFor(m => m.Place, PlaceGenerator.Generate(1).First())
+                .RuleFor(m => m.Place, f => f.PickRandom(PlaceGenerator.Generate(100)))
                 .RuleFor(m => m.Workers,f => WorkerGenerator.Generate(f.Random.Int(0,5)));
             ContractorGenerator = new Faker<Contractor>()
                 .RuleFor(m => m.Name, f => f.Name.FullName())
@@ -50,7 +50,7 @@ namespace TheJobOrganizationApp.Services
                 .RuleFor(m => m.StartTime, f => f.Date.Recent())
                 .RuleFor(m => m.FinishTime, f => f.Date.Soon())
                 .RuleFor(m => m.Tasks, f => TaskGenerator.Generate(f.Random.Int(0, 5)))
-                .RuleFor(m => m.Contractor, ContractorGenerator.Generate(1).First());
+                .RuleFor(m => m.Contractor,f=> f.PickRandom(ContractorGenerator.Generate(100)));
         }
 
     }

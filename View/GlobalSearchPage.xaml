@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.GlobalSearchPage"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
-             x:DataType="viewmodels:ScheldudeViewModel"
+             x:DataType="viewmodels:GlobalSearchViewModel"
+             xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
              Title="GlobalSearchPage">
     <Grid RowDefinitions="60,60,*" >
         <Grid ColumnDefinitions="*,60" Grid.Row="0">
@@ -16,9 +17,29 @@
             <Button Text="Delete"></Button>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"
+                    ItemsSource="{Binding TypePickerItems}"
+                    SelectedItem="{Binding SelectedModel}"
                     ></Picker>
         </Grid>
-        <CollectionView Grid.Row="2"></CollectionView>
-        
+        <CollectionView 
+    ItemsSource="{Binding ObsModels}"
+    SelectionMode="None"
+    Grid.Row="2" >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Thing">
+                    <Frame HeightRequest="70"  Margin="0">
+                        <HorizontalStackLayout>
+                            <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                                <Label Text="{Binding Name}"
+                         FontSize="Micro"
+                         TextColor="Black"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"></Label>
+                        </HorizontalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
     </Grid>
 </ContentPage>
