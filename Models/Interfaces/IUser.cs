@@ -1,5 +1,4 @@
-﻿
-namespace TheJobOrganizationApp.Models
+﻿namespace TheJobOrganizationApp.Models.Interfaces
 {
     public interface IUser
     {

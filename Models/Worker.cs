@@ -1,4 +1,6 @@
 ﻿
+using TheJobOrganizationApp.Models.Interfaces;
+
 namespace TheJobOrganizationApp.Models;
 
 [Model(DisplayableInTheGlobalSearch = true)]

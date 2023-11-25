@@ -11,14 +11,21 @@ namespace TheJobOrganizationApp.ViewModels
         [ObservableProperty]
         List<string> typePickerItems = new();
 
-        [ObservableProperty]
-
         string searchPromt = "";
+        public string SearchPromt
+        {
+            get => searchPromt;
+            set
+            {
+                searchPromt = value;
+                LoadModels();
+            }
+        }
 
 
         [ObservableProperty]
 
-        string selectedModel = "Items";
+        string selectedModel = typeof(Item).Name;
 
         GlobalSettings settings;
         IDataStorage dataStorage { get; }
@@ -49,6 +56,7 @@ namespace TheJobOrganizationApp.ViewModels
             dataStorage = data;
             this.settings = settings;
             InitiateModelChoice();
+            OnSelectedModelChanging("", selectedModel);
         }
 
         void InitiateModelChoice()

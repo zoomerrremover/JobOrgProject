@@ -8,7 +8,8 @@
              Title="GlobalSearchPage">
     <Grid RowDefinitions="60,60,*" >
         <Grid ColumnDefinitions="*,60" Grid.Row="0">
-            <Entry Grid.Column="0"></Entry>
+            <Entry Grid.Column="0"
+                   Text="{Binding SearchPromt}"></Entry>
             <Button Grid.Column="1"></Button>
         </Grid>
         <Grid ColumnDefinitions="400,*,240" Grid.Row="1" Margin="8" >
