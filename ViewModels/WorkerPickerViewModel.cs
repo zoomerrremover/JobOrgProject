@@ -21,7 +21,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
             InitiateList(value);
             mainEntryText = value;
         } }
-    public ObservableCollection<Worker> WorkersPicked { get; set; }
+    public ObservableCollection<Worker> WorkersPicked { get; set; } = new();
 
     ObservableCollection<Worker> workers { get => data.GetItems<Worker>(); }
     [RelayCommand]
