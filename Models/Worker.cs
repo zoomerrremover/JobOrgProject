@@ -1,6 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Models;
 
+[Model(DisplayableInTheGlobalSearch = true)]
 public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems
 
 {
@@ -13,4 +14,6 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems
     public string Buissness { get ; set ; }
     public List<Item> Items { get ; set ; }
     public Color Color { get; set; }
+
+    public bool IsPicked { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Models;
 
+[Model(DisplayableInTheGlobalSearch =false)] 
 public record HistoryRecord
 {
     public string Subject {  get; set; }

@@ -44,7 +44,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
         var totalWorkers = data.Workers.OrderByDescending(w => w.IsPicked);
         foreach (var worker in totalWorkers)
         {
-            if (worker.Worker.Name.Contains(searchPromt))
+            if (worker.Name.Contains(searchPromt))
             {
                 ObsWorkers.Add(worker);
             }
@@ -75,12 +75,12 @@ public partial class WorkerPickerViewModel : BaseViewModel
     //public void WorkerChoosen(object sender,CheckedChangedEventArgs worker)
     //{
 
-    //    if(contorls.WorkersPicked.Contains(worker))
+    //    if(contorlssPicked.Contains(worker))
     //    {
     //        throw new Exception("Logic error");
     //    }
-    //    contorls.WorkersPicked.Add(worker);
+    //    contorlssPicked.Add(worker);
     //}
-    public ObservableCollection<WorkerUIL> ObsWorkers { get; set; } = new();
+    public ObservableCollection<Worker> ObsWorkers { get; set; } = new();
 
 }

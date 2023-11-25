@@ -1,6 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Models
 {
+    [Model(DisplayableInTheGlobalSearch = true)]
     public class Contractor : Thing, IHasContacts
     {
         public string PhoneNumber { get ; set ; }

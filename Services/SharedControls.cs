@@ -10,19 +10,14 @@ namespace TheJobOrganizationApp.Services
     public class SharedControls:BaseViewModel
     {
         IDataStorage Data;
-        public ObservableCollection<WorkerUIL> WorkersPicked { get; set; }
-        //    get
-        //    {
-        //        var localReturn = new ObservableCollection<WorkerUIL>();
-        //        Data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => localReturn.Add(w));
-        //        return localReturn;
-        //    }
-        //}
+        public ObservableCollection<Worker> WorkersPicked { get; set; }
+
+        public List<string> GSDisplayableModels {  get; set; }
 
         public SharedControls(IDataStorage storange)
         {
             Data = storange;
-            WorkersPicked = new ObservableCollection<WorkerUIL>();
+            WorkersPicked = new ObservableCollection<Worker>();
         }
     }
 }

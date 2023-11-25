@@ -28,7 +28,6 @@ namespace TheJobOrganizationApp.Services
             var localWorker = localJobs
                 .SelectMany(job => job.Tasks)
                 .SelectMany(task => task.Workers)
-                .Select(w=> (WorkerUIL)w)
                 .ToList();
             var localTasks = localJobs
                 .SelectMany(job => job.Tasks)
@@ -37,9 +36,7 @@ namespace TheJobOrganizationApp.Services
                 .SelectMany(job => job.Tasks)
                 .Select(task => task.Place)
                 .ToList();
-            var localItems = localJobs
-                .SelectMany(job => job.Tasks)
-                .SelectMany(task => task.Workers)
+            var localItems = localWorker
                 .SelectMany(worker => worker.Items)
                 .ToList();
             var localConts = localJobs

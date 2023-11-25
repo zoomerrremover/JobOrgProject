@@ -6,11 +6,6 @@
 
         public Dictionary<string,Dictionary<string,string>> SettedText { get; set; }
 
-        public List<string> InteractableModels { get; set; }
-
-        public void RegisterModels(List<string> models)
-        {
-        }
         public void RegisterColors(List<string> colors)
         {
         }

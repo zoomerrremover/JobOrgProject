@@ -24,7 +24,7 @@
             SelectionMode="None"
             Grid.Row="2" >
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:WorkerUIL">
+                <DataTemplate x:DataType="models:Worker">
                     <Frame HeightRequest="70"  Margin="0">
                         <HorizontalStackLayout>
                             <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
@@ -37,7 +37,7 @@
                                     </TapGestureRecognizer>
                                 </CheckBox.GestureRecognizers>
                             </CheckBox>
-                            <Label Text="{Binding Worker.Name}"
+                            <Label Text="{Binding Name}"
                                  FontSize="Micro"
                                  TextColor="Black"
                                  HorizontalOptions="Center"

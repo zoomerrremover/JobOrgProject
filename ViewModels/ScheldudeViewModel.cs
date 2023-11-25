@@ -32,13 +32,13 @@ public partial class ScheldudeViewModel
         tasksOnTheScreen.Clear ();
         controls.WorkersPicked.ToList().ForEach(w =>
         {
-            var tasks = Data.Assignments.Where(t => t.Workers.Contains(w.Worker));
+            var tasks = Data.Assignments.Where(t => t.Workers.Contains(w));
             foreach (var task in tasks)
             {
                 if (!tasksOnTheScreen.Contains(task.Id))
                 {
                     tasksOnTheScreen.Add(task.Id);
-                    var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name, Background = w.Worker.Color  };
+                    var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name, Background = w.Color  };
                     appointments.Add(newAppointment);
                 }
             }

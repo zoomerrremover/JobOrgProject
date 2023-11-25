@@ -11,13 +11,12 @@ namespace TheJobOrganizationApp.Services
         {
             SettedCollors = new();
             SettedCollors = new();
-            InteractableModels = new();
         }
         
 
         public Dictionary<string, Color> SettedCollors { get; set; }
         public Dictionary<string, Dictionary<string, string>> SettedText { get; set; }
-        public List<string> InteractableModels { get; set; }
+
   
     }
 }
