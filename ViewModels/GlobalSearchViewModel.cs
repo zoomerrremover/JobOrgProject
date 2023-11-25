@@ -20,16 +20,16 @@ namespace TheJobOrganizationApp.ViewModels
 
         string selectedModel = "Items";
 
-
+        GlobalSettings settings;
         IDataStorage dataStorage { get; }
 
-        List<Thing> Models { get; set; } = new();
+        ObservableCollection<Thing> Models { get; set; } = new();
 
         public ObservableCollection<Thing> ObsModels { get; set; } = new();
 
         partial void OnSelectedModelChanging(string oldValue, string newValue)
         {
-            Models = dataStorage[newValue];
+            Models = dataStorage.GetItems<Thing>(newValue);
             LoadModels();
         }
         void LoadModels()
@@ -44,12 +44,24 @@ namespace TheJobOrganizationApp.ViewModels
             }
         }
 
-        public GlobalSearchViewModel(ILoadableContent loadableContent,IDataStorage data)
+        public GlobalSearchViewModel(GlobalSettings settings,IDataStorage data)
         {
             dataStorage = data;
-            foreach(var item in loadableContent.InteractableModels)
+            this.settings = settings;
+            InitiateModelChoice();
+        }
+
+        void InitiateModelChoice()
+        {
+            foreach (var type in settings.Models)
             {
-                TypePickerItems.Add(item);
+                var attribute = (Model)Attribute.GetCustomAttribute(type, typeof(Model));
+
+                // If IsActive is true, add the type to the list
+                if (attribute.DisplayableInTheGlobalSearch)
+                {
+                    TypePickerItems.Add(type.Name);
+                }
             }
         }
     }

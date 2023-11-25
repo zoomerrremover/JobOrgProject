@@ -1,10 +1,43 @@
 ﻿
-namespace TheJobOrganizationApp.Services
-{
-    public class GlobalSettings
-    {
-        public List<Type> Models { get; set; }
+using System.Reflection;
+using TheJobOrganizationApp.Models;
 
-        public Dictionary<string, string> Settings { get; set; }
+namespace TheJobOrganizationApp.Services;
+
+public class GlobalSettings: Iintializable
+{
+    public List<Type> Models { get; set; } = new();
+
+    public Dictionary<string, string> Settings { get; set; }
+
+    public bool InitializeSettings()
+    {
+        if(InitializeModels())
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool Initialize()
+    {
+        if (InitializeModels())
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool InitializeModels()
+    {
+        var types = Assembly.GetExecutingAssembly().GetTypes();
+        foreach (var type in types)
+        {
+            if (type.IsClass && Attribute.IsDefined(type, typeof(Model)))
+            {
+
+                Models.Add(type);
+        }
+
+    }
+        return true;
     }
 }

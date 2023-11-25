@@ -21,19 +21,21 @@ public partial class WorkerPickerViewModel : BaseViewModel
             InitiateList(value);
             mainEntryText = value;
         } }
-    SharedControls controls;
+    public ObservableCollection<Worker> WorkersPicked { get; set; }
+
+    ObservableCollection<Worker> workers { get => data.GetItems<Worker>(); }
     [RelayCommand]
     void UpdateList()
     {
-        controls.WorkersPicked.Clear();
-        data.Workers.Where(w => w.IsPicked == true).ToList().ForEach(w => controls.WorkersPicked.Add(w));
+        WorkersPicked.Clear();
+        workers.Where(w => w.IsPicked == true).ToList().ForEach(w => WorkersPicked.Add(w));
 
     }
 
-    public WorkerPickerViewModel(IDataStorage Storange, SharedControls controls)
+    public WorkerPickerViewModel(Initializator init, IDataStorage Storange)
     {
+        init.Initialize();
         data = Storange;
-        this.controls = controls;
         InitiateList();
 
     }
@@ -41,7 +43,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
     {
         ObsWorkers.Clear();
         searchPromt ??= "";
-        var totalWorkers = data.Workers.OrderByDescending(w => w.IsPicked);
+        var totalWorkers = workers.OrderByDescending(w => w.IsPicked);
         foreach (var worker in totalWorkers)
         {
             if (worker.Name.Contains(searchPromt))
@@ -54,7 +56,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
 
     void SelectAll()
     {
-        foreach (var worker in data.Workers)
+        foreach (var worker in data.GetItems<Worker>())
         {
             worker.IsPicked = true;
         }
@@ -65,7 +67,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
 
     void UnSelectAll()
     {
-        foreach (var worker in data.Workers)
+        foreach (var worker in data.GetItems<Worker>())
         {
             worker.IsPicked = false;
         }

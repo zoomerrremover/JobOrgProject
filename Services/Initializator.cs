@@ -1,58 +1,21 @@
-﻿using Foundation;
-using System.Reflection;
-using TheJobOrganizationApp.Models;
+﻿
 namespace TheJobOrganizationApp.Services
 {
     public class Initializator
 
     {
-        ILoadableContent loadableContent;
+        public List<Iintializable>Services { get; } = new();
 
-        IDataStorage storage;
-
-        SharedControls sharedControls;
-
-        GlobalSettings globalSettings;
-        public Initializator(GlobalSettings settings,SharedControls controls,ILoadableContent loadableContent,IDataStorage dataStorage)
+        public Initializator(GlobalSettings st,IDataStorage storage)
         {
-            globalSettings = settings;
-            storage = dataStorage;
-            this.loadableContent = loadableContent;
-            this.sharedControls = controls;
-            Initialize();
+            Services.Add(st);
+            Services.Add(storage);
         }
-        public void InitializeDatabase()
-        {
-            foreach(var model in globalSettings.Models)
-            {
-                storage.RegisterModel(model);
-            }
-            
-        }
-        public bool InitializeModels()
-        {
-            var types = Assembly.GetExecutingAssembly().GetTypes();
-            foreach (var type in types)
-            {
-                if (type.IsClass && Attribute.IsDefined(type, typeof(Model))){
 
-                    var attribute = (Model)Attribute.GetCustomAttribute(type, typeof(Model));
-
-                    globalSettings.Models.Add(type);
-                    // If IsActive is true, add the type to the list
-                    if (attribute.DisplayableInTheGlobalSearch)
-                    {
-                        sharedControls.GSDisplayableModels.Add(type.Name);
-                    }
-                }
-            }
-            return true;
-
-        }
         public void Initialize()
         {
-            loadableContent.InteractableModels = new() { nameof(Worker), nameof(Place),
-            nameof(Contractor),nameof(Job),nameof(Item),nameof(Assignment)};
+            Services.ForEach(i => i.Initialize());
+
         }
     }
 }
