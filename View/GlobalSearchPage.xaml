@@ -14,7 +14,8 @@
         </Grid>
         <Grid ColumnDefinitions="400,*,240" Grid.Row="1" Margin="8" >
             <HorizontalStackLayout Spacing="8">
-            <Button Text="Add"></Button>
+            <Button Text="Add"
+                    Command="{Binding GoToDetailsCommand}"></Button>
             <Button Text="Delete"></Button>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"
@@ -29,6 +30,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Thing">
                     <Frame HeightRequest="70"  Margin="0">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
                         <HorizontalStackLayout>
                             <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
                                 <Label Text="{Binding Name}"

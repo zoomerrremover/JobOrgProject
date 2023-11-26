@@ -1,8 +1,10 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
+using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.ViewModels
 {
@@ -50,7 +52,6 @@ namespace TheJobOrganizationApp.ViewModels
                 }
             }
         }
-
         public GlobalSearchViewModel(GlobalSettings settings,IDataStorage data)
         {
             dataStorage = data;
@@ -58,7 +59,12 @@ namespace TheJobOrganizationApp.ViewModels
             InitiateModelChoice();
             OnSelectedModelChanging("", selectedModel);
         }
-
+        [RelayCommand]
+        async Task GoToDetails(Thing worker)
+        {
+            var newWorker = (Worker)worker;
+            await Shell.Current.GoToAsync($"{nameof(WorkerDetailPage)}", true, new Dictionary<string, object> { { nameof(Worker), newWorker} });
+        }
         void InitiateModelChoice()
         {
             foreach (var type in settings.Models)

@@ -32,6 +32,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(), provider.GetRequiredService<FakeDataFactory>(), 10));
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddSingleton<GlobalSearchViewModel>();
+            builder.Services.AddSingleton<WorkerDetailsViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddSingleton<WorkerPickerPage>();
