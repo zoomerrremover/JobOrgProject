@@ -4,6 +4,7 @@
              x:Class="TheJobOrganizationApp.View.WorkerDetailPage"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
              x:DataType="viewmodels:WorkerDetailsViewModel"
+             xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
              Title="WorkerDetailPage">
     <ScrollView>
         <Grid RowDefinitions="325,400,400">
@@ -23,18 +24,20 @@
                      Grid.Row ="1"
                      BackgroundColor="White"
                      RowDefinitions="*,60,60,*"
-                    ColumnDefinitions="*,250,*">
+                    ColumnDefinitions="*,400,*">
                     <Label Text="{Binding Worker.Name}"
                            FontSize="Large"
                            Grid.Column="1"
-                           Grid.Row="1"></Label>
+                           Grid.Row="1"
+                           HorizontalOptions="Center"></Label>
                     <VerticalStackLayout Grid.Column="1"
                                          Grid.Row="2"
                                          HorizontalOptions="CenterAndExpand">
                     <Label Text="{Binding Worker.Email}"
                            FontSize="Medium"></Label>
                     <Label Text="{Binding Worker.PhoneNumber}"
-                           FontSize="Medium"></Label>
+                           FontSize="Medium"
+                           HorizontalOptions="Center"></Label>
                         </VerticalStackLayout>
             </Grid>
         </Grid>
@@ -57,8 +60,22 @@
                        Grid.Column="1"
                        VerticalOptions="Center"/>
                     <CollectionView Grid.ColumnSpan="2"
-                                Grid.Row="1">
-
+                                Grid.Row="1"
+                                ItemsSource="{Binding Worker.Items}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Item">
+                                <Frame HeightRequest="70"  Margin="0">
+                                    <HorizontalStackLayout>
+                                        <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                                        <Label Text="{Binding Name}"
+                         FontSize="Micro"
+                         TextColor="Black"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"></Label>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
                     </CollectionView>
 
                 </Grid>
@@ -91,7 +108,7 @@
                   ColumnDefinitions="120,*"
                   Padding="25"
                   Margin="25">
-                <Label Text="Items"
+                <Label Text="Tasks"
             Grid.Row="0"
             Grid.Column="0"
             VerticalOptions="Center"
@@ -102,7 +119,21 @@
             Grid.Column="1"
             VerticalOptions="Center"/>
                 <CollectionView Grid.ColumnSpan="2"
-                     Grid.Row="1">
+                                ItemsSource="{Binding Assignments}">
+                    <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Assignment">
+                        <Frame HeightRequest="70"  Margin="0">
+                            <HorizontalStackLayout>
+                                <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                                <Label Text="{Binding Name}"
+                         FontSize="Micro"
+                         TextColor="Black"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center"></Label>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
                 </CollectionView>
             </Grid>

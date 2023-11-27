@@ -1,6 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Services;
 
 namespace TheJobOrganizationApp.ViewModels
 {
@@ -10,9 +12,20 @@ namespace TheJobOrganizationApp.ViewModels
         [ObservableProperty]
         Worker worker;
 
-        public WorkerDetailsViewModel()
+        IDataStorage ds;
+
+        public ObservableCollection<Assignment> Assignments { get
+            {
+                var totalAssgnments = ds.GetItems<Assignment>();
+                ObservableCollection<Assignment> assignments = new ObservableCollection<Assignment>();
+                totalAssgnments.Where(w => w.Workers.Contains(Worker)).ToList().ForEach(assignments.Add);
+                return assignments;
+            } 
+        }
+
+        public WorkerDetailsViewModel(IDataStorage ds)
         {
-                
+            this.ds = ds;       
         }
     }
 }

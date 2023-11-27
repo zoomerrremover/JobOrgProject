@@ -15,4 +15,13 @@ public abstract class Thing
     {
          Id = Guid.NewGuid();
     }
+
+    public override bool Equals(object obj)
+    {
+       if(obj == null) return false;
+       if(obj as  Thing == null) return false;
+       var newObj = obj as Thing;
+        if(newObj.Id != Id) return false;
+        else return true;
+    }
 }
