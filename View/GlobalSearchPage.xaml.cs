@@ -1,3 +1,4 @@
+using Microsoft.Maui.Controls;
 using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.View;
@@ -8,5 +9,5 @@ public partial class GlobalSearchPage : ContentPage
 	{
 		BindingContext = bc;
 		InitializeComponent();
-	}
+    }
 }

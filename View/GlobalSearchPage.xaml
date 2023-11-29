@@ -5,6 +5,7 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
              x:DataType="viewmodels:GlobalSearchViewModel"
              xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
              Title="GlobalSearchPage">
     <Grid RowDefinitions="60,60,*" >
         <Grid ColumnDefinitions="*,60" Grid.Row="0">
@@ -26,26 +27,9 @@
         <CollectionView 
     ItemsSource="{Binding ObsModels}"
     SelectionMode="None"
-    Grid.Row="2" >
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Thing">
-                    <Frame HeightRequest="70"  Margin="0">
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
-                                        CommandParameter="{Binding .}"/>
-                        </Frame.GestureRecognizers>
-                        <HorizontalStackLayout>
-                            <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
-                                <Label Text="{Binding Name}"
-                         FontSize="Micro"
-                         TextColor="Black"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"></Label>
-                        </HorizontalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+    Grid.Row="2" 
+    ItemTemplate="{Binding Selector}">
+
         </CollectionView>
 
     </Grid>

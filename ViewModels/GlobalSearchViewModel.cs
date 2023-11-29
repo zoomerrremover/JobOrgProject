@@ -36,6 +36,8 @@ namespace TheJobOrganizationApp.ViewModels
 
         public ObservableCollection<Thing> ObsModels { get; set; } = new();
 
+        public GSSelector Selector {  get; set; }
+
         partial void OnSelectedModelChanging(string oldValue, string newValue)
         {
             Models = dataStorage.GetItems<Thing>(newValue);
@@ -52,12 +54,14 @@ namespace TheJobOrganizationApp.ViewModels
                 }
             }
         }
-        public GlobalSearchViewModel(GlobalSettings settings,IDataStorage data)
+        public GlobalSearchViewModel(GlobalSettings settings,IDataStorage data,GSSelector selector)
         {
             dataStorage = data;
             this.settings = settings;
             InitiateModelChoice();
             OnSelectedModelChanging("", selectedModel);
+            Selector = selector;
+            Selector.ModelSelected = SelectedModel;
         }
         [RelayCommand]
         async Task GoToDetails(Thing worker)

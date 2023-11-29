@@ -72,6 +72,9 @@
 	  <MauiXaml Update="View\LogInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Resources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\WorkerPickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

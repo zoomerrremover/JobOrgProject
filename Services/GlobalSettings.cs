@@ -1,6 +1,7 @@
 ﻿
 using System.Reflection;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.Services;
 
@@ -18,6 +19,7 @@ public class GlobalSettings: Iintializable
         }
         return false;
     }
+
     public bool Initialize()
     {
         if (InitializeModels())

@@ -5,11 +5,19 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
              x:DataType="viewmodels:WorkerDetailsViewModel"
              xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:local="clr-namespace:TheJobOrganizationApp.View"
              Title="WorkerDetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <local:Resources/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView>
         <Grid RowDefinitions="325,400,400">
         <Grid Grid.Row="0"
-              BackgroundColor="Black"
+              BackgroundColor="{Binding Worker.Color}"
               ColumnDefinitions="150,*"
               ColumnSpacing="50"
               RowDefinitions="250"
@@ -61,22 +69,10 @@
                        VerticalOptions="Center"/>
                     <CollectionView Grid.ColumnSpan="2"
                                 Grid.Row="1"
-                                ItemsSource="{Binding Worker.Items}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Item">
-                                <Frame HeightRequest="70"  Margin="0">
-                                    <HorizontalStackLayout>
-                                        <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
-                                        <Label Text="{Binding Name}"
-                         FontSize="Micro"
-                         TextColor="Black"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"></Label>
-                                    </HorizontalStackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                ItemsSource="{Binding Worker.Items}"
+                                ItemTemplate="{StaticResource ItemTemplate}"/>
+
+
 
                 </Grid>
                 <Grid
@@ -95,10 +91,9 @@
                        Grid.Column="1"
                        VerticalOptions="Center"/>
                     <CollectionView Grid.ColumnSpan="2"
-                                Grid.Row="1">
-
-                    </CollectionView>
-
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding ObsAssignments}"
+                                    ItemTemplate="{StaticResource AssignmentTemplate}" />
                 </Grid>
 
             </Grid>
@@ -118,24 +113,7 @@
             Grid.Row="0"
             Grid.Column="1"
             VerticalOptions="Center"/>
-                <CollectionView Grid.ColumnSpan="2"
-                                ItemsSource="{Binding Assignments}">
-                    <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:Assignment">
-                        <Frame HeightRequest="70"  Margin="0">
-                            <HorizontalStackLayout>
-                                <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
-                                <Label Text="{Binding Name}"
-                         FontSize="Micro"
-                         TextColor="Black"
-                         HorizontalOptions="Center"
-                         VerticalOptions="Center"></Label>
-                            </HorizontalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                    </CollectionView.ItemTemplate>
 
-                </CollectionView>
             </Grid>
 
         </Grid>

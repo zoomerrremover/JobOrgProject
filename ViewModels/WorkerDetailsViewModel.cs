@@ -7,25 +7,41 @@ using TheJobOrganizationApp.Services;
 namespace TheJobOrganizationApp.ViewModels
 {
     [QueryProperty("Worker", "Worker")]
-    public partial class WorkerDetailsViewModel:BaseViewModel
+    public partial class WorkerDetailsViewModel : BaseViewModel, IQueryAttributable
     {
-        [ObservableProperty]
-        Worker worker;
 
         IDataStorage ds;
 
-        public ObservableCollection<Assignment> Assignments { get
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(ObsAssignments))]
+
+        Worker worker;
+
+        public ObservableCollection<Assignment> Assignments
+        {
+            get => ds.GetItems<Assignment>();
+        } 
+
+        public ObservableCollection<Assignment> ObsAssignments
+        {
+            get
             {
-                var totalAssgnments = ds.GetItems<Assignment>();
+                var listOfAssignments = Assignments.Where(w => w.Workers.Contains(Worker)).ToList();
                 ObservableCollection<Assignment> assignments = new ObservableCollection<Assignment>();
-                totalAssgnments.Where(w => w.Workers.Contains(Worker)).ToList().ForEach(assignments.Add);
+                listOfAssignments.ForEach(assignments.Add);
                 return assignments;
-            } 
+            }
         }
+
 
         public WorkerDetailsViewModel(IDataStorage ds)
         {
             this.ds = ds;       
+        }
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            Worker = (Worker)query.FirstOrDefault().Value;
         }
     }
 }
