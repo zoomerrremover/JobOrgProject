@@ -28,7 +28,7 @@
     ItemsSource="{Binding ObsModels}"
     SelectionMode="None"
     Grid.Row="2" 
-    ItemTemplate="{Binding Selector}">
+    ItemTemplate="{Binding CurrentTemplate}">
 
         </CollectionView>
 

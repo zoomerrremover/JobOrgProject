@@ -36,11 +36,15 @@ namespace TheJobOrganizationApp.ViewModels
 
         public ObservableCollection<Thing> ObsModels { get; set; } = new();
 
-        public GSSelector Selector {  get; set; }
+        [ObservableProperty]
+        DataTemplate currentTemplate; 
+
+        GSSelector Selector;
 
         partial void OnSelectedModelChanging(string oldValue, string newValue)
         {
             Models = dataStorage.GetItems<Thing>(newValue);
+            CurrentTemplate = Selector.TemplatesAndTypes[newValue];
             LoadModels();
         }
         void LoadModels()
@@ -58,10 +62,10 @@ namespace TheJobOrganizationApp.ViewModels
         {
             dataStorage = data;
             this.settings = settings;
+            Selector = selector;
+
             InitiateModelChoice();
             OnSelectedModelChanging("", selectedModel);
-            Selector = selector;
-            Selector.ModelSelected = SelectedModel;
         }
         [RelayCommand]
         async Task GoToDetails(Thing worker)
