@@ -38,7 +38,7 @@ namespace TheJobOrganizationApp.Services
                 .RuleFor(m => m.StartTime, f => f.Date.Recent())
                 .RuleFor(m => m.FinishTime, f => f.Date.Soon())
                 .RuleFor(m => m.Place, f => f.PickRandom(PlaceGenerator.Generate(100)))
-                .RuleFor(m => m.Workers,f => new List<Worker> { f.PickRandom(WorkerGenerator.Generate(10)) });
+                .RuleFor(m => m.Workers,f => f.PickRandom(WorkerGenerator.Generate(10),f.Random.Number(1,4)).ToList() );
             ContractorGenerator = new Faker<Contractor>()
                 .RuleFor(m => m.Name, f => f.Name.FullName())
                 .RuleFor(m => m.Email, (f, m) => $"{m.Name.ToLower().Replace(" ", "")}@gmail.com")

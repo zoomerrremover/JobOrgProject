@@ -15,9 +15,8 @@
         </Grid>
         <Grid ColumnDefinitions="400,*,240" Grid.Row="1" Margin="8" >
             <HorizontalStackLayout Spacing="8">
-            <Button Text="Add"
-                    Command="{Binding GoToDetailsCommand}"></Button>
-            <Button Text="Delete"></Button>
+                <Button Text="Add"/>
+                <Button Text="Delete"></Button>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"
                     ItemsSource="{Binding TypePickerItems}"
@@ -26,11 +25,12 @@
         </Grid>
         <CollectionView 
     ItemsSource="{Binding ObsModels}"
-    SelectionMode="None"
     Grid.Row="2" 
-    ItemTemplate="{Binding CurrentTemplate}">
+    ItemTemplate="{Binding CurrentTemplate}"
+    SelectionMode="Single"
+    SelectionChangedCommand="{Binding GoToDetails}"/>
 
-        </CollectionView>
+
 
     </Grid>
 </ContentPage>

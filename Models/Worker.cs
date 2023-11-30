@@ -4,7 +4,7 @@ using TheJobOrganizationApp.Models.Interfaces;
 namespace TheJobOrganizationApp.Models;
 
 [Model(DisplayableInTheGlobalSearch = true)]
-public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems
+public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHasColour
 
 {
     public string Password { get; set ; }

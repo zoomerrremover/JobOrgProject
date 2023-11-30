@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Resources"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models">
+
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
         <Frame HeightRequest="70"  Margin="0">
-            <Grid ColumnDefinitions="100,150"
+            <Grid ColumnDefinitions="150,150,350"
                   ColumnSpacing="60">
                 <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
                 <Label Text="{Binding Name}"
@@ -17,18 +18,32 @@
                     <Label Text="{Binding StartTime}"
                          FontSize="Micro"
                          TextColor="Grey"/>
-                <Label Text="{Binding FinishTime}"
+                    <Label Text="{Binding FinishTime}"
                          FontSize="Micro"
                          TextColor="Grey"/>
                 </VerticalStackLayout>
-             </Grid>
+                <CollectionView
+                     ItemsSource="{Binding WorkerColours}"
+                     Grid.Column="2"
+                     ItemsLayout="HorizontalList"
+                     HorizontalScrollBarVisibility="Never">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Color">
+                            <Ellipse WidthRequest="30"
+                                     HeightRequest="30"
+                                     
+                                     Background="{Binding .}"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </Frame>
     </DataTemplate>
     <DataTemplate   x:Key="ItemTemplate"
                     x:DataType="models:Item">
         <Frame HeightRequest="70"  Margin="0">
             <Grid ColumnDefinitions="100,60,80,2,50">
-              
+
                 <Label Text="{Binding Name}"
                          FontSize="Small"
                          TextColor="Black"/>
@@ -43,4 +58,43 @@
             </Grid>
         </Frame>
     </DataTemplate>
+    <DataTemplate   x:Key="PlaceTemplate"
+                    x:DataType="models:Place">
+        <Frame HeightRequest="70"  Margin="0">
+            <Grid ColumnDefinitions="150,450"
+                  ColumnSpacing="60">
+
+                <Label Text="{Binding Name}"
+                         FontSize="Small"
+                         TextColor="Black"/>
+                <Label Text="{Binding Location}"
+                         FontSize="Micro"
+                         TextColor="Grey"
+                         Grid.Column="3"
+                         VerticalOptions="Center"/>
+            </Grid>
+        </Frame>
+    </DataTemplate>
+    <DataTemplate   x:Key="WorkerTemplate"
+                    x:DataType="models:Worker">
+        <Frame HeightRequest="70"  Margin="0">
+            <Grid ColumnDefinitions="50,100,450"
+                  ColumnSpacing="60">
+                <Ellipse Background="{Binding Color}"
+                         WidthRequest="30"
+                         HeightRequest="30"/>
+                <Label Text="{Binding Name}"
+                         FontSize="Small"
+                         TextColor="Black"
+                         Grid.Column="1"/>
+                <Label Text="{Binding Location}"
+                         FontSize="Micro"
+                         TextColor="Grey"
+                         Grid.Column="2"
+                         VerticalOptions="Center"/>
+
+            </Grid>
+        </Frame>
+    </DataTemplate>
+
 </ResourceDictionary>

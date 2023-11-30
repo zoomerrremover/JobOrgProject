@@ -5,6 +5,8 @@ namespace TheJobOrganizationApp.Models
     public class Assignment:TConstrained
     {
         public List<Worker> Workers;
+
+        public List<Color> WorkerColours { get => Workers.Select(x => x.Color).ToList(); }
         
     }
 }

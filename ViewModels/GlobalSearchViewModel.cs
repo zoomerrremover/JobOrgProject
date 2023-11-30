@@ -58,8 +58,10 @@ namespace TheJobOrganizationApp.ViewModels
                 }
             }
         }
-        public GlobalSearchViewModel(GlobalSettings settings,IDataStorage data,GSSelector selector)
+        DetailsPageFactory factory;
+        public GlobalSearchViewModel(DetailsPageFactory Factory,GlobalSettings settings,IDataStorage data,GSSelector selector)
         {
+            factory = Factory;
             dataStorage = data;
             this.settings = settings;
             Selector = selector;
@@ -67,11 +69,11 @@ namespace TheJobOrganizationApp.ViewModels
             InitiateModelChoice();
             OnSelectedModelChanging("", selectedModel);
         }
-        [RelayCommand]
-        async Task GoToDetails(Thing worker)
+        public void GoToDetails(object sender, SelectionChangedEventArgs e)
         {
-            var newWorker = (Worker)worker;
-            await Shell.Current.GoToAsync($"{nameof(WorkerDetailPage)}", true, new Dictionary<string, object> { { nameof(Worker), newWorker} });
+            Thing selectedObject = (Thing)e.CurrentSelection;
+            var PageToLoad = factory.MakeADetailsPage(selectedObject);
+            Shell.Current.Navigation.PushAsync(PageToLoad);
         }
         void InitiateModelChoice()
         {

@@ -60,12 +60,18 @@
 	  <Compile Update="View\ScheldudePage.xaml.cs">
 	    <DependentUpon>ScheldudePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="View\DetailPage.xaml.cs">
+	    <DependentUpon>DetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\WorkerPickerPage.xaml.cs">
 	    <DependentUpon>WorkerPickerPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="View\DetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\GlobalSearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
