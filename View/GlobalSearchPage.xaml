@@ -28,7 +28,8 @@
     Grid.Row="2" 
     ItemTemplate="{Binding CurrentTemplate}"
     SelectionMode="Single"
-    SelectionChangedCommand="{Binding GoToDetails}"/>
+    SelectedItem="{Binding SelectedObject}"
+    SelectionChangedCommand="{Binding GoToDetailsCommand}"/>
 
 
 

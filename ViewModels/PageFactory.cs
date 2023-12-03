@@ -1,17 +1,16 @@
 ﻿
-using System.Reflection;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.ViewModels;
 
-public class DetailsPageFactory
+public class PageFactory
 {
-    Dictionary<string, DataTemplate> Controls;
+    Dictionary<string, DataTemplate> Controls = new();
 
     ResourceDictionary Resources;
 
-    public DetailsPageFactory(ResourceDictionary Resources)
+    public PageFactory(Resources Resources)
     {
         this.Resources = Resources;
         InitializeTemplates();
@@ -27,15 +26,14 @@ public class DetailsPageFactory
             Controls[baseClass]
         };
         Controls.Where(w => interfaces.Contains(w.Key)).ToList().ForEach(w=>listOfTemplate.Add(w.Value));
-        DetailsViewModel vm = new(Obj);
-        return new DetailsPage(vm, listOfTemplate);
+        return new DetailsPage(Obj, listOfTemplate);
     }
 
         void InitializeTemplates()
         {
             foreach (var Template in Resources)
             {
-                if (Template.Value is DataTemplate || Template.Key.Contains("Details"))
+                if (Template.Value is DataTemplate & Template.Key.Contains("Details"))
                 {
                     Controls[Template.Key.Replace("Details", "")] = Template.Value as DataTemplate;
                 }

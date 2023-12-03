@@ -30,6 +30,10 @@ namespace TheJobOrganizationApp.ViewModels
         string selectedModel = typeof(Item).Name;
 
         GlobalSettings settings;
+
+        [ObservableProperty]
+
+        Thing selectedObject; 
         IDataStorage dataStorage { get; }
 
         ObservableCollection<Thing> Models { get; set; } = new();
@@ -58,8 +62,8 @@ namespace TheJobOrganizationApp.ViewModels
                 }
             }
         }
-        DetailsPageFactory factory;
-        public GlobalSearchViewModel(DetailsPageFactory Factory,GlobalSettings settings,IDataStorage data,GSSelector selector)
+        PageFactory factory;
+        public GlobalSearchViewModel(PageFactory Factory,GlobalSettings settings,IDataStorage data,GSSelector selector)
         {
             factory = Factory;
             dataStorage = data;
@@ -69,10 +73,14 @@ namespace TheJobOrganizationApp.ViewModels
             InitiateModelChoice();
             OnSelectedModelChanging("", selectedModel);
         }
-        public void GoToDetails(object sender, SelectionChangedEventArgs e)
+        [RelayCommand]
+        void GoToDetails()
         {
-            Thing selectedObject = (Thing)e.CurrentSelection;
-            var PageToLoad = factory.MakeADetailsPage(selectedObject);
+            if(SelectedObject is null)
+            {
+                return;
+            }
+            var PageToLoad = factory.MakeADetailsPage(SelectedObject);
             Shell.Current.Navigation.PushAsync(PageToLoad);
         }
         void InitiateModelChoice()

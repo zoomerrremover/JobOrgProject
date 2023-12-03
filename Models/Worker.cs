@@ -4,9 +4,11 @@ using TheJobOrganizationApp.Models.Interfaces;
 namespace TheJobOrganizationApp.Models;
 
 [Model(DisplayableInTheGlobalSearch = true)]
-public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHasColour
+public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHasColour 
 
 {
+
+
     public string Password { get; set ; }
     public string UserName { get ; set ; }
     public string EmailForLogIn { get ; set ; }
@@ -16,6 +18,8 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHas
     public string Buissness { get ; set ; }
     public List<Item> Items { get ; set ; }
     public Color Color { get; set; }
-
     public bool IsPicked { get; set; }
+
+    public string Role { get; set; }
+
 }

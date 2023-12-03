@@ -1,8 +1,4 @@
-﻿
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Layouts;
-using Syncfusion.Maui.Scheduler;
+﻿using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;

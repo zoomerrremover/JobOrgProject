@@ -96,5 +96,83 @@
             </Grid>
         </Frame>
     </DataTemplate>
+    <DataTemplate   x:Key="ThingDetails"
+                    x:DataType="models:Thing">
+        <Grid Grid.Row="0"
+           BackgroundColor="Black"
+           ColumnDefinitions="150,*"
+           ColumnSpacing="50"
+           RowDefinitions="250"
+           VerticalOptions="Center"
+           Padding="35">
+            <StackLayout Grid.Column="0"
+                  Grid.Row ="1" 
+                  Background="White"
+                      ></StackLayout>
+            <Grid       
+                  Grid.Column="1"
+                  Grid.Row ="1"
+                  BackgroundColor="White"
+                  RowDefinitions="*,60,60,*"
+                 ColumnDefinitions="*,400,*">
+                <Label Text="{Binding Name}"
+                        FontSize="Large"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        HorizontalOptions="Center"></Label>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="IHasItemsDetails"
+                  x:DataType="models:IHasItems">
+        <Grid
+Grid.Column="1"
+RowDefinitions="60,*"
+ColumnDefinitions="120,*"
+BackgroundColor="Gray">
+            <Label Text="Items"
+       Grid.Row="0"
+       Grid.Column="0"
+       VerticalOptions="Center"
+       HorizontalOptions="Center"/>
+
+            <Entry
+       Grid.Row="0"
+       Grid.Column="1"
+       VerticalOptions="Center"/>
+            <CollectionView Grid.ColumnSpan="2"
+                    Grid.Row="1"
+                    ItemsSource="{Binding Items}"
+                    ItemTemplate="{StaticResource ItemTemplate}" />
+        </Grid>
+
+    </DataTemplate>
+    <DataTemplate x:Key="IHasContactsDetails"
+                  x:DataType="models:IHasContacts">
+        <Grid
+Grid.Column="1"
+RowDefinitions="60,*"
+BackgroundColor="Gray">
+            <Label Text="Contacts"
+       Grid.Row="0"
+       Grid.Column="0"
+       VerticalOptions="Center"
+       HorizontalOptions="Center"/>
+
+            <VerticalStackLayout 
+                           Grid.Row="1"
+                           HorizontalOptions="CenterAndExpand">
+                <Label Text="{Binding Email}"
+                           FontSize="Medium"></Label>
+                <Label Text="{Binding PhoneNumber}"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"></Label>
+                <Label Text="{Binding Buissness}"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"></Label>
+            </VerticalStackLayout>
+        </Grid>
+
+    </DataTemplate>
 
 </ResourceDictionary>
