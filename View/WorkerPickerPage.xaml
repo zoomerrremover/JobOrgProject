@@ -9,7 +9,13 @@
              Title="WorkerPicker"
              BackgroundColor="#80000000">
 
-    <Grid RowDefinitions="60,45,*" WidthRequest="400" HeightRequest="400" Background="White">
+    <Frame Grid.Row="1"
+                   CornerRadius="20"
+                   Grid.ColumnSpan="2"
+                   BackgroundColor="#225189"
+                   BorderColor="Transparent"
+                   WidthRequest="450" HeightRequest="400">
+        <Grid RowDefinitions="60,45,*" Background="Transparent" RowSpacing="5" >
         <Entry Grid.Row="0"  Margin="9" Text="{Binding MainEntryText}"/>
         <Grid ColumnDefinitions="*,*" Grid.Row="1">
             <Button Grid.Column="0"
@@ -48,4 +54,5 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
     </Grid>
+    </Frame>
 </mopups:PopupPage>

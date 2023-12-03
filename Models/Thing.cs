@@ -14,18 +14,12 @@ public abstract class Thing
 
     public List<HistoryRecord> History { get; set; }
 
-    protected static IDataStorage mainQuery;
 
     public Thing()
     {
          Id = Guid.NewGuid();
     }
 
-    public bool Initialize(IDataStorage storange)
-    {
-        mainQuery = storange;
-        return true;
-    }
 
     public override bool Equals(object obj)
     {

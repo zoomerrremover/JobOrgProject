@@ -19,11 +19,10 @@ public class PageFactory
     public DetailsPage MakeADetailsPage(Thing Obj)
     {
         var type = Obj.GetType();
-        var baseClass = Obj.GetType().BaseType.Name;
         var interfaces = type.GetInterfaces().Select(i=>i.Name).ToList();
         var listOfTemplate = new List<DataTemplate>
         {
-            Controls[baseClass]
+            Controls[type.Name]
         };
         Controls.Where(w => interfaces.Contains(w.Key)).ToList().ForEach(w=>listOfTemplate.Add(w.Value));
         return new DetailsPage(Obj, listOfTemplate);

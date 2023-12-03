@@ -96,56 +96,187 @@
             </Grid>
         </Frame>
     </DataTemplate>
-    <DataTemplate   x:Key="ThingDetails"
-                    x:DataType="models:Thing">
-        <Grid Grid.Row="0"
-           BackgroundColor="Black"
-           ColumnDefinitions="150,*"
-           ColumnSpacing="50"
-           RowDefinitions="250"
-           VerticalOptions="Center"
-           Padding="35">
-            <StackLayout Grid.Column="0"
-                  Grid.Row ="1" 
-                  Background="White"
-                      ></StackLayout>
-            <Grid       
-                  Grid.Column="1"
-                  Grid.Row ="1"
-                  BackgroundColor="White"
-                  RowDefinitions="*,60,60,*"
-                 ColumnDefinitions="*,400,*">
-                <Label Text="{Binding Name}"
-                        FontSize="Large"
-                        Grid.Column="1"
-                        Grid.Row="1"
-                        HorizontalOptions="Center"></Label>
-            </Grid>
+    <DataTemplate   x:Key="WorkerDetails"
+                    x:DataType="models:Worker">
+        <Grid
+              BackgroundColor="Transparent"
+              ColumnDefinitions="150,*"
+              ColumnSpacing="50"
+              RowDefinitions="250,130"
+              VerticalOptions="Center"
+              Padding="35"
+              RowSpacing="20">
+            <Frame   CornerRadius="10"
+                     Grid.Column="0"
+                     Grid.Row ="0" 
+                     Background="White"
+                     BorderColor="Transparent"
+                         ></Frame>
+            <Frame Background="#225189"
+                           CornerRadius="10"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           BorderColor="Transparent">
+                <Grid       
+                     Grid.Column="1"
+                     Grid.Row ="1"
+                     BackgroundColor="Transparent"
+                     RowDefinitions="45,30,10,100"
+                     ColumnSpacing="10"
+                    ColumnDefinitions="30,*">
+                    <Label Text="{Binding Name}"
+                           FontSize="Large"
+                           TextColor="White"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           Grid.Column="1"
+                           ></Label>
+                    <Label Text="Position"
+                           FontSize="Medium"
+                           TextColor="White"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"
+                           ></Label>
+                    <Label Text="{Binding Description}"
+                           FontSize="Micro"
+                           Grid.Row="3"
+                           TextColor="White"
+                           MaxLines="3"
+                           Grid.Column="1"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand"></Label>
+                </Grid>
+            </Frame>
+            <Frame Grid.Row="1"
+                   CornerRadius="50"
+                   Grid.ColumnSpan="2"
+                   BackgroundColor="#225189"
+                   BorderColor="Transparent"
+                   >
+                <Grid VerticalOptions="Center"
+                      ColumnDefinitions="50,30,Auto,10,70,*,100,10,100"
+                      RowDefinitions="*,*">
+                    <Ellipse WidthRequest="50"
+                             HeightRequest="50"
+                             Fill="{Binding Color}"
+                             Grid.RowSpan="2"/>
+                    <Label Text="Task Name"
+                           FontSize="Medium"
+                           TextColor="White"
+                           Grid.Column="2"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           ></Label>
+                    <Label Text="Job Name"
+                           FontSize="14"
+                           TextColor="White"
+                           Grid.Column="4"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           ></Label>
+                    <Label Text="Adress"
+                           FontSize="17"
+                           TextColor="White"
+                           Grid.Column="2"
+                           Grid.Row="1"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           ></Label>
+                    <Frame CornerRadius="30"
+                        BackgroundColor="#1A3B6F"
+                        HeightRequest="85"
+                        BorderColor="Transparent"
+                        Grid.Column="6"
+                        Grid.RowSpan="2">
+                        <Grid RowDefinitions="17,*"
+                            ColumnDefinitions="*,*">
+                            <Label Text="From:"
+                                    FontSize="15"
+                                    TextColor="White"
+       Grid.Column="0"
+       ></Label>
+                            <Label Text="14:00 PM"
+                                FontSize="20"
+                                HorizontalOptions="CenterAndExpand"
+                                TextColor="White"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                    <Frame CornerRadius="30"
+                           BackgroundColor="#1A3B6F"
+                           HeightRequest="85"
+                           BorderColor="Transparent"
+                           Grid.Column="8"
+                           Grid.RowSpan="2">
+                        <Grid RowDefinitions="17,*"
+                              ColumnDefinitions="*,*">
+                            <Label Text="Until:"
+                           FontSize="15"
+                           TextColor="White"
+                           Grid.Column="0"
+                           ></Label>
+                            <Label Text="18:00 PM"
+                           FontSize="20"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="White"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           ></Label>
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </Frame>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="IHasItemsDetails"
                   x:DataType="models:IHasItems">
-        <Grid
-Grid.Column="1"
-RowDefinitions="60,*"
-ColumnDefinitions="120,*"
-BackgroundColor="Gray">
-            <Label Text="Items"
-       Grid.Row="0"
-       Grid.Column="0"
-       VerticalOptions="Center"
-       HorizontalOptions="Center"/>
+        <Frame 
+                   CornerRadius="50"
+                   Grid.ColumnSpan="2"
+                   BackgroundColor="#225189"
+                   BorderColor="Transparent"
+                   Margin="35">
+            <Grid
+                Padding="10"
+                Grid.Column="1"
+                RowDefinitions="20,45,*"
+                ColumnDefinitions="60,*,45,45"
+                BackgroundColor="#225189"
+                RowSpacing="5"
+                ColumnSpacing="10">
+                <Button
+                    Grid.Column="3"
+                    BackgroundColor="White"
+                    />
+                <Label Text="Items"
+                   Grid.Row="0"
+                   TextColor="White"
+                   Grid.Column="0"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"/>
 
-            <Entry
-       Grid.Row="0"
-       Grid.Column="1"
-       VerticalOptions="Center"/>
-            <CollectionView Grid.ColumnSpan="2"
+                <Entry
                     Grid.Row="1"
+                    VerticalOptions="Center"
+                    Background="White"
+                    Grid.ColumnSpan="2"/>
+                <Button  Grid.Column="3"
+                         Grid.Row="1"
+                         BackgroundColor="White"/>
+                <Button  Grid.Column="2"
+                         Grid.Row="1"
+                         BackgroundColor="White"/>
+                    <CollectionView Grid.ColumnSpan="4"
+                    Grid.Row="2"
                     ItemsSource="{Binding Items}"
                     ItemTemplate="{StaticResource ItemTemplate}" />
-        </Grid>
-
+            </Grid>
+        </Frame>
     </DataTemplate>
     <DataTemplate x:Key="IHasContactsDetails"
                   x:DataType="models:IHasContacts">
