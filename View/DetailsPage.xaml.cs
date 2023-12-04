@@ -1,4 +1,5 @@
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Models.ModelsProxies;
 using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.View;
@@ -15,6 +16,7 @@ public partial class DetailsPage : ContentPage
         SV.Content = grid;
         SV.Padding = 10;
         Content = SV;
+        BindingContext = bindingContext;
         InitializeComponent();
 
     }
@@ -27,7 +29,6 @@ public partial class DetailsPage : ContentPage
             var dataTemplate = dataTemplates[i];
             var localCont = new ContentView
             {
-                BindingContext = bindingContext,
                 Content = (Microsoft.Maui.Controls.View)dataTemplate.CreateContent()
             };
             if(i == 0 || i == dataTemplates.Count - 1)

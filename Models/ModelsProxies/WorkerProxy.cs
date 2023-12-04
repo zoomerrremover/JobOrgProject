@@ -1,5 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels;
@@ -30,11 +31,23 @@ public partial class WorkerProxy:Worker
     Assignment currentTask;
     [ObservableProperty]
     Assignment nextTask;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(componentsVisWhileEditIsActive))]
+    bool editMode1 = false;
+    public bool componentsVisWhileEditIsActive { get { return !EditMode1; } }
+    [RelayCommand]
+    void OnEditButton1Pressed () => EditMode1 = !EditMode1;
     public WorkerProxy()
     {
-        nextTask = Assignments.Where(a => a.StartTime > DateTime.Now).OrderBy(a => a.StartTime).FirstOrDefault();
-        currentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
+         InitializeComponents();
     }
+
+    public void InitializeComponents()
+    {
+        NextTask = Assignments.Where(a => a.StartTime > DateTime.Now).OrderBy(a => a.StartTime).FirstOrDefault();
+        CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
+    }
+
     public string TaskName
     {
         get => CurrentTask is null ? "None , Next task" : CurrentTask.Name;
@@ -53,6 +66,7 @@ public partial class WorkerProxy:Worker
             return task.ToString("d");
         }
     }
+
     public static bool Initialize(IDataStorage st)
     {
         queryService = st;

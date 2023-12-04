@@ -126,12 +126,14 @@
                     <Grid ColumnDefinitions="Auto,*,50"
                           RowDefinitions="50,*">
                         <VerticalStackLayout Grid.Column="0"
-                                             Grid.RowSpan="2">
+                                             Grid.RowSpan="2"
+                                             IsVisible="{Binding componentsVisWhileEditIsActive}">
                         <Label Text="{Binding Name}"
                            FontSize="Large"
                            TextColor="White"
                            HorizontalOptions="StartAndExpand"
-                           VerticalOptions="Start"/>
+                           VerticalOptions="Start"
+                           />
                     <Label Text="Position"
                            FontSize="Medium"
                            TextColor="White"
@@ -141,6 +143,7 @@
                         <ImageButton Grid.Column="2"
                                 Background="#1A3B6F"
                                 CornerRadius="10"
+                                Command="{Binding EditButton1PressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
                 </Frame>
