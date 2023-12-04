@@ -1,4 +1,6 @@
 ﻿
+using TheJobOrganizationApp.Models.ModelsProxies;
+
 namespace TheJobOrganizationApp.Services
 {
     public class Initializator
@@ -10,6 +12,7 @@ namespace TheJobOrganizationApp.Services
         {
             Services.Add(st);
             Services.Add(storage);
+            WorkerProxy.Initialize(storage);
         }
 
         public void Initialize()

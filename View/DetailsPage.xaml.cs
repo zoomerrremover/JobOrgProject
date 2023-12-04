@@ -67,7 +67,7 @@ public partial class DetailsPage : ContentPage
       
         for (int i = 0; i < rowCount; i++)
         {
-            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(450) });
+            grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1,GridUnitType.Auto) });
             if (i < 2)
             {
                 grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });

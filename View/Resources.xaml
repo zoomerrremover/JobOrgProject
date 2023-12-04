@@ -2,7 +2,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Resources"
-             xmlns:models ="clr-namespace:TheJobOrganizationApp.Models">
+             xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies">
 
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
@@ -97,7 +98,7 @@
         </Frame>
     </DataTemplate>
     <DataTemplate   x:Key="WorkerDetails"
-                    x:DataType="models:Worker">
+                    x:DataType="modelsProxies:WorkerProxy">
         <Grid
               BackgroundColor="Transparent"
               ColumnDefinitions="150,*"
@@ -110,45 +111,60 @@
                      Grid.Column="0"
                      Grid.Row ="0" 
                      Background="White"
-                     BorderColor="Transparent"
-                         ></Frame>
-            <Frame Background="#225189"
+                     BorderColor="Transparent"/>
+            <Grid       
+                     Grid.Column="1"
+                     Grid.Row="0"
+                     BackgroundColor="Transparent"
+                     RowDefinitions="100,10,140"
+                     ColumnSpacing="5"
+                    ColumnDefinitions="30,*">
+                <Frame Background="#225189"
                            CornerRadius="10"
                            Grid.Column="1"
-                           Grid.Row="0"
                            BorderColor="Transparent">
-                <Grid       
-                     Grid.Column="1"
-                     Grid.Row ="1"
-                     BackgroundColor="Transparent"
-                     RowDefinitions="45,30,10,100"
-                     ColumnSpacing="10"
-                    ColumnDefinitions="30,*">
-                    <Label Text="{Binding Name}"
+                    <Grid ColumnDefinitions="Auto,*,50"
+                          RowDefinitions="50,*">
+                        <VerticalStackLayout Grid.Column="0"
+                                             Grid.RowSpan="2">
+                        <Label Text="{Binding Name}"
                            FontSize="Large"
                            TextColor="White"
                            HorizontalOptions="StartAndExpand"
-                           VerticalOptions="Center"
-                           Grid.Column="1"
-                           ></Label>
+                           VerticalOptions="Start"/>
                     <Label Text="Position"
                            FontSize="Medium"
                            TextColor="White"
-                           Grid.Row="1"
+                           VerticalOptions="Start"
+                           HorizontalOptions="StartAndExpand"/>
+                    </VerticalStackLayout>
+                        <ImageButton Grid.Column="2"
+                                Background="#1A3B6F"
+                                CornerRadius="10"
+                                Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                    </Grid>
+                </Frame>
+                <Frame Background="#225189"
+                           CornerRadius="10"
                            Grid.Column="1"
-                           VerticalOptions="Center"
-                           HorizontalOptions="StartAndExpand"
-                           ></Label>
-                    <Label Text="{Binding Description}"
+                           Grid.Row="2"
+                           BorderColor="Transparent">
+                    <Grid ColumnDefinitions="Auto,*,50"
+                          RowDefinitions="50,Auto">
+                        <Label Text="{Binding Description}"
                            FontSize="Micro"
-                           Grid.Row="3"
                            TextColor="White"
                            MaxLines="3"
-                           Grid.Column="1"
                            HorizontalOptions="StartAndExpand"
-                           VerticalOptions="CenterAndExpand"></Label>
-                </Grid>
-            </Frame>
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"/>
+                        <ImageButton Grid.Column="2"
+                                Background="#1A3B6F"
+                                CornerRadius="10"
+                                Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                    </Grid>
+                </Frame>
+            </Grid>
             <Frame Grid.Row="1"
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
@@ -156,13 +172,13 @@
                    BorderColor="Transparent"
                    >
                 <Grid VerticalOptions="Center"
-                      ColumnDefinitions="50,30,Auto,10,70,*,100,10,100"
+                      ColumnDefinitions="50,30,Auto,10,70,*,150,10,150"
                       RowDefinitions="*,*">
                     <Ellipse WidthRequest="50"
                              HeightRequest="50"
                              Fill="{Binding Color}"
                              Grid.RowSpan="2"/>
-                    <Label Text="Task Name"
+                    <Label Text="{Binding TaskName }"
                            FontSize="Medium"
                            TextColor="White"
                            Grid.Column="2"
@@ -171,6 +187,7 @@
                            ></Label>
                     <Label Text="Job Name"
                            FontSize="14"
+                           IsVisible="{Binding IsCurrentTaskActive}"
                            TextColor="White"
                            Grid.Column="4"
                            HorizontalOptions="StartAndExpand"
@@ -190,14 +207,12 @@
                         BorderColor="Transparent"
                         Grid.Column="6"
                         Grid.RowSpan="2">
-                        <Grid RowDefinitions="17,*"
-                            ColumnDefinitions="*,*">
+                        <Grid RowDefinitions="17,*">
                             <Label Text="From:"
                                     FontSize="15"
                                     TextColor="White"
-       Grid.Column="0"
-       ></Label>
-                            <Label Text="14:00 PM"
+                                    Grid.Column="0"/>
+                            <Label Text="{Binding BStartTime}"
                                 FontSize="20"
                                 HorizontalOptions="CenterAndExpand"
                                 TextColor="White"
@@ -212,8 +227,7 @@
                            BorderColor="Transparent"
                            Grid.Column="8"
                            Grid.RowSpan="2">
-                        <Grid RowDefinitions="17,*"
-                              ColumnDefinitions="*,*">
+                        <Grid RowDefinitions="17,*">
                             <Label Text="Until:"
                            FontSize="15"
                            TextColor="White"
@@ -244,15 +258,16 @@
             <Grid
                 Padding="10"
                 Grid.Column="1"
-                RowDefinitions="20,45,*"
-                ColumnDefinitions="60,*,45,45"
+                RowDefinitions="60,60,10,*"
+                ColumnDefinitions="60,*,60,60"
                 BackgroundColor="#225189"
-                RowSpacing="5"
                 ColumnSpacing="10">
                 <Button
+                    BorderColor="Transparent"
                     Grid.Column="3"
-                    BackgroundColor="White"
-                    />
+                    Background="Transparent"
+                    VerticalOptions="Start"
+                    ImageSource="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\drdown25.png"/>
                 <Label Text="Items"
                    Grid.Row="0"
                    TextColor="White"
@@ -265,14 +280,20 @@
                     VerticalOptions="Center"
                     Background="White"
                     Grid.ColumnSpan="2"/>
-                <Button  Grid.Column="3"
+                <ImageButton  Grid.Column="3"
                          Grid.Row="1"
-                         BackgroundColor="White"/>
-                <Button  Grid.Column="2"
+                         BackgroundColor="#1A3B6F"
+                         BorderColor="Transparent"
+                         CornerRadius="10"
+                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png"/>
+                <ImageButton  Grid.Column="2"
                          Grid.Row="1"
-                         BackgroundColor="White"/>
+                         BackgroundColor="#1A3B6F"
+                         BorderColor="Transparent"
+                         CornerRadius="10"
+                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png"/>
                     <CollectionView Grid.ColumnSpan="4"
-                    Grid.Row="2"
+                    Grid.Row="3"
                     ItemsSource="{Binding Items}"
                     ItemTemplate="{StaticResource ItemTemplate}" />
             </Grid>
@@ -280,30 +301,43 @@
     </DataTemplate>
     <DataTemplate x:Key="IHasContactsDetails"
                   x:DataType="models:IHasContacts">
-        <Grid
-Grid.Column="1"
-RowDefinitions="60,*"
-BackgroundColor="Gray">
+        <Frame 
+                   CornerRadius="50"
+                   Grid.ColumnSpan="2"
+                   BackgroundColor="#225189"
+                   BorderColor="Transparent"
+                   Margin="35">
+            <Grid
+            Grid.Column="1"
+            RowDefinitions="60,*"
+            ColumnDefinitions="70,*"
+            BackgroundColor="#225189">
             <Label Text="Contacts"
-       Grid.Row="0"
-       Grid.Column="0"
-       VerticalOptions="Center"
+                   TextColor="White"
+                   FontSize="Micro"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   VerticalOptions="Center"
        HorizontalOptions="Center"/>
 
             <VerticalStackLayout 
                            Grid.Row="1"
-                           HorizontalOptions="CenterAndExpand">
+                           HorizontalOptions="CenterAndExpand"
+                           Grid.ColumnSpan="2">
                 <Label Text="{Binding Email}"
-                           FontSize="Medium"></Label>
+                           FontSize="Medium"
+                           TextColor="White"></Label>
                 <Label Text="{Binding PhoneNumber}"
                            FontSize="Medium"
-                           HorizontalOptions="Center"></Label>
+                           HorizontalOptions="Center"
+                           TextColor="White"></Label>
                 <Label Text="{Binding Buissness}"
                            FontSize="Medium"
-                           HorizontalOptions="Center"></Label>
+                           HorizontalOptions="Center"
+                           TextColor="White"></Label>
             </VerticalStackLayout>
         </Grid>
-
+        </Frame>
     </DataTemplate>
 
 </ResourceDictionary>
