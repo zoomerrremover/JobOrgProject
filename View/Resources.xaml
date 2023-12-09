@@ -5,6 +5,21 @@
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies">
 
+    <LinearGradientBrush x:Key="BGColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#1A3B6F" Offset="0.1" />
+        <GradientStop Color="White" Offset="4" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BlockColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#1A3B6F" Offset="0.1" />
+        <GradientStop Color="Blue" Offset="2" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ControlColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#1A3B6F" Offset="0.1" />
+        <GradientStop Color="Blue" Offset="2" />
+    </LinearGradientBrush>
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
         <Frame HeightRequest="70"  Margin="0">
@@ -119,7 +134,7 @@
                      RowDefinitions="100,10,140"
                      ColumnSpacing="5"
                     ColumnDefinitions="30,*">
-                <Frame Background="#225189"
+                <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            BorderColor="Transparent">
@@ -141,13 +156,13 @@
                            HorizontalOptions="StartAndExpand"/>
                     </VerticalStackLayout>
                         <ImageButton Grid.Column="2"
-                                Background="#1A3B6F"
+                                Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
                                 Command="{Binding EditButton1PressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
                 </Frame>
-                <Frame Background="#225189"
+                <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            Grid.Row="2"
@@ -162,7 +177,7 @@
                            VerticalOptions="CenterAndExpand"
                            Grid.RowSpan="2"/>
                         <ImageButton Grid.Column="2"
-                                Background="#1A3B6F"
+                                Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
@@ -171,9 +186,11 @@
             <Frame Grid.Row="1"
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
-                   BackgroundColor="#225189"
                    BorderColor="Transparent"
                    >
+                <Frame.Background>
+                    <StaticResource Key="BlockColor" />
+                </Frame.Background>
                 <Grid VerticalOptions="Center"
                       ColumnDefinitions="50,30,Auto,10,70,*,150,10,150"
                       RowDefinitions="*,*">
@@ -205,11 +222,13 @@
                            VerticalOptions="Center"
                            ></Label>
                     <Frame CornerRadius="30"
-                        BackgroundColor="#1A3B6F"
                         HeightRequest="85"
                         BorderColor="Transparent"
                         Grid.Column="6"
                         Grid.RowSpan="2">
+                        <Frame.Background>
+                            <StaticResource Key="ControlColor" />
+                        </Frame.Background>
                         <Grid RowDefinitions="17,*">
                             <Label Text="From:"
                                     FontSize="15"
@@ -225,11 +244,13 @@
                         </Grid>
                     </Frame>
                     <Frame CornerRadius="30"
-                           BackgroundColor="#1A3B6F"
                            HeightRequest="85"
                            BorderColor="Transparent"
                            Grid.Column="8"
                            Grid.RowSpan="2">
+                        <Frame.Background>
+                            <StaticResource Key="ControlColor" />
+                        </Frame.Background>
                         <Grid RowDefinitions="17,*">
                             <Label Text="Until:"
                            FontSize="15"
@@ -255,15 +276,17 @@
         <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
-                   BackgroundColor="#225189"
                    BorderColor="Transparent"
                    Margin="35">
+            <Frame.Background>
+                <StaticResource Key="BlockColor" />
+            </Frame.Background>
             <Grid
                 Padding="10"
                 Grid.Column="1"
                 RowDefinitions="60,60,10,*"
                 ColumnDefinitions="60,*,60,60"
-                BackgroundColor="#225189"
+                BackgroundColor="{StaticResource BlockColor}"
                 ColumnSpacing="10">
                 <Button
                     BorderColor="Transparent"
@@ -285,17 +308,23 @@
                     Grid.ColumnSpan="2"/>
                 <ImageButton  Grid.Column="3"
                          Grid.Row="1"
-                         BackgroundColor="#1A3B6F"
                          BorderColor="Transparent"
                          CornerRadius="10"
-                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png"/>
+                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png">
+                    <ImageButton.Background>
+                        <StaticResource Key="ControlColor" />
+                    </ImageButton.Background>
+                </ImageButton>
                 <ImageButton  Grid.Column="2"
                          Grid.Row="1"
-                         BackgroundColor="#1A3B6F"
                          BorderColor="Transparent"
                          CornerRadius="10"
-                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png"/>
-                    <CollectionView Grid.ColumnSpan="4"
+                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
+                    <ImageButton.Background>
+                        <StaticResource Key="ControlColor" />
+                    </ImageButton.Background>
+                </ImageButton>
+                <CollectionView Grid.ColumnSpan="4"
                     Grid.Row="3"
                     ItemsSource="{Binding Items}"
                     ItemTemplate="{StaticResource ItemTemplate}" />
@@ -307,15 +336,17 @@
         <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
-                   BackgroundColor="#225189"
                    BorderColor="Transparent"
                    Margin="35">
+            <Frame.Background>
+                <StaticResource Key="BlockColor" />
+            </Frame.Background>
             <Grid
             Grid.Column="1"
             RowDefinitions="60,*"
             ColumnDefinitions="70,*"
-            BackgroundColor="#225189">
-            <Label Text="Contacts"
+            Background="Transparent">
+                <Label Text="Contacts"
                    TextColor="White"
                    FontSize="Micro"
                    Grid.Row="0"

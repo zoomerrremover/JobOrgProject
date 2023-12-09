@@ -2,6 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DetailsPage"
-             Title="DetailsPage"
-             Background="#1A3B6F">
+             xmlns:local ="clr-namespace:TheJobOrganizationApp.View"
+             Title="DetailsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </ContentPage.Resources>
+    <ContentPage.Background>
+        <StaticResource Key="BGColor" />
+    </ContentPage.Background>
 </ContentPage>
