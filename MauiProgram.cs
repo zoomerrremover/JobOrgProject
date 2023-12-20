@@ -20,8 +20,8 @@ namespace TheJobOrganizationApp
                 .ConfigureMopups()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("SF-Pro.ttf", "MainFont");
+                    fonts.AddFont("SF-Pro-Display-Medium.otf", "BoldFont");
                 });
             builder.Services.AddSingleton(MopupService.Instance);
             builder.Services.AddSingleton<IDataStorage>(provider => new DataStorageTemp(provider.GetRequiredService<GlobalSettings>()));
@@ -39,6 +39,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddSingleton<WorkerPickerPage>();
+            builder.Services.AddSingleton<ModelToVMAdaptor>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<GlobalSearchPage>();

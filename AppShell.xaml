@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:TheJobOrganizationApp"
     xmlns:view="clr-namespace:TheJobOrganizationApp.View"
     Shell.FlyoutBehavior="Disabled"
-    Shell.TabBarIsVisible="True">
+    Shell.TabBarIsVisible="True"
+    Shell.NavBarIsVisible="False">
     <TabBar>
         <ShellContent
         Title="Schedule"
@@ -14,6 +15,10 @@
         Route="ScheldudePage" />
         <ShellContent
         Title="Database"
+        ContentTemplate="{DataTemplate view:GlobalSearchPage}"
+        Route="GlobalSearchPage" />
+        <ShellContent
+        Title="Settings"
         ContentTemplate="{DataTemplate view:GlobalSearchPage}"
         Route="GlobalSearchPage" />
     </TabBar>

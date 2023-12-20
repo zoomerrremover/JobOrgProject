@@ -3,29 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Resources"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
              xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies">
-
-    <LinearGradientBrush x:Key="BGColor"
-        StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#1A3B6F" Offset="0.1" />
-        <GradientStop Color="White" Offset="4" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="BlockColor"
-        StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#1A3B6F" Offset="0.1" />
-        <GradientStop Color="Blue" Offset="2" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="ControlColor"
-        StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#1A3B6F" Offset="0.1" />
-        <GradientStop Color="Blue" Offset="2" />
-    </LinearGradientBrush>
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
         <Frame HeightRequest="70"  Margin="0">
             <Grid ColumnDefinitions="150,150,350"
                   ColumnSpacing="60">
-                <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                <Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>
                 <Label Text="{Binding Name}"
                          FontSize="Small"
                          TextColor="Black"/>
@@ -102,7 +90,8 @@
                 <Label Text="{Binding Name}"
                          FontSize="Small"
                          TextColor="Black"
-                         Grid.Column="1"/>
+                         Grid.Column="1"
+                         FontFamily="MainFont"/>
                 <Label Text="{Binding Location}"
                          FontSize="Micro"
                          TextColor="Grey"
@@ -141,24 +130,34 @@
                     <Grid ColumnDefinitions="Auto,*,50"
                           RowDefinitions="50,*">
                         <VerticalStackLayout Grid.Column="0"
-                                             Grid.RowSpan="2"
-                                             IsVisible="{Binding componentsVisWhileEditIsActive}">
-                        <Label Text="{Binding Name}"
-                           FontSize="Large"
-                           TextColor="White"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="Start"
-                           />
-                    <Label Text="Position"
-                           FontSize="Medium"
-                           TextColor="White"
-                           VerticalOptions="Start"
-                           HorizontalOptions="StartAndExpand"/>
-                    </VerticalStackLayout>
+                                             Grid.RowSpan="2">
+                            <Label Text="{Binding DisplayableNameGet}"
+                                   HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="Start"
+                                   IsVisible="{Binding NameEditMode.Visible}"
+                                   Style="{StaticResource HeaderLabel}"/>
+                            <Entry HorizontalOptions="StartAndExpand"
+                                   VerticalOptions="Start"
+                                   Text="{Binding DisplayableNameSet}"
+                                   IsVisible="{Binding NameEditMode.Invisible}"
+                                   Style="{StaticResource EditableEntry}"
+                                   FontSize="25"/>
+                            <Label Text="{Binding DisplayablePositionGet}"
+                                        VerticalOptions="Start" 
+                                        HorizontalOptions="StartAndExpand"
+                                        Style="{StaticResource SmallLabel}"
+                                        IsVisible="{Binding NameEditMode.Visible}"/>
+                            <Picker
+                                VerticalOptions="Start"
+                                IsVisible="{Binding NameEditMode.Invisible}"
+                                HeightRequest="10"
+                                ItemsSource= "{Binding PossiblePositions}"
+                                SelectedIndex="{Binding DisplayablePositionSet}"/>
+                        </VerticalStackLayout>
                         <ImageButton Grid.Column="2"
                                 Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
-                                Command="{Binding EditButton1PressedCommand}"
+                                Command="{Binding NameEditMode.SwitchPressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
                 </Frame>
@@ -169,13 +168,12 @@
                            BorderColor="Transparent">
                     <Grid ColumnDefinitions="Auto,*,50"
                           RowDefinitions="50,Auto">
-                        <Label Text="{Binding Description}"
-                           FontSize="Micro"
-                           TextColor="White"
+                        <Label Text="{Binding Worker.Description}"
                            MaxLines="3"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"/>
+                           Grid.RowSpan="2"
+                           Style="{StaticResource SmallLabel}"/>
                         <ImageButton Grid.Column="2"
                                 Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
@@ -192,28 +190,28 @@
                     <StaticResource Key="BlockColor" />
                 </Frame.Background>
                 <Grid VerticalOptions="Center"
-                      ColumnDefinitions="50,30,Auto,10,70,*,150,10,150"
+                      ColumnDefinitions="50,30,300,10,70,*,150,10,150"
                       RowDefinitions="*,*">
                     <Ellipse WidthRequest="50"
                              HeightRequest="50"
-                             Fill="{Binding Color}"
+                             Fill="{Binding Worker.Color}"
                              Grid.RowSpan="2"/>
                     <Label Text="{Binding TaskName }"
-                           FontSize="Medium"
-                           TextColor="White"
+                           Style="{StaticResource HeaderLabel}"
                            Grid.Column="2"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"
+                           MaxLines="1"
                            ></Label>
-                    <Label Text="Job Name"
-                           FontSize="14"
+                    <Label Text="{Binding SecondaryText}"
+                           MaxLines="1"
                            IsVisible="{Binding IsCurrentTaskActive}"
-                           TextColor="White"
+                           Style="{StaticResource SmallLabel}"
                            Grid.Column="4"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"
                            ></Label>
-                    <Label Text="Adress"
+                    <Label Text="{Binding Addressline}"
                            FontSize="17"
                            TextColor="White"
                            Grid.Column="2"
@@ -231,16 +229,14 @@
                         </Frame.Background>
                         <Grid RowDefinitions="17,*">
                             <Label Text="From:"
-                                    FontSize="15"
-                                    TextColor="White"
+                                    Style="{StaticResource MicroLabel}"
                                     Grid.Column="0"/>
                             <Label Text="{Binding BStartTime}"
-                                FontSize="20"
                                 HorizontalOptions="CenterAndExpand"
-                                TextColor="White"
                                 Grid.Column="0"
                                 Grid.Row="1"
-                                VerticalOptions="Center"/>
+                                VerticalOptions="Center"
+                                Style="{StaticResource MeiumBold}"/>
                         </Grid>
                     </Frame>
                     <Frame CornerRadius="30"
@@ -253,14 +249,12 @@
                         </Frame.Background>
                         <Grid RowDefinitions="17,*">
                             <Label Text="Until:"
-                           FontSize="15"
-                           TextColor="White"
-                           Grid.Column="0"
+                                Style="{StaticResource MicroLabel}"
+                                Grid.Column="0"
                            ></Label>
-                            <Label Text="18:00 PM"
-                           FontSize="20"
+                            <Label Text="{Binding BFinishTime}"
                            HorizontalOptions="CenterAndExpand"
-                           TextColor="White"
+                           Style="{StaticResource MeiumBold}"
                            Grid.Column="0"
                            Grid.Row="1"
                            VerticalOptions="Center"

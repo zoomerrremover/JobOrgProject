@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.Styles">
+
+    <LinearGradientBrush x:Key="BGColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#03045E" Offset="0.1" />
+        <GradientStop Color="#CAF0F8" Offset="4" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BlockColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#0077B6" Offset="0.1" />
+        <GradientStop Color="#48CAE4" Offset="4" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="ControlColor"
+        StartPoint="0,1"  EndPoint="0,0">
+        <GradientStop Color="#023E8A" Offset="0.1" />
+        <GradientStop Color="#0077B6" Offset="2" />
+    </LinearGradientBrush>
+    <Style x:Key="HeaderLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property ="TextColor" Value="#CAF0F8"></Setter>
+        <Setter Property="FontFamily" Value="BoldFont"></Setter>
+    </Style>
+    <Style x:Key="SmallLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property ="TextColor" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="MainFont"></Setter>
+    </Style>
+    <Style x:Key="MicroLabel" TargetType="Label">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property ="TextColor" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="MainFont"></Setter>
+    </Style>
+    <Style x:Key="MeiumBold" TargetType="Label">
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property ="TextColor" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="BoldFont"></Setter>
+    </Style>
+    <Style x:Key="EditableEntry" TargetType="Entry">
+        <Setter Property ="TextColor" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="BoldFont"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+    </Style>
+</ResourceDictionary>

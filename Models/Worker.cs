@@ -19,7 +19,7 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHas
     public List<Item> Items { get ; set ; }
     public Color Color { get; set; }
     public bool IsPicked { get; set; }
-
+    public Position Position { get; set; }
     public string Role { get; set; }
 
 }

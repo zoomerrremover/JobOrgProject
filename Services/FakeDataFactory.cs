@@ -7,13 +7,18 @@ namespace TheJobOrganizationApp.Services
     public class FakeDataFactory
     {
        public Faker<Worker> WorkerGenerator { get; set; }
-       public Faker<Item> ItemGenerator { get; set; }
+
+        public Faker<Position> PositionGenerator { get; set; }
+        public Faker<Item> ItemGenerator { get; set; }
        public Faker<Place> PlaceGenerator { get; set; }
        public Faker<Assignment> TaskGenerator { get; set; }
 
        public Faker<Job> JobGenerator { get; set; }
        public Faker<Contractor> ContractorGenerator { get; set; }
         public FakeDataFactory() {
+            PositionGenerator = new Faker<Position>()
+                .RuleFor(m => m.Description, f => f.Random.Words())
+                .RuleFor(m => m.Name, f => f.Commerce.Department());
             WorkerGenerator = new Faker<Worker>()
                 .RuleFor(m => m.Name, f => f.Name.FullName())
                 .RuleFor(m => m.UserName, (f, m) => m.Name.ToLower().Replace(" ", ""))
@@ -23,6 +28,7 @@ namespace TheJobOrganizationApp.Services
                 .RuleFor(m => m.EmailForLogIn, (f, m) => m.Email)
                 .RuleFor(m => m.Description, f => f.Random.Words())
                 .RuleFor(m => m.Password, f => f.Random.Word())
+                .RuleFor(w => w.Position, f=>f.PickRandom(PositionGenerator.Generate(2)))
                 .RuleFor(m => m.Location, f => f.Address.FullAddress())
                 .RuleFor(m => m.Color, f => Color.FromRgb(f.Random.Byte(), f.Random.Byte(), f.Random.Byte()))
                 .RuleFor(m => m.Items, f => ItemGenerator.Generate(f.Random.Int(0, 20)));

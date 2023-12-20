@@ -42,12 +42,16 @@ namespace TheJobOrganizationApp.Services
             var localConts = localJobs
                 .Select(job => job.Contractor)
                 .ToList();
+            var localPos = localWorkers
+                .Select(w => w.Position)
+                .ToList();
             dataStorange.AddThing(ToObservableCol(localPlaces));
             dataStorange.AddThing(ToObservableCol(localJobs));
             dataStorange.AddThing(ToObservableCol(localWorkers));
             dataStorange.AddThing(ToObservableCol(localTasks));
             dataStorange.AddThing(ToObservableCol(localItems));
             dataStorange.AddThing(ToObservableCol(localConts));
+            dataStorange.AddThing(ToObservableCol(localPos));
 
         }
 

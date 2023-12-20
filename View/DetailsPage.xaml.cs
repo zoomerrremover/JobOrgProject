@@ -6,7 +6,7 @@ namespace TheJobOrganizationApp.View;
 
 public partial class DetailsPage : ContentPage
 {
-	public DetailsPage(Thing bindingContext,List<DataTemplate> dataTemplates)
+	public DetailsPage(BaseViewModel bindingContext,List<DataTemplate> dataTemplates)
     {
         var numberOfElements = dataTemplates.Count;
         var grid = CreateGrid(numberOfElements);
@@ -16,12 +16,11 @@ public partial class DetailsPage : ContentPage
         SV.Content = grid;
         SV.Padding = 10;
         Content = SV;
-        BindingContext = bindingContext;
         InitializeComponent();
 
     }
 
-    private void FillGridWithContent(Thing bindingContext, List<DataTemplate> dataTemplates, Grid grid)
+    private void FillGridWithContent(BaseViewModel bindingContext, List<DataTemplate> dataTemplates, Grid grid)
     {
         var c = 0;
         for (int i = 0; i < dataTemplates.Count; i++)
@@ -29,7 +28,8 @@ public partial class DetailsPage : ContentPage
             var dataTemplate = dataTemplates[i];
             var localCont = new ContentView
             {
-                Content = (Microsoft.Maui.Controls.View)dataTemplate.CreateContent()
+                Content = (Microsoft.Maui.Controls.View)dataTemplate.CreateContent(),
+                BindingContext = bindingContext
             };
             if(i == 0 || i == dataTemplates.Count - 1)
             {

@@ -1,5 +1,6 @@
 ﻿
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.ViewModels;
@@ -10,8 +11,11 @@ public class PageFactory
 
     ResourceDictionary Resources;
 
-    public PageFactory(Resources Resources)
+    ModelToVMAdaptor adaptor;
+
+    public PageFactory(Resources Resources,ModelToVMAdaptor adaptor)
     {
+        this.adaptor = adaptor;
         this.Resources = Resources;
         InitializeTemplates();
 
@@ -25,7 +29,8 @@ public class PageFactory
             Controls[type.Name]
         };
         Controls.Where(w => interfaces.Contains(w.Key)).ToList().ForEach(w=>listOfTemplate.Add(w.Value));
-        return new DetailsPage(Obj, listOfTemplate);
+        var bc = adaptor.ConvertToViewModel(Obj);
+        return new DetailsPage(bc, listOfTemplate);
     }
 
         void InitializeTemplates()

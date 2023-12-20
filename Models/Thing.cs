@@ -29,4 +29,8 @@ public abstract class Thing
         if(newObj.Id != Id) return false;
         else return true;
     }
+    public override string ToString()
+    {
+        return Name;
+    }
 }
