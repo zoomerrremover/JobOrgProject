@@ -97,9 +97,71 @@
                          TextColor="Grey"
                          Grid.Column="2"
                          VerticalOptions="Center"/>
-
             </Grid>
         </Frame>
+    </DataTemplate>
+    <DataTemplate x:Key="ThingDetails"
+                  x:DataType="modelsProxies:ThingProxy">
+        <Grid RowDefinitions="Auto,Auto"
+          RowSpacing="20">
+            <Frame Background="{StaticResource BlockColor}">
+                <Grid ColumnDefinitions="Auto,*,50"
+              RowDefinitions="50,*">
+                    <VerticalStackLayout Grid.Column="0"
+                                   Grid.RowSpan="2">
+                        <Label Text="{Binding DisplayableNameGet}"
+                      HorizontalOptions="StartAndExpand"
+                      VerticalOptions="Start"
+                      IsVisible="{Binding NameEditMode.Visible}"
+                      Style="{StaticResource HeaderLabel}"/>
+                        <Label Text="{Binding DisplayableID}"
+                                    VerticalOptions="Start" 
+                                    HorizontalOptions="StartAndExpand"
+                                    Style="{StaticResource SmallLabel}"
+                                    IsVisible="{Binding NameEditMode.Visible}"/>
+                        <Entry HorizontalOptions="StartAndExpand"
+               VerticalOptions="Start"
+               Text="{Binding DisplayableNameSet}"
+               IsVisible="{Binding NameEditMode.Invisible}"
+               Style="{StaticResource EditableEntry}"
+               FontSize="25"/>
+                    </VerticalStackLayout>
+                    <ImageButton Grid.Column="2"
+            Background="{StaticResource ControlColor}"
+            CornerRadius="10"
+            Command="{Binding NameEditMode.SwitchPressedCommand}"
+            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                </Grid>
+            </Frame>
+            <Frame Background="{StaticResource BlockColor}"
+           CornerRadius="10"
+           Grid.Column="1"
+           Grid.Row="2"
+           BorderColor="Transparent">
+                <Grid ColumnDefinitions="*,50"
+              RowDefinitions="50,*"
+              ColumnSpacing="10">
+                    <Editor
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Text="{Binding DisplayableDescriptionSet}"
+                IsVisible="{Binding DescriptionEditMode.Invisible}"/>
+                    <Label Text="{Binding DisplayableDescriptionGet}"
+                   MaxLines="3"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.RowSpan="2"
+                   Grid.Column="0"
+                   IsVisible="{Binding DescriptionEditMode.Visible}"
+                   Style="{StaticResource SmallLabel}"/>
+                    <ImageButton Grid.Column="2"
+                    Background="{StaticResource ControlColor}"
+            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+            CornerRadius="10"
+            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                </Grid>
+            </Frame>
+        </Grid>
     </DataTemplate>
     <DataTemplate   x:Key="WorkerDetails"
                     x:DataType="modelsProxies:WorkerProxy">
@@ -109,21 +171,21 @@
               ColumnSpacing="50"
               RowDefinitions="250,130"
               VerticalOptions="Center"
-              Padding="35"
-              RowSpacing="20">
+              RowSpacing="20"
+              Margin="0">
             <Frame   CornerRadius="10"
                      Grid.Column="0"
                      Grid.Row ="0" 
                      Background="White"
                      BorderColor="Transparent"/>
-            <Grid       
-                     Grid.Column="1"
-                     Grid.Row="0"
-                     BackgroundColor="Transparent"
-                     RowDefinitions="100,10,140"
-                     ColumnSpacing="5"
-                    ColumnDefinitions="30,*">
-                <Frame Background="{StaticResource BlockColor}"
+            <TemplatedView ControlTemplate="{StaticResource ThingDetails}"
+                         
+                         Grid.Column="1"
+                        Grid.Row="0"/>
+            
+
+
+            <!--<Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            BorderColor="Transparent">
@@ -160,37 +222,44 @@
                                 Command="{Binding NameEditMode.SwitchPressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
-                </Frame>
-                <Frame Background="{StaticResource BlockColor}"
+                </Frame>-->
+                <!--<Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            Grid.Row="2"
                            BorderColor="Transparent">
-                    <Grid ColumnDefinitions="Auto,*,50"
-                          RowDefinitions="50,Auto">
-                        <Label Text="{Binding Worker.Description}"
+                    <Grid ColumnDefinitions="*,50"
+                          RowDefinitions="50,*"
+                          ColumnSpacing="10">
+                        <Editor
+                            Grid.RowSpan="2"
+                            Grid.Column="0"
+                            Text="{Binding DisplayableDescriptionSet}"
+                            IsVisible="{Binding DescriptionEditMode.Invisible}"/>
+                        <Label Text="{Binding DisplayableDescriptionGet}"
                            MaxLines="3"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="CenterAndExpand"
                            Grid.RowSpan="2"
+                           Grid.Column="0"
+                           IsVisible="{Binding DescriptionEditMode.Visible}"
                            Style="{StaticResource SmallLabel}"/>
                         <ImageButton Grid.Column="2"
                                 Background="{StaticResource ControlColor}"
+                                Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
                                 CornerRadius="10"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
-                </Frame>
-            </Grid>
+                </Frame>-->
             <Frame Grid.Row="1"
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
-                   BorderColor="Transparent"
-                   >
+                   BorderColor="Transparent">
                 <Frame.Background>
                     <StaticResource Key="BlockColor" />
                 </Frame.Background>
                 <Grid VerticalOptions="Center"
-                      ColumnDefinitions="50,30,300,10,70,*,150,10,150"
+                      ColumnDefinitions="50,30,250,10,70,*,150,10,150"
                       RowDefinitions="*,*">
                     <Ellipse WidthRequest="50"
                              HeightRequest="50"
@@ -266,12 +335,12 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="IHasItemsDetails"
-                  x:DataType="models:IHasItems">
+                  x:DataType="modelsProxies:IHasItemsProxy">
         <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
                    BorderColor="Transparent"
-                   Margin="35">
+                   HeightRequest="{Binding ScreenHeight}">
             <Frame.Background>
                 <StaticResource Key="BlockColor" />
             </Frame.Background>
@@ -279,7 +348,7 @@
                 Padding="10"
                 Grid.Column="1"
                 RowDefinitions="60,60,10,*"
-                ColumnDefinitions="60,*,60,60"
+                ColumnDefinitions="60,*,80,60,60"
                 BackgroundColor="{StaticResource BlockColor}"
                 ColumnSpacing="10">
                 <Button
@@ -287,6 +356,7 @@
                     Grid.Column="3"
                     Background="Transparent"
                     VerticalOptions="Start"
+                    Command="{Binding RolloutButtonSwitch.SwitchPressedCommand}"
                     ImageSource="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\drdown25.png"/>
                 <Label Text="Items"
                    Grid.Row="0"
@@ -299,8 +369,18 @@
                     Grid.Row="1"
                     VerticalOptions="Center"
                     Background="White"
-                    Grid.ColumnSpan="2"/>
-                <ImageButton  Grid.Column="3"
+                    Grid.ColumnSpan="2"
+                    Text="{Binding SearchPrompt}"
+                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"/>
+                <Picker
+                    Grid.Column="2"
+                    Grid.Row="1"
+                    SelectedIndex="{Binding FilterChoice}"
+                    ItemsSource="{Binding AvaliableFilters}"
+                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"/>
+                <ImageButton
+                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
+                         Grid.Column="3"
                          Grid.Row="1"
                          BorderColor="Transparent"
                          CornerRadius="10"
@@ -309,8 +389,9 @@
                         <StaticResource Key="ControlColor" />
                     </ImageButton.Background>
                 </ImageButton>
-                <ImageButton  Grid.Column="2"
+                <ImageButton  Grid.Column="4"
                          Grid.Row="1"
+                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
                          BorderColor="Transparent"
                          CornerRadius="10"
                          Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
@@ -320,18 +401,21 @@
                 </ImageButton>
                 <CollectionView Grid.ColumnSpan="4"
                     Grid.Row="3"
-                    ItemsSource="{Binding Items}"
-                    ItemTemplate="{StaticResource ItemTemplate}" />
+                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"
+                    ItemsSource="{Binding DisplayedItems}"
+                    ItemTemplate="{StaticResource ItemTemplate}"
+                    MaximumHeightRequest="300"/>
             </Grid>
         </Frame>
     </DataTemplate>
+    
+
     <DataTemplate x:Key="IHasContactsDetails"
                   x:DataType="models:IHasContacts">
         <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
-                   BorderColor="Transparent"
-                   Margin="35">
+                   BorderColor="Transparent">
             <Frame.Background>
                 <StaticResource Key="BlockColor" />
             </Frame.Background>
@@ -348,23 +432,23 @@
                    VerticalOptions="Center"
        HorizontalOptions="Center"/>
 
-            <VerticalStackLayout 
+                <VerticalStackLayout 
                            Grid.Row="1"
                            HorizontalOptions="CenterAndExpand"
                            Grid.ColumnSpan="2">
-                <Label Text="{Binding Email}"
+                    <Label Text="{Binding Email}"
                            FontSize="Medium"
                            TextColor="White"></Label>
-                <Label Text="{Binding PhoneNumber}"
-                           FontSize="Medium"
-                           HorizontalOptions="Center"
-                           TextColor="White"></Label>
-                <Label Text="{Binding Buissness}"
+                    <Label Text="{Binding PhoneNumber}"
                            FontSize="Medium"
                            HorizontalOptions="Center"
                            TextColor="White"></Label>
-            </VerticalStackLayout>
-        </Grid>
+                    <Label Text="{Binding Buissness}"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"
+                           TextColor="White"></Label>
+                </VerticalStackLayout>
+            </Grid>
         </Frame>
     </DataTemplate>
 

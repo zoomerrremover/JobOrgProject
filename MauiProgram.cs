@@ -43,7 +43,6 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<GlobalSearchPage>();
-            builder.Services.AddSingleton<WorkerDetailPage>();
 
 
 

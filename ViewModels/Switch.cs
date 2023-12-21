@@ -11,7 +11,13 @@ namespace TheJobOrganizationApp.ViewModels
         bool visible = true;
         public bool Invisible { get { return !Visible; } }
         [RelayCommand]
-        void SwitchPressed() => Visible = !Visible;
+        void SwitchPressed()
+        {
+            Visible = !Visible;
+            OnSwitchPressed.Invoke();
+        }
+
+        public event Action OnSwitchPressed;
 
     }
 }

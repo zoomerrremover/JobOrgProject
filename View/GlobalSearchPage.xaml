@@ -13,7 +13,7 @@
                    Text="{Binding SearchPromt}"></Entry>
             <Button Grid.Column="1"></Button>
         </Grid>
-        <Grid ColumnDefinitions="400,*,240" Grid.Row="1" Margin="8" >
+        <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="1" Margin="8" >
             <HorizontalStackLayout Spacing="8">
                 <Button Text="Add"/>
                 <Button Text="Delete"></Button>

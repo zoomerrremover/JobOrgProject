@@ -1,15 +1,16 @@
 ﻿
+using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
-    public abstract class ModelView:BaseViewModel
+    public class ModelView:BaseViewModel
     {
 
-
+        protected static IDataStorage queryService;
         public static ModelView CreateFromTheModel(Thing model)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

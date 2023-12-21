@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Maui.Controls;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.View;
@@ -23,17 +24,38 @@ public class PageFactory
     public DetailsPage MakeADetailsPage(Thing Obj)
     {
         var type = Obj.GetType();
-        var interfaces = type.GetInterfaces().Select(i=>i.Name).ToList();
-        var listOfTemplate = new List<DataTemplate>
+        var baseType = typeof(Thing);
+        var firstTemplate = Controls.ContainsKey(type.Name) ? type : baseType; 
+        var types = new List<Type>
         {
-            Controls[type.Name]
+            firstTemplate
         };
-        Controls.Where(w => interfaces.Contains(w.Key)).ToList().ForEach(w=>listOfTemplate.Add(w.Value));
-        var bc = adaptor.ConvertToViewModel(Obj);
-        return new DetailsPage(bc, listOfTemplate);
+        types.AddRange(Obj.GetType().GetInterfaces().ToList());
+        List<ContentView> listOfContent = new();
+        foreach(Type localType in  types)
+        {
+            if(Controls.ContainsKey(localType.Name))
+            {
+                var template = Controls[localType.Name];
+                var bindingContext = adaptor.ConvertToViewModel(Obj, localType);
+                var content = dataTemplateToContentView(template, bindingContext);
+                listOfContent.Add(content);
+            }
+        }
+        return new DetailsPage(listOfContent);
     }
 
-        void InitializeTemplates()
+    private ContentView dataTemplateToContentView(DataTemplate template, BaseViewModel bindingContext)
+    {
+        var localCont = new ContentView
+        {
+            Content = (Microsoft.Maui.Controls.View)template.CreateContent(),
+            BindingContext = bindingContext
+        };
+        return localCont;
+    }
+
+    void InitializeTemplates()
         {
             foreach (var Template in Resources)
             {

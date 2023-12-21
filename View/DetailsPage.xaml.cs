@@ -6,11 +6,11 @@ namespace TheJobOrganizationApp.View;
 
 public partial class DetailsPage : ContentPage
 {
-	public DetailsPage(BaseViewModel bindingContext,List<DataTemplate> dataTemplates)
+	public DetailsPage(List<ContentView> content)
     {
-        var numberOfElements = dataTemplates.Count;
+        var numberOfElements = content.Count;
         var grid = CreateGrid(numberOfElements);
-        FillGridWithContent(bindingContext, dataTemplates, grid);
+        FillGridWithContent(content, grid);
 
         var SV = new ScrollView();
         SV.Content = grid;
@@ -20,41 +20,36 @@ public partial class DetailsPage : ContentPage
 
     }
 
-    private void FillGridWithContent(BaseViewModel bindingContext, List<DataTemplate> dataTemplates, Grid grid)
+    private void FillGridWithContent(List<ContentView> content, Grid grid)
     {
         var c = 0;
-        for (int i = 0; i < dataTemplates.Count; i++)
+        for (int i = 0; i < content.Count; i++)
         {
-            var dataTemplate = dataTemplates[i];
-            var localCont = new ContentView
+
+            if(i == 0 || i == content.Count - 1)
             {
-                Content = (Microsoft.Maui.Controls.View)dataTemplate.CreateContent(),
-                BindingContext = bindingContext
-            };
-            if(i == 0 || i == dataTemplates.Count - 1)
-            {
-                Grid.SetColumnSpan(localCont, 2);
-                Grid.SetRow(localCont, i);
+                Grid.SetColumnSpan(content[i], 2);
+                Grid.SetRow(content[i], i);
             }
-            else if(i == dataTemplates.Count - 2 || dataTemplates.Count % 2 > 0)
+            else if(i == content.Count - 2 || content.Count % 2 > 0)
             {
-                Grid.SetColumnSpan(localCont, 2);
-                Grid.SetRow(localCont, i);
+                Grid.SetColumnSpan(content[i], 2);
+                Grid.SetRow(content[i], i);
             }
             else
             {
                 if (c > 0)
                 {
-                    Grid.SetRow(localCont, i-1);
+                    Grid.SetRow(content[i], i-1);
                 }
                 else
                 {
-                    Grid.SetRow(localCont, i);
+                    Grid.SetRow(content[i], i);
                 }
-                Grid.SetColumn(localCont, c);
+                Grid.SetColumn(content[i], c);
             }
             
-            grid.Children.Add(localCont);
+            grid.Children.Add(content[i]);
             c = (c == 1) ? 0 : 1;
         }
 
@@ -75,6 +70,8 @@ public partial class DetailsPage : ContentPage
             }
 
         }
+        grid.Padding = new Thickness(35, 0, 35, 0);
+        grid.RowSpacing = 35;
         return grid;
     }
 }

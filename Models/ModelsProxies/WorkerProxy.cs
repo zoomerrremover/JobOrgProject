@@ -1,14 +1,12 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels;
-
 namespace TheJobOrganizationApp.Models.ModelsProxies;
-public partial class WorkerProxy:ModelView
+[Proxy(ClassLinked = typeof(Worker))]
+public partial class WorkerProxy:ThingProxy
 {
-    static IDataStorage queryService;
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Worker)
@@ -18,24 +16,22 @@ public partial class WorkerProxy:ModelView
         }
         else return null;
     }
-    public WorkerProxy(Worker worker)
+
+    public WorkerProxy(Worker worker):base(worker)
     {
         Worker = worker;
         InitializeComponents();
     }
     [ObservableProperty]
-    public Worker worker;
+    Worker worker;
     [ObservableProperty]
-    string displayableNameGet;
-    public string DisplayableNameSet {  
-        get { return DisplayableNameGet; } 
-        set {
-            DisplayableNameGet = value;
-            Worker.Name = value;
-        }
-    }
+    LogicSwitch nameEditMode = new();
+    [ObservableProperty]
+    LogicSwitch descriptionEditMode = new();
+
+
     //Choosable postion feature
- //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     [ObservableProperty]
     List<Position> possiblePositions;
 
@@ -51,6 +47,19 @@ public partial class WorkerProxy:ModelView
         {
             Worker.Position = PossiblePositions[value];
             DisplayablePositionGet = PossiblePositions[value].Name;
+        }
+    }
+    //Editable Description
+    //--------------------------------------------------------------------------
+    [ObservableProperty]
+    string displayableDescriptionGet;
+    public string DisplayableDescriptionSet
+    {
+        get { return DisplayableDescriptionGet; }
+        set
+        {
+            DisplayableDescriptionGet = value;
+            Worker.Description = value;
         }
     }
     //--------------------------------------------------------------------------
@@ -73,14 +82,13 @@ public partial class WorkerProxy:ModelView
     Assignment currentTask;
     [ObservableProperty]
     Assignment nextTask;
-    [ObservableProperty]
-    public LogicSwitch nameEditMode = new();
-    public LogicSwitch DescriptionEditMode = new();
+
 
     public void InitializeComponents()
     {
         DisplayablePositionGet = Worker.Position.Name;
         DisplayableNameGet = Worker.Name;
+        DisplayableDescriptionGet= Worker.Description;
         PossiblePositions = queryService.GetItems<Position>().ToList();
         NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
         CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
