@@ -100,8 +100,8 @@
             </Grid>
         </Frame>
     </DataTemplate>
-    <DataTemplate x:Key="ThingDetails"
-                  x:DataType="modelsProxies:ThingProxy">
+    <ControlTemplate x:Key="ThingDetails"
+                 x:DataType="modelsProxies:ThingProxy">
         <Grid RowDefinitions="Auto,Auto"
           RowSpacing="20">
             <Frame Background="{StaticResource BlockColor}">
@@ -162,7 +162,7 @@
                 </Grid>
             </Frame>
         </Grid>
-    </DataTemplate>
+    </ControlTemplate>
     <DataTemplate   x:Key="WorkerDetails"
                     x:DataType="modelsProxies:WorkerProxy">
         <Grid
@@ -178,32 +178,34 @@
                      Grid.Row ="0" 
                      Background="White"
                      BorderColor="Transparent"/>
-            <TemplatedView ControlTemplate="{StaticResource ThingDetails}"
-                         
-                         Grid.Column="1"
-                        Grid.Row="0"/>
-            
 
 
-            <!--<Frame Background="{StaticResource BlockColor}"
+            <Grid       
+                     Grid.Column="1"
+                     Grid.Row="0"
+                     BackgroundColor="Transparent"
+                     RowDefinitions="120,10,140"
+                     ColumnSpacing="5"
+                     ColumnDefinitions="30,*">
+                <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            BorderColor="Transparent">
-                    <Grid ColumnDefinitions="Auto,*,50"
-                          RowDefinitions="50,*">
-                        <VerticalStackLayout Grid.Column="0"
-                                             Grid.RowSpan="2">
+                    <Grid ColumnDefinitions="250,350,*,50"
+                          RowDefinitions="40,5,50">
+                        <StackLayout Grid.Column="0">
                             <Label Text="{Binding DisplayableNameGet}"
-                                   HorizontalOptions="StartAndExpand"
-                                   VerticalOptions="Start"
                                    IsVisible="{Binding NameEditMode.Visible}"
-                                   Style="{StaticResource HeaderLabel}"/>
+                                   Style="{StaticResource HeaderLabel}"
+                                   MaxLines="1"/>
                             <Entry HorizontalOptions="StartAndExpand"
                                    VerticalOptions="Start"
                                    Text="{Binding DisplayableNameSet}"
                                    IsVisible="{Binding NameEditMode.Invisible}"
                                    Style="{StaticResource EditableEntry}"
                                    FontSize="25"/>
+                        </StackLayout>
+                        <StackLayout Grid.Row="2">
                             <Label Text="{Binding DisplayablePositionGet}"
                                         VerticalOptions="Start" 
                                         HorizontalOptions="StartAndExpand"
@@ -215,15 +217,21 @@
                                 HeightRequest="10"
                                 ItemsSource= "{Binding PossiblePositions}"
                                 SelectedIndex="{Binding DisplayablePositionSet}"/>
-                        </VerticalStackLayout>
-                        <ImageButton Grid.Column="2"
+                        </StackLayout>
+                        <Label Text="{Binding Worker.Id}"
+                                        Grid.Column="1"
+                                        VerticalOptions="Start" 
+                                        HorizontalOptions="StartAndExpand"
+                                        Style="{StaticResource SmallLabel}"/>
+                        <ImageButton Grid.Column="3"
+                                     Grid.RowSpan="2"
                                 Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
                                 Command="{Binding NameEditMode.SwitchPressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
-                </Frame>-->
-                <!--<Frame Background="{StaticResource BlockColor}"
+                </Frame>
+                <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
                            Grid.Column="1"
                            Grid.Row="2"
@@ -250,7 +258,8 @@
                                 CornerRadius="10"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
-                </Frame>-->
+                </Frame>
+            </Grid>
             <Frame Grid.Row="1"
                    CornerRadius="50"
                    Grid.ColumnSpan="2"

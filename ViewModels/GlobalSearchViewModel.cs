@@ -80,8 +80,9 @@ namespace TheJobOrganizationApp.ViewModels
             {
                 return;
             }
-            var PageToLoad = factory.MakeADetailsPage(SelectedObject);
-            Shell.Current.Navigation.PushAsync(PageToLoad);
+            var pageToLoad = factory.MakeADetailsPage(SelectedObject);
+            Shell.Current.Navigation.PushAsync(pageToLoad);
+
         }
         void InitiateModelChoice()
         {

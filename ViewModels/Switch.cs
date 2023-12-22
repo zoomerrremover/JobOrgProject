@@ -16,6 +16,10 @@ namespace TheJobOrganizationApp.ViewModels
             Visible = !Visible;
             OnSwitchPressed.Invoke();
         }
+        public LogicSwitch()
+        {
+            OnSwitchPressed = () => { };
+        }
 
         public event Action OnSwitchPressed;
 

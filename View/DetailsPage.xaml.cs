@@ -54,7 +54,12 @@ public partial class DetailsPage : ContentPage
         }
 
     }
-
+    protected override bool OnBackButtonPressed()
+    {
+        Shell.Current.Navigation.RemovePage(this);
+        Shell.Current.GoToAsync($"{nameof(GlobalSearchPage)}");
+        return true;
+    }
     Grid CreateGrid(int rowCount)
     {
         var grid = new Grid();
