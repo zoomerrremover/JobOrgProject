@@ -12,8 +12,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         IHasItems bindingObject;
         [ObservableProperty]
         public ObservableCollection<Item> displayedItems = new();
-        [ObservableProperty]
-        List<string> avaliableFilters = new();
 
         int filterChoice = 0;
         public int FilterChoice
@@ -83,7 +81,10 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
                 }
             }
         }
+        delegate void ListSelector(ObservableCollection<Item> items);
         Dictionary<string, ListSelector> filterSelectorMethods = new();
+        [ObservableProperty]
+        List<string> avaliableFilters = new();
         public new static ModelView CreateFromTheModel(Thing model)
         {
             if (model is IHasItems)
@@ -123,7 +124,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
                 items.Add(item);
             }
         }
-        delegate void ListSelector(ObservableCollection<Item> items);
 
     }
 }

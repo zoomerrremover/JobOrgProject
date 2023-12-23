@@ -31,6 +31,11 @@ namespace TheJobOrganizationApp.Services
             var items = new ObservableCollection<T>();
             return items;
         }
+        public ObservableCollection<Thing> GetItemsWithInterface<T>(string key = null)
+        {
+            var items = new ObservableCollection<Thing>();
+            return items;
+        }
 
     }
 

@@ -10,11 +10,11 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
 
 {
     GlobalSettings globalSettings;
-    Dictionary<string, ObservableCollection<Thing>> ObjectKeeper { get; set; } = new();
+    Dictionary<Type, ObservableCollection<Thing>> ObjectKeeper { get; set; } = new();
 
     void RegisterModel(Type type)
     {
-        ObjectKeeper[type.Name] = new ObservableCollection<Thing>();
+        ObjectKeeper[type] = new ObservableCollection<Thing>();
     }
     public bool InitializeDatabase()
     {
@@ -28,14 +28,14 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
     public void AddThing<T>(T thing)where T : Thing
     {
         var Ts = typeof(T);
-        ObjectKeeper[Ts.Name].Add(thing);
+        ObjectKeeper[typeof(T)].Add(thing);
     }
     public void AddThing<T>(IEnumerable<T> thing) where T : Thing
     {
         var Ts = typeof(T);
         foreach(var model in thing)
         {
-            ObjectKeeper[Ts.Name].Add(model);
+            ObjectKeeper[Ts].Add(model);
         }
     }
 
@@ -51,14 +51,15 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
     {
         globalSettings = settings;
     }
-    public ObservableCollection<T> GetItems<T>(string key = null) where T : Thing
+
+    public ObservableCollection<T> GetItems<T>(Type key = null)where T : Thing
     {
         var colToFill = new ObservableCollection<T>();
-        key ??= typeof(T).Name;
-        foreach(var item in ObjectKeeper[key])
-        {
-            colToFill.Add((T)item);
-        }
+        key ??= typeof(T);
+        foreach (var item in ObjectKeeper[key])
+            {
+                colToFill.Add((T)item);
+            }
         ObjectKeeper[key].CollectionChanged += (s, e) =>
         {
             switch (e.Action)
@@ -73,6 +74,22 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
                     break;
             }
         };
+        return colToFill;
+    }
+    public ObservableCollection<Thing> GetItemsWithInterface<T>()
+    {
+        Type type = typeof(T);
+        var colToFill = new ObservableCollection<Thing>();
+        foreach (var list in ObjectKeeper.Keys)
+        {
+            if (type.GetInterfaces().Contains(list.GetType()))
+            {
+                foreach (var item in ObjectKeeper[list])
+                {
+                    colToFill.Add(item);
+                }
+            }
+        }
         return colToFill;
     }
 
