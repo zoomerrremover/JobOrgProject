@@ -164,7 +164,7 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="ItemDetails"
-              x:DataType="modelsProxies:ThingProxy">
+              x:DataType="modelsProxies:ItemProxy">
               <Grid RowDefinitions="Auto,Auto,Auto"
                     RowSpacing="20">
                   <Frame Background="{StaticResource BlockColor}"
@@ -200,7 +200,7 @@
                    <Frame Background="{StaticResource BlockColor}"
                           CornerRadius="10"
                           Grid.Column="1"
-                          Grid.Row="2"
+                          Grid.Row="1"
                           BorderColor="Transparent">
                           <Grid ColumnDefinitions="*,50"
                                 RowDefinitions="50,*"
@@ -228,10 +228,11 @@
                    CornerRadius="50"
                    Grid.ColumnSpan="2"
                    BorderColor="Transparent"
-                   HeightRequest="{Binding ScreenHeight}">
+                   Grid.Row="2">
                 <Frame.Background>
                     <StaticResource Key="BlockColor" />
                 </Frame.Background>
+            
                 <Grid
                        Padding="10"
                        Grid.Column="1"
@@ -255,10 +256,8 @@
                          Grid.Column="2"
                          Grid.Row="1"
                          SelectedIndex="{Binding FilterChoice}"
-                         ItemsSource="{Binding AvaliableFilters}"
-                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"/>
+                         ItemsSource="{Binding AvaliableFilters}"/>
                      <ImageButton
-                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
                          Grid.Column="3"
                          Grid.Row="1"
                          BorderColor="Transparent"
@@ -270,7 +269,6 @@
                      </ImageButton>
                      <ImageButton  Grid.Column="4"
                          Grid.Row="1"
-                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
                          BorderColor="Transparent"
                          CornerRadius="10"
                          Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
@@ -280,9 +278,8 @@
                     </ImageButton>
                     <CollectionView Grid.ColumnSpan="4"
                     Grid.Row="3"
-                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"
-                    ItemsSource="{Binding DisplayedItems}"
-                    ItemTemplate="{StaticResource ItemTemplate}"
+                    ItemsSource="{Binding DisplayedHolders}"
+                    ItemTemplate="{StaticResource WorkerTemplate}"
                     MaximumHeightRequest="300"/>
                 </Grid>
             </Frame>

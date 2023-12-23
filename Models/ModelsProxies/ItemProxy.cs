@@ -24,6 +24,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         public ItemProxy(Item item) : base(item)
         {
             BindingObject = item;
+            Initiate();
         }
         public ItemProxy(Thing BindingObject) : base(BindingObject)
         {

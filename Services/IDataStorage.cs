@@ -26,7 +26,7 @@ namespace TheJobOrganizationApp.Services
             return true;
         }
 
-        public ObservableCollection<T> GetItems<T>(string key = null) where T : Thing
+        public ObservableCollection<T> GetItems<T>(Type key = null) where T : Thing
         {
             var items = new ObservableCollection<T>();
             return items;

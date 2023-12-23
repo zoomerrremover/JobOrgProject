@@ -11,7 +11,8 @@ namespace TheJobOrganizationApp.ViewModels
     public partial class GlobalSearchViewModel : BaseViewModel
     {
         [ObservableProperty]
-        List<string> typePickerItems = new();
+        List<string> displayedPickerItems = new();
+        List<Type> typePickerItems = new();
 
         string searchPromt = "";
         public string SearchPromt
@@ -47,7 +48,9 @@ namespace TheJobOrganizationApp.ViewModels
 
         partial void OnSelectedModelChanging(string oldValue, string newValue)
         {
-            Models = dataStorage.GetItems<Thing>(newValue);
+            var localType = typePickerItems.Where(w=>w.Name == newValue)
+                .FirstOrDefault();
+            Models = dataStorage.GetItems<Thing>(localType);
             CurrentTemplate = Selector.TemplatesAndTypes[newValue];
             LoadModels();
         }
@@ -71,7 +74,7 @@ namespace TheJobOrganizationApp.ViewModels
             Selector = selector;
 
             InitiateModelChoice();
-            OnSelectedModelChanging("", selectedModel);
+            OnSelectedModelChanging(null, selectedModel);
         }
         [RelayCommand]
         void GoToDetails()
@@ -93,8 +96,10 @@ namespace TheJobOrganizationApp.ViewModels
                 // If IsActive is true, add the type to the list
                 if (attribute.DisplayableInTheGlobalSearch)
                 {
-                    TypePickerItems.Add(type.Name);
+                    typePickerItems.Add(type);
+                    DisplayedPickerItems.Add(type.Name);
                 }
+                
             }
         }
     }

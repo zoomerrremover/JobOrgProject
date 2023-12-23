@@ -19,7 +19,7 @@
                 <Button Text="Delete"></Button>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"
-                    ItemsSource="{Binding TypePickerItems}"
+                    ItemsSource="{Binding DisplayedPickerItems}"
                     SelectedItem="{Binding SelectedModel}"
                     ></Picker>
         </Grid>
