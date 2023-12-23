@@ -82,7 +82,7 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
         var colToFill = new ObservableCollection<Thing>();
         foreach (var list in ObjectKeeper.Keys)
         {
-            if (type.GetInterfaces().Contains(list.GetType()))
+            if (list.GetInterfaces().Contains(type))
             {
                 foreach (var item in ObjectKeeper[list])
                 {

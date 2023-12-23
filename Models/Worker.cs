@@ -20,6 +20,7 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHas
     public Color Color { get; set; }
     public bool IsPicked { get; set; }
     public Position Position { get; set; }
-    public string Role { get; set; }
+    public float Latitude { get; set; }
+    public float Longitude { get; set; }
 
 }

@@ -24,26 +24,16 @@ namespace TheJobOrganizationApp.Services
 
         public void Initiate(int generations)
         {
+            var localItems = FakeDataFactory.ItemGenerator.Generate(generations);
+            var localPos = FakeDataFactory.PositionGenerator.Generate(generations);
+            var localPlaces = FakeDataFactory.PlaceGenerator.Generate(generations);
+            var localWorkers = FakeDataFactory.WorkerGenerator.Generate(generations);
             var localJobs = FakeDataFactory.JobGenerator.Generate(generations);
-            var localWorkers = localJobs
-                .SelectMany(job => job.Tasks)
-                .SelectMany(task => task.Workers)
-                .ToList();
             var localTasks = localJobs
                 .SelectMany(job => job.Tasks)
                 .ToList();
-            var localPlaces = localJobs
-                .SelectMany(job => job.Tasks)
-                .Select(task => task.Place)
-                .ToList();
-            var localItems = localWorkers
-                .SelectMany(worker => worker.Items)
-                .ToList();
             var localConts = localJobs
                 .Select(job => job.Contractor)
-                .ToList();
-            var localPos = localWorkers
-                .Select(w => w.Position)
                 .ToList();
             dataStorange.AddThing(ToObservableCol(localPlaces));
             dataStorange.AddThing(ToObservableCol(localJobs));

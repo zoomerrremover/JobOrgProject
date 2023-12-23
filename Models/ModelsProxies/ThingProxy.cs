@@ -57,6 +57,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         {
             DisplayableNameGet = BindingObject.Name;
             DisplayableDescriptionGet = BindingObject.Description;
+            DisplayableID = BindingObject.Id.ToString();
         }
     }
 }

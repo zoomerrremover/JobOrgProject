@@ -8,7 +8,8 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
     [Proxy(ClassLinked = typeof(Item))]
     public partial class ItemProxy : ThingProxy
     {
-        new public Item BindingObject { get; set; } 
+        new public Item BindingObject { get; set; }
+
 
         // CTORS
 //--------------------------------------------------------------------------------
@@ -37,18 +38,23 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             var localHolders = queryService.GetItemsWithInterface<IHasItems>();
             foreach (var holder in localHolders)
             {
-                avaliableHolders.Add((holder, holder as IHasItems));
+                if (holder is IHasItems)
+                {
+                    var itemContext = holder as IHasItems;
+                    if (itemContext.Items.Contains(BindingObject))
+                    {
+                        var item = itemContext.Items.Where(x => x == BindingObject).FirstOrDefault();
+                        avaliableHolders.Add(new ThingItemMerge(holder, item));
+                    }
+                }
             }
             DisplayHolders();
-
         }
         //--------------------------------------------------------------------------------
-        delegate void ListSelector(ObservableCollection<(Thing, IHasItems)> items);
-
-
+        delegate void ListSelector(ObservableCollection<ThingItemMerge> items);
         [ObservableProperty]
-        public ObservableCollection<(Thing, IHasItems)> displayedHolders = new();
-        ObservableCollection<(Thing, IHasItems)> avaliableHolders = new();
+        public ObservableCollection<ThingItemMerge> displayedHolders = new();
+        ObservableCollection<ThingItemMerge> avaliableHolders = new();
         string searchPrompt = "";
         public string SearchPrompt
         {
@@ -64,7 +70,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         }
         void ApplySearchQuery()
         {
-            var filteredList = avaliableHolders.Where(i => i.Item1.Name.ToLower().Contains(SearchPrompt));
+            var filteredList = avaliableHolders.Where(i => i.thing.Name.ToLower().Contains(SearchPrompt));
             DisplayedHolders.Clear();
             foreach (var item in filteredList)
             {
@@ -73,7 +79,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         }
         void DisplayHolders()
         {
-            DisplayedHolders = avaliableHolders;
             ApplySearchQuery();
             ApplyFilters();
         }
@@ -105,20 +110,19 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
 
         // Filters
         //--------------------------------------------------------------------------------
-        public void NameSelector(ObservableCollection<(Thing, IHasItems)> holders)
+        public void NameSelector(ObservableCollection<ThingItemMerge> holders)
         {
             var listedItems = holders.ToList()
-                .OrderBy(i => i.Item2.Items.Where(w => w == BindingObject)
-                    .First().Qty);
+                .OrderBy(i => i.item.Qty);
             holders.Clear();
             foreach (var item in listedItems)
             {
                 holders.Add(item);
             }
         }
-        public void QuantitySelector(ObservableCollection<(Thing, IHasItems)> holders)
+        public void QuantitySelector(ObservableCollection<ThingItemMerge> holders)
         {
-            var listedItems = holders.ToList().OrderByDescending(h => h.Item1);
+            var listedItems = holders.ToList().OrderByDescending(h => h.thing);
             holders.Clear();
             foreach (var item in listedItems)
             {

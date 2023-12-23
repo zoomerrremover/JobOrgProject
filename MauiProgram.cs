@@ -4,7 +4,7 @@ using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using TheJobOrganizationApp.Services;
 using Mopups.Hosting;
-using Mopups.Interfaces;
+
 using Mopups.Services;
 
 namespace TheJobOrganizationApp
@@ -18,6 +18,7 @@ namespace TheJobOrganizationApp
             builder
                 .UseMauiApp<App>()
                 .ConfigureMopups()
+                .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("SF-Pro.ttf", "MainFont");

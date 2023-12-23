@@ -1,9 +1,13 @@
 ﻿
 namespace TheJobOrganizationApp.Models
 {
-    internal interface IHasLocation
+    public interface IHasLocation
     {
-        public string Location { get; set; }
+        public float Latitude { get; set; }
+
+        public float Longitude { get; set; }
+
+
 
         //backendstuff
     }

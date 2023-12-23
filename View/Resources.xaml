@@ -4,7 +4,8 @@
              x:Class="TheJobOrganizationApp.View.Resources"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
-             xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies">
+             xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies"
+             xmlns:maps ="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Styles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
@@ -71,7 +72,7 @@
                 <Label Text="{Binding Name}"
                          FontSize="Small"
                          TextColor="Black"/>
-                <Label Text="{Binding Location}"
+                <Label Text="{Binding Address}"
                          FontSize="Micro"
                          TextColor="Grey"
                          Grid.Column="3"
@@ -100,6 +101,7 @@
             </Grid>
         </Frame>
     </DataTemplate>
+    
     <DataTemplate x:Key="ThingDetails"
                  x:DataType="modelsProxies:ThingProxy">
         <Grid RowDefinitions="Auto,Auto"
@@ -154,6 +156,71 @@
                    Grid.Column="0"
                    IsVisible="{Binding DescriptionEditMode.Visible}"
                    Style="{StaticResource SmallLabel}"/>
+                    <ImageButton Grid.Column="2"
+                    Background="{StaticResource ControlColor}"
+            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+            CornerRadius="10"
+            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="PlaceDetails"
+              x:DataType="modelsProxies:PlaceProxy">
+        <Grid RowDefinitions="Auto,Auto"
+          RowSpacing="20">
+            <Frame Background="{StaticResource BlockColor}">
+                <Grid ColumnDefinitions="300,300,*,50"
+              RowDefinitions="50,*">
+                    <VerticalStackLayout Grid.Column="0"
+                                         Grid.RowSpan="2">
+                        <Label Text="{Binding DisplayableNameGet}"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="Start"
+                                IsVisible="{Binding NameEditMode.Visible}"
+                                Style="{StaticResource HeaderLabel}"/>
+                        <Label Text="{Binding DisplayableAdressGet}"
+                                    Grid.Column="1"
+                                    Style="{StaticResource SmallLabel}"
+                                    IsVisible="{Binding NameEditMode.Visible}"/>
+                        <Entry HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Start"
+                               Text="{Binding DisplayableNameSet}"
+                               IsVisible="{Binding NameEditMode.Invisible}"
+                               Style="{StaticResource EditableEntry}"
+                               FontSize="25"/>
+                    </VerticalStackLayout>
+                    <Label Text="{Binding DisplayableID}"
+                                    Grid.Column="1"
+                                    Style="{StaticResource SmallLabel}"/>
+                    <ImageButton Grid.Column="3"
+                                 Background="{StaticResource ControlColor}"
+                                 CornerRadius="10"
+                                 Command="{Binding NameEditMode.SwitchPressedCommand}"
+                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                     </Grid>
+            </Frame>
+            <Frame Background="{StaticResource BlockColor}"
+           CornerRadius="10"
+           Grid.Column="1"
+           Grid.Row="2"
+           BorderColor="Transparent">
+                <Grid ColumnDefinitions="*,50"
+              RowDefinitions="50,*"
+              ColumnSpacing="10">
+                    <Editor
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Text="{Binding DisplayableDescriptionSet}"
+                        IsVisible="{Binding DescriptionEditMode.Invisible}"/>
+                    <Label Text="{Binding DisplayableDescriptionGet}"
+                           MaxLines="3"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"
+                           Grid.Column="0"
+                           IsVisible="{Binding DescriptionEditMode.Visible}"
+                           Style="{StaticResource SmallLabel}"/>
                     <ImageButton Grid.Column="2"
                     Background="{StaticResource ControlColor}"
             Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
@@ -238,7 +305,7 @@
                        Grid.Column="1"
                        RowDefinitions="60,60,10,*"
                        ColumnDefinitions="60,*,80,60,60"
-                       BackgroundColor="{StaticResource BlockColor}"
+                       Background="{StaticResource BlockColor}"
                        ColumnSpacing="10">
                     <Label Text="Holders"
                         Grid.Row="0"
@@ -276,11 +343,21 @@
                             <StaticResource Key="ControlColor" />
                         </ImageButton.Background>
                     </ImageButton>
-                    <CollectionView Grid.ColumnSpan="4"
-                    Grid.Row="3"
-                    ItemsSource="{Binding DisplayedHolders}"
-                    ItemTemplate="{StaticResource WorkerTemplate}"
-                    MaximumHeightRequest="300"/>
+                    <CollectionView Grid.ColumnSpan="5"
+                                    Grid.Row="3"
+                                    MaximumHeightRequest="450"
+                                    ItemsSource="{Binding DisplayedHolders}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="modelsProxies:ThingItemMerge">
+                                <Frame>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding thing.Name}"></Label>
+                                        <Label Text="{Binding item.Qty}"></Label>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
             </Frame>
         </Grid>
@@ -480,7 +557,7 @@
                 Grid.Column="1"
                 RowDefinitions="60,60,10,*"
                 ColumnDefinitions="60,*,80,60,60"
-                BackgroundColor="{StaticResource BlockColor}"
+                Background="Transparent"
                 ColumnSpacing="10">
                 <Button
                     BorderColor="Transparent"
@@ -537,6 +614,19 @@
                     ItemTemplate="{StaticResource ItemTemplate}"
                     MaximumHeightRequest="300"/>
             </Grid>
+        </Frame>
+    </DataTemplate>
+    <DataTemplate x:Key="IHasLocationDetails"
+                  x:DataType="modelsProxies:IHasLocationProxy">
+        <Frame 
+                   CornerRadius="50"
+                   Grid.ColumnSpan="2"
+                   BorderColor="Transparent">
+            <Frame.Background>
+                <StaticResource Key="BlockColor" />
+            </Frame.Background>
+            <maps:Map x:Name="map"
+                      MapType="Street"/>
         </Frame>
     </DataTemplate>
     <DataTemplate x:Key="IHasContactsDetails"
