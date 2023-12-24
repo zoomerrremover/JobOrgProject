@@ -1,8 +1,10 @@
 ﻿
+using TheJobOrganizationApp.Models.Interfaces;
+
 namespace TheJobOrganizationApp.Models
 {
     [Model(DisplayableInTheGlobalSearch = true)]
-    public class Assignment:Thing,TConstrained
+    public class Assignment:Thing,ITimeBased
     {
         public List<Worker> Workers;
         public List<Color> WorkerColours { get => Workers.Select(x => x.Color).ToList(); }

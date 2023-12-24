@@ -1,7 +1,6 @@
-﻿
-namespace TheJobOrganizationApp.Models
+﻿namespace TheJobOrganizationApp.Models.Interfaces
 {
-    public interface TConstrained
+    public interface ITimeBased
     {
         public DateTime StartTime { get; set; }
         public DateTime FinishTime { get; set; }

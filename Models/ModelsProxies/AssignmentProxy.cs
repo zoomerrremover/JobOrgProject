@@ -1,11 +1,12 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
+    [Proxy(ClassLinked = typeof(Assignment))]
     public partial class AssignmentProxy:ThingProxy
     {
         new public Assignment BindingObject { get; set; }
-
-
         // CTORS
         //------------------------------------------------------------------------------------------------
         public new static ModelView CreateFromTheModel(Thing model)
@@ -25,6 +26,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         {
         }
         //------------------------------------------------------------------------------------------------
-    
+
     }
 }

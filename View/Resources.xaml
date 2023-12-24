@@ -13,6 +13,11 @@
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
         <Frame HeightRequest="75    "  Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="150,150,350"
                   ColumnSpacing="60">
                 <Label Text="{Binding Name}"
@@ -47,6 +52,11 @@
     <DataTemplate   x:Key="JobTemplate"
                     x:DataType="models:Job">
         <Frame HeightRequest="75"  Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="150,150,350"
                ColumnSpacing="60">
                 <Label Text="{Binding Name}"
@@ -219,12 +229,12 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="AssignmentDetails"
-                 x:DataType="modelsProxies:">
-        <Grid RowDefinitions="Auto,Auto,Auto"
-          RowSpacing="20">
-            <Frame Background="{StaticResource BlockColor}">
-                <Grid ColumnDefinitions="Auto,*,50"
-              RowDefinitions="50,*">
+                  x:DataType="modelsProxies:AssignmentProxy">
+                  <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                        RowSpacing="20">
+                        <Frame Background="{StaticResource BlockColor}">
+                                <Grid ColumnDefinitions="Auto,*,50"
+                                       RowDefinitions="50,*">
                     <VerticalStackLayout Grid.Column="0"
                                    Grid.RowSpan="2">
                         <Label Text="{Binding DisplayableNameGet}"
@@ -251,11 +261,11 @@
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
-            <Frame Background="{StaticResource BlockColor}"
-           CornerRadius="10"
-           Grid.Column="1"
-           Grid.Row="2"
-           BorderColor="Transparent">
+                        <Frame Background="{StaticResource BlockColor}"
+                   CornerRadius="10"
+                   Grid.Column="1"
+                   Grid.Row="2"
+                   BorderColor="Transparent">
                 <Grid ColumnDefinitions="*,50"
               RowDefinitions="50,*"
               ColumnSpacing="10">
@@ -279,8 +289,24 @@
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
-            
-        </Grid>
+
+                  </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="ITimeBasedDetails">
+        <Frame Grid.Row="3">
+            <HorizontalStackLayout Spacing="30">
+                <VerticalStackLayout>
+                    <Label Text="Start time:"/>
+                    <DatePicker Date="{Binding DisplayableStartDate}"/>
+                    <TimePicker Time="{Binding DisplayableStartDate, Mode=TwoWay}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout>
+                    <Label Text="Finish time:"/>
+                    <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"/>
+                    <TimePicker Time="{Binding DisplayableFinishDate, Mode=TwoWay}"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Frame>
     </DataTemplate>
     <DataTemplate x:Key="PlaceDetails"
               x:DataType="modelsProxies:PlaceProxy">

@@ -35,11 +35,16 @@ public class ModelToVMAdaptor
             type = modelsToViewModel[asociatedType];
             
         }
-        else
+        else if( modelsToViewModel.ContainsKey(model.GetType()))
         {
+
             type = modelsToViewModel
                 .Where(m => m.Key == model.GetType())
                         .First().Value;
+        }
+        else
+        {
+            type = modelsToViewModel[typeof(Thing)];
         }
        
         var methodToInvoke = type

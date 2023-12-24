@@ -1,8 +1,10 @@
 ﻿
+using TheJobOrganizationApp.Models.Interfaces;
+
 namespace TheJobOrganizationApp.Models
 {
     [Model(DisplayableInTheGlobalSearch = true)]
-    public class Job:Thing,TConstrained 
+    public class Job:Thing,ITimeBased 
     {
         public List<Assignment> Tasks;
 
