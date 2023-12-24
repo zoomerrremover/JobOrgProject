@@ -39,7 +39,8 @@
                                       VerticalOptions="Center">
                                 <CheckBox.GestureRecognizers>
                                     <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WorkerPickerViewModel}}, Path=UpdateListCommand}">
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:WorkerPickerViewModel}}, Path=CheckBoxClickedCommand}"
+                                        CommandParameter="{Binding .}">
                                     </TapGestureRecognizer>
                                 </CheckBox.GestureRecognizers>
                             </CheckBox>

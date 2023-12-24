@@ -4,7 +4,7 @@ using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using TheJobOrganizationApp.Services;
 using Mopups.Hosting;
-
+using CommunityToolkit.Maui.Maps;
 using Mopups.Services;
 
 namespace TheJobOrganizationApp
@@ -39,14 +39,13 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<WorkerDetailsViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
+            builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddSingleton<WorkerPickerPage>();
             builder.Services.AddSingleton<ModelToVMAdaptor>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<GlobalSearchPage>();
-
-
-
+            builder.Services.AddTransient<SettingsPage>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

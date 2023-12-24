@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
@@ -20,13 +21,21 @@ public partial class WorkerPickerViewModel : BaseViewModel
     public ObservableCollection<Worker> WorkersPicked { get; set; } = new();
 
     ObservableCollection<Worker> workers { get => data.GetItems<Worker>(); }
-    [RelayCommand]
     void UpdateList()
     {
         WorkersPicked.Clear();
         workers.Where(w => w.IsPicked == true).ToList().ForEach(w => WorkersPicked.Add(w));
 
     }
+    [RelayCommand]
+    void CheckBoxClicked(Worker worker)
+    {
+        worker.IsPicked = !worker.IsPicked;
+        ObsWorkers.Remove(worker);
+        ObsWorkers.Insert(0,worker);
+        UpdateList();
+    }
+
 
     public WorkerPickerViewModel(Initializator init, IDataStorage Storange)
     {
@@ -48,6 +57,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
             }
         }
     }
+
     [RelayCommand]
 
     void SelectAll()

@@ -1,9 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Resources"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels"
              xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies"
              xmlns:maps ="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
     <ResourceDictionary.MergedDictionaries>
@@ -11,10 +12,9 @@
     </ResourceDictionary.MergedDictionaries>
     <DataTemplate   x:Key="AssignmentTemplate"
                     x:DataType="models:Assignment">
-        <Frame HeightRequest="70"  Margin="0">
+        <Frame HeightRequest="75    "  Margin="0">
             <Grid ColumnDefinitions="150,150,350"
                   ColumnSpacing="60">
-                <Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>
                 <Label Text="{Binding Name}"
                          FontSize="Small"
                          TextColor="Black"/>
@@ -44,9 +44,36 @@
             </Grid>
         </Frame>
     </DataTemplate>
+    <DataTemplate   x:Key="JobTemplate"
+                    x:DataType="models:Job">
+        <Frame HeightRequest="75"  Margin="0">
+            <Grid ColumnDefinitions="150,150,350"
+               ColumnSpacing="60">
+                <Label Text="{Binding Name}"
+                      FontSize="Small"
+                      TextColor="Black"/>
+                <VerticalStackLayout Grid.Column="1"
+                                  VerticalOptions="Start">
+                    <Label Text="{Binding StartTime}"
+                      FontSize="Micro"
+                      TextColor="Grey"/>
+                    <Label Text="{Binding FinishTime}"
+                      FontSize="Micro"
+                      TextColor="Grey"/>
+                </VerticalStackLayout>
+              
+            </Grid>
+        </Frame>
+    </DataTemplate>
     <DataTemplate   x:Key="ItemTemplate"
                     x:DataType="models:Item">
+
         <Frame HeightRequest="70"  Margin="0">
+            <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="100,60,80,2,50">
 
                 <Label Text="{Binding Name}"
@@ -66,6 +93,11 @@
     <DataTemplate   x:Key="PlaceTemplate"
                     x:DataType="models:Place">
         <Frame HeightRequest="70"  Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="150,450"
                   ColumnSpacing="60">
 
@@ -80,9 +112,31 @@
             </Grid>
         </Frame>
     </DataTemplate>
+    <DataTemplate   x:Key="ThingTemplate"
+                x:DataType="models:Thing">
+
+        <Frame HeightRequest="70"  Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                    CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
+            <Grid ColumnDefinitions="100,60,80,2,50">
+
+                <Label Text="{Binding Name}"
+                     FontSize="Small"
+                     TextColor="Black"/>
+            </Grid>
+        </Frame>
+    </DataTemplate>
     <DataTemplate   x:Key="WorkerTemplate"
                     x:DataType="models:Worker">
         <Frame HeightRequest="70"  Margin="0">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+            </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="50,100,450"
                   ColumnSpacing="60">
                 <Ellipse Background="{Binding Color}"
@@ -101,7 +155,6 @@
             </Grid>
         </Frame>
     </DataTemplate>
-    
     <DataTemplate x:Key="ThingDetails"
                  x:DataType="modelsProxies:ThingProxy">
         <Grid RowDefinitions="Auto,Auto"
@@ -122,7 +175,7 @@
                                     Style="{StaticResource SmallLabel}"
                                     IsVisible="{Binding NameEditMode.Visible}"/>
                         <Entry HorizontalOptions="StartAndExpand"
-               VerticalOptions="Start"
+                               VerticalOptions="Start"
                Text="{Binding DisplayableNameSet}"
                IsVisible="{Binding NameEditMode.Invisible}"
                Style="{StaticResource EditableEntry}"
@@ -163,6 +216,70 @@
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="AssignmentDetails"
+                 x:DataType="modelsProxies:">
+        <Grid RowDefinitions="Auto,Auto,Auto"
+          RowSpacing="20">
+            <Frame Background="{StaticResource BlockColor}">
+                <Grid ColumnDefinitions="Auto,*,50"
+              RowDefinitions="50,*">
+                    <VerticalStackLayout Grid.Column="0"
+                                   Grid.RowSpan="2">
+                        <Label Text="{Binding DisplayableNameGet}"
+                      HorizontalOptions="StartAndExpand"
+                      VerticalOptions="Start"
+                      IsVisible="{Binding NameEditMode.Visible}"
+                      Style="{StaticResource HeaderLabel}"/>
+                        <Label Text="{Binding DisplayableID}"
+                                    VerticalOptions="Start" 
+                                    HorizontalOptions="StartAndExpand"
+                                    Style="{StaticResource SmallLabel}"
+                                    IsVisible="{Binding NameEditMode.Visible}"/>
+                        <Entry HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Start"
+               Text="{Binding DisplayableNameSet}"
+               IsVisible="{Binding NameEditMode.Invisible}"
+               Style="{StaticResource EditableEntry}"
+               FontSize="25"/>
+                    </VerticalStackLayout>
+                    <ImageButton Grid.Column="2"
+            Background="{StaticResource ControlColor}"
+            CornerRadius="10"
+            Command="{Binding NameEditMode.SwitchPressedCommand}"
+            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                </Grid>
+            </Frame>
+            <Frame Background="{StaticResource BlockColor}"
+           CornerRadius="10"
+           Grid.Column="1"
+           Grid.Row="2"
+           BorderColor="Transparent">
+                <Grid ColumnDefinitions="*,50"
+              RowDefinitions="50,*"
+              ColumnSpacing="10">
+                    <Editor
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Text="{Binding DisplayableDescriptionSet}"
+                IsVisible="{Binding DescriptionEditMode.Invisible}"/>
+                    <Label Text="{Binding DisplayableDescriptionGet}"
+                   MaxLines="3"
+                   HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.RowSpan="2"
+                   Grid.Column="0"
+                   IsVisible="{Binding DescriptionEditMode.Visible}"
+                   Style="{StaticResource SmallLabel}"/>
+                    <ImageButton Grid.Column="2"
+                    Background="{StaticResource ControlColor}"
+            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+            CornerRadius="10"
+            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                </Grid>
+            </Frame>
+            
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="PlaceDetails"
@@ -366,31 +483,26 @@
                     x:DataType="modelsProxies:WorkerProxy">
         <Grid
               BackgroundColor="Transparent"
-              ColumnDefinitions="150,*"
-              ColumnSpacing="50"
-              RowDefinitions="250,130"
+              ColumnDefinitions="*,150,*"
+              RowDefinitions="250,Auto,Auto"
               VerticalOptions="Center"
               RowSpacing="20"
               Margin="0">
             <Frame   CornerRadius="10"
-                     Grid.Column="0"
+                     Grid.Column="1"
                      Grid.Row ="0" 
                      Background="White"
                      BorderColor="Transparent"/>
 
-
             <Grid       
-                     Grid.Column="1"
-                     Grid.Row="0"
+                     Grid.Row="1"
+                     Grid.ColumnSpan="3"
                      BackgroundColor="Transparent"
-                     RowDefinitions="120,10,140"
-                     ColumnSpacing="5"
-                     ColumnDefinitions="30,*">
+                     RowDefinitions="130,10,140">
                 <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
-                           Grid.Column="1"
                            BorderColor="Transparent">
-                    <Grid ColumnDefinitions="250,350,*,50"
+                    <Grid ColumnDefinitions="100,350,*,50"
                           RowDefinitions="40,5,50">
                         <StackLayout Grid.Column="0">
                             <Label Text="{Binding DisplayableNameGet}"
@@ -406,14 +518,15 @@
                         </StackLayout>
                         <StackLayout Grid.Row="2">
                             <Label Text="{Binding DisplayablePositionGet}"
-                                        VerticalOptions="Start" 
-                                        HorizontalOptions="StartAndExpand"
-                                        Style="{StaticResource SmallLabel}"
-                                        IsVisible="{Binding NameEditMode.Visible}"/>
+                                   VerticalOptions="Start" 
+                                   HorizontalOptions="StartAndExpand"
+                                   Style="{StaticResource SmallLabel}"
+                                   IsVisible="{Binding NameEditMode.Visible}"/>
                             <Picker
                                 VerticalOptions="Start"
+                                WidthRequest="70"
+                                HorizontalOptions="Start"
                                 IsVisible="{Binding NameEditMode.Invisible}"
-                                HeightRequest="10"
                                 ItemsSource= "{Binding PossiblePositions}"
                                 SelectedIndex="{Binding DisplayablePositionSet}"/>
                         </StackLayout>
@@ -432,7 +545,7 @@
                 </Frame>
                 <Frame Background="{StaticResource BlockColor}"
                            CornerRadius="10"
-                           Grid.Column="1"
+                           Grid.ColumnSpan="3"
                            Grid.Row="2"
                            BorderColor="Transparent">
                     <Grid ColumnDefinitions="*,50"
@@ -459,48 +572,56 @@
                     </Grid>
                 </Frame>
             </Grid>
-            <Frame Grid.Row="1"
+            <Frame Grid.Row="2"
                    CornerRadius="50"
-                   Grid.ColumnSpan="2"
+                   Grid.ColumnSpan="3"
                    BorderColor="Transparent">
                 <Frame.Background>
                     <StaticResource Key="BlockColor" />
                 </Frame.Background>
                 <Grid VerticalOptions="Center"
-                      ColumnDefinitions="50,30,250,10,70,*,150,10,150"
-                      RowDefinitions="*,*">
-                    <Ellipse WidthRequest="50"
-                             HeightRequest="50"
+                      ColumnDefinitions="125,125"
+                      RowDefinitions="60,*"
+                      ColumnSpacing="10">
+                    <Grid ColumnDefinitions="20,70,50"
+                          RowDefinitions="*,*"
+                          Grid.ColumnSpan="2">
+                        <Ellipse WidthRequest="20"
+                             HeightRequest="20"
                              Fill="{Binding Worker.Color}"
-                             Grid.RowSpan="2"/>
-                    <Label Text="{Binding TaskName }"
-                           Style="{StaticResource HeaderLabel}"
-                           Grid.Column="2"
+                             Grid.Row="0"/>
+                        <Label Text="{Binding TaskName }"
+                           FontSize="10"
+                           Grid.Column="1"
+                           Grid.Row="0"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"
                            MaxLines="1"
-                           ></Label>
-                    <Label Text="{Binding SecondaryText}"
+                           />
+                        <Label Text="{Binding SecondaryText}"
                            MaxLines="1"
                            IsVisible="{Binding IsCurrentTaskActive}"
-                           Style="{StaticResource SmallLabel}"
+                           FontSize="10"
+                           Grid.Row="0"
                            Grid.Column="4"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"
-                           ></Label>
-                    <Label Text="{Binding Addressline}"
-                           FontSize="17"
+                           />
+                        <Label Text="{Binding Addressline}"
+                           FontSize="10"
                            TextColor="White"
-                           Grid.Column="2"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
                            Grid.Row="1"
                            HorizontalOptions="StartAndExpand"
                            VerticalOptions="Center"
-                           ></Label>
-                    <Frame CornerRadius="30"
+                           />
+                    </Grid>
+                        <Frame CornerRadius="30"
                         HeightRequest="85"
                         BorderColor="Transparent"
-                        Grid.Column="6"
-                        Grid.RowSpan="2">
+                        Grid.Column="0"
+                        Grid.Row="3">
                         <Frame.Background>
                             <StaticResource Key="ControlColor" />
                         </Frame.Background>
@@ -510,7 +631,7 @@
                                     Grid.Column="0"/>
                             <Label Text="{Binding BStartTime}"
                                 HorizontalOptions="CenterAndExpand"
-                                Grid.Column="0"
+                                Grid.Column="3"
                                 Grid.Row="1"
                                 VerticalOptions="Center"
                                 Style="{StaticResource MeiumBold}"/>
@@ -519,8 +640,8 @@
                     <Frame CornerRadius="30"
                            HeightRequest="85"
                            BorderColor="Transparent"
-                           Grid.Column="8"
-                           Grid.RowSpan="2">
+                           Grid.Column="1"
+                           Grid.Row="3">
                         <Frame.Background>
                             <StaticResource Key="ControlColor" />
                         </Frame.Background>
@@ -562,7 +683,7 @@
                 <Button
                     BorderColor="Transparent"
                     Grid.Column="3"
-                    Background="Transparent"
+                    Background="White"
                     VerticalOptions="Start"
                     Command="{Binding RolloutButtonSwitch.SwitchPressedCommand}"
                     ImageSource="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\drdown25.png"/>
@@ -616,7 +737,7 @@
             </Grid>
         </Frame>
     </DataTemplate>
-    <DataTemplate x:Key="IHasLocationDetails"
+    <!--<DataTemplate x:Key="IHasLocationDetails"
                   x:DataType="modelsProxies:IHasLocationProxy">
         <Frame 
                    CornerRadius="50"
@@ -628,7 +749,7 @@
             <maps:Map x:Name="map"
                       MapType="Street"/>
         </Frame>
-    </DataTemplate>
+    </DataTemplate>-->
     <DataTemplate x:Key="IHasContactsDetails"
                   x:DataType="models:IHasContacts">
         <Frame 

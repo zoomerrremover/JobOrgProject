@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Styles">
 
     <LinearGradientBrush x:Key="BGColor"
         StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#03045E" Offset="0.1" />
-        <GradientStop Color="#CAF0F8" Offset="4" />
+        <GradientStop Color="#03045E" Offset="1" />
+        <GradientStop Color="#CAF0F8" Offset="0.1" />
     </LinearGradientBrush>
     <LinearGradientBrush x:Key="BlockColor"
         StartPoint="0,1"  EndPoint="0,0">

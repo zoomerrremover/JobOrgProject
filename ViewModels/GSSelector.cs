@@ -18,7 +18,14 @@ public class GSSelector
                 TemplatesAndTypes[Template.Key.Replace("Template","")] = Template.Value as DataTemplate;
             }
         }
-
+    }
+    public DataTemplate ChooseTemplate(string key)
+    {
+        if (TemplatesAndTypes.ContainsKey(key))
+        {
+            return TemplatesAndTypes[key];
+        }
+        else { return TemplatesAndTypes["Thing"]; }
     }
     public GSSelector(Resources resource)
     {

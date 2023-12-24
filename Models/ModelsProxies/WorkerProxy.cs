@@ -84,7 +84,7 @@ public partial class WorkerProxy:ThingProxy
     Assignment nextTask;
 
 
-    public void InitializeComponents()
+    public new void InitializeComponents()
     {
         DisplayablePositionGet = Worker.Position.Name;
         DisplayableNameGet = Worker.Name;

@@ -1,5 +1,6 @@
 ﻿
 using TheJobOrganizationApp.Models.ModelsProxies;
+using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Services
 {

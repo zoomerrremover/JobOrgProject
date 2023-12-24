@@ -5,7 +5,6 @@ namespace TheJobOrganizationApp.Models
     public class Assignment:Thing,TConstrained
     {
         public List<Worker> Workers;
-
         public List<Color> WorkerColours { get => Workers.Select(x => x.Color).ToList(); }
         public DateTime StartTime { get ; set ; }
         public DateTime FinishTime { get ; set ; }

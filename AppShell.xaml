@@ -19,8 +19,8 @@
         Route="GlobalSearchPage" />
         <ShellContent
         Title="Settings"
-        ContentTemplate="{DataTemplate view:GlobalSearchPage}"
-        Route="GlobalSearchPage" />
+        ContentTemplate="{DataTemplate view:SettingsPage}"
+        Route="SettingsPage" />
     </TabBar>
 
 </Shell>

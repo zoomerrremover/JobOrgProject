@@ -51,9 +51,10 @@ namespace TheJobOrganizationApp.ViewModels
             var localType = typePickerItems.Where(w=>w.Name == newValue)
                 .FirstOrDefault();
             Models = dataStorage.GetItems<Thing>(localType);
-            CurrentTemplate = Selector.TemplatesAndTypes[newValue];
+            CurrentTemplate = Selector.ChooseTemplate(newValue);
             LoadModels();
         }
+
         void LoadModels()
         {
             ObsModels.Clear();
@@ -65,7 +66,7 @@ namespace TheJobOrganizationApp.ViewModels
                 }
             }
         }
-        PageFactory factory;
+        static PageFactory factory;
         public GlobalSearchViewModel(PageFactory Factory,GlobalSettings settings,IDataStorage data,GSSelector selector)
         {
             factory = Factory;
@@ -77,7 +78,7 @@ namespace TheJobOrganizationApp.ViewModels
             OnSelectedModelChanging(null, selectedModel);
         }
         [RelayCommand]
-        void GoToDetails()
+        public static void GoToDetails(Thing SelectedObject)
         {
             if(SelectedObject is null)
             {
@@ -87,6 +88,7 @@ namespace TheJobOrganizationApp.ViewModels
             Shell.Current.Navigation.PushAsync(pageToLoad);
 
         }
+
         void InitiateModelChoice()
         {
             foreach (var type in settings.Models)

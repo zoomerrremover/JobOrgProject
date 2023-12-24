@@ -24,12 +24,10 @@
                     ></Picker>
         </Grid>
         <CollectionView 
-    ItemsSource="{Binding ObsModels}"
-    Grid.Row="2" 
-    ItemTemplate="{Binding CurrentTemplate}"
-    SelectionMode="Single"
-    SelectedItem="{Binding SelectedObject}"
-    SelectionChangedCommand="{Binding GoToDetailsCommand}"/>
+            ItemsSource="{Binding ObsModels}"
+            Grid.Row="2" 
+            ItemTemplate="{Binding CurrentTemplate}"
+            SelectionMode="Single"/>
 
 
 
