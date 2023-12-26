@@ -1,18 +1,21 @@
 ﻿
+using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using TheJobOrganizationApp.Services;
 
 namespace TheJobOrganizationApp.Models;
 
-public abstract class Thing
+public abstract partial class Thing:ObservableObject
 
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    [ObservableProperty]
+    public string name;
 
     public string Description { get; set; }
 
-    public List<HistoryRecord> History { get; set; }
+    public ObservableCollection<HistoryRecord> History;
 
 
     public Thing()
@@ -32,5 +35,12 @@ public abstract class Thing
     public override string ToString()
     {
         return Name;
+    }
+   
+    public static Action<Thing> updateActionInvoke;
+    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+    {
+        updateActionInvoke.Invoke(this);
+        base.OnPropertyChanged(e);
     }
 }

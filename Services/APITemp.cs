@@ -6,7 +6,7 @@ namespace TheJobOrganizationApp.Services
 {
     public class APITemp : IAPIService
     {
-        public APITemp(IDataStorage dataStorange,FakeDataFactory fakeDataFactory,int numberOfGeneratedData = 1)
+        public APITemp(IDataStorage dataStorange,FakeDataFactory fakeDataFactory,int numberOfGeneratedData = 10)
         {
             this.dataStorange = dataStorange;
             FakeDataFactory = fakeDataFactory;

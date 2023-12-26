@@ -32,7 +32,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<GlobalSettings>();
             builder.Services.AddSingleton<GSSelector>();
             builder.Services.AddSingleton<PageFactory>();
-            builder.Services.AddSingleton<IAPIService>(provider => new APITemp(provider.GetRequiredService<IDataStorage>(), provider.GetRequiredService<FakeDataFactory>(), 10));
+            builder.Services.AddSingleton<IAPIService,APITemp>();
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddSingleton<Resources>();
             builder.Services.AddSingleton<GlobalSearchViewModel>();

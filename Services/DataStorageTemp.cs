@@ -92,5 +92,10 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
         }
         return colToFill;
     }
+    public void TriggerUpdate<T>() where T : Thing
+    {
+        var typeOfThing = typeof(T);
+        ObjectKeeper[typeOfThing].Add(null);
+    }
 
 }

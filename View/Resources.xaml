@@ -230,7 +230,7 @@
     </DataTemplate>
     <DataTemplate x:Key="AssignmentDetails"
                   x:DataType="modelsProxies:AssignmentProxy">
-                  <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                  <Grid RowDefinitions="Auto,Auto,Auto"
                         RowSpacing="20">
                         <Frame Background="{StaticResource BlockColor}">
                                 <Grid ColumnDefinitions="Auto,*,50"
@@ -289,8 +289,86 @@
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
+                        <Frame 
+                            CornerRadius="50"
+                            Grid.ColumnSpan="2"
+                            BorderColor="Transparent"
+                            Grid.Row="2">
+                            <Frame.Background>
+                                <StaticResource Key="BlockColor" />
+                            </Frame.Background>
+                        <Grid
+                            Padding="10"
+                            Grid.Column="1"
+                            RowDefinitions="60,60,10,*"
+                            ColumnDefinitions="60,*,60,60"
+                            Background="{StaticResource BlockColor}"
+                            ColumnSpacing="10">
+                            <Label Text="Holders"
+                                Grid.Row="0"
+                                TextColor="White"
+                                Grid.Column="0"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Start"/>
+                    <Entry
+                        Grid.Row="1"
+                        VerticalOptions="Center"
+                        Background="White"
+                        Grid.ColumnSpan="2"
+                        MaxLength="24"
+                        Text="{Binding SearchEntryText}"/>
+                    <ImageButton
+                        Grid.Column="2"
+                        Grid.Row="1"
+                        BorderColor="Transparent"
+                        CornerRadius="10"
+                        Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png">
+                        <ImageButton.Background>
+                            <StaticResource Key="ControlColor" />
+                        </ImageButton.Background>
+                    </ImageButton>
+                    <ImageButton  Grid.Column="4"
+                                  Grid.Row="1"
+                                  BorderColor="Transparent"
+                                  CornerRadius="10"
+                                   Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
+                        <ImageButton.Background>
+                            <StaticResource Key="ControlColor" />
+                        </ImageButton.Background>
+                    </ImageButton>
+                    <CollectionView Grid.ColumnSpan="5"
+                        Grid.Row="3"
+                        MaximumHeightRequest="450"
+                        ItemsSource="{Binding DisplayableWorkers}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="modelsProxies:PickableWorker">
+                                <Frame HeightRequest="70"  Margin="0">
+                                    <HorizontalStackLayout>
+                                        <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
+                                        <CheckBox
+                                      IsChecked="{Binding data}"
+                                      VerticalOptions="Center">
+                                            <CheckBox.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type modelsProxies:AssignmentProxy}}, Path=EditWorkerCommand}"
+                                                    CommandParameter="{Binding .}">
+                                                </TapGestureRecognizer>
+                                            </CheckBox.GestureRecognizers>
+                                        </CheckBox>
+                                        <Label Text="{Binding model.Name}"
+                                 FontSize="Micro"
+                                 TextColor="Black"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"></Label>
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Frame>
 
-                  </Grid>
+        </Grid>
     </DataTemplate>
     <DataTemplate x:Key="ITimeBasedDetails">
         <Frame Grid.Row="3">
@@ -310,7 +388,7 @@
     </DataTemplate>
     <DataTemplate x:Key="PlaceDetails"
               x:DataType="modelsProxies:PlaceProxy">
-        <Grid RowDefinitions="Auto,Auto"
+        <Grid RowDefinitions="Auto,Auto,Auto"
           RowSpacing="20">
             <Frame Background="{StaticResource BlockColor}">
                 <Grid ColumnDefinitions="300,300,*,50"

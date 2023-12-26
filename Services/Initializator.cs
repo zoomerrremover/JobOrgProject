@@ -1,4 +1,5 @@
 ﻿
+using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.ModelsProxies;
 using TheJobOrganizationApp.ViewModels;
 
@@ -14,6 +15,7 @@ namespace TheJobOrganizationApp.Services
             Services.Add(st);
             Services.Add(storage);
             WorkerProxy.Initialize(storage);
+            Thing
         }
 
         public void Initialize()

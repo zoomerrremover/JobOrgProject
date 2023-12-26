@@ -16,7 +16,10 @@ namespace TheJobOrganizationApp.Services
         public void AddThing<T>(IEnumerable<T> thing) where T : Thing
         {
         }
+        public void TriggerUpdate<T>(T thing) where T : Thing
+        {
 
+        }
         public void RemoveThing<T>(T thing)
         {
 
