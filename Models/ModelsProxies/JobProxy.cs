@@ -23,11 +23,19 @@ public partial class JobProxy:ThingProxy
     public JobProxy(Job item) : base(item)
     {
         BindingObject = item;
-        workers = queryService.GetItems<Worker>();
+        Initialize();
+    }
+    void Initialize()
+    {
+
     }
     //------------------------------------------------------------------------------------------------
+    public ObservableCollection<Contractor> Contractors { get; set; }
+    [ObservableProperty]
+    Contractor pickedContractor;
+    //-------------------------------------------------------------------------------------------
+    public ObservableCollection<Assignment> Assignments { get; set; }
     
-
 
     
 

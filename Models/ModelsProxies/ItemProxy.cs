@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
@@ -34,7 +35,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             InitializeFilters();
             queryService.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
             InitializeHolders();
-            DisplayHolders();
+            
         }
 
         private void InitializeHolders(object sender, NotifyCollectionChangedEventArgs e)
@@ -48,7 +49,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             filterSelectorMethods["Quantity"] = QuantitySelector;
             AvaliableFilters = filterSelectorMethods.Keys.ToList();
         }
-
+        private void InitializeCollectionView
         private void InitializeHolders()
         {
             var localHolders = queryService.GetItemsWithInterface<IHasItems>();
@@ -65,65 +66,24 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
                 }
             }
         }
-
         //--------------------------------------------------------------------------------
-        delegate void ListSelector(ObservableCollection<ThingItemMerge> items);
         [ObservableProperty]
-        public ObservableCollection<ThingItemMerge> displayedHolders = new();
-        ObservableCollection<ThingItemMerge> avaliableHolders = new();
-        string searchPrompt = "";
-        public string SearchPrompt
+        string displayablePrice;
+        protected override void NameEditButtonPressed()
         {
-            get => searchPrompt.ToLower();
-
-            set
+            if(DataCheckFloat(DisplayablePrice))
             {
-                Task.Delay(250);
-                searchPrompt = value;
-                DisplayHolders();
-
+                var localPrice = float.Parse(DisplayablePrice);
+                BindingObject.Price = localPrice;
             }
+            base.NameEditButtonPressed();
         }
-        void ApplySearchQuery()
+        bool DataCheckFloat(string numberToCheck)
         {
-            var filteredList = avaliableHolders.Where(i => i.thing.Name.ToLower().Contains(SearchPrompt));
-            DisplayedHolders.Clear();
-            foreach (var item in filteredList)
-            {
-                DisplayedHolders.Add(item);
-            }
+            return true; //TODO
         }
-        void DisplayHolders()
-        {
-            ApplySearchQuery();
-            ApplyFilters();
-        }
-        // Choosable filters feature
         //--------------------------------------------------------------------------------
-        Dictionary<string, ListSelector> filterSelectorMethods = new();
-        [ObservableProperty]
-        List<string> avaliableFilters = new();
-        int filterChoice = 0;
-        public int FilterChoice
-        {
-            get => filterChoice;
-            set
-            {
-                Task.Delay(250);
-                filterChoice = value;
-                DisplayHolders();
-            }
-        }
-        void ApplyFilters()
-        {
-            var choosedFilter = AvaliableFilters[FilterChoice];
-            var filteringMethod = filterSelectorMethods[choosedFilter];
-            if (filteringMethod != null)
-            {
-                filteringMethod.Invoke(DisplayedHolders);
-            }
-        }
-
+        ModelCollectionView<ThingItemMerge> ModelCollectionView { get; set; }
         // Filters
         //--------------------------------------------------------------------------------
         public void NameSelector(ObservableCollection<ThingItemMerge> holders)
@@ -138,7 +98,8 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         }
         public void QuantitySelector(ObservableCollection<ThingItemMerge> holders)
         {
-            var listedItems = holders.ToList().OrderByDescending(h => h.thing);
+            var listedItems = holders.ToList()
+                                        .OrderByDescending(h => h.thing);
             holders.Clear();
             foreach (var item in listedItems)
             {

@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
@@ -93,16 +94,15 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         void LoadModels()
             {
             var promptLocal = SearchEntryText.ToLower();
-            foreach (var worker in workers)
+            foreach (var (worker, boolValue) in from worker in workers
+                                                let NameLocal = worker.Name.ToLower()
+                                                where NameLocal.Contains(promptLocal)
+                                                let boolValue = BindingObject.Workers.Contains(worker) ? true : false
+                                                select (worker, boolValue))
             {
-                var NameLocal = worker.Name.ToLower();
-                if (NameLocal.Contains(promptLocal))
-                {
-                    bool boolValue = BindingObject.Workers.Contains(worker) ? true : false;
-                    DisplayableWorkers.Add(new PickableWorker(worker, boolValue));
-                }
+                DisplayableWorkers.Add(new PickableWorker(worker, boolValue));
             }
-            }
+        }
 
     }
 }
