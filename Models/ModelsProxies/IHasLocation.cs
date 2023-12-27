@@ -1,7 +1,5 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
-using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {

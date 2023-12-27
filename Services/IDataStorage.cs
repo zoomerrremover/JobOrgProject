@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using TheJobOrganizationApp.Models;
 
 
@@ -7,23 +8,12 @@ namespace TheJobOrganizationApp.Services
 {
     public interface IDataStorage: Iintializable
     {
-        public void RegisterModel(Type type)
-        {
-        }
-        public void AddThing<T>(T thing)where T : Thing
-        {
-        }
-        public void AddThing<T>(IEnumerable<T> thing) where T : Thing
-        {
-        }
-        public void TriggerUpdate<T>(T thing) where T : Thing
-        {
-
-        }
-        public void RemoveThing<T>(T thing)
-        {
-
-        }
+        public void RegisterModel(Type type);
+        public void AddThing<T>(T thing) where T : Thing;
+        public void AddThing<T>(IEnumerable<T> thing) where T : Thing;
+        public void TriggerUpdate<T>(T key = null) where T : class;
+        public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action, Type type);
+        public void RemoveThing<T>(T thing);
         public bool InitializeDatabase()
         {
             return true;

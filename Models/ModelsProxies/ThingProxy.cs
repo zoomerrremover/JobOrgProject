@@ -1,5 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
@@ -9,10 +10,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
     {
         [ObservableProperty]
         Thing bindingObject;
-        [ObservableProperty]
-        LogicSwitch nameEditMode = new();
-        [ObservableProperty]
-        LogicSwitch descriptionEditMode = new();
         public new static ModelView CreateFromTheModel(Thing model)
         {
                 var wm = new ThingProxy(model);
@@ -28,35 +25,42 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         //Editable Name
         //--------------------------------------------------------------------------
         [ObservableProperty]
-        string displayableNameGet;
+        string displayableName;
         [ObservableProperty]
         string displayableID;
-        public string DisplayableNameSet
-        {
-            get { return DisplayableNameGet; }
-            set
-            {
-                DisplayableNameGet = value;
-                BindingObject.Name = value;
-            }
-        }
+        [ObservableProperty]
+        string displayableDescription;
         //--------------------------------------------------------------------------
         [ObservableProperty]
-        string displayableDescriptionGet;
-        public string DisplayableDescriptionSet
+        bool nameInEditMode = true;
+        [ObservableProperty]
+        bool descriptionInEditMode = true;
+
+        [RelayCommand]
+        protected virtual void NameEditButtonPressed()
         {
-            get { return DisplayableDescriptionGet; }
-            set
+            NameInEditMode = !NameInEditMode;
+            if(NameInEditMode)
             {
-                DisplayableDescriptionGet = value;
-                BindingObject.Description = value;
+                BindingObject.Name = DisplayableName;
             }
+            queryService.TriggerUpdate(BindingObject);
+        }
+        [RelayCommand]
+        protected virtual void DescriptionEditButtonPressed()
+        {
+            DescriptionInEditMode = !DescriptionInEditMode;
+            if (DescriptionInEditMode)
+            {
+                BindingObject.Description = DisplayableDescription;
+            }
+            queryService.TriggerUpdate(BindingObject);
         }
         //--------------------------------------------------------------------------
         public void InitializeComponents()
         {
-            DisplayableNameGet = BindingObject.Name;
-            DisplayableDescriptionGet = BindingObject.Description;
+            DisplayableName = BindingObject.Name;
+            DisplayableDescription = BindingObject.Description;
             DisplayableID = BindingObject.Id.ToString();
         }
     }

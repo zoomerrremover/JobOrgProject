@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 
@@ -19,12 +21,11 @@ public partial class WorkerPickerViewModel : BaseViewModel
             mainEntryText = value;
         } }
     public ObservableCollection<Worker> WorkersPicked { get; set; } = new();
-
-    ObservableCollection<Worker> workers { get => data.GetItems<Worker>(); }
+    ObservableCollection<Worker> Workers;
     void UpdateList()
     {
         WorkersPicked.Clear();
-        workers.Where(w => w.IsPicked == true).ToList().ForEach(w => WorkersPicked.Add(w));
+        Workers.Where(w => w.IsPicked == true).ToList().ForEach(WorkersPicked.Add);
 
     }
     [RelayCommand]
@@ -41,14 +42,22 @@ public partial class WorkerPickerViewModel : BaseViewModel
     {
         init.Initialize();
         data = Storange;
+        Workers = data.GetItems<Worker>();
+        Workers.CollectionChanged += UpdateList;
         InitiateList();
 
     }
+
+    private void UpdateList(object sender, NotifyCollectionChangedEventArgs e)
+    {
+        UpdateList();
+    }
+
     async void InitiateList(string searchPromt = "")
     {
         ObsWorkers.Clear();
         searchPromt ??= "";
-        var totalWorkers = workers.OrderByDescending(w => w.IsPicked);
+        var totalWorkers = Workers.OrderByDescending(w => w.IsPicked);
         foreach (var worker in totalWorkers)
         {
             if (worker.Name.Contains(searchPromt))
@@ -89,6 +98,7 @@ public partial class WorkerPickerViewModel : BaseViewModel
     //    }
     //    contorlssPicked.Add(worker);
     //}
+
     public ObservableCollection<Worker> ObsWorkers { get; set; } = new();
 
 }

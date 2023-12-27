@@ -15,7 +15,7 @@ namespace TheJobOrganizationApp.Services
             Services.Add(st);
             Services.Add(storage);
             WorkerProxy.Initialize(storage);
-            Thing
+
         }
 
         public void Initialize()

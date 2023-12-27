@@ -6,12 +6,11 @@ using TheJobOrganizationApp.Services;
 
 namespace TheJobOrganizationApp.Models;
 
-public abstract partial class Thing:ObservableObject
+public abstract class Thing
 
 {
     public Guid Id { get; set; }
-    [ObservableProperty]
-    public string name;
+    public string Name { get; set; }
 
     public string Description { get; set; }
 
@@ -37,10 +36,4 @@ public abstract partial class Thing:ObservableObject
         return Name;
     }
    
-    public static Action<Thing> updateActionInvoke;
-    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
-    {
-        updateActionInvoke.Invoke(this);
-        base.OnPropertyChanged(e);
-    }
 }

@@ -33,15 +33,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         //--------------------------------------------------------------------------------
         [ObservableProperty]
         string displayableAdressGet;
-        public string DisplayableAdressSet
-        {
-            get { return DisplayableNameGet; }
-            set
-            {
-                DisplayableNameGet = value;
-                BindingObject.Name = value;
-            }
-        }
 
     }
 }

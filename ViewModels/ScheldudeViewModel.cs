@@ -25,14 +25,15 @@ public partial class ScheldudeViewModel
     WorkerPickerViewModel WorkerPickerVM;
     public ObservableCollection<SchedulerAppointment> appointments { get; }
 
+    ObservableCollection<Assignment> GlobalAssignments;
+
     void InitializeAppointments (object sender = null,EventArgs e = null)
     {
         appointments.Clear ();
         tasksOnTheScreen.Clear ();
         WorkerPickerVM.WorkersPicked.ToList().ForEach(w =>
-        {
-            var tasks = Data.GetItems<Assignment>();
-            foreach (var task in tasks)
+        {;
+            foreach (var task in GlobalAssignments)
             {
                 if (!tasksOnTheScreen.Contains(task.Id))
                 {
@@ -54,10 +55,13 @@ public partial class ScheldudeViewModel
         appointments = new();
         this.WorkerPickerVM = WorkerPickerVM;
         this.PopUpService = PopUpService;
+        GlobalAssignments= Data.GetItems<Assignment> ();
        // GoToLogInScreen();
         apiservice.Connect();
         apiservice.Initiate();
+        GlobalAssignments.CollectionChanged += InitializeAppointments;
         WorkerPickerVM.WorkersPicked.CollectionChanged += InitializeAppointments;
+        
         InitializeAppointments();
     }
     [RelayCommand]

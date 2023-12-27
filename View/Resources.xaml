@@ -15,8 +15,8 @@
         <Frame HeightRequest="75    "  Margin="0">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
-                                        CommandParameter="{Binding .}"/>
+                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                         CommandParameter="{Binding .}"/>
             </Frame.GestureRecognizers>
             <Grid ColumnDefinitions="150,150,350"
                   ColumnSpacing="60">
@@ -41,7 +41,6 @@
                         <DataTemplate x:DataType="Color">
                             <Ellipse WidthRequest="30"
                                      HeightRequest="30"
-                                     
                                      Background="{Binding .}"/>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -174,27 +173,21 @@
               RowDefinitions="50,*">
                     <VerticalStackLayout Grid.Column="0"
                                    Grid.RowSpan="2">
-                        <Label Text="{Binding DisplayableNameGet}"
-                      HorizontalOptions="StartAndExpand"
-                      VerticalOptions="Start"
-                      IsVisible="{Binding NameEditMode.Visible}"
-                      Style="{StaticResource HeaderLabel}"/>
-                        <Label Text="{Binding DisplayableID}"
-                                    VerticalOptions="Start" 
-                                    HorizontalOptions="StartAndExpand"
-                                    Style="{StaticResource SmallLabel}"
-                                    IsVisible="{Binding NameEditMode.Visible}"/>
                         <Entry HorizontalOptions="StartAndExpand"
                                VerticalOptions="Start"
-               Text="{Binding DisplayableNameSet}"
-               IsVisible="{Binding NameEditMode.Invisible}"
-               Style="{StaticResource EditableEntry}"
-               FontSize="25"/>
+                               Text="{Binding DisplayableName}"
+                               InputTransparent="{Binding NameInEditMode}"
+                               Style="{StaticResource EditableEntry}"
+                               FontSize="25"/>
+                        <Label Text="{Binding DisplayableID}"
+                                           VerticalOptions="Start" 
+                                           HorizontalOptions="StartAndExpand"
+                                           Style="{StaticResource SmallLabel}"/>
                     </VerticalStackLayout>
                     <ImageButton Grid.Column="2"
             Background="{StaticResource ControlColor}"
             CornerRadius="10"
-            Command="{Binding NameEditMode.SwitchPressedCommand}"
+            Command="{Binding NameEditButtonPressedCommand}"
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
@@ -207,23 +200,15 @@
               RowDefinitions="50,*"
               ColumnSpacing="10">
                     <Editor
-                Grid.RowSpan="2"
-                Grid.Column="0"
-                Text="{Binding DisplayableDescriptionSet}"
-                IsVisible="{Binding DescriptionEditMode.Invisible}"/>
-                    <Label Text="{Binding DisplayableDescriptionGet}"
-                   MaxLines="3"
-                   HorizontalOptions="StartAndExpand"
-                   VerticalOptions="CenterAndExpand"
-                   Grid.RowSpan="2"
-                   Grid.Column="0"
-                   IsVisible="{Binding DescriptionEditMode.Visible}"
-                   Style="{StaticResource SmallLabel}"/>
+                        Grid.RowSpan="2"
+                        Grid.Column="0"
+                        Text="{Binding DisplayableDescription}"
+                        IsVisible="{Binding DescriptionInEditMode}"/>
                     <ImageButton Grid.Column="2"
                     Background="{StaticResource ControlColor}"
-            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
-            CornerRadius="10"
-            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                    Command="{Binding DescriptionEditButtonPressedCommand}"
+                    CornerRadius="10"
+                    Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
         </Grid>
@@ -231,34 +216,29 @@
     <DataTemplate x:Key="AssignmentDetails"
                   x:DataType="modelsProxies:AssignmentProxy">
                   <Grid RowDefinitions="Auto,Auto,Auto"
+                        ColumnDefinitions="*"
                         RowSpacing="20">
                         <Frame Background="{StaticResource BlockColor}">
                                 <Grid ColumnDefinitions="Auto,*,50"
                                        RowDefinitions="50,*">
                     <VerticalStackLayout Grid.Column="0"
-                                   Grid.RowSpan="2">
-                        <Label Text="{Binding DisplayableNameGet}"
-                      HorizontalOptions="StartAndExpand"
-                      VerticalOptions="Start"
-                      IsVisible="{Binding NameEditMode.Visible}"
-                      Style="{StaticResource HeaderLabel}"/>
-                        <Label Text="{Binding DisplayableID}"
-                                    VerticalOptions="Start" 
-                                    HorizontalOptions="StartAndExpand"
-                                    Style="{StaticResource SmallLabel}"
-                                    IsVisible="{Binding NameEditMode.Visible}"/>
+                                                        Grid.RowSpan="2">
+                                        <Label Text="{Binding DisplayableID}"
+                                           VerticalOptions="Start" 
+                                           HorizontalOptions="StartAndExpand"
+                                           Style="{StaticResource SmallLabel}"/>
                         <Entry HorizontalOptions="StartAndExpand"
                                VerticalOptions="Start"
-               Text="{Binding DisplayableNameSet}"
-               IsVisible="{Binding NameEditMode.Invisible}"
-               Style="{StaticResource EditableEntry}"
-               FontSize="25"/>
+                    Text="{Binding DisplayableName}"
+                    InputTransparent="{Binding NameInEditMode}"
+                    Style="{StaticResource EditableEntry}"
+                    FontSize="25"/>
                     </VerticalStackLayout>
                     <ImageButton Grid.Column="2"
-            Background="{StaticResource ControlColor}"
-            CornerRadius="10"
-            Command="{Binding NameEditMode.SwitchPressedCommand}"
-            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                    Background="{StaticResource ControlColor}"
+                    CornerRadius="10"
+                    Command="{Binding NameEditButtonPressedCommand}"
+                    Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
                         <Frame Background="{StaticResource BlockColor}"
@@ -272,28 +252,20 @@
                     <Editor
                 Grid.RowSpan="2"
                 Grid.Column="0"
-                Text="{Binding DisplayableDescriptionSet}"
-                IsVisible="{Binding DescriptionEditMode.Invisible}"/>
-                    <Label Text="{Binding DisplayableDescriptionGet}"
-                   MaxLines="3"
-                   HorizontalOptions="StartAndExpand"
-                   VerticalOptions="CenterAndExpand"
-                   Grid.RowSpan="2"
-                   Grid.Column="0"
-                   IsVisible="{Binding DescriptionEditMode.Visible}"
-                   Style="{StaticResource SmallLabel}"/>
+                Text="{Binding DisplayableDescription}"
+                InputTransparent="{Binding DescriptionInEditMode}"/>
                     <ImageButton Grid.Column="2"
                     Background="{StaticResource ControlColor}"
-            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+            Command="{Binding DescriptionEditButtonPressedCommand}"
             CornerRadius="10"
             Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
-                        <Frame 
+                        <Frame  
+                            Grid.Row="2"
                             CornerRadius="50"
                             Grid.ColumnSpan="2"
-                            BorderColor="Transparent"
-                            Grid.Row="2">
+                            BorderColor="Transparent">
                             <Frame.Background>
                                 <StaticResource Key="BlockColor" />
                             </Frame.Background>
@@ -322,16 +294,8 @@
                         Grid.Row="1"
                         BorderColor="Transparent"
                         CornerRadius="10"
+                        Command="{Binding EditButtonPressedCommand}"
                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png">
-                        <ImageButton.Background>
-                            <StaticResource Key="ControlColor" />
-                        </ImageButton.Background>
-                    </ImageButton>
-                    <ImageButton  Grid.Column="4"
-                                  Grid.Row="1"
-                                  BorderColor="Transparent"
-                                  CornerRadius="10"
-                                   Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
                         <ImageButton.Background>
                             <StaticResource Key="ControlColor" />
                         </ImageButton.Background>
@@ -339,7 +303,8 @@
                     <CollectionView Grid.ColumnSpan="5"
                         Grid.Row="3"
                         MaximumHeightRequest="450"
-                        ItemsSource="{Binding DisplayableWorkers}">
+                        ItemsSource="{Binding DisplayableWorkers}"
+                        InputTransparent="{Binding WorkersInEditMode}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="modelsProxies:PickableWorker">
                                 <Frame HeightRequest="70"  Margin="0">
@@ -370,19 +335,25 @@
 
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="ITimeBasedDetails">
-        <Frame Grid.Row="3">
+    <DataTemplate x:Key="ITimeBasedDetails"
+                  x:DataType="modelsProxies:ITimeBasedProxy">
+        <Frame >
             <HorizontalStackLayout Spacing="30">
                 <VerticalStackLayout>
                     <Label Text="Start time:"/>
-                    <DatePicker Date="{Binding DisplayableStartDate}"/>
-                    <TimePicker Time="{Binding DisplayableStartDate, Mode=TwoWay}"/>
+                    <DatePicker Date="{Binding DisplayableStartDate}"
+                                InputTransparent="{Binding InputTransparency}"/>
+                    <TimePicker Time="{Binding DisplayableStartDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="Finish time:"/>
-                    <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"/>
-                    <TimePicker Time="{Binding DisplayableFinishDate, Mode=TwoWay}"/>
+                    <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
+                    <TimePicker Time="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
                 </VerticalStackLayout>
+                <Button Command="{Binding SaveButtonPressedCommand}"/>
             </HorizontalStackLayout>
         </Frame>
     </DataTemplate>
@@ -395,19 +366,13 @@
               RowDefinitions="50,*">
                     <VerticalStackLayout Grid.Column="0"
                                          Grid.RowSpan="2">
-                        <Label Text="{Binding DisplayableNameGet}"
-                                HorizontalOptions="StartAndExpand"
-                                VerticalOptions="Start"
-                                IsVisible="{Binding NameEditMode.Visible}"
-                                Style="{StaticResource HeaderLabel}"/>
                         <Label Text="{Binding DisplayableAdressGet}"
                                     Grid.Column="1"
-                                    Style="{StaticResource SmallLabel}"
-                                    IsVisible="{Binding NameEditMode.Visible}"/>
+                                    Style="{StaticResource SmallLabel}"/>
                         <Entry HorizontalOptions="StartAndExpand"
                                VerticalOptions="Start"
-                               Text="{Binding DisplayableNameSet}"
-                               IsVisible="{Binding NameEditMode.Invisible}"
+                               Text="{Binding DisplayableName}"
+                               InputTransparent="{Binding NameInEditMode}"
                                Style="{StaticResource EditableEntry}"
                                FontSize="25"/>
                     </VerticalStackLayout>
@@ -417,7 +382,7 @@
                     <ImageButton Grid.Column="3"
                                  Background="{StaticResource ControlColor}"
                                  CornerRadius="10"
-                                 Command="{Binding NameEditMode.SwitchPressedCommand}"
+                                 Command="{Binding NameEditButtonPressedCommand}"
                                  Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                      </Grid>
             </Frame>
@@ -432,21 +397,13 @@
                     <Editor
                         Grid.RowSpan="2"
                         Grid.Column="0"
-                        Text="{Binding DisplayableDescriptionSet}"
-                        IsVisible="{Binding DescriptionEditMode.Invisible}"/>
-                    <Label Text="{Binding DisplayableDescriptionGet}"
-                           MaxLines="3"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.Column="0"
-                           IsVisible="{Binding DescriptionEditMode.Visible}"
-                           Style="{StaticResource SmallLabel}"/>
+                        Text="{Binding DisplayableDescription}"
+                        InputTransparent="{Binding DescriptionInEditMode}"/>
                     <ImageButton Grid.Column="2"
-                    Background="{StaticResource ControlColor}"
-            Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
-            CornerRadius="10"
-            Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                        Background="{StaticResource ControlColor}"
+                        Command="{Binding DescriptionEditButtonPressedCommand}"
+                        CornerRadius="10"
+                        Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                 </Grid>
             </Frame>
         </Grid>
@@ -459,29 +416,23 @@
                          BorderColor="Transparent">
                     <Grid ColumnDefinitions="Auto,*,50"
                           RowDefinitions="50,*">
-                          <VerticalStackLayout Grid.Column="0"
+                    <VerticalStackLayout Grid.Column="0"
                                                Grid.RowSpan="2">
-                        <Label Text="{Binding DisplayableNameGet}"
-                                 HorizontalOptions="StartAndExpand"
-                                 VerticalOptions="Start"
-                                 IsVisible="{Binding NameEditMode.Visible}"
-                                 Style="{StaticResource HeaderLabel}"/>
                         <Entry HorizontalOptions="StartAndExpand"
                                  VerticalOptions="Start"
-                                 Text="{Binding DisplayableNameSet}"
-                                 IsVisible="{Binding NameEditMode.Invisible}"
+                                 Text="{Binding DisplayableName}"
+                                 InputTransparent="{Binding NameInEditMode}"
                                  Style="{StaticResource EditableEntry}"
                                  FontSize="25"/>
                         <Label Text="{Binding DisplayableID}"
                                  VerticalOptions="Start" 
                                  HorizontalOptions="StartAndExpand"
-                                 Style="{StaticResource SmallLabel}"
-                                 IsVisible="{Binding NameEditMode.Visible}"/>
+                                 Style="{StaticResource SmallLabel}"/>
                     </VerticalStackLayout>
                     <ImageButton Grid.Column="2"
                                  Background="{StaticResource ControlColor}"
                                  CornerRadius="10"
-                                 Command="{Binding NameEditMode.SwitchPressedCommand}"
+                                 Command="{Binding NameEditButtonPressedCommand}"
                                  Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
                    </Frame>
@@ -495,19 +446,12 @@
                                 ColumnSpacing="10">
                                 <Editor Grid.RowSpan="2"
                                         Grid.Column="0"
-                                        Text="{Binding DisplayableDescriptionSet}"
-                                        IsVisible="{Binding DescriptionEditMode.Invisible}"/>
-                                <Label Text="{Binding DisplayableDescriptionGet}"
-                                       MaxLines="3"
-                                       HorizontalOptions="StartAndExpand"
-                                       VerticalOptions="CenterAndExpand"
-                                       Grid.RowSpan="2"
-                                       Grid.Column="0"
-                                       IsVisible="{Binding DescriptionEditMode.Visible}"
-                                       Style="{StaticResource SmallLabel}"/>
+                                        Text="{Binding DisplayableDescription}"
+                                        InputTransparent="{Binding DescriptionInEditMode}"/>
+
                                 <ImageButton Grid.Column="2"
                                              Background="{StaticResource ControlColor}"
-                                             Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+                                             Command="{Binding DescriptionEditButtonPressedCommand}"
                                              CornerRadius="10"
                                              Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                           </Grid>
@@ -609,28 +553,19 @@
                     <Grid ColumnDefinitions="100,350,*,50"
                           RowDefinitions="40,5,50">
                         <StackLayout Grid.Column="0">
-                            <Label Text="{Binding DisplayableNameGet}"
-                                   IsVisible="{Binding NameEditMode.Visible}"
-                                   Style="{StaticResource HeaderLabel}"
-                                   MaxLines="1"/>
                             <Entry HorizontalOptions="StartAndExpand"
                                    VerticalOptions="Start"
-                                   Text="{Binding DisplayableNameSet}"
-                                   IsVisible="{Binding NameEditMode.Invisible}"
+                                   Text="{Binding DisplayableName}"
+                                   InputTransparent="{Binding NameEditMode}"
                                    Style="{StaticResource EditableEntry}"
                                    FontSize="25"/>
                         </StackLayout>
                         <StackLayout Grid.Row="2">
-                            <Label Text="{Binding DisplayablePositionGet}"
-                                   VerticalOptions="Start" 
-                                   HorizontalOptions="StartAndExpand"
-                                   Style="{StaticResource SmallLabel}"
-                                   IsVisible="{Binding NameEditMode.Visible}"/>
                             <Picker
                                 VerticalOptions="Start"
                                 WidthRequest="70"
                                 HorizontalOptions="Start"
-                                IsVisible="{Binding NameEditMode.Invisible}"
+                                InputTransparent="{Binding NameEditMode}"
                                 ItemsSource= "{Binding PossiblePositions}"
                                 SelectedIndex="{Binding DisplayablePositionSet}"/>
                         </StackLayout>
@@ -643,7 +578,7 @@
                                      Grid.RowSpan="2"
                                 Background="{StaticResource ControlColor}"
                                 CornerRadius="10"
-                                Command="{Binding NameEditMode.SwitchPressedCommand}"
+                                Command="{Binding NameEditButtonPressedCommand}"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>
                 </Frame>
@@ -658,19 +593,11 @@
                         <Editor
                             Grid.RowSpan="2"
                             Grid.Column="0"
-                            Text="{Binding DisplayableDescriptionSet}"
-                            IsVisible="{Binding DescriptionEditMode.Invisible}"/>
-                        <Label Text="{Binding DisplayableDescriptionGet}"
-                           MaxLines="3"
-                           HorizontalOptions="StartAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           Grid.RowSpan="2"
-                           Grid.Column="0"
-                           IsVisible="{Binding DescriptionEditMode.Visible}"
-                           Style="{StaticResource SmallLabel}"/>
+                            Text="{Binding DisplayableDescription}"
+                            IsVisible="{Binding DescriptionEditMode}"/>
                         <ImageButton Grid.Column="2"
                                 Background="{StaticResource ControlColor}"
-                                Command="{Binding DescriptionEditMode.SwitchPressedCommand}"
+                                Command="{Binding DescriptionEditButtonPressedCommand}"
                                 CornerRadius="10"
                                 Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
                     </Grid>

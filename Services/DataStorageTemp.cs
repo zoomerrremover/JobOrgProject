@@ -92,10 +92,17 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
         }
         return colToFill;
     }
-    public void TriggerUpdate<T>() where T : Thing
+    public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action,Type type)
     {
-        var typeOfThing = typeof(T);
-        ObjectKeeper[typeOfThing].Add(null);
+        ObjectKeeper[type].CollectionChanged += action;
     }
+    public void TriggerUpdate<T>(T objectKey = null)where T : class
+    {
+        var typeOfThing = objectKey is null?typeof(T):objectKey.GetType();
+        ObjectKeeper[typeOfThing].Add(ObjectKeeper[typeOfThing].Last());
+        ObjectKeeper[typeOfThing].Remove(ObjectKeeper[typeOfThing].Last());
+    }
+
+
 
 }

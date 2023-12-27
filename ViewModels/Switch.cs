@@ -14,14 +14,24 @@ namespace TheJobOrganizationApp.ViewModels
         void SwitchPressed()
         {
             Visible = !Visible;
-            OnSwitchPressed.Invoke();
+            if (Visible)
+            {
+                SwitchOn.Invoke();
+            }
+            else
+            {
+                SwitchOff.Invoke();
+            }
         }
         public LogicSwitch()
         {
-            OnSwitchPressed = () => { };
+            SwitchOff = () => { };
+            SwitchOn= () => { };
         }
 
-        public event Action OnSwitchPressed;
+        public event Action SwitchOn;
+
+        public event Action SwitchOff;
 
     }
 }

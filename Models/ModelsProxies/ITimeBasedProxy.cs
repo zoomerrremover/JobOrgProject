@@ -1,7 +1,9 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 using TheJobOrganizationApp.Models.Interfaces;
+using TheJobOrganizationApp.ViewModels;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
@@ -24,7 +26,13 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         public ITimeBasedProxy(ITimeBased BindingObject)
         {
             this.BindingObject = BindingObject;
-            displayableStartDate = BindingObject.StartTime;
+            InitializeData();
+        }
+
+        void InitializeData()
+        {
+            DisplayableStartDate = BindingObject.StartTime;
+            DisplayableStartDate = BindingObject.FinishTime;
         }
 
         //----------------------------------------------------------------------------------------------------------
@@ -32,40 +40,36 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         DateTime displayableStartDate;
         [ObservableProperty]
         DateTime displayableFinishDate;
-    protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        [ObservableProperty]
+        bool inputTransparency = true;
+
+        [RelayCommand]
+        void OnSaveButtonPressed()
         {
-            switch (e.PropertyName)
+            if(!InputTransparency)
             {
-                case nameof(DisplayableStartDate):
-                    if (DisplayableStartDate < DisplayableFinishDate)
-                    {
-                        BindingObject.StartTime = DisplayableStartDate;
-                        break;
+                if (DisplayableStartDate < DisplayableFinishDate)
+                {
+                    BindingObject.FinishTime = DisplayableFinishDate;
+                    BindingObject.StartTime = DisplayableStartDate;
+                    queryService.TriggerUpdate(BindingObject);
 
-                    }
-                    else
-                    {
-                        DisplayTimeError.Invoke();
-                        displayableStartDate = BindingObject.StartTime;
-                        break;
-                    }
-                    break;
-                case nameof(DisplayableFinishDate):
-                    if (DisplayableStartDate < DisplayableFinishDate)
-                    {
-                        BindingObject.FinishTime = DisplayableFinishDate;
-                        break;
-
-                    }
-                    else
-                    {
-                        DisplayTimeError.Invoke();
-                        displayableFinishDate = BindingObject.FinishTime;
-                        break;
-                    }
+                }
+                else
+                {
+                    DisplayTimeError.Invoke();
+                    DisplayableFinishDate = BindingObject.FinishTime;
+                    DisplayableFinishDate = BindingObject.StartTime;
+                }
             }
-            base.OnPropertyChanged(e);
+            else
+            {
+                InputTransparency = false;
+            }
+
         }
+
         public event Action DisplayTimeError = () => { };
+        
     }
 }

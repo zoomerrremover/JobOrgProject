@@ -101,7 +101,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         }
         public void Initiate()
         {
-            RolloutButtonSwitch.OnSwitchPressed += ExtendScreen;
+            RolloutButtonSwitch.SwitchOff += ExtendScreen;
             filterSelectorMethods["Name"] = NameSelector;
             filterSelectorMethods["Quantity"] = QuantitySelector;
             AvaliableFilters = filterSelectorMethods.Keys.ToList();

@@ -6,5 +6,7 @@ namespace TheJobOrganizationApp.Models
     {
         public float Qty { get; set; }
         public string UnitsName { get; set; }
+
+        public float Price { get; set; }
     }
 }

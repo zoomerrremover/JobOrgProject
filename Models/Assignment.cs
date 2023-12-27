@@ -6,15 +6,13 @@ using TheJobOrganizationApp.Models.Interfaces;
 namespace TheJobOrganizationApp.Models
 {
     [Model(DisplayableInTheGlobalSearch = true)]
-    public partial class Assignment:Thing,ITimeBased
+    public class Assignment:Thing,ITimeBased,IHasItems
     {
         public List<Worker> Workers;
         public List<Color> WorkerColours { get => Workers.Select(x => x.Color).ToList(); }
-        [ObservableProperty]
-        public DateTime startTime;
-        [ObservableProperty]
-        public DateTime finishTime;
+        public DateTime StartTime { get; set; }
+        public DateTime FinishTime { get; set; }
         public Place Place { get ; set ; }
-        
+        public List<Item> Items { get; set; } = new();
     }
 } 

@@ -5,8 +5,8 @@ using System.Collections.ObjectModel;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
-    [Proxy(ClassLinked = typeof(Assignment))]
-    public partial class AssignmentProxy:ThingProxy
+    [Proxy(ClassLinked = typeof(Job))]
+    public partial class JobProxy:ThingProxy
     {
         new public Assignment BindingObject { get; set; }
         // CTORS
@@ -23,45 +23,25 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         public AssignmentProxy(Assignment item) : base(item)
         {
             BindingObject = item;
-            Initialize();
-        }
-
-        private void Initialize()
-        {
-
             workers = queryService.GetItems<Worker>();
-        }
-
-        //------------------------------------------------------------------------------------------------
-        [ObservableProperty]
-        ObservableCollection<Job> jobs;
-        [ObservableProperty]
-        Job pickedJob;
-        //------------------------------------------------------------------------------------------------
-        [ObservableProperty]
-        ObservableCollection<Place> places;
-        [ObservableProperty]
-        Place pickedPlace;
-        protected override void NameEditButtonPressed()
-        {
-            foreach(var job in Jobs)
-            {
-                job.Tasks.Remove(BindingObject);
-            }
-            BindingObject.Place = PickedPlace;
-            PickedJob.Tasks.Add(BindingObject);
-            queryService.TriggerUpdate<Job>();
-            base.NameEditButtonPressed();
         }
         //------------------------------------------------------------------------------------------------
         [ObservableProperty]
         ObservableCollection<PickableWorker> displayableWorkers = new();
         ObservableCollection<Worker> workers = new ObservableCollection<Worker>();
-        [ObservableProperty]
         string searchEntryText = "";
-        partial void OnSearchEntryTextChanged(string value)
+
+        public string SearchEntryText
         {
-            LoadModels();
+            get
+            {
+                return searchEntryText;
+            }
+            set
+            {
+                searchEntryText = value;
+                ApplySearchString();
+            }
         }
         [RelayCommand]
         void EditWorker(PickableWorker obj)
@@ -75,7 +55,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             {
                 BindingObject.Workers.Remove(obj.model);
             }
-            LoadModels();
+            ApplySearchString();
         }
         [ObservableProperty]
         bool workersInEditMode = true;
@@ -87,20 +67,38 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             {
                 queryService.TriggerUpdate<Worker>();
             }
+
         }
-        void LoadModels()
+        void ApplySearchString()
             {
-            var promptLocal = SearchEntryText.ToLower();
+            var wholeWorkers = new ObservableCollection<Worker>();
+            var promptLocal = searchEntryText.ToLower();
             foreach (var worker in workers)
             {
                 var NameLocal = worker.Name.ToLower();
                 if (NameLocal.Contains(promptLocal))
                 {
-                    bool boolValue = BindingObject.Workers.Contains(worker) ? true : false;
-                    DisplayableWorkers.Add(new PickableWorker(worker, boolValue));
+                    wholeWorkers.Add(worker);
                 }
             }
+            LoadWorkers(wholeWorkers);
             }
+        void LoadWorkers(ObservableCollection<Worker> source)
+        {
+            DisplayableWorkers.Clear();
+            source.OrderByDescending(BindingObject.Workers.Contains)
+                .ToList()
+                     .ForEach((w) =>
+                                {
+                                    bool boolValue = BindingObject.Workers.Contains(w) ? true : false;
+                                    DisplayableWorkers.Add(new PickableWorker(w, boolValue));
+
+                                });
+        }
+
+
+        
+
 
     }
 }

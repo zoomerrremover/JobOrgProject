@@ -87,8 +87,6 @@ public partial class WorkerProxy:ThingProxy
     public new void InitializeComponents()
     {
         DisplayablePositionGet = Worker.Position.Name;
-        DisplayableNameGet = Worker.Name;
-        DisplayableDescriptionGet= Worker.Description;
         PossiblePositions = queryService.GetItems<Position>().ToList();
         NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
         CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();

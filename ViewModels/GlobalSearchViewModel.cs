@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.View;
@@ -51,7 +52,13 @@ namespace TheJobOrganizationApp.ViewModels
             var localType = typePickerItems.Where(w=>w.Name == newValue)
                 .FirstOrDefault();
             Models = dataStorage.GetItems<Thing>(localType);
+            Models.CollectionChanged += LoadModels;
             CurrentTemplate = Selector.ChooseTemplate(newValue);
+            LoadModels();
+        }
+
+        private void LoadModels(object sender, NotifyCollectionChangedEventArgs e)
+        {
             LoadModels();
         }
 
@@ -73,7 +80,6 @@ namespace TheJobOrganizationApp.ViewModels
             dataStorage = data;
             this.settings = settings;
             Selector = selector;
-
             InitiateModelChoice();
             OnSelectedModelChanging(null, selectedModel);
         }
