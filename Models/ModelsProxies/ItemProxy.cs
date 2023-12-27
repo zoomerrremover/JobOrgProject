@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
 using System.Collections.ObjectModel;
-
+using System.Collections.Specialized;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
@@ -12,7 +11,7 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
 
 
         // CTORS
-//--------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------
         public new static ModelView CreateFromTheModel(Thing model)
         {
             if (model is Item)
@@ -25,16 +24,33 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         public ItemProxy(Item item) : base(item)
         {
             BindingObject = item;
-            Initiate();
+            Initialize();
         }
         public ItemProxy(Thing BindingObject) : base(BindingObject)
         {
         }
-        public void Initiate()
+        public void Initialize()
+        {
+            InitializeFilters();
+            queryService.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
+            InitializeHolders();
+            DisplayHolders();
+        }
+
+        private void InitializeHolders(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            InitializeHolders();
+        }
+
+        private void InitializeFilters()
         {
             filterSelectorMethods["Name"] = NameSelector;
             filterSelectorMethods["Quantity"] = QuantitySelector;
             AvaliableFilters = filterSelectorMethods.Keys.ToList();
+        }
+
+        private void InitializeHolders()
+        {
             var localHolders = queryService.GetItemsWithInterface<IHasItems>();
             foreach (var holder in localHolders)
             {
@@ -48,8 +64,8 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
                     }
                 }
             }
-            DisplayHolders();
         }
+
         //--------------------------------------------------------------------------------
         delegate void ListSelector(ObservableCollection<ThingItemMerge> items);
         [ObservableProperty]

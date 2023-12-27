@@ -31,12 +31,13 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
 
             workers = queryService.GetItems<Worker>();
         }
-
+        //Pickable job feature
         //------------------------------------------------------------------------------------------------
         [ObservableProperty]
         ObservableCollection<Job> jobs;
         [ObservableProperty]
         Job pickedJob;
+        //Pickable place feature
         //------------------------------------------------------------------------------------------------
         [ObservableProperty]
         ObservableCollection<Place> places;
@@ -53,21 +54,15 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             queryService.TriggerUpdate<Job>();
             base.NameEditButtonPressed();
         }
+        //Displayable workers feature
         //------------------------------------------------------------------------------------------------
         [ObservableProperty]
-        ObservableCollection<PickableWorker> displayableWorkers = new();
-        ObservableCollection<Worker> workers = new ObservableCollection<Worker>();
-        [ObservableProperty]
-        string searchEntryText = "";
-        partial void OnSearchEntryTextChanged(string value)
-        {
-            LoadModels();
-        }
+        bool workersInEditMode = true;
         [RelayCommand]
         void EditWorker(PickableWorker obj)
         {
             obj.data = !obj.data;
-            if(obj.data)
+            if (obj.data)
             {
                 BindingObject.Workers.Add(obj.model);
             }
@@ -77,16 +72,23 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             }
             LoadModels();
         }
-        [ObservableProperty]
-        bool workersInEditMode = true;
         [RelayCommand]
         void OnEditButtonPressed()
         {
             WorkersInEditMode = !WorkersInEditMode;
-            if(!WorkersInEditMode)
+            if (!WorkersInEditMode)
             {
                 queryService.TriggerUpdate<Worker>();
             }
+        }
+        [ObservableProperty]
+        ObservableCollection<PickableWorker> displayableWorkers = new();
+        ObservableCollection<Worker> workers = new ObservableCollection<Worker>();
+        [ObservableProperty]
+        string searchEntryText = "";
+        partial void OnSearchEntryTextChanged(string value)
+        {
+            LoadModels();
         }
         void LoadModels()
             {

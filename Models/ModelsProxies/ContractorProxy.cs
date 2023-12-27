@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
@@ -23,13 +24,17 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         public ContractorProxy(Contractor item) : base(item)
         {
             BindingObject = item;
+            Initialize();
         }
         void Initialize()
         {
-            queryService.
+            queryService.SubscribeForUpdates(InitializeJobs, typeof(Job));
             InitializeJobs();
         }
-
+        private void InitializeJobs(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            InitializeJobs();
+        }
         private void InitializeJobs()
         {
             Jobs.AddRange(from job in queryService.GetItems<Job>()

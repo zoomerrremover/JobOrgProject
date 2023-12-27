@@ -13,7 +13,7 @@ namespace TheJobOrganizationApp.Services
         public void AddThing<T>(IEnumerable<T> thing) where T : Thing;
         public void TriggerUpdate<T>(T key = null) where T : class;
         public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action, Type type);
-        public void RemoveThing<T>(T thing);
+        public void RemoveThing<T>(T thing)where T : Thing;
         public bool InitializeDatabase()
         {
             return true;

@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Reflection;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels;
 
@@ -12,7 +13,7 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
     GlobalSettings globalSettings;
     Dictionary<Type, ObservableCollection<Thing>> ObjectKeeper { get; set; } = new();
 
-    void RegisterModel(Type type)
+    public void RegisterModel(Type type)
     {
         ObjectKeeper[type] = new ObservableCollection<Thing>();
     }
@@ -25,11 +26,17 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
         return true;
 
     }
+    public void RemoveThing<T>(T thing) where T : Thing
+    {
+        var Ts = typeof(T);
+        ObjectKeeper[typeof(T)].Remove(thing);
+    }
     public void AddThing<T>(T thing)where T : Thing
     {
         var Ts = typeof(T);
         ObjectKeeper[typeof(T)].Add(thing);
     }
+
     public void AddThing<T>(IEnumerable<T> thing) where T : Thing
     {
         var Ts = typeof(T);
@@ -94,7 +101,14 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
     }
     public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action,Type type)
     {
-        ObjectKeeper[type].CollectionChanged += action;
+        if (type.IsClass) ObjectKeeper[type].CollectionChanged += action;
+        else if(type.IsInterface)
+        {
+            foreach(var collection in ObjectKeeper.Where(i => i.Key.GetInterfaces().Contains(type)))
+            {
+                collection.Value.CollectionChanged += action;
+            }
+        }
     }
     public void TriggerUpdate<T>(T objectKey = null)where T : class
     {
