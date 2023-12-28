@@ -52,6 +52,9 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\Controls\ModelListView.xaml.cs">
+      <DependentUpon>ModelListView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="View\ScheldudePage.xaml.cs">
       <DependentUpon>ScheldudePage.xaml</DependentUpon>
     </Compile>
@@ -60,6 +63,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="View\Controls\ModelListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\DetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

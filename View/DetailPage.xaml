@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.WorkerDetailPage"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
+             x:DataType="viewmodels:WorkerDetailsViewModel"
+             xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:local="clr-namespace:TheJobOrganizationApp.View"
+             Title="WorkerDetailPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <local:Resources/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowDefinitions="325,400,400">
+        <Grid Grid.Row="0"
+              BackgroundColor="{Binding Worker.Color}"
+              ColumnDefinitions="150,*"
+              ColumnSpacing="50"
+              RowDefinitions="250"
+              VerticalOptions="Center"
+              Padding="35">
+            <StackLayout Grid.Column="0"
+                     Grid.Row ="1" 
+                     Background="White"
+                         ></StackLayout>
+                <Grid       
+                     Grid.Column="1"
+                     Grid.Row ="1"
+                     BackgroundColor="White"
+                     RowDefinitions="*,60,60,*"
+                    ColumnDefinitions="*,400,*">
+                    <Label Text="{Binding Worker.Name}"
+                           FontSize="Large"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           HorizontalOptions="Center"></Label>
+                    <VerticalStackLayout Grid.Column="1"
+                                         Grid.Row="2"
+                                         HorizontalOptions="CenterAndExpand">
+                    <Label Text="{Binding Worker.Email}"
+                           FontSize="Medium"></Label>
+                    <Label Text="{Binding Worker.PhoneNumber}"
+                           FontSize="Medium"
+                           HorizontalOptions="Center"></Label>
+                        </VerticalStackLayout>
+            </Grid>
+        </Grid>
+            <Grid Grid.Row="1"
+              ColumnDefinitions="*,*"
+              Padding="25"
+              ColumnSpacing="25">
+                <Grid BackgroundColor="Gray"
+                Grid.Column="0"
+                RowDefinitions="60,*"
+                ColumnDefinitions="120,*">
+                    <Label Text="Items"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                    <Entry
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalOptions="Center"/>
+                    <CollectionView Grid.ColumnSpan="2"
+                                Grid.Row="1"
+                                ItemsSource="{Binding Worker.Items}"
+                                ItemTemplate="{StaticResource ItemTemplate}"/>
+
+
+
+                </Grid>
+                <Grid
+                Grid.Column="1"
+                RowDefinitions="60,*"
+                ColumnDefinitions="120,*"
+                BackgroundColor="Gray">
+                    <Label Text="Tasks"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                    <Entry
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalOptions="Center"/>
+                    <CollectionView Grid.ColumnSpan="2"
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding ObsAssignments}"
+                                    ItemTemplate="{StaticResource AssignmentTemplate}" />
+                </Grid>
+
+            </Grid>
+            <Grid BackgroundColor="Gray"
+                  Grid.Row="2"
+                  RowDefinitions="60,*"
+                  ColumnDefinitions="120,*"
+                  Padding="25"
+                  Margin="25">
+                <Label Text="Tasks"
+            Grid.Row="0"
+            Grid.Column="0"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+
+                <Entry
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalOptions="Center"/>
+
+            </Grid>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

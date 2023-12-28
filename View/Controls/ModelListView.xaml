@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.Controls.ModelListView"
+             xlmns:vi>
+    <Frame Grid.Row="2"
+                   CornerRadius="50"
+                   Grid.ColumnSpan="3"
+                   BorderColor="Transparent">
+        <Frame.Background>
+            <StaticResource Key="BlockColor" />
+        </Frame.Background>
+        <Grid VerticalOptions="Center"
+                      ColumnDefinitions="125,125"
+                      RowDefinitions="60,*"
+                      ColumnSpacing="10">
+            <Grid ColumnDefinitions="20,70,50"
+                          RowDefinitions="*,*"
+                          Grid.ColumnSpan="2">
+                <Ellipse WidthRequest="20"
+                             HeightRequest="20"
+                             Fill="{Binding Worker.Color}"
+                             Grid.Row="0"/>
+                <Label Text="{Binding TaskName }"
+                           FontSize="10"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           MaxLines="1"
+                           />
+                <Label Text="{Binding SecondaryText}"
+                           MaxLines="1"
+                           IsVisible="{Binding IsCurrentTaskActive}"
+                           FontSize="10"
+                           Grid.Row="0"
+                           Grid.Column="4"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           />
+                <Label Text="{Binding Addressline}"
+                           FontSize="10"
+                           TextColor="White"
+                           Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="1"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           />
+            </Grid>
+            <Frame CornerRadius="30"
+                        HeightRequest="85"
+                        BorderColor="Transparent"
+                        Grid.Column="0"
+                        Grid.Row="3">
+                <Frame.Background>
+                    <StaticResource Key="ControlColor" />
+                </Frame.Background>
+                <Grid RowDefinitions="17,*">
+                    <Label Text="From:"
+                                    Style="{StaticResource MicroLabel}"
+                                    Grid.Column="0"/>
+                    <Label Text="{Binding BStartTime}"
+                                HorizontalOptions="CenterAndExpand"
+                                Grid.Column="3"
+                                Grid.Row="1"
+                                VerticalOptions="Center"
+                                Style="{StaticResource MeiumBold}"/>
+                </Grid>
+            </Frame>
+            <Frame CornerRadius="30"
+                           HeightRequest="85"
+                           BorderColor="Transparent"
+                           Grid.Column="1"
+                           Grid.Row="3">
+                <Frame.Background>
+                    <StaticResource Key="ControlColor" />
+                </Frame.Background>
+                <Grid RowDefinitions="17,*">
+                    <Label Text="Until:"
+                                Style="{StaticResource MicroLabel}"
+                                Grid.Column="0"
+                           ></Label>
+                    <Label Text="{Binding BFinishTime}"
+                           HorizontalOptions="CenterAndExpand"
+                           Style="{StaticResource MeiumBold}"
+                           Grid.Column="0"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           ></Label>
+                </Grid>
+            </Frame>
+        </Grid>
+    </Frame>
+</ContentView>

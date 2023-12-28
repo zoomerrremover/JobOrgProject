@@ -17,29 +17,32 @@ namespace TheJobOrganizationApp.ViewModels
         //--------------------------------------------------------------------------------
         public bool AddButtonEnabled { get; private set; } = false;
         public bool AddButtonIsVisible { get; private set; } = false;
-        public void WithAddButton(bool permissionProvider)
+        public ModelCollectionView<T> WithAddButton(bool permissionProvider)
         {   
             AddButtonIsVisible = true;
             AddButtonEnabled = permissionProvider;
+            return this;
         }
         //--------------------------------------------------------------------------------
         public bool EditButtonEnabled { get; private set; } = false;
         public bool EditButtonIsVisible { get; private set; } = false;
-        public void WithEditButton(bool permissionProvider)
+        public ModelCollectionView<T> WithEditButton(bool permissionProvider)
         {
             EditButtonIsVisible = true;
             EditButtonEnabled = permissionProvider;
+            return this;
         }
 
         //--------------------------------------------------------------------------------
         public bool FiltersAreVisible { get; private set; } = false;
-        public void WithFilters(params (string,Action<ObservableCollection<T>>)[] filters)
+        public ModelCollectionView<T> WithFilters(params (string,Action<ObservableCollection<T>>)[] filters)
         {
             FiltersAreVisible = true;
             filters.ForEach(w=>filterSelectorMethods[w.Item1]=w.Item2);
             filterSelectorMethods.Keys.ForEach(AvaliableFilters.Add);
             SelectedString = AvaliableFilters.First();
             LoadCollection();
+            return this;
         }
         void LoadCollection()
         {

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using TheJobOrganizationApp.ViewModels;
+using System.Linq;
 
 namespace TheJobOrganizationApp.Models.ModelsProxies
 {
@@ -32,7 +33,6 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         }
         public void Initialize()
         {
-            InitializeFilters();
             queryService.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
             InitializeHolders();
             
@@ -43,29 +43,30 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             InitializeHolders();
         }
 
-        private void InitializeFilters()
-        {
-            filterSelectorMethods["Name"] = NameSelector;
-            filterSelectorMethods["Quantity"] = QuantitySelector;
-            AvaliableFilters = filterSelectorMethods.Keys.ToList();
-        }
-        private void InitializeCollectionView
         private void InitializeHolders()
         {
             var localHolders = queryService.GetItemsWithInterface<IHasItems>();
-            foreach (var holder in localHolders)
-            {
-                if (holder is IHasItems)
-                {
-                    var itemContext = holder as IHasItems;
-                    if (itemContext.Items.Contains(BindingObject))
-                    {
-                        var item = itemContext.Items.Where(x => x == BindingObject).FirstOrDefault();
-                        avaliableHolders.Add(new ThingItemMerge(holder, item));
-                    }
-                }
-            }
+            var values = GetValues(localHolders);
+            ModelCollectionView = new(values);
+            ModelCollectionView.WithAddButton(false)
+                .WithFilters(("Name",NameSelector), ("Quantity",QuantitySelector));
         }
+
+        private ObservableCollection<ThingItemMerge> GetValues(ObservableCollection<Thing> localHolders)
+        {
+            ObservableCollection<ThingItemMerge> localCol = new();
+            foreach (var (holder, item) in from holder in localHolders
+                                           where holder is IHasItems
+                                           let itemContext = holder as IHasItems
+                                           where itemContext.Items.Contains(BindingObject)
+                                           let item = itemContext.Items.Where(x => x == BindingObject).FirstOrDefault()
+                                           select (holder, item))
+            {
+                localCol.Add(new ThingItemMerge(holder, item));
+            }
+            return localCol;
+        }
+
         //--------------------------------------------------------------------------------
         [ObservableProperty]
         string displayablePrice;
