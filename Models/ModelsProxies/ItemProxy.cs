@@ -47,14 +47,14 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
         {
             var localHolders = queryService.GetItemsWithInterface<IHasItems>();
             var values = GetValues(localHolders);
-            ModelCollectionView = new(values);
+            ModelCollectionView = new(values.OfType<object>());
             ModelCollectionView.WithAddButton(false)
-                .WithFilters(("Name",NameSelector), ("Quantity",QuantitySelector));
+                .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
         }
 
-        private ObservableCollection<ThingItemMerge> GetValues(ObservableCollection<Thing> localHolders)
+        private List<ThingItemMerge> GetValues(IEnumerable<Thing> localHolders)
         {
-            ObservableCollection<ThingItemMerge> localCol = new();
+            List<ThingItemMerge> localCol = new();
             foreach (var (holder, item) in from holder in localHolders
                                            where holder is IHasItems
                                            let itemContext = holder as IHasItems
@@ -84,28 +84,21 @@ namespace TheJobOrganizationApp.Models.ModelsProxies
             return true; //TODO
         }
         //--------------------------------------------------------------------------------
-        ModelCollectionView<ThingItemMerge> ModelCollectionView { get; set; }
+        public ModelCollectionView ModelCollectionView { get; set; }
         // Filters
         //--------------------------------------------------------------------------------
-        public void NameSelector(ObservableCollection<ThingItemMerge> holders)
+        public void NameSelector(ObservableCollection<object> holders)
         {
-            var listedItems = holders.ToList()
-                .OrderBy(i => i.item.Qty);
-            holders.Clear();
-            foreach (var item in listedItems)
-            {
-                holders.Add(item);
-            }
+            var newHolders = holders.OfType<ThingItemMerge>();
+            newHolders.OrderBy(t => t.thing).OfType<object>();
+            holders = newHolders.ToObservableCollection<object>();
+            
         }
-        public void QuantitySelector(ObservableCollection<ThingItemMerge> holders)
+        public void QuantitySelector(ObservableCollection<object> holders)
         {
-            var listedItems = holders.ToList()
-                                        .OrderByDescending(h => h.thing);
-            holders.Clear();
-            foreach (var item in listedItems)
-            {
-                holders.Add(item);
-            }
+            holders = holders.OfType<ThingItemMerge>() // Cast objects to ThingMerged
+                         .OrderByDescending(h => h.item.Qty) // Sort ThingMerged objects
+                         .ToObservableCollection<object>();
         }
         //--------------------------------------------------------------------------------
 

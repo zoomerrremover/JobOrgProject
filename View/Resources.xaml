@@ -4,6 +4,7 @@
              x:Class="TheJobOrganizationApp.View.Resources"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:controls ="clr-namespace:TheJobOrganizationApp.View.Controls"
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels"
              xmlns:modelsProxies ="clr-namespace:TheJobOrganizationApp.Models.ModelsProxies"
              xmlns:maps ="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
@@ -333,6 +334,7 @@
                 </Grid>
             </Frame>
 
+
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="ITimeBasedDetails"
@@ -410,7 +412,7 @@
     </DataTemplate>
     <DataTemplate x:Key="ItemDetails"
               x:DataType="modelsProxies:ItemProxy">
-              <Grid RowDefinitions="Auto,Auto,Auto"
+              <Grid RowDefinitions="Auto,Auto,Auto,Auto"
                     RowSpacing="20">
                   <Frame Background="{StaticResource BlockColor}"
                          BorderColor="Transparent">
@@ -464,7 +466,7 @@
                 <Frame.Background>
                     <StaticResource Key="BlockColor" />
                 </Frame.Background>
-            
+
                 <Grid
                        Padding="10"
                        Grid.Column="1"
@@ -478,18 +480,18 @@
                         Grid.Column="0"
                         HorizontalOptions="Start"
                         VerticalOptions="Start"/>
-                     <Entry
+                    <Entry
                         Grid.Row="1"
                         VerticalOptions="Center"
                         Background="White"
-                        Grid.ColumnSpan="2"
-                        Text="{Binding SearchPrompt}"/>
-                     <Picker
+                        Grid.ColumnSpan="2"></Entry>
+                        <!--Text="{Binding SearchPrompt}"/>-->
+                    <Picker
                          Grid.Column="2"
                          Grid.Row="1"
-                         SelectedIndex="{Binding FilterChoice}"
-                         ItemsSource="{Binding AvaliableFilters}"/>
-                     <ImageButton
+                         ></Picker>
+    
+                    <ImageButton
                          Grid.Column="3"
                          Grid.Row="1"
                          BorderColor="Transparent"
@@ -498,8 +500,8 @@
                         <ImageButton.Background>
                             <StaticResource Key="ControlColor" />
                         </ImageButton.Background>
-                     </ImageButton>
-                     <ImageButton  Grid.Column="4"
+                    </ImageButton>
+                    <ImageButton  Grid.Column="4"
                          Grid.Row="1"
                          BorderColor="Transparent"
                          CornerRadius="10"
@@ -510,8 +512,7 @@
                     </ImageButton>
                     <CollectionView Grid.ColumnSpan="5"
                                     Grid.Row="3"
-                                    MaximumHeightRequest="450"
-                                    ItemsSource="{Binding DisplayedHolders}">
+                                    MaximumHeightRequest="450">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="modelsProxies:ThingItemMerge">
                                 <Frame>
@@ -524,7 +525,9 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Grid>
+                
             </Frame>
+            <controls:ModelListView BindingContext="{Binding ModelCollectionView}"/>
         </Grid>
     </DataTemplate>
     <DataTemplate   x:Key="WorkerDetails"
