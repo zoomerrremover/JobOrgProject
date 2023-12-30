@@ -55,37 +55,68 @@
     <Compile Update="View\Controls\ModelListView.xaml.cs">
       <DependentUpon>ModelListView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\ScheldudePage.xaml.cs">
+    <Compile Update="View\Controls\DataTemplates.xaml.cs">
+      <DependentUpon>DataTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\MainPages\ScheldudePage.xaml.cs">
       <DependentUpon>ScheldudePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\WorkerPickerPage.xaml.cs">
+    <Compile Update="View\PopUpPages\WorkerPickerPage.xaml.cs">
       <DependentUpon>WorkerPickerPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="View\Controls\IHasLocation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\ModelPages\AssignmentDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\Controls\BaseDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\Controls\IHasContactsDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\Controls\IHasItemsDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\ModelPages\ItemDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\Controls\ITimeBasedDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\Controls\ModelListView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\DetailsPage.xaml">
+    <MauiXaml Update="View\ModelPages\PlaceDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\GlobalSearchPage.xaml">
+    <MauiXaml Update="View\ModelPages\WorkerDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\LogInPage.xaml">
+    <MauiXaml Update="View\MainPages\GlobalSearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\Resources.xaml">
+    <MauiXaml Update="View\PopUpPages\LogInPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\SettingsPage.xaml">
+    <MauiXaml Update="View\Controls\DataTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\MainPages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\WorkerPickerPage.xaml">
+    <MauiXaml Update="View\PopUpPages\WorkerPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\GeneralElements\" />
+    <Folder Include="ViewModels\ModelsProxies\" />
   </ItemGroup>
 </Project>

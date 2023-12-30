@@ -3,7 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.ModelListView"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              x:DataType="viewmodels:ModelCollectionView">
+    <ContentView.Resources>
+        <view:Styles/>
+    </ContentView.Resources>
     <Frame  
          Grid.Row="2"
          CornerRadius="50"

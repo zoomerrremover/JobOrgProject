@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.Controls.IHasLocation"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.ModelsProxies"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             x:DataType="viewmodels:ITimeBasedProxy">
+    <!--<DataTemplate x:Key="IHasLocationDetails"
+                  x:DataType="modelsProxies:IHasLocationProxy">
+        <Frame 
+                   CornerRadius="50"
+                   Grid.ColumnSpan="2"
+                   BorderColor="Transparent">
+            <Frame.Background>
+                <StaticResource Key="BlockColor" />
+            </Frame.Background>
+            <maps:Map x:Name="map"
+                      MapType="Street"/>
+        </Frame>
+    </DataTemplate>-->
+</ContentView>

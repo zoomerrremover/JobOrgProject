@@ -26,7 +26,7 @@ namespace TheJobOrganizationApp
                 });
             builder.Services.AddSingleton(MopupService.Instance);
             builder.Services.AddSingleton<IDataStorage>(provider => new DataStorageTemp(provider.GetRequiredService<GlobalSettings>()));
-            builder.Services.AddSingleton<ILoadableContent>(new LoadableContent());
+            builder.Services.AddSingleton<ILoadableContent>(new ContentLoader());
             builder.Services.AddSingleton<FakeDataFactory>();
             builder.Services.AddSingleton<Initializator>();
             builder.Services.AddSingleton<GlobalSettings>();
@@ -41,7 +41,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddSingleton<WorkerPickerPage>();
-            builder.Services.AddSingleton<ModelToVMAdaptor>();
+            builder.Services.AddSingleton<Converter>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<GlobalSearchPage>();

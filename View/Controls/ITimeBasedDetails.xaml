@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.Controls.ITimeBasedDetails"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.ModelsProxies"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             x:DataType="viewmodels:ITimeBasedProxy">
+    <Frame >
+        <HorizontalStackLayout Spacing="30">
+            <VerticalStackLayout>
+                <Label Text="Start time:"/>
+                <DatePicker Date="{Binding DisplayableStartDate}"
+                                InputTransparent="{Binding InputTransparency}"/>
+                <TimePicker Time="{Binding DisplayableStartDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout>
+                <Label Text="Finish time:"/>
+                <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
+                <TimePicker Time="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                                InputTransparent="{Binding InputTransparency}"/>
+            </VerticalStackLayout>
+            <Button Command="{Binding SaveButtonPressedCommand}"/>
+        </HorizontalStackLayout>
+    </Frame>
+</ContentView>
