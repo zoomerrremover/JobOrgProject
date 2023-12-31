@@ -1,12 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
+using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels;
+namespace TheJobOrganizationApp.ViewModels.PopUpViewModels;
 
 public partial class WorkerPickerViewModel : BaseViewModel
 {
@@ -38,9 +38,8 @@ public partial class WorkerPickerViewModel : BaseViewModel
     }
 
 
-    public WorkerPickerViewModel(Initializator init, IDataStorage Storange)
+    public WorkerPickerViewModel( IDataStorage Storange)
     {
-        init.Initialize();
         data = Storange;
         Workers = data.GetItems<Worker>();
         Workers.CollectionChanged += UpdateList;

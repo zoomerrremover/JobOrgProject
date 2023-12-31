@@ -3,9 +3,9 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface IXAMLContent
     {
-        public Dictionary<Type, DataTemplate> DataTemplates {get;}
-        public Dictionary<Type, ContentPage> ContentPages {get;}
-        public DataTemplate DataTemplatesDefaultValue {get;}
-        public ContentPage ContentPageDefaultValue {get;}
+        public Dictionary<Type, Type> DataTemplates {get;}
+        public Dictionary<Type, Type> ContentPages {get;}
+        public Type DataTemplatesDefaultValue {get;}
+        public Type ContentPageDefaultValue {get;}
     }
 }

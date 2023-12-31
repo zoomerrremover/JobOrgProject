@@ -2,10 +2,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels.ModelsProxies
+namespace TheJobOrganizationApp.ViewModels.Base
 {
-    [Proxy(ClassLinked = typeof(Thing))]
+
     public partial class ThingProxy:ModelView
     {
         [ObservableProperty]

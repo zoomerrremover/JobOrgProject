@@ -1,7 +1,8 @@
 ﻿
-namespace TheJobOrganizationApp.ViewModels
+using TheJobOrganizationApp.ViewModels.Base;
+
+namespace TheJobOrganizationApp.ViewModels.MainViewModels;
+
+public partial class SettingsViewModel:BaseViewModel
 {
-    public partial class SettingsViewModel:BaseViewModel
-    {
-    }
 }

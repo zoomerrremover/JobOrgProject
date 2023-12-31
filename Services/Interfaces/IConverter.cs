@@ -1,6 +1,6 @@
 ﻿
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.ViewModels;
+using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.Services.Interfaces
 {
@@ -9,5 +9,6 @@ namespace TheJobOrganizationApp.Services.Interfaces
         BaseViewModel ConvertToViewModel(Thing model);
         DataTemplate ConvertToDataTemplate(Thing model);
         ContentPage ConvertToContentPage(Thing model);
+        DataTemplate ConvertToDataTemplate(Type model);
     }
 }

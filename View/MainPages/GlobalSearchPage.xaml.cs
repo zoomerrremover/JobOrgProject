@@ -1,5 +1,5 @@
-using Microsoft.Maui.Controls;
-using TheJobOrganizationApp.ViewModels;
+
+using TheJobOrganizationApp.ViewModels.MainViewModels;
 
 namespace TheJobOrganizationApp.View;
 

@@ -1,7 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.Input;
+using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels;
+namespace TheJobOrganizationApp.ViewModels.PopUpViewModels;
 
 public partial class LogInViewModel: BaseViewModel
 {

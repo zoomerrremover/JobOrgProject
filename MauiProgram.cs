@@ -6,6 +6,11 @@ using TheJobOrganizationApp.Services;
 using Mopups.Hosting;
 using CommunityToolkit.Maui.Maps;
 using Mopups.Services;
+using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.Services.HighLevelServices;
+using TheJobOrganizationApp.ViewModels.PopUpViewModels;
+using TheJobOrganizationApp.ViewModels.MainViewModels;
+using TheJobOrganizationApp.Services.LowLeveLServices;
 
 namespace TheJobOrganizationApp
 {
@@ -24,24 +29,26 @@ namespace TheJobOrganizationApp
                     fonts.AddFont("SF-Pro.ttf", "MainFont");
                     fonts.AddFont("SF-Pro-Display-Medium.otf", "BoldFont");
                 });
+            builder.Services.AddTransient<IErrorService, ErrorService>();
             builder.Services.AddSingleton(MopupService.Instance);
-            builder.Services.AddSingleton<IDataStorage>(provider => new DataStorageTemp(provider.GetRequiredService<GlobalSettings>()));
+            builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
             builder.Services.AddSingleton<ILoadableContent>(new ContentLoader());
+            builder.Services.AddSingleton<IAPIService, APITemp>();
+            builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
+            builder.Services.AddSingleton<IXAMLContent, RuntimeContent>
+                (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
+            builder.Services.AddSingleton<IConverter,RuntimeContent>
+                (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
             builder.Services.AddSingleton<FakeDataFactory>();
-            builder.Services.AddSingleton<Initializator>();
             builder.Services.AddSingleton<GlobalSettings>();
-            builder.Services.AddSingleton<GSSelector>();
             builder.Services.AddSingleton<PageFactory>();
-            builder.Services.AddSingleton<IAPIService,APITemp>();
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddSingleton<Resources>();
             builder.Services.AddSingleton<GlobalSearchViewModel>();
-            builder.Services.AddSingleton<WorkerDetailsViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
             builder.Services.AddSingleton<WorkerPickerPage>();
-            builder.Services.AddSingleton<Converter>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddSingleton<GlobalSearchPage>();

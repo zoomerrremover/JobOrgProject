@@ -2,10 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.ItemDetails"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.ModelsProxies"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              x:DataType="viewmodels:ItemProxy"
-             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls">
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             xmlns:wrappers ="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto"
                     RowSpacing="20">
@@ -109,7 +110,7 @@
                                     Grid.Row="3"
                                     MaximumHeightRequest="450">
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="modelsProxies:ThingItemMerge">
+                        <DataTemplate x:DataType="wrappers:ThingItemMerge">
                             <Frame>
                                 <HorizontalStackLayout>
                                     <Label Text="{Binding thing.Name}"></Label>

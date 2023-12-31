@@ -2,7 +2,7 @@
 
 using TheJobOrganizationApp.Models;
 
-namespace TheJobOrganizationApp.ViewModels.ModelsProxies;
+namespace TheJobOrganizationApp.ViewModels.ModelWrappers;
 
 public class CustomModelWraper
     <Model,CustomData> where Model : Thing

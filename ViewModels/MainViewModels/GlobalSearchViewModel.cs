@@ -6,9 +6,10 @@ using System.Collections.Specialized;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
-using TheJobOrganizationApp.View;
+using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels
+namespace TheJobOrganizationApp.ViewModels.MainViewModels
 {
     public partial class GlobalSearchViewModel : BaseViewModel
     {
@@ -32,7 +33,7 @@ namespace TheJobOrganizationApp.ViewModels
 
         string selectedModel = typeof(Item).Name;
 
-        GlobalSettings settings;
+        IReflectionContent ReflectionContent;
 
         [ObservableProperty]
 
@@ -46,15 +47,14 @@ namespace TheJobOrganizationApp.ViewModels
         [ObservableProperty]
         DataTemplate currentTemplate; 
 
-        GSSelector Selector;
+        IConverter Converter;
 
-        partial void OnSelectedModelChanging(string oldValue, string newValue)
+        partial void OnSelectedModelChanged(string value)
         {
-            var localType = typePickerItems.Where(w=>w.Name == newValue)
-                .FirstOrDefault();
+            var localType = typePickerItems.Find(w => w.Name == value);
             Models = dataStorage.GetItems<Thing>(localType);
             Models.CollectionChanged += LoadModels;
-            CurrentTemplate = Selector.ChooseTemplate(newValue);
+            CurrentTemplate = Converter.ConvertToDataTemplate(localType);
             LoadModels();
         }
 
@@ -75,12 +75,12 @@ namespace TheJobOrganizationApp.ViewModels
             }
         }
         static PageFactory factory;
-        public GlobalSearchViewModel(PageFactory Factory,GlobalSettings settings,IDataStorage data,GSSelector selector)
+        public GlobalSearchViewModel(PageFactory Factory,IReflectionContent ReflectionContent,IDataStorage DataBase,IConverter Converter)
         {
             factory = Factory;
-            dataStorage = data;
-            this.settings = settings;
-            Selector = selector;
+            dataStorage = DataBase;
+            this.ReflectionContent = ReflectionContent;
+            this.Converter = Converter;
             InitiateModelChoice();
             OnSelectedModelChanging(null, selectedModel);
         }
@@ -91,16 +91,16 @@ namespace TheJobOrganizationApp.ViewModels
             {
                 return;
             }
-            var pageToLoad = factory.MakeADetailsPage(SelectedObject);
+            var pageToLoad = factory.MakePage(SelectedObject);
             Shell.Current.Navigation.PushAsync(pageToLoad);
 
         }
 
         void InitiateModelChoice()
         {
-            foreach (var type in settings.Models)
+            foreach (var type in ReflectionContent.Models)
             {
-                var attribute = (Model)Attribute.GetCustomAttribute(type, typeof(Model));
+                var attribute = (ModelAttribute)Attribute.GetCustomAttribute(type, typeof(ModelAttribute));
 
                 // If IsActive is true, add the type to the list
                 if (attribute.DisplayableInTheGlobalSearch)

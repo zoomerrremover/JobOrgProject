@@ -1,16 +1,15 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Reflection;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.ViewModels;
+using TheJobOrganizationApp.Services.Interfaces;
 
 namespace TheJobOrganizationApp.Services;
 
-public class DataStorageTemp : BaseViewModel ,IDataStorage 
+public class DataStorageTemp : IDataStorage 
 
 {
-    GlobalSettings globalSettings;
+    IReflectionContent ReflectionContent;
     Dictionary<Type, ObservableCollection<Thing>> ObjectKeeper { get; set; } = new();
 
     public void RegisterModel(Type type)
@@ -19,7 +18,7 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
     }
     public bool InitializeDatabase()
     {
-        foreach (var model in globalSettings.Models)
+        foreach (var model in ReflectionContent.Models)
         {
             RegisterModel(model);
         }
@@ -54,9 +53,10 @@ public class DataStorageTemp : BaseViewModel ,IDataStorage
         }
         return false;
     }
-    public DataStorageTemp(GlobalSettings settings)
+    public DataStorageTemp(IReflectionContent ReflectionContent)
     {
-        globalSettings = settings;
+        this.ReflectionContent = ReflectionContent;
+        Initialize();
     }
 
     public ObservableCollection<T> GetItems<T>(Type key = null)where T : Thing

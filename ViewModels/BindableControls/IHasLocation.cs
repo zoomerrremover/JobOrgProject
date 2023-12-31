@@ -1,27 +1,27 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels.ModelsProxies
+namespace TheJobOrganizationApp.ViewModels.BindableControls;
+
+public partial class IHasLocationProxy : ModelView
 {
-    [Proxy(ClassLinked = typeof(IHasLocation))]
-    public partial class IHasLocationProxy : ModelView
+    [ObservableProperty]
+    IHasLocation bindingObject;
+    public new static ModelView CreateFromTheModel(Thing model)
     {
-        [ObservableProperty]
-        IHasLocation bindingObject;
-        public new static ModelView CreateFromTheModel(Thing model)
+        if (model is IHasLocation)
         {
-            if (model is IHasLocation)
-            {
-                var wm = new IHasLocationProxy(model as IHasLocation);
-                return wm;
-            }
-            else return null;
+            var wm = new IHasLocationProxy(model as IHasLocation);
+            return wm;
         }
-        public IHasLocationProxy(IHasLocation BindingObject)
-        {
-            this.BindingObject = BindingObject;
-        }
-
+        else return null;
     }
+    public IHasLocationProxy(IHasLocation BindingObject)
+    {
+        this.BindingObject = BindingObject;
+    }
+
 }

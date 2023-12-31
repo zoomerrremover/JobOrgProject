@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.AssignmentDetails"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.ModelsProxies"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             xmlns:wrappers ="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers"
              x:DataType="viewmodels:AssignmentProxy">
         <Grid RowDefinitions="Auto,Auto,Auto"
                         ColumnDefinitions="*"
@@ -97,7 +98,7 @@
                         ItemsSource="{Binding DisplayableWorkers}"
                         InputTransparent="{Binding WorkersInEditMode}">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="modelsProxies:PickableWorker">
+                        <DataTemplate x:DataType="wrappers:PickableWorker">
                                 <Frame HeightRequest="70"  Margin="0">
                                     <HorizontalStackLayout>
                                         <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
@@ -106,7 +107,7 @@
                                       VerticalOptions="Center">
                                             <CheckBox.GestureRecognizers>
                                                 <TapGestureRecognizer 
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type modelsProxies:AssignmentProxy}}, Path=EditWorkerCommand}"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AssignmentProxy}}, Path=EditWorkerCommand}"
                                                     CommandParameter="{Binding .}">
                                                 </TapGestureRecognizer>
                                             </CheckBox.GestureRecognizers>

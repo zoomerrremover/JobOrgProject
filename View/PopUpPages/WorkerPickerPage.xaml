@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.WorkerPickerPage"
              xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.PopUpViewModels"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
              x:DataType="viewmodels:WorkerPickerViewModel"
              Title="WorkerPicker"

@@ -1,6 +1,6 @@
 ﻿using TheJobOrganizationApp.Models;
-namespace TheJobOrganizationApp.ViewModels.ModelsProxies
-{
+namespace TheJobOrganizationApp.ViewModels.ModelWrappers;
+
     public class ThingItemMerge
     {
         public Thing thing { get; set; }
@@ -13,4 +13,4 @@ namespace TheJobOrganizationApp.ViewModels.ModelsProxies
             this.item = item;
         }
     }
-}
+

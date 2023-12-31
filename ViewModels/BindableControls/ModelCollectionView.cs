@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
 
-namespace TheJobOrganizationApp.ViewModels;
+namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
 public partial class ModelCollectionView:ObservableObject
 {

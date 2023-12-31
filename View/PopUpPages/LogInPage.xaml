@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.LogInPage"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels;assembly=TheJobOrganizationApp"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.PopUpViewModels"
              x:DataType="viewmodels:LogInViewModel"
              Title="LogInPage">
     <Grid ColumnDefinitions="400" RowDefinitions="60,60,30,60,30,60" HorizontalOptions="Center" VerticalOptions="Center">

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<DataTemplate xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
+             x:Class="TheJobOrganizationApp.View.DataTemplates.ItemDataTemplate"
+             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
+             x:DataType="models:Item">
+    <Frame HeightRequest="70"  Margin="0">
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+        </Frame.GestureRecognizers>
+        <Grid ColumnDefinitions="100,60,80,2,50">
+
+            <Label Text="{Binding Name}"
+                         FontSize="Small"
+                         TextColor="Black"/>
+            <Label Text="{Binding Qty}"
+                         FontSize="Micro"
+                         TextColor="Grey"
+                         Grid.Column="2"/>
+            <Label Text="{Binding UnitsName}"
+                         FontSize="Micro"
+                         TextColor="Grey"
+                         Grid.Column="4"/>
+        </Grid>
+    </Frame>
+</DataTemplate>

@@ -1,6 +1,5 @@
 ﻿
-using CommunityToolkit.Mvvm.ComponentModel;
-using System.Collections.ObjectModel;
+using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models.Interfaces;
 
 namespace TheJobOrganizationApp.Models

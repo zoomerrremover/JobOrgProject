@@ -1,17 +1,16 @@
 ﻿
 
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mopups.Interfaces;
 using Syncfusion.Maui.Scheduler;
 using System.Collections.ObjectModel;
-using System.Drawing;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.View;
-using Color = Microsoft.Maui.Graphics.Color;
+using TheJobOrganizationApp.ViewModels.Base;
+using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 
-namespace TheJobOrganizationApp.ViewModels;
+namespace TheJobOrganizationApp.ViewModels.MainViewModels;
 
 public partial class ScheldudeViewModel
     : BaseViewModel

@@ -2,7 +2,7 @@
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Models;
 
-namespace TheJobOrganizationApp.ViewModels.ModelsProxies
+namespace TheJobOrganizationApp.ViewModels.Base
 {
     public class ModelView:BaseViewModel
     {

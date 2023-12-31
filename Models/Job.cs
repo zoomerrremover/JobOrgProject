@@ -1,4 +1,5 @@
 ﻿
+using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models.Interfaces;
 
 namespace TheJobOrganizationApp.Models
