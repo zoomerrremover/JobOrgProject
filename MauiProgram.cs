@@ -35,17 +35,23 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
             builder.Services.AddSingleton<ILoadableContent>(new ContentLoader());
             builder.Services.AddSingleton<IAPIService, APITemp>();
+            #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
             builder.Services.AddSingleton<IXAMLContent, RuntimeContent>
-                (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
+                (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);            
             builder.Services.AddSingleton<IConverter,RuntimeContent>
                 (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
+            #endregion
+            #region User Controller
+            builder.Services.AddSingleton<IUserController, UserController>();
+            builder.Services.AddSingleton<IUserPermissionController, UserController>
+                (sp => sp.GetRequiredService<IUserController>() as UserController);
+            #endregion
             builder.Services.AddSingleton<ModelView>();
             builder.Services.AddSingleton<FakeDataFactory>();
             builder.Services.AddSingleton<GlobalSettings>();
             builder.Services.AddSingleton<PageFactory>();
             builder.Services.AddTransient<ScheldudeViewModel>();
-            builder.Services.AddSingleton<Resources>();
             builder.Services.AddSingleton<GlobalSearchViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();

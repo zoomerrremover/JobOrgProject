@@ -1,21 +1,17 @@
-﻿
-using TheJobOrganizationApp.Models;
+﻿using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Models.Misc;
 using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.Services.UtilityClasses;
 
-namespace TheJobOrganizationApp.Services.LowLeveLServices
+namespace TheJobOrganizationApp.Services.HighLevelServices
 {
     public class UserController : IUserPermissionController, IUserController
     {
         public int VisibilityLevel { get => User.Position.VisibilityLevel; }
-
-        public List<Rule> Permissions { get => User.Position.Permissions; }
-
-        IUser User { get; set; }
-
-        public void CreateHistoryRecord(Thing Object, HistoryActionType type,string propertyName = null,object value = null, object value2 = null)
+        List<Rule> Permissions { get => User.Position.Permissions; }
+        IUser User { get;set; }
+        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object value = null, object value2 = null)
         {
             var newHistoryRecord = new HistoryRecord()
             {
@@ -25,9 +21,20 @@ namespace TheJobOrganizationApp.Services.LowLeveLServices
                 Value = value.ToString(),
                 Value2 = value2.ToString()
             };
-
         }
-
+        public bool GetPermission(Thing Object, RuleType Type)
+        {
+            if (Object.Equals(User))
+            {
+                return true;
+            }
+            else
+            {
+                var type = Object.GetType();
+                var permission = Permissions.Find(p=>p.Model == type);
+                return permission.Status.Contains(Type);
+            }
+        }
         public void SetPermissions(IUser user)
         {
             User = user;

@@ -1,7 +1,7 @@
 ﻿
 namespace TheJobOrganizationApp.Services.UtilityClasses;
 
-public enum PermissionType
+public enum RuleType
 {
     Edit = 1,
     Create = 2,
