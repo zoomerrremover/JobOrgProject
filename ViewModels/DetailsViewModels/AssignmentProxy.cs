@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
-using TheJobOrganizationApp.ViewModels.BindableControls;
 using TheJobOrganizationApp.ViewModels.ModelWrappers;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
@@ -30,16 +29,13 @@ public partial class AssignmentProxy:ThingProxy
         BindingObject = item;
         Initialize();
     }
-
     private void Initialize()
     {
-
-        workers = queryService.GetItems<Worker>();
+        Workers = queryService.GetItems<Worker>();
     }
     //Pickable job feature
-    //------------------------------------------------------------------------------------------------
-    [ObservableProperty]
-    ObservableCollection<Job> jobs;
+    //------------------------------------------------------------------------------------------------    [ObservableProperty]
+    public ObservableCollection<Job> Jobs { get; set; }
     [ObservableProperty]
     Job pickedJob;
     //Pickable place feature
@@ -86,9 +82,8 @@ public partial class AssignmentProxy:ThingProxy
             queryService.TriggerUpdate<Worker>();
         }
     }
-    [ObservableProperty]
-    ObservableCollection<PickableWorker> displayableWorkers = new();
-    ObservableCollection<Worker> workers = new ObservableCollection<Worker>();
+    public ObservableCollection<PickableWorker> DisplayableWorkers { get; set; } = new();
+    public ObservableCollection<Worker> Workers { get; set; } = new ObservableCollection<Worker>();
     [ObservableProperty]
     string searchEntryText = "";
     partial void OnSearchEntryTextChanged(string value)
@@ -98,7 +93,7 @@ public partial class AssignmentProxy:ThingProxy
     void LoadModels()
         {
         var promptLocal = SearchEntryText.ToLower();
-        foreach (var (worker, boolValue) in from worker in workers
+        foreach (var (worker, boolValue) in from worker in Workers
                                             let NameLocal = worker.Name.ToLower()
                                             where NameLocal.Contains(promptLocal)
                                             let boolValue = BindingObject.Workers.Contains(worker) ? true : false

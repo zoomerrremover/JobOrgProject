@@ -8,9 +8,17 @@ namespace TheJobOrganizationApp.ViewModels.Base
     {
 
         protected static IDataStorage queryService;
+        public ModelView(IDataStorage QueryService)
+        {
+            queryService = QueryService;
+        }
         public static ModelView CreateFromTheModel(Thing model)
         {
             throw new NotImplementedException();
+        }
+        public ModelView()
+        {
+            
         }
     }
 }

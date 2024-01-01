@@ -6,7 +6,7 @@ using TheJobOrganizationApp.Models;
 
 namespace TheJobOrganizationApp.Services
 {
-    public interface IDataStorage: Iintializable
+    public interface IDataStorage
     {
         public void RegisterModel(Type type);
         public void AddThing<T>(T thing) where T : Thing;

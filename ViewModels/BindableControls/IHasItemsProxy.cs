@@ -86,15 +86,6 @@ public partial class IHasItemsProxy : ModelView
     Dictionary<string, ListSelector> filterSelectorMethods = new();
     [ObservableProperty]
     List<string> avaliableFilters = new();
-    public new static ModelView CreateFromTheModel(Thing model)
-    {
-        if (model is IHasItems)
-        {
-            var wm = new IHasItemsProxy(model as IHasItems);
-            return wm;
-        }
-        else return null;
-    }
     public IHasItemsProxy(IHasItems BindingObject)
     {
         this.BindingObject = BindingObject;

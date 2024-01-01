@@ -10,38 +10,45 @@ namespace TheJobOrganizationApp.Services
         {
             this.dataStorange = dataStorange;
             FakeDataFactory = fakeDataFactory;
-            Initiate(numberOfGeneratedData);
+            this.numberOfGeneratedData = numberOfGeneratedData;
         }
-        static ObservableCollection<T> ToObservableCol<T>( IEnumerable<T> listToFillFrom)
+        int numberOfGeneratedData;
+
+        public void Connect()
         {
-            var listToFill = new ObservableCollection<T>();
-            foreach (T thing in listToFillFrom)
-            {
-                listToFill.Add(thing);
-            }
-            return listToFill;
+            throw new NotImplementedException();
         }
 
-        public void Initiate(int generations)
+        public void Disconnect()
         {
-            var localItems = FakeDataFactory.ItemGenerator.Generate(generations);
-            var localPos = FakeDataFactory.PositionGenerator.Generate(generations);
-            var localPlaces = FakeDataFactory.PlaceGenerator.Generate(generations);
-            var localWorkers = FakeDataFactory.WorkerGenerator.Generate(generations);
-            var localJobs = FakeDataFactory.JobGenerator.Generate(generations);
+            throw new NotImplementedException();
+        }
+
+        public void LogIn(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadContent(int VisibilityLevel)
+        {
+            var localItems = FakeDataFactory.ItemGenerator.Generate(numberOfGeneratedData);
+            var localPos = FakeDataFactory.PositionGenerator.Generate(numberOfGeneratedData);
+            var localPlaces = FakeDataFactory.PlaceGenerator.Generate(numberOfGeneratedData);
+            var localWorkers = FakeDataFactory.WorkerGenerator.Generate(numberOfGeneratedData);
+            var localJobs = FakeDataFactory.JobGenerator.Generate(numberOfGeneratedData);
             var localTasks = localJobs
                 .SelectMany(job => job.Tasks)
                 .ToList();
             var localConts = localJobs
                 .Select(job => job.Contractor)
                 .ToList();
-            dataStorange.AddThing(ToObservableCol(localPlaces));
-            dataStorange.AddThing(ToObservableCol(localJobs));
-            dataStorange.AddThing(ToObservableCol(localWorkers));
-            dataStorange.AddThing(ToObservableCol(localTasks));
-            dataStorange.AddThing(ToObservableCol(localItems));
-            dataStorange.AddThing(ToObservableCol(localConts));
-            dataStorange.AddThing(ToObservableCol(localPos));
+            dataStorange.AddThing(localPlaces.ToObservableCollection());
+            dataStorange.AddThing(localJobs.ToObservableCollection());
+            dataStorange.AddThing(localWorkers.ToObservableCollection());
+            dataStorange.AddThing(localTasks.ToObservableCollection());
+            dataStorange.AddThing(localItems.ToObservableCollection());
+            dataStorange.AddThing(localConts.ToObservableCollection());
+            dataStorange.AddThing(localPos.ToObservableCollection());
 
         }
 

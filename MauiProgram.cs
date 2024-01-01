@@ -11,6 +11,7 @@ using TheJobOrganizationApp.Services.HighLevelServices;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
+using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp
 {
@@ -39,6 +40,7 @@ namespace TheJobOrganizationApp
                 (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
             builder.Services.AddSingleton<IConverter,RuntimeContent>
                 (sp => sp.GetRequiredService<IReflectionContent>() as RuntimeContent);
+            builder.Services.AddSingleton<ModelView>();
             builder.Services.AddSingleton<FakeDataFactory>();
             builder.Services.AddSingleton<GlobalSettings>();
             builder.Services.AddSingleton<PageFactory>();

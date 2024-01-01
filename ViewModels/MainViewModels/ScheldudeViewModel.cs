@@ -48,7 +48,7 @@ public partial class ScheldudeViewModel
     }
 
 
-    public ScheldudeViewModel(WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IAPIService apiservice,IDataStorage storage)
+    public ScheldudeViewModel(ModelView mv,WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IAPIService apiservice,IDataStorage storage)
     {
         Data = storage;
         appointments = new();
@@ -57,7 +57,6 @@ public partial class ScheldudeViewModel
         GlobalAssignments= Data.GetItems<Assignment> ();
        // GoToLogInScreen();
         apiservice.Connect();
-        apiservice.Initiate();
         GlobalAssignments.CollectionChanged += InitializeAppointments;
         WorkerPickerVM.WorkersPicked.CollectionChanged += InitializeAppointments;
         

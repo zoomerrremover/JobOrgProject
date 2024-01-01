@@ -14,15 +14,6 @@ public partial class ITimeBasedProxy : ModelView
 //----------------------------------------------------------------------------------------------------------
     [ObservableProperty]
     ITimeBased bindingObject;
-    public new static ModelView CreateFromTheModel(Thing model)
-    {
-        if (model is ITimeBased)
-        {
-            var wm = new ITimeBasedProxy(model as ITimeBased);
-            return wm;
-        }
-        else return null;
-    }
     public ITimeBasedProxy(ITimeBased BindingObject)
     {
         this.BindingObject = BindingObject;

@@ -5,7 +5,7 @@ using TheJobOrganizationApp.View;
 
 namespace TheJobOrganizationApp.Services;
 
-public class GlobalSettings: Iintializable
+public class GlobalSettings
 {
     public Dictionary<string, string> Settings { get; set; }
 
