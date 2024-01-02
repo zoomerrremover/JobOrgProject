@@ -6,7 +6,7 @@ using TheJobOrganizationApp.Services.UtilityClasses;
 
 namespace TheJobOrganizationApp.Services.HighLevelServices
 {
-    public class UserController : IUserPermissionController, IUserController
+    public class UserController :IUserController
     {
         public int VisibilityLevel { get => User.Position.VisibilityLevel; }
         List<Rule> Permissions { get => User.Position.Permissions; }

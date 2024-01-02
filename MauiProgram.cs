@@ -30,11 +30,13 @@ namespace TheJobOrganizationApp
                     fonts.AddFont("SF-Pro.ttf", "MainFont");
                     fonts.AddFont("SF-Pro-Display-Medium.otf", "BoldFont");
                 });
-            builder.Services.AddTransient<IErrorService, ErrorService>();
             builder.Services.AddSingleton(MopupService.Instance);
+            builder.Services.AddTransient<IErrorService, ErrorService>();
             builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
-            builder.Services.AddSingleton<ILoadableContent>(new ContentLoader());
-            builder.Services.AddSingleton<IAPIService, APITemp>();
+            builder.Services.AddSingleton<IConnectionService, APITemp>();
+            builder.Services.AddSingleton<IUserController, UserController>();
+            builder.Services.AddSingleton<ISettings,AppSettings>();
+            builder.Services.AddSingleton<IInitializator,Initializator>();
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
             builder.Services.AddSingleton<IXAMLContent, RuntimeContent>
@@ -47,9 +49,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IUserPermissionController, UserController>
                 (sp => sp.GetRequiredService<IUserController>() as UserController);
             #endregion
-            builder.Services.AddSingleton<ModelView>();
             builder.Services.AddSingleton<FakeDataFactory>();
-            builder.Services.AddSingleton<GlobalSettings>();
             builder.Services.AddSingleton<PageFactory>();
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddSingleton<GlobalSearchViewModel>();

@@ -8,6 +8,7 @@ namespace TheJobOrganizationApp.Services
 {
     public interface IDataStorage
     {
+        public DateTime ContentVersion { get; }
         public void RegisterModel(Type type);
         public void AddThing<T>(T thing) where T : Thing;
         public void AddThing<T>(IEnumerable<T> thing) where T : Thing;
@@ -18,7 +19,6 @@ namespace TheJobOrganizationApp.Services
         {
             return true;
         }
-
         public ObservableCollection<T> GetItems<T>(Type key = null) where T : Thing
         {
             var items = new ObservableCollection<T>();
@@ -29,6 +29,7 @@ namespace TheJobOrganizationApp.Services
             var items = new ObservableCollection<Thing>();
             return items;
         }
+        public bool CompareContentVersion(DateTime CurrentContent);
 
     }
 

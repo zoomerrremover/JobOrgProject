@@ -1,17 +1,16 @@
 ﻿
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Services.Interfaces;
 
 namespace TheJobOrganizationApp.ViewModels.Base
 {
-    public class ModelView:BaseViewModel
+    public abstract class ModelView:BaseViewModel
     {
 
-        protected static IDataStorage queryService;
-        public ModelView(IDataStorage QueryService)
-        {
-            queryService = QueryService;
-        }
+        public static IDataStorage queryService;
+
+        public static IUserController userController;
         public static ModelView CreateFromTheModel(Thing model)
         {
             throw new NotImplementedException();

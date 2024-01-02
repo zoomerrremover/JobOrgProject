@@ -3,6 +3,6 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface ISettings
     {
-        public Dictionary<string, string> Settings { get; }
+        public Dictionary<string, object> Settings { get; }
     }
 }

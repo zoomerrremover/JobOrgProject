@@ -8,6 +8,7 @@ namespace TheJobOrganizationApp.Services.Interfaces
         Dictionary<string, GradientBrush> Colors { get; }
         public string GetIcon(string name);
         public string GetString(string name);
+        public bool CheckResources(List<string> RequiredContent);
         public void LoadContent();
     }
 }

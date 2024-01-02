@@ -12,6 +12,8 @@ public class DataStorageTemp : IDataStorage
     IReflectionContent ReflectionContent;
     Dictionary<Type, ObservableCollection<Thing>> ObjectKeeper { get; set; } = new();
 
+    public DateTime ContentVersion { get; set; }
+
     public void RegisterModel(Type type)
     {
         ObjectKeeper[type] = new ObservableCollection<Thing>();
@@ -117,6 +119,8 @@ public class DataStorageTemp : IDataStorage
         ObjectKeeper[typeOfThing].Remove(ObjectKeeper[typeOfThing].Last());
     }
 
-
-
+    public bool CompareContentVersion(DateTime CurrentContent)
+    {
+        throw new NotImplementedException();
+    }
 }

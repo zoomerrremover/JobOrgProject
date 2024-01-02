@@ -1,11 +1,16 @@
 ﻿
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Models.Misc;
+using TheJobOrganizationApp.Services.UtilityClasses;
 
 namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface IUserController
     {
+        public int VisibilityLevel { get; }
+        public void SetPermissions(IUser user);
+        public bool GetPermission(Thing Object, RuleType Type);
         public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object value = null, object value2 = null);
     }
 }

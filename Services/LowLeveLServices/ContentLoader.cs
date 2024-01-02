@@ -1,22 +1,36 @@
 ﻿
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Services.Interfaces;
 
 namespace TheJobOrganizationApp.Services
 {
-    public class ContentLoader : ILoadableContent
+    public class Resources : IResources
 
     {
+        public Dictionary<string, string> Icons => throw new NotImplementedException();
 
-        public ContentLoader()
+        public Dictionary<string, string> Strings => throw new NotImplementedException();
+
+        public Dictionary<string, GradientBrush> Colors => throw new NotImplementedException();
+
+        public bool CheckResources(List<string> RequiredContent)
         {
-            SettedCollors = new();
-            SettedCollors = new();
+            throw new NotImplementedException();
         }
-        
 
-        public Dictionary<string, Color> SettedCollors { get; set; }
-        public Dictionary<string, Dictionary<string, string>> SettedText { get; set; }
+        public string GetIcon(string name)
+        {
+            throw new NotImplementedException();
+        }
 
-  
+        public string GetString(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadContent()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
