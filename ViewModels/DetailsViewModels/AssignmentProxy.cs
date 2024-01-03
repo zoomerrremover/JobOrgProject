@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
+using TheJobOrganizationApp.ViewModels.BindableControls;
 using TheJobOrganizationApp.ViewModels.ModelWrappers;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
@@ -40,6 +41,7 @@ public partial class AssignmentProxy:ThingProxy
     Job pickedJob;
     //Pickable place feature
     //------------------------------------------------------------------------------------------------
+    #region Displayable place
     [ObservableProperty]
     ObservableCollection<Place> places;
     [ObservableProperty]
@@ -55,8 +57,9 @@ public partial class AssignmentProxy:ThingProxy
         queryService.TriggerUpdate<Job>();
         base.NameEditButtonPressed();
     }
-    //Displayable workers feature
-    //------------------------------------------------------------------------------------------------
+    #endregion
+    #region DisplayableWorkersFeature
+    public ModelCollectionView Workers {  get; set; }
     [ObservableProperty]
     bool workersInEditMode = true;
     [RelayCommand]
@@ -102,5 +105,5 @@ public partial class AssignmentProxy:ThingProxy
             DisplayableWorkers.Add(new PickableWorker(worker, boolValue));
         }
     }
-
+    #endregion
 }

@@ -9,6 +9,7 @@ using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
+using System.Linq;
 
 namespace TheJobOrganizationApp.ViewModels.MainViewModels;
 
@@ -30,23 +31,18 @@ public partial class ScheldudeViewModel
     {
         appointments.Clear ();
         tasksOnTheScreen.Clear ();
-        WorkerPickerVM.WorkersPicked.ToList().ForEach(w =>
+        WorkerPickerVM.WorkersPicked.ForEach(w =>
         {;
-            foreach (var task in GlobalAssignments)
+            foreach (var task in from task in GlobalAssignments.Where(t => t.Workers.Contains(w))
+                                 where !tasksOnTheScreen.Contains(task.Id)
+                                 select task)
             {
-                if (!tasksOnTheScreen.Contains(task.Id))
-                {
-                    if (task.Workers.Contains(w))
-                    {
-                        tasksOnTheScreen.Add(task.Id);
-                        var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name, Background = w.Color };
-                        appointments.Add(newAppointment);
-                    }
-                }
+                tasksOnTheScreen.Add(task.Id);
+                var newAppointment = new SchedulerAppointment { StartTime = task.StartTime, EndTime = task.FinishTime, Subject = task.Name, Background = w.Color };
+                appointments.Add(newAppointment);
             }
         });
     }
-
 
     public ScheldudeViewModel(WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IConnectionService apiservice,IDataStorage storage)
     {
@@ -54,13 +50,21 @@ public partial class ScheldudeViewModel
         appointments = new();
         this.WorkerPickerVM = WorkerPickerVM;
         this.PopUpService = PopUpService;
-        GlobalAssignments= Data.GetItems<Assignment> ();
-        apiservice.Connect();
-        GlobalAssignments.CollectionChanged += InitializeAppointments;
-        WorkerPickerVM.WorkersPicked.CollectionChanged += InitializeAppointments;
-        
+        Initialize(WorkerPickerVM);
+    }
+
+    private void Initialize(WorkerPickerViewModel WorkerPickerVM)
+    {
+        GlobalAssignments = Data.GetItems<Assignment>();
+        LinkMethods(WorkerPickerVM);
         InitializeAppointments();
     }
+    private void LinkMethods(WorkerPickerViewModel WorkerPickerVM)
+    {
+        GlobalAssignments.CollectionChanged += InitializeAppointments;
+        WorkerPickerVM.WorkersPicked.CollectionChanged += InitializeAppointments;
+    }
+
     [RelayCommand]
     void WorkerPicker()
     {

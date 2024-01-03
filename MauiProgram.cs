@@ -12,6 +12,7 @@ using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
 using TheJobOrganizationApp.ViewModels.Base;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TheJobOrganizationApp
 {
@@ -36,7 +37,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IConnectionService, APITemp>();
             builder.Services.AddSingleton<IUserController, UserController>();
             builder.Services.AddSingleton<ISettings,AppSettings>();
-            builder.Services.AddSingleton<IInitializator,Initializator>();
+            builder.Services.AddTransient<IInitializator,Initializator>();
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
             builder.Services.AddSingleton<IXAMLContent, RuntimeContent>
@@ -46,20 +47,18 @@ namespace TheJobOrganizationApp
             #endregion
             #region User Controller
             builder.Services.AddSingleton<IUserController, UserController>();
-            builder.Services.AddSingleton<IUserPermissionController, UserController>
-                (sp => sp.GetRequiredService<IUserController>() as UserController);
             #endregion
-            builder.Services.AddSingleton<FakeDataFactory>();
-            builder.Services.AddSingleton<PageFactory>();
+            builder.Services.AddTransient<FakeDataFactory>();
+            builder.Services.AddTransient<PageFactory>();
             builder.Services.AddTransient<ScheldudeViewModel>();
-            builder.Services.AddSingleton<GlobalSearchViewModel>();
+            builder.Services.AddTransient<GlobalSearchViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
-            builder.Services.AddSingleton<WorkerPickerPage>();
+            builder.Services.AddTransient<WorkerPickerPage>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
-            builder.Services.AddSingleton<GlobalSearchPage>();
+            builder.Services.AddTransient<GlobalSearchPage>();
             builder.Services.AddTransient<SettingsPage>();
 #if DEBUG
             builder.Logging.AddDebug();

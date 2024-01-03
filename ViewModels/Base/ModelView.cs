@@ -15,9 +15,6 @@ namespace TheJobOrganizationApp.ViewModels.Base
         {
             throw new NotImplementedException();
         }
-        public ModelView()
-        {
-            
-        }
+
     }
 }

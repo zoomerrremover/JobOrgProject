@@ -26,7 +26,7 @@ namespace TheJobOrganizationApp.Services.LowLeveLServices
         public void Initiate()
         {
 
-            throw new NotImplementedException();
+          // App Starting logic
         }
     }
 }

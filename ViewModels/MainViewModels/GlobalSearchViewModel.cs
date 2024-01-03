@@ -74,7 +74,6 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
                 }
             }
         }
-        static PageFactory factory;
         public GlobalSearchViewModel(PageFactory Factory,IReflectionContent ReflectionContent,IDataStorage DataBase,IConverter Converter)
         {
             factory = Factory;
@@ -84,8 +83,9 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
             InitiateModelChoice();
             OnSelectedModelChanging(null, selectedModel);
         }
+        PageFactory factory;
         [RelayCommand]
-        public static void GoToDetails(Thing SelectedObject)
+        public void GoToDetails(Thing SelectedObject)
         {
             if(SelectedObject is null)
             {

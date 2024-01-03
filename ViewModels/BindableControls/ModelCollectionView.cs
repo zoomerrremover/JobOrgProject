@@ -1,46 +1,74 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
-using TheJobOrganizationApp.Models;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
-public partial class ModelCollectionView:ObservableObject
+public partial class ModelCollectionView : ObservableObject
 {
-    //--------------------------------------------------------------------------------
+    #region Constructors and main enumerables
     public ObservableCollection<object> DisplayableList { get; set; } = new();
     ObservableCollection<object> values { get; init; }
     public ModelCollectionView(IEnumerable<object> values)
     {
-        
+
         this.values = values.ToObservableCollection<object>();
         LoadCollection();
     }
-    //--------------------------------------------------------------------------------
+    #endregion
+    #region AddButton
     public bool AddButtonEnabled { get; private set; } = false;
     public bool AddButtonIsVisible { get; private set; } = false;
-    public ModelCollectionView WithAddButton(bool permissionProvider)
-    {   
+    Action AddButtonAction { get; set; }
+    public ModelCollectionView WithAddButton(bool permissionProvider, Action addButtonAction = null)
+    {
         AddButtonIsVisible = true;
         AddButtonEnabled = permissionProvider;
+        AddButtonAction = addButtonAction;
         return this;
     }
-    //--------------------------------------------------------------------------------
+    [RelayCommand]
+    void AddButtonPressed()
+    {
+        if (AddButtonEnabled)
+        {
+            if (AddButtonAction != null)
+            {
+                AddButtonAction();
+            }
+        }
+    }
+    #endregion
+    #region EditButton
     public bool EditButtonEnabled { get; private set; } = false;
     public bool EditButtonIsVisible { get; private set; } = false;
-    public ModelCollectionView WithEditButton(bool permissionProvider)
+    Action EditButtonAction { get; set; }
+    public ModelCollectionView WithEditButton(bool permissionProvider, Action editButtonAction = null)
     {
         EditButtonIsVisible = true;
         EditButtonEnabled = permissionProvider;
+        EditButtonAction = editButtonAction;
         return this;
     }
-
-    //--------------------------------------------------------------------------------
+    [RelayCommand]
+    void EditButtonPressed()
+    {
+        if (EditButtonEnabled)
+        {
+            if (EditButtonAction != null)
+            {
+                EditButtonAction();
+            }
+        }
+    }
+    #endregion
+    #region Filters
     public bool FiltersAreVisible { get; private set; } = false;
-    public ModelCollectionView WithFilters(params (string,Action<ObservableCollection<object>>)[] filters)
+    public ModelCollectionView WithFilters(params (string, Action<ObservableCollection<object>>)[] filters)
     {
         FiltersAreVisible = true;
-        filters.ForEach(w=>filterSelectorMethods[w.Item1]=w.Item2);
+        filters.ForEach(w => filterSelectorMethods[w.Item1] = w.Item2);
         filterSelectorMethods.Keys.ForEach(AvaliableFilters.Add);
         selectedString = AvaliableFilters.First().ToString();
         LoadCollection();
@@ -49,28 +77,29 @@ public partial class ModelCollectionView:ObservableObject
     void LoadCollection()
     {
         ApplySearchEntry();
-        if(FiltersAreVisible)
+        if (FiltersAreVisible)
         {
             ApplyFilters();
         }
     }
-        Dictionary<string,Action<ObservableCollection<object>>> filterSelectorMethods = new();
-        public ObservableCollection<string> AvaliableFilters { get; set; } = new();
-        [ObservableProperty]
-        string selectedString = "";
-        partial void OnSelectedStringChanged(string value)
+    Dictionary<string, Action<ObservableCollection<object>>> filterSelectorMethods = new();
+    public ObservableCollection<string> AvaliableFilters { get; set; } = new();
+    [ObservableProperty]
+    string selectedString = "";
+    partial void OnSelectedStringChanged(string value)
+    {
+        LoadCollection();
+    }
+    void ApplyFilters()
+    {
+        var choosedFilter = filterSelectorMethods[SelectedString];
+        if (choosedFilter != null)
         {
-            LoadCollection();
+            choosedFilter.Invoke(DisplayableList);
         }
-        void ApplyFilters()
-        {
-            var choosedFilter = filterSelectorMethods[SelectedString];
-            if (choosedFilter != null)
-            {
-                choosedFilter.Invoke(DisplayableList);
-            }
-        }
-    //--------------------------------------------------------------------------------
+    }
+    #endregion
+    #region Search entry
     [ObservableProperty]
     string searchEntry = "";
     partial void OnSearchEntryChanged(string value)
@@ -86,4 +115,5 @@ public partial class ModelCollectionView:ObservableObject
             DisplayableList.Add(item);
         }
     }
+    #endregion
 }
