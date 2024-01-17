@@ -6,12 +6,12 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
-public partial class IHasLocationProxy : ModelView
+public partial class HasLocationVM : ModelView
 {
     [ObservableProperty]
     IHasLocation bindingObject;
 
-    public IHasLocationProxy(IHasLocation BindingObject)
+    public HasLocationVM(IHasLocation BindingObject)
     {
         this.BindingObject = BindingObject;
     }

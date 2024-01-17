@@ -9,7 +9,7 @@ using TheJobOrganizationApp.ViewModels.BindableControls;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Contractor))]
-public partial class ContractorProxy:ThingProxy
+public partial class ContractorProxy:ThingDetailsVM
 {
     new public Contractor BindingObject { get; set; }
     // CTORS

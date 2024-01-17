@@ -24,5 +24,11 @@ namespace TheJobOrganizationApp
             }
             return newObs;
         }
+        public static ObservableCollection<T> TriggerEvent<T>(this ObservableCollection<T> col)
+        {
+            col.Add(col.Last());
+            col.Remove(col.Last());
+            return col;
+        }
     }
 }

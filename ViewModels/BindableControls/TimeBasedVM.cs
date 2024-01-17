@@ -8,13 +8,13 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
-public partial class ITimeBasedProxy : ModelView
+public partial class TimeBasedVM : ModelView
 {
 // CTORS
 //----------------------------------------------------------------------------------------------------------
     [ObservableProperty]
     ITimeBased bindingObject;
-    public ITimeBasedProxy(ITimeBased BindingObject)
+    public TimeBasedVM(ITimeBased BindingObject)
     {
         this.BindingObject = BindingObject;
         InitializeData();

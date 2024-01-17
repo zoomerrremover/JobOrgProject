@@ -10,7 +10,7 @@ using TheJobOrganizationApp.ViewModels.ModelWrappers;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Item))]
-public partial class ItemProxy : ThingProxy
+public partial class ItemProxy : ThingDetailsVM
 {
     new public Item BindingObject { get; set; }
 

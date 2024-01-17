@@ -1,23 +1,22 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.ViewModels.Base;
+using TheJobOrganizationApp.ViewModels;
 
-namespace TheJobOrganizationApp.ViewModels.Base
+namespace TheJobOrganizationApp.Models.ModelsProxies
 {
-
-    public partial class ThingDetailsVM:ModelView
+    [Proxy(ClassLinked = typeof(Thing))]
+    public partial class ThingProxy:ModelView
     {
         [ObservableProperty]
         Thing bindingObject;
         public new static ModelView CreateFromTheModel(Thing model)
         {
-                var wm = new ThingDetailsVM(model);
+                var wm = new ThingProxy(model);
                 return wm;
             
         }
-        public ThingDetailsVM(Thing BindingObject)
+        public ThingProxy(Thing BindingObject)
         {
             this.BindingObject = BindingObject;
             InitializeComponents();

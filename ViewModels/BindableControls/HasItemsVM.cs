@@ -7,7 +7,7 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
-public partial class IHasItemsProxy : ModelView
+public partial class HasItemsVM : ModelView
 {
     [ObservableProperty]
     IHasItems bindingObject;
@@ -86,7 +86,7 @@ public partial class IHasItemsProxy : ModelView
     Dictionary<string, ListSelector> filterSelectorMethods = new();
     [ObservableProperty]
     List<string> avaliableFilters = new();
-    public IHasItemsProxy(IHasItems BindingObject)
+    public HasItemsVM(IHasItems BindingObject)
     {
         this.BindingObject = BindingObject;
         Initiate();

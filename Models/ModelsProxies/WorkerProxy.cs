@@ -2,14 +2,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Services;
-using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Atributes;
-using TheJobOrganizationApp.ViewModels.BindableControls;
-using TheJobOrganizationApp.ViewModels.Base;
-
-namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
-[DetailsViewModel(ClassLinked = typeof(Worker))]
-public partial class WorkerProxy:ThingDetailsVM
+using TheJobOrganizationApp.ViewModels;
+namespace TheJobOrganizationApp.Models.ModelsProxies;
+[Proxy(ClassLinked = typeof(Worker))]
+public partial class WorkerProxy:ThingProxy
 {
     public new static ModelView CreateFromTheModel(Thing model)
     {

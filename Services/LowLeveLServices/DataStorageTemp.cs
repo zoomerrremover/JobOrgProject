@@ -115,8 +115,7 @@ public class DataStorageTemp : IDataStorage
     public void TriggerUpdate<T>(T objectKey = null)where T : class
     {
         var typeOfThing = objectKey is null?typeof(T):objectKey.GetType();
-        ObjectKeeper[typeOfThing].Add(ObjectKeeper[typeOfThing].Last());
-        ObjectKeeper[typeOfThing].Remove(ObjectKeeper[typeOfThing].Last());
+        ObjectKeeper[typeOfThing].TriggerEvent();    
     }
 
     public bool CompareContentVersion(DateTime CurrentContent)

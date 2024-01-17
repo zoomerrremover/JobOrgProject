@@ -7,7 +7,8 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
-public partial class IHasContacts: ModelView
+public partial class HasContactsVM
+    : ModelView
 {
     //[ObservableProperty]
     //IHasItems bindingObject;

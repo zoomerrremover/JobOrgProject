@@ -153,9 +153,6 @@
     <MauiXaml Update="View\MainPages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\Styles.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="View\PopUpPages\WorkerPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
