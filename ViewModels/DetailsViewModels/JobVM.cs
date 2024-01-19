@@ -30,6 +30,9 @@ public partial class JobVM:ThingVM
     void Initialize()
     {
         InitializeContractors();
+        InitializeAssignments();
+        InitializeTimeBasedVM();
+        InitializePlace();
     }
 
     #endregion
@@ -54,28 +57,53 @@ public partial class JobVM:ThingVM
         var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
         AssignmentCollectionView = new ModelCollectionView(BindingObject.Tasks)
                                        .WithAddButton(permission,CreateAssignment)
-                                       .WithFilters();
+                                       .WithFilters(("Name",NameSelector),
+                                                    ("Most Recent",TimeMostRecentSelector),
+                                                    ("Least Recent",TimeLessRecentSelector));
     }
 
     void CreateAssignment()
     {
-        pageFactory.MakeACreatePage(typeof(Assignment), new Job { Contractor = BindingObject });
+        var newAssignment = new Assignment();
+        BindingObject.Tasks.Add(newAssignment);
+        pageFactory.MakeACreatePage(typeof(Assignment), newAssignment);
     }
-    void NameSelector(ObservableCollection<Assignment> holders)
+    void NameSelector(ObservableCollection<object> holders)
     {
-        holders.OrderBy(assignment => assignment.Name);
+        holders.OfType<Thing>().OrderBy(assignment => assignment.Name);
 
     }
-    void TimeMostRecentSelector(ObservableCollection<Assignment> holders)
+    void TimeMostRecentSelector(ObservableCollection<object> holders)
     {
-        holders.OrderBy(assignment => assignment.FinishTime);
+        holders.OfType<Assignment>().OrderBy(assignment => assignment.FinishTime);
     }
-    void TimeLessRecentSelector(ObservableCollection<Assignment> holders)
+    void TimeLessRecentSelector(ObservableCollection<object> holders)
     {
-        holders.OrderByDescending(assignment => assignment.FinishTime);
+        holders.OfType<Assignment>().OrderByDescending(assignment => assignment.FinishTime);
     }
     #endregion
-
+    #region Time
+    public TimeBasedVM TimeBasedVM { get;set; }
+    void InitializeTimeBasedVM()
+    {
+        TimeBasedVM = new(BindingObject);
+    }
+    #endregion
+    #region Place
+    ObservableCollection<Place> places;
+    public ObservableCollection<string> DisplayablePlaces { get => places.Select(place => place.ToString()).ToObservableCollection(); }
+    [ObservableProperty]
+    string pickedPlaced;
+    partial void OnPickedPlacedChanged(string value)
+    {
+        BindingObject.Place = value == "None" ? null:places.Single(place => place.Name == value);
+    }
+    void InitializePlace()
+    {
+        places = dataStorage.GetItems<Place>();
+        PickedPlaced = BindingObject.Place.ToString();
+    }
+    #endregion
 
 
 

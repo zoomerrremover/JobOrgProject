@@ -34,10 +34,9 @@ public partial class AssignmentVM:ThingVM
         var models = InitializeModels();
         DisplayableWorkers = new ModelCollectionView(models)
             .WithEditButton(EditPermission);
-        Jobs = new ObservableCollection<Job>();
         TimeSelector = new(BindingObject);
-        var jobsLoaded = dataStorage.GetItems<Job>();
-        jobsLoaded.ForEach(Jobs.Add);
+        Jobs = dataStorage.GetItems<Job>();
+        PickedJob = Jobs.Single(job=>job.Tasks.Contains(BindingObject));
     }
     #endregion
     #region TimeSelector
