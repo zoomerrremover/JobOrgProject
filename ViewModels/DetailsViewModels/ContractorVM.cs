@@ -11,9 +11,8 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Contractor))]
 public partial class ContractorVM:ThingVM
 {
-    new public Contractor BindingObject { get; set; }
-    public bool EditPermission { get; set; }
     #region CTORS
+    new public Contractor BindingObject { get; set; }
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Contractor)
@@ -30,7 +29,6 @@ public partial class ContractorVM:ThingVM
     }
     void Initialize()
     {
-        EditPermission = userController.GetPermission(BindingObject,RuleType.Edit);
         HasContactsVM = new(BindingObject);
         InitializeJobs();
     }

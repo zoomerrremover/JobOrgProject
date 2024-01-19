@@ -9,8 +9,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
 
     public partial class ThingVM:ModelView
     {
-        [ObservableProperty]
-        Thing bindingObject;
+
         public new static ModelView CreateFromTheModel(Thing model)
         {
                 var wm = new ThingVM(model);

@@ -12,11 +12,8 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Item))]
 public partial class ItemVM : ThingVM
 {
+    #region Ctors
     new public Item BindingObject { get; set; }
-
-
-    // CTORS
-    //--------------------------------------------------------------------------------
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Item)
@@ -31,31 +28,23 @@ public partial class ItemVM : ThingVM
         BindingObject = item;
         Initialize();
     }
-    public ItemVM(Thing BindingObject) : base(BindingObject)
-    {
-    }
     public void Initialize()
     {
-        dataStorage.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
         InitializeHolders();
         
     }
 
-    private void InitializeHolders(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        InitializeHolders();
-    }
 
     private void InitializeHolders()
     {
         var localHolders = dataStorage.GetItemsWithInterface<IHasItems>();
-        var values = GetValues(localHolders);
+        var values = GetHoldersWithItemQTY(localHolders);
         ModelCollectionView = new(values.OfType<object>());
         ModelCollectionView.WithAddButton(false)
             .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
     }
-
-    private List<ThingItemMerge> GetValues(IEnumerable<Thing> localHolders)
+    #endregion
+    private List<ThingItemMerge> GetHoldersWithItemQTY(IEnumerable<Thing> localHolders)
     {
         List<ThingItemMerge> localCol = new();
         foreach (var (holder, item) in from holder in localHolders

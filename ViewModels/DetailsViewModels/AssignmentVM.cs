@@ -14,6 +14,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Assignment))]
 public partial class AssignmentVM:ThingVM
 {
+    #region CTORS
     new public Assignment BindingObject { get; set; }
     public new static ModelView CreateFromTheModel(Thing model)
     {
@@ -29,18 +30,17 @@ public partial class AssignmentVM:ThingVM
         BindingObject = item;
         Initialize();
     }
-    public bool PermissionToEdit { get; set; }
     private void Initialize()
     {
         var models = InitializeModels();
-        PermissionToEdit = userController.GetPermission(BindingObject, RuleType.Edit);
         DisplayableWorkers = new ModelCollectionView(models)
-            .WithEditButton(PermissionToEdit);
+            .WithEditButton(EditPermission);
         Jobs = new ObservableCollection<Job>();
         TimeSelector = new(BindingObject);
         var jobsLoaded = dataStorage.GetItems<Job>();
         jobsLoaded.ForEach(Jobs.Add);
     }
+    #endregion
     #region TimeSelector
     public TimeBasedVM TimeSelector { get; set; }
     #endregion

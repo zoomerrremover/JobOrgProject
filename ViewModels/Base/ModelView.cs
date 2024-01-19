@@ -2,10 +2,12 @@
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
+using TheJobOrganizationApp.Services.UtilityClasses;
 
 namespace TheJobOrganizationApp.ViewModels.Base
 {
-    public abstract class ModelView:BaseViewModel
+    public abstract partial class ModelView:BaseViewModel
     {
 
         protected static IDataStorage dataStorage;
@@ -13,6 +15,11 @@ namespace TheJobOrganizationApp.ViewModels.Base
         protected static IUserController userController;
 
         protected static IPageFactory pageFactory;
+
+        public bool EditPermission { get => userController.GetPermission(BindingObject, RuleType.Edit); }
+
+        [ObservableProperty]
+        Thing bindingObject;
 
         public static void SetStaticFields(IDataStorage DataStorage,IUserController UserController,IPageFactory PageFactory)
         {
