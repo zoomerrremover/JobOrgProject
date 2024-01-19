@@ -45,4 +45,7 @@ public partial class PlaceVM : ThingVM
     }
     public HasItemsVM HasItemsVM { get; set; }
     #endregion
+    #region Jobs and AssignmentsHere 
+    //To Be Added , The feature should include list of Jobs and assignments inside them 
+    #endregion
 }

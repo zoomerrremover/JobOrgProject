@@ -43,11 +43,16 @@ public partial class AssignmentVM:ThingVM
     public TimeBasedVM TimeSelector { get; set; }
     #endregion
     #region Pickable Job feature
-    public ObservableCollection<Job> Jobs { get; set; }
+    ObservableCollection<Job> Jobs { get; set; }
+    public ObservableCollection<string> DisplayableJobs { get; set; }
     [ObservableProperty]
-    Job pickedJob;
-    partial void OnPickedJobChanging(Job oldValue, Job newValue)
+    string pickedJob;
+    partial void OnPickedJobChanging(string oldValue, string newValue)
     {
+        if(oldValue != "None")
+        {
+            Jobs()
+        }
         oldValue.Tasks.Remove(BindingObject);
         newValue.Tasks.Add(BindingObject);
     }
