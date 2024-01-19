@@ -10,11 +10,8 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Place))]
 public partial class PlaceVM : ThingVM
 {
+    #region CTOR
     new public Place BindingObject { get; set; }
-
-
-    // CTORS
-    //--------------------------------------------------------------------------------
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Place)
@@ -31,11 +28,21 @@ public partial class PlaceVM : ThingVM
     }
     public void Initiate()
     {
-        DisplayableAdressGet = BindingObject.Address;
+        InitiateLocationVM();
     }
-
-    //--------------------------------------------------------------------------------
-    [ObservableProperty]
-    string displayableAdressGet;
-
+    #endregion
+    #region Location
+    void InitiateLocationVM()
+    {
+        HasLocationVM = new(BindingObject, true);
+    }
+    public HasLocationVM HasLocationVM { get; set; }
+    #endregion
+    #region Items
+    void InitializeHasItemsVM()
+    {
+        HasItemsVM = new(BindingObject);
+    }
+    public HasItemsVM HasItemsVM { get; set; }
+    #endregion
 }

@@ -10,10 +10,12 @@ public partial class HasLocationVM : ModelView
 {
     [ObservableProperty]
     IHasLocation bindingObject;
+    public bool CanBeEdited { get; set; }
 
-    public HasLocationVM(IHasLocation BindingObject)
+    public HasLocationVM(IHasLocation BindingObject, bool canBeEdited = false)
     {
         this.BindingObject = BindingObject;
+        CanBeEdited = canBeEdited;
     }
 
 }
