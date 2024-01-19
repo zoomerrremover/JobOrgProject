@@ -4,7 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.BindableControls;
 using TheJobOrganizationApp.ViewModels.ModelWrappers;
