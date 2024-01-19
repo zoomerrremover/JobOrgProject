@@ -5,8 +5,8 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface IPageFactory
     {
-        public ContentPage MakePage(Thing model);
+        public ContentPage MakeADetailsPage(Thing model);
 
-        public ContentPage MakeACreatePage(Type type);
+        public ContentPage MakeACreatePage(Type type,Thing PreSets = null);
     }
 }

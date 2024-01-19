@@ -91,7 +91,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
             {
                 return;
             }
-            var pageToLoad = factory.MakePage(SelectedObject);
+            var pageToLoad = factory.MakeADetailsPage(SelectedObject);
             Shell.Current.Navigation.PushAsync(pageToLoad);
 
         }

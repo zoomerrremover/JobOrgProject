@@ -9,19 +9,19 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Worker))]
-public partial class WorkerProxy:ThingDetailsVM
+public partial class WorkerVM:ThingVM
 {
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Worker)
         {
-            var wm = new WorkerProxy(model as Worker);
+            var wm = new WorkerVM(model as Worker);
             return wm;
         }
         else return null;
     }
 
-    public WorkerProxy(Worker worker):base(worker)
+    public WorkerVM(Worker worker):base(worker)
     {
         Worker = worker;
         InitializeComponents();
@@ -74,7 +74,7 @@ public partial class WorkerProxy:ThingDetailsVM
         get
         {
             assignments.Clear();
-            foreach (var task in queryService.GetItems<Assignment>().Where(w => w.Workers.Contains(Worker)))
+            foreach (var task in dataStorage.GetItems<Assignment>().Where(w => w.Workers.Contains(Worker)))
             {
                 assignments.Add(task);
             }
@@ -91,7 +91,7 @@ public partial class WorkerProxy:ThingDetailsVM
     public new void InitializeComponents()
     {
         DisplayablePositionGet = Worker.Position.Name;
-        PossiblePositions = queryService.GetItems<Position>().ToList();
+        PossiblePositions = dataStorage.GetItems<Position>().ToList();
         NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
         CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
     }
@@ -102,7 +102,7 @@ public partial class WorkerProxy:ThingDetailsVM
     }
     public string SecondaryText
     {
-        get => CurrentTask is null ? NextTask.Name : queryService.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name;
+        get => CurrentTask is null ? NextTask.Name : dataStorage.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name;
     }
     public string Addressline
     {
@@ -125,7 +125,7 @@ public partial class WorkerProxy:ThingDetailsVM
 
     public static bool Initialize(IDataStorage st)
     {
-        queryService = st;
+        dataStorage = st;
         return true;
     }
 

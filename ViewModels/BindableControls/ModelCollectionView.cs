@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using TheJobOrganizationApp.Services;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
@@ -20,15 +22,28 @@ public partial class ModelCollectionView : ObservableObject
     public ObservableCollection<object> DisplayableList { get; set; } = new();
     ObservableCollection<object> elements { get; init; }
 
+    static IDataStorage DataStorage { get; set; }
+
     /// <summary>
     /// Create new instance of observavle ModelCollectionView . You can add additional
     /// features using builder style methods(etc this.WithAddButtonn(...)
     /// <param name="elements">All the elements it can display.</param>
     /// </summary>
+    /// 
+    public ModelCollectionView(IDataStorage dataStorange)
+    {
+        DataStorage = dataStorange;
+    }
     public ModelCollectionView(IEnumerable<object> elements)
     {
-
+        var type = elements.First().GetType();
+        DataStorage.SubscribeForUpdates(LoadCollection, type);
         this.elements = elements.ToObservableCollection();
+        LoadCollection();
+    }
+
+    private void LoadCollection(object sender, NotifyCollectionChangedEventArgs e)
+    {
         LoadCollection();
     }
     #endregion

@@ -12,19 +12,19 @@ using TheJobOrganizationApp.ViewModels.ModelWrappers;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Assignment))]
-public partial class AssignmentDetailsVM:ThingDetailsVM
+public partial class AssignmentVM:ThingVM
 {
     new public Assignment BindingObject { get; set; }
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Assignment)
         {
-            var wm = new AssignmentDetailsVM(model as Assignment);
+            var wm = new AssignmentVM(model as Assignment);
             return wm;
         }
         else return null;
     }
-    public AssignmentDetailsVM(Assignment item) : base(item)
+    public AssignmentVM(Assignment item) : base(item)
     {
         BindingObject = item;
         Initialize();
@@ -38,7 +38,7 @@ public partial class AssignmentDetailsVM:ThingDetailsVM
             .WithEditButton(PermissionToEdit);
         Jobs = new ObservableCollection<Job>();
         TimeSelector = new(BindingObject);
-        var jobsLoaded = queryService.GetItems<Job>();
+        var jobsLoaded = dataStorage.GetItems<Job>();
         jobsLoaded.ForEach(Jobs.Add);
     }
     #region TimeSelector
@@ -67,7 +67,7 @@ public partial class AssignmentDetailsVM:ThingDetailsVM
         }
         BindingObject.Place = PickedPlace;
         PickedJob.Tasks.Add(BindingObject);
-        queryService.TriggerUpdate<Job>();
+        dataStorage.TriggerUpdate<Job>();
         base.NameEditButtonPressed();
     }
     #endregion
@@ -96,7 +96,7 @@ public partial class AssignmentDetailsVM:ThingDetailsVM
     List<PickableWorker> InitializeModels()
     {
         var ReturnWorkers = new List<PickableWorker>();
-        var workers = queryService.GetItems<Worker>();
+        var workers = dataStorage.GetItems<Worker>();
         foreach (var (worker, boolValue) in from worker in workers
                                             let NameLocal = worker.Name.ToLower()
                                             let boolValue = BindingObject.Workers.Contains(worker) ? true : false

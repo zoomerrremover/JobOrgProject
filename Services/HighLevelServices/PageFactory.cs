@@ -12,8 +12,7 @@ public class PageFactory: IPageFactory
     public PageFactory(IConverter adaptor,IDataStorage dataStorange,IUserController userController)
     {
         Convertor = adaptor;
-        ModelView.queryService = dataStorange;
-        ModelView.userController = userController;
+        ModelView.SetStaticFields(dataStorange, userController,this);
     }
 
     public ContentPage MakeACreatePage(Type type)
@@ -21,7 +20,12 @@ public class PageFactory: IPageFactory
         throw new NotImplementedException();
     }
 
-    public ContentPage MakePage(Thing model)
+    public ContentPage MakeACreatePage(Type type, Thing PreSets = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ContentPage MakeADetailsPage(Thing model)
     {
         var ViewModel = Convertor.ConvertToViewModel(model);
         var Page = Convertor.ConvertToContentPage(model);

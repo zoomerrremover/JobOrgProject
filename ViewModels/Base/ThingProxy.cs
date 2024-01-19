@@ -7,17 +7,17 @@ using TheJobOrganizationApp.ViewModels.Base;
 namespace TheJobOrganizationApp.ViewModels.Base
 {
 
-    public partial class ThingDetailsVM:ModelView
+    public partial class ThingVM:ModelView
     {
         [ObservableProperty]
         Thing bindingObject;
         public new static ModelView CreateFromTheModel(Thing model)
         {
-                var wm = new ThingDetailsVM(model);
+                var wm = new ThingVM(model);
                 return wm;
             
         }
-        public ThingDetailsVM(Thing BindingObject)
+        public ThingVM(Thing BindingObject)
         {
             this.BindingObject = BindingObject;
             InitializeComponents();
@@ -45,7 +45,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
             {
                 BindingObject.Name = DisplayableName;
             }
-            queryService.TriggerUpdate(BindingObject);
+            dataStorage.TriggerUpdate(BindingObject);
         }
         [RelayCommand]
         protected virtual void DescriptionEditButtonPressed()
@@ -55,7 +55,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
             {
                 BindingObject.Description = DisplayableDescription;
             }
-            queryService.TriggerUpdate(BindingObject);
+            dataStorage.TriggerUpdate(BindingObject);
         }
         //--------------------------------------------------------------------------
         public void InitializeComponents()

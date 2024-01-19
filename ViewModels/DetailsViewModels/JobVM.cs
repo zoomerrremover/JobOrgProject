@@ -8,7 +8,7 @@ using TheJobOrganizationApp.ViewModels.BindableControls;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Job))]
-public partial class JobProxy:ThingDetailsVM
+public partial class JobVM:ThingVM
 {
     new public Job BindingObject { get; set; }
     // CTORS
@@ -17,12 +17,12 @@ public partial class JobProxy:ThingDetailsVM
     {
         if (model is Job)
         {
-            var wm = new JobProxy(model as Job);
+            var wm = new JobVM(model as Job);
             return wm;
         }
         else return null;
     }
-    public JobProxy(Job item) : base(item)
+    public JobVM(Job item) : base(item)
     {
         BindingObject = item;
         Initialize();

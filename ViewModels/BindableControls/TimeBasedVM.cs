@@ -43,7 +43,7 @@ public partial class TimeBasedVM : ModelView
             {
                 BindingObject.FinishTime = DisplayableFinishDate;
                 BindingObject.StartTime = DisplayableStartDate;
-                queryService.TriggerUpdate(BindingObject);
+                dataStorage.TriggerUpdate(BindingObject);
 
             }
             else

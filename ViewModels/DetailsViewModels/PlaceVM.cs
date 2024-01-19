@@ -8,7 +8,7 @@ using TheJobOrganizationApp.ViewModels.BindableControls;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Place))]
-public partial class PlaceProxy : ThingDetailsVM
+public partial class PlaceVM : ThingVM
 {
     new public Place BindingObject { get; set; }
 
@@ -19,12 +19,12 @@ public partial class PlaceProxy : ThingDetailsVM
     {
         if (model is Place)
         {
-            var wm = new PlaceProxy(model as Place);
+            var wm = new PlaceVM(model as Place);
             return wm;
         }
         else return null;
     }
-    public PlaceProxy(Place place) : base(place)
+    public PlaceVM(Place place) : base(place)
     {
         BindingObject = place;
         Initiate();

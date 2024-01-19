@@ -10,7 +10,7 @@ using TheJobOrganizationApp.ViewModels.ModelWrappers;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Item))]
-public partial class ItemProxy : ThingDetailsVM
+public partial class ItemVM : ThingVM
 {
     new public Item BindingObject { get; set; }
 
@@ -21,22 +21,22 @@ public partial class ItemProxy : ThingDetailsVM
     {
         if (model is Item)
         {
-            var wm = new ItemProxy(model as Item);
+            var wm = new ItemVM(model as Item);
             return wm;
         }
         else return null;
     }
-    public ItemProxy(Item item) : base(item)
+    public ItemVM(Item item) : base(item)
     {
         BindingObject = item;
         Initialize();
     }
-    public ItemProxy(Thing BindingObject) : base(BindingObject)
+    public ItemVM(Thing BindingObject) : base(BindingObject)
     {
     }
     public void Initialize()
     {
-        queryService.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
+        dataStorage.SubscribeForUpdates(InitializeHolders, typeof(IHasItems));
         InitializeHolders();
         
     }
@@ -48,7 +48,7 @@ public partial class ItemProxy : ThingDetailsVM
 
     private void InitializeHolders()
     {
-        var localHolders = queryService.GetItemsWithInterface<IHasItems>();
+        var localHolders = dataStorage.GetItemsWithInterface<IHasItems>();
         var values = GetValues(localHolders);
         ModelCollectionView = new(values.OfType<object>());
         ModelCollectionView.WithAddButton(false)
