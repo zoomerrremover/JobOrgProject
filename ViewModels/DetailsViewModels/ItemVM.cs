@@ -34,16 +34,16 @@ public partial class ItemVM : ThingVM
         
     }
 
-
+    #endregion
+    #region Holders
+    public ModelCollectionView HoldersCollectionView { get; set; }
     private void InitializeHolders()
     {
         var localHolders = dataStorage.GetItemsWithInterface<IHasItems>();
         var values = GetHoldersWithItemQTY(localHolders);
-        ModelCollectionView = new(values.OfType<object>());
-        ModelCollectionView.WithAddButton(false)
+        HoldersCollectionView = new ModelCollectionView(values.OfType<object>())
             .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
     }
-    #endregion
     private List<ThingItemMerge> GetHoldersWithItemQTY(IEnumerable<Thing> localHolders)
     {
         List<ThingItemMerge> localCol = new();
@@ -58,8 +58,8 @@ public partial class ItemVM : ThingVM
         }
         return localCol;
     }
-
-    //--------------------------------------------------------------------------------
+    #endregion
+    #region Price
     [ObservableProperty]
     string displayablePrice;
     protected override void NameEditButtonPressed()
@@ -75,10 +75,8 @@ public partial class ItemVM : ThingVM
     {
         return true; //TODO
     }
-    //--------------------------------------------------------------------------------
-    public ModelCollectionView ModelCollectionView { get; set; }
-    // Filters
-    //--------------------------------------------------------------------------------
+    #endregion
+    #region Selectors for HolderView
     public void NameSelector(ObservableCollection<object> holders)
     {
         var newHolders = holders.OfType<ThingItemMerge>();
@@ -92,6 +90,6 @@ public partial class ItemVM : ThingVM
                      .OrderByDescending(h => h.item.Qty) // Sort ThingMerged objects
                      .ToObservableCollection<object>();
     }
-    //--------------------------------------------------------------------------------
+    #endregion
 
 }
