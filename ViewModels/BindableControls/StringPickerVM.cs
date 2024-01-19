@@ -22,9 +22,9 @@ public partial class StringPickerVM:ObservableObject
     [ObservableProperty]
     string pickedObject;
 
-    public StringPickerVM(IEnumerable<Thing> objectsBase,Thing InitialValue = null)
+    public StringPickerVM(ObservableCollection<Thing> objectsBase,Thing InitialValue = null)
     {
-        objects = objectsBase.ToObservableCollection();
+        objects = objectsBase;
         pickedObject = InitialValue.Name; 
     }
     public StringPickerVM WithPermissions(bool EditPermission = false,bool AddPermision = false)
