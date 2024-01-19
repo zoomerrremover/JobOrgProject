@@ -64,16 +64,12 @@ public partial class ItemVM : ThingVM
     string displayablePrice;
     protected override void NameEditButtonPressed()
     {
-        if(DataCheckFloat(DisplayablePrice))
-        {
-            var localPrice = float.Parse(DisplayablePrice);
-            BindingObject.Price = localPrice;
-        }
+
+        float localPrice;
+        float.TryParse(DisplayablePrice,out localPrice);
+        BindingObject.Price = localPrice;
+        
         base.NameEditButtonPressed();
-    }
-    bool DataCheckFloat(string numberToCheck)
-    {
-        return true; //TODO
     }
     #endregion
     #region Selectors for HolderView
