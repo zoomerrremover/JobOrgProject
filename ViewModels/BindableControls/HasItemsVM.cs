@@ -3,63 +3,62 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
 public partial class HasItemsVM : ModelView
 {
+    #region CTORS
+    new IHasItems BindingObject;
+    public HasItemsVM(IHasItems BindingObject)
+    {
+        this.BindingObject = BindingObject;
+        Initialize();
+    }
+    void Initialize()
+    {
+        InitializeItemCollectionView();
+    }
+    #endregion
+    #region Items
+    public ModelCollectionView ItemsCollectionView { get; set; }
+
+    void InitializeItemCollectionView()
+    {
+        var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
+        ItemsCollectionView = new ModelCollectionView(BindingObject.Items)
+                                       .WithAddButton(permission, AddButton)
+                                       .WithFilters(("Name", NameSelector),
+                                                    ("Quantity", QuantitySelector));
+    }
+
+    void AddButton()
+    {
+        //TODO : Create a pop out window with a picker for item and , entry for a quantity
+    }
+    void NameSelector(ObservableCollection<object> items)
+    {
+        var listedItems = items.Select(item => item as Item).OrderBy(i => i.Name);
+        items.Clear();
+        foreach (var item in listedItems)
+        {
+            items.Add(item);
+        }
+    }
+    void QuantitySelector(ObservableCollection<object> items)
+    {
+        var listedItems = items.Select(item=>item as Item).OrderByDescending(i => i.Qty);
+        items.Clear();
+        foreach (var item in listedItems)
+        {
+            items.Add(item);
+        }
+    }
+    #endregion
+    #region Rollout window feature
     [ObservableProperty]
-    IHasItems bindingObject;
-    [ObservableProperty]
-    public ObservableCollection<Item> displayedItems = new();
-
-    int filterChoice = 0;
-    public int FilterChoice
-    {
-        get => filterChoice;
-        set
-        {
-            Task.Delay(250);
-            filterChoice = value;
-            ApplySearchQuery();
-            ApplyFilters();
-        }
-    }
-    string searchPrompt = "";
-    public string SearchPrompt
-    {
-        get => searchPrompt.ToLower();
-
-        set
-        {
-            Task.Delay(250);
-            searchPrompt = value;
-            ApplySearchQuery();
-            ApplyFilters();
-
-        }
-    }
-    public void ApplyFilters()
-    {
-        var choosedFilter = AvaliableFilters[FilterChoice];
-        var filteringMethod = filterSelectorMethods[choosedFilter];
-        if (filteringMethod != null)
-        {
-            filteringMethod.Invoke(DisplayedItems);
-        }
-    }
-    public void ApplySearchQuery()
-    {
-        var filteredList = BindingObject.Items.Where(i => i.Name.ToLower().Contains(SearchPrompt));
-        DisplayedItems.Clear();
-        foreach (var item in filteredList)
-        {
-            DisplayedItems.Add(item);
-        }
-    }
-    [ObservableProperty]
-
     LogicSwitch rolloutButtonSwitch = new();
 
     [ObservableProperty]
@@ -82,39 +81,6 @@ public partial class HasItemsVM : ModelView
             }
         }
     }
-    delegate void ListSelector(ObservableCollection<Item> items);
-    Dictionary<string, ListSelector> filterSelectorMethods = new();
-    [ObservableProperty]
-    List<string> avaliableFilters = new();
-    public HasItemsVM(IHasItems BindingObject)
-    {
-        this.BindingObject = BindingObject;
-        Initiate();
-    }
-    public void Initiate()
-    {
-        RolloutButtonSwitch.SwitchOff += ExtendScreen;
-        filterSelectorMethods["Name"] = NameSelector;
-        filterSelectorMethods["Quantity"] = QuantitySelector;
-        AvaliableFilters = filterSelectorMethods.Keys.ToList();
-    }
-    public void NameSelector(ObservableCollection<Item> items)
-    {
-        var listedItems = items.ToList().OrderBy(i=>i.Name);
-        items.Clear();
-        foreach (var item in listedItems)
-        {
-            items.Add(item);
-        }
-    }
-    public void QuantitySelector(ObservableCollection<Item> items)
-    {
-        var listedItems = items.ToList().OrderByDescending(i => i.Qty);
-        items.Clear();
-        foreach (var item in listedItems)
-        {
-            items.Add(item);
-        }
-    }
+    #endregion
 
 }
