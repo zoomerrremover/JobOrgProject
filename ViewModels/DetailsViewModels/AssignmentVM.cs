@@ -32,7 +32,7 @@ public partial class AssignmentVM : ThingVM
     private void Initialize()
     {
         var models = InitializeModels();
-        DisplayableWorkers = new ModelCollectionView(models)
+        WorkersCollectionView = new ModelCollectionView(models)
             .WithEditButton(EditPermission);
         TimeSelector = new(BindingObject);
         InitializeJobPicker();
@@ -66,13 +66,13 @@ public partial class AssignmentVM : ThingVM
 
     #endregion
     #region Displayable place
-    public StringPickerVM StringPickerVM { get; set; }
+    public StringPickerVM PlacePicker { get; set; }
     void InitializePlacePicker()
     {
 
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Place;
-        StringPickerVM = new StringPickerVM(localPlaces, initialValue)
+        PlacePicker = new StringPickerVM(localPlaces, initialValue)
             .WithPermissions(EditPermission)
             .WithNoneOption()
             .WithAction(ChangeJobAction);
@@ -84,7 +84,7 @@ public partial class AssignmentVM : ThingVM
     }
     #endregion
     #region DisplayableWorkersFeature
-    public ModelCollectionView DisplayableWorkers {  get; set; }
+    public ModelCollectionView WorkersCollectionView {  get; set; }
     [RelayCommand]
     /// <summary>
     /// Should be called when user have choosen worker.
@@ -100,7 +100,7 @@ public partial class AssignmentVM : ThingVM
         {
             BindingObject.Workers.Remove(obj.model);
         }
-        DisplayableWorkers.DisplayableList.TriggerEvent();
+        WorkersCollectionView.DisplayableList.TriggerEvent();
     }/// <summary>
      /// Initializes models into adaptor (for UI).
      /// </summary>

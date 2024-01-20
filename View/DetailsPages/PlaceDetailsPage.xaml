@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             x:DataType="viewmodels:PlaceProxy">
+             x:DataType="viewmodels:PlaceVM">
     <Grid RowDefinitions="Auto,Auto,Auto"
           RowSpacing="20">
             <Frame Background="{StaticResource BlockColor}">

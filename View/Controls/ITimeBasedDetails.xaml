@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             x:DataType="viewmodels:ITimeBasedProxy">
+             x:DataType="viewmodels:TimeBasedVM">
     <Frame >
         <HorizontalStackLayout Spacing="30">
             <VerticalStackLayout>

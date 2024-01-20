@@ -4,7 +4,7 @@
              x:Class="TheJobOrganizationApp.View.Controls.ItemDetails"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="viewmodels:ItemProxy"
+             x:DataType="viewmodels:ItemVM"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
              xmlns:wrappers ="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers">
 

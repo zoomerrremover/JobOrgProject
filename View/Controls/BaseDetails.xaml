@@ -2,9 +2,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.BaseDetails"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
+             xmlns:baseViewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="viewmodels:ThingProxy">
+             x:DataType="baseViewmodels:ThingVM">
     <Grid RowDefinitions="Auto,Auto"
             RowSpacing="20">
         <Frame Background="{StaticResource BlockColor}">

@@ -4,54 +4,47 @@
              x:Class="TheJobOrganizationApp.View.Controls.ModelListView"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:class="clr-namespace:TheJobOrganizationApp.View.Controls"
              x:DataType="viewmodels:ModelCollectionView">
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame  
-         Grid.Row="2"
-         CornerRadius="50"
-         Grid.ColumnSpan="2"
-         BorderColor="Transparent">
-        <Frame.Background>
-            <StaticResource Key="BlockColor" />
-        </Frame.Background>
+    <Frame>
         <Grid
-            Padding="10"
-            Grid.Column="1"
-            RowDefinitions="60,60,10,*"
-              ColumnDefinitions="60,*,60,60"
-              Background="{StaticResource BlockColor}"
-              ColumnSpacing="10">
-            <Label Text="Holders"
-               Grid.Row="0"
-                TextColor="White"
+            RowDefinitions="10,30,60,*"
+            ColumnDefinitions="35,*,60,30,30">
+            <Label
+                Grid.Row="0"
                 Grid.Column="0"
-                HorizontalOptions="Start"
-                VerticalOptions="Start"/>
+                Text="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
+                Path=ListTitle}"/>
             <Entry
-                        Grid.Row="1"
-                        VerticalOptions="Center"
-                        Background="White"
-                        Grid.ColumnSpan="2"
-                        MaxLength="24"
-                        Text="{Binding SearchEntry}"/>
+                Grid.ColumnSpan="5"
+                Grid.Row="1"
+                Text="{Binding SearchEntry}"/>
+            <Picker
+                Grid.Column="2"
+                Grid.Row="2"
+                IsVisible="{Binding FiltersAreVisible}"
+                ItemsSource="{Binding AvaliableFilters}"
+                SelectedItem="{Binding SelectedString}"/>
             <ImageButton
-                        Grid.Column="2"
-                        Grid.Row="1"
-                        BorderColor="Transparent"
-                        CornerRadius="10"
-                        Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png">
-                <ImageButton.Background>
-                    <StaticResource Key="ControlColor" />
-                </ImageButton.Background>
-            </ImageButton>
-            <CollectionView Grid.ColumnSpan="5"
-                        Grid.Row="3"
-                        MaximumHeightRequest="450"
-                        ItemsSource="{Binding DisplayableList}"/>
-            <!--InputTransparent="{Binding WorkersInEditMode}"/>-->
-
+                Grid.Column="3"
+                Grid.Row="2"
+                IsVisible="{Binding AddButtonIsVisible}"
+                IsEnabled="{Binding AddButtonEnabled}"
+                Command="{Binding AddButtonPressedCommand}"/>
+            <ImageButton
+                Grid.Column="4"
+                Grid.Row="2"
+                IsVisible="{Binding EditButtonIsVisible}"
+                IsEnabled="{Binding EditButtonEnabled}"
+                Command="{Binding EditButtonPressedCommand}"/>
+            <CollectionView
+                Grid.ColumnSpan="5"
+                Grid.Row="5"
+                ItemsSource="{Binding DisplayableList}"
+                ItemTemplate=""/>
 
         </Grid>
     </Frame>

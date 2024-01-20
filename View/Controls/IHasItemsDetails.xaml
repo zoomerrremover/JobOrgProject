@@ -4,7 +4,7 @@
              x:Class="TheJobOrganizationApp.View.Controls.IHasItemsDetails"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="viewmodels:IHasItemsProxy">
+             x:DataType="viewmodels:HasItemsVM">
     <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"

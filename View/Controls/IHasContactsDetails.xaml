@@ -4,7 +4,7 @@
              x:Class="TheJobOrganizationApp.View.Controls.IHasContactsDetails"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="viewmodels:IHasContacts">
+             x:DataType="viewmodels:HasContactsVM">
     <Frame 
                    CornerRadius="50"
                    Grid.ColumnSpan="2"

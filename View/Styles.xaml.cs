@@ -1,8 +1,8 @@
 namespace TheJobOrganizationApp.View;
 
-public partial class Resources : ResourceDictionary
+public partial class Styles : ResourceDictionary
 {
-	public Resources()
+	public Styles()
 	{
 		InitializeComponent();
 	}
