@@ -35,6 +35,12 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
                 return permission.Status.Contains(Type);
             }
         }
+
+        public bool GetPermission(Type Object, RuleType Type)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetPermissions(IUser user)
         {
             User = user;
