@@ -10,8 +10,7 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
 public partial class TimeBasedVM : ModelView
 {
-// CTORS
-//----------------------------------------------------------------------------------------------------------
+    #region CTORS
     [ObservableProperty]
     ITimeBased bindingObject;
     public TimeBasedVM(ITimeBased BindingObject)
@@ -26,7 +25,8 @@ public partial class TimeBasedVM : ModelView
         DisplayableStartDate = BindingObject.FinishTime;
     }
 
-    //----------------------------------------------------------------------------------------------------------
+    #endregion
+    #region Time
     [ObservableProperty]
     DateTime displayableStartDate;
     [ObservableProperty]
@@ -61,5 +61,5 @@ public partial class TimeBasedVM : ModelView
     }
 
     public event Action DisplayTimeError = () => { };
-    
+    #endregion
 }

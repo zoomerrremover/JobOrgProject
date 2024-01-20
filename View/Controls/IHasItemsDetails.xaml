@@ -2,78 +2,18 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.IHasItemsDetails"
+             x:DataType="viewmodels:HasItemsVM"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
-             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="viewmodels:HasItemsVM">
-    <Frame 
-                   CornerRadius="50"
-                   Grid.ColumnSpan="2"
-                   BorderColor="Transparent"
-                   HeightRequest="{Binding ScreenHeight}">
-        <Frame.Background>
-            <StaticResource Key="BlockColor" />
-        </Frame.Background>
-        <Grid
-                Padding="10"
-                Grid.Column="1"
-                RowDefinitions="60,60,10,*"
-                ColumnDefinitions="60,*,80,60,60"
-                Background="Transparent"
-                ColumnSpacing="10">
-            <Button
-                    BorderColor="Transparent"
-                    Grid.Column="3"
-                    Background="White"
-                    VerticalOptions="Start"
-                    Command="{Binding RolloutButtonSwitch.SwitchPressedCommand}"
-                    ImageSource="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\drdown25.png"/>
-            <Label Text="Items"
-                   Grid.Row="0"
-                   TextColor="White"
-                   Grid.Column="0"
-                   HorizontalOptions="Start"
-                   VerticalOptions="Start"/>
-
-            <Entry
-                    Grid.Row="1"
-                    VerticalOptions="Center"
-                    Background="White"
-                    Grid.ColumnSpan="2"
-                    Text="{Binding SearchPrompt}"
-                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"/>
-            <Picker
-                    Grid.Column="2"
-                    Grid.Row="1"
-                    SelectedIndex="{Binding FilterChoice}"
-                    ItemsSource="{Binding AvaliableFilters}"
-                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"/>
-            <ImageButton
-                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
-                         Grid.Column="3"
-                         Grid.Row="1"
-                         BorderColor="Transparent"
-                         CornerRadius="10"
-                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\add25.png">
-                <ImageButton.Background>
-                    <StaticResource Key="ControlColor" />
-                </ImageButton.Background>
-            </ImageButton>
-            <ImageButton  Grid.Column="4"
-                         Grid.Row="1"
-                         IsVisible="{Binding RolloutButtonSwitch.Invisible}"
-                         BorderColor="Transparent"
-                         CornerRadius="10"
-                         Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\delete25.png">
-                <ImageButton.Background>
-                    <StaticResource Key="ControlColor" />
-                </ImageButton.Background>
-            </ImageButton>
-            <CollectionView Grid.ColumnSpan="4"
-                    Grid.Row="3"
-                    IsVisible="{Binding RolloutButtonSwitch.Invisible}"
-                    ItemsSource="{Binding DisplayedItems}"
-                    ItemTemplate="{StaticResource ItemTemplate}"
-                    MaximumHeightRequest="300"/>
-        </Grid>
-    </Frame>
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             xmlns:DataTemplates="clr-namespace:TheJobOrganizationApp.View.DataTemplates"
+             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <dataTemplate:ItemDataTemplate x:Key="itemTemplate"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <controls:ModelListView
+        ListTitle="Items"
+        DataTemplate="{StaticResource itemTemplate}"
+        BindingContext="{Binding ItemsCollectionView}"/>
 </ContentView>

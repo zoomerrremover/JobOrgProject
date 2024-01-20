@@ -44,7 +44,8 @@
                 Grid.ColumnSpan="5"
                 Grid.Row="5"
                 ItemsSource="{Binding DisplayableList}"
-                ItemTemplate=""/>
+                ItemTemplate="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
+                Path=ListDataTemplate}"/>
 
         </Grid>
     </Frame>

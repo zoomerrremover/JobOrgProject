@@ -73,15 +73,6 @@
     <Compile Update="View\MainPages\ScheldudePage.xaml.cs">
       <DependentUpon>ScheldudePage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="View\DetailsPages\ItemDetailsPage.xaml.cs">
-      <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\DetailsPages\PlaceDetailsPage.xaml.cs">
-      <DependentUpon>PlaceDetailsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="View\DetailsPages\WorkerDetailsPage.xaml.cs">
-      <DependentUpon>WorkerDetailsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="View\PopUpPages\WorkerPickerPage.xaml.cs">
       <DependentUpon>WorkerPickerPage.xaml</DependentUpon>
     </Compile>
@@ -90,10 +81,16 @@
     <MauiXaml Update="View\Controls\IHasLocation.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\Controls\StringPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\DataTemplates\AssignmentDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\DataTemplates\ItemDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\DataTemplates\PickableWorkerTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\DataTemplates\PlaceDataTemplate.xaml">
@@ -120,19 +117,10 @@
     <MauiXaml Update="View\DetailsPages\AssignmentDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="View\DetailsPages\ItemDetailsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
     <MauiXaml Update="View\Controls\ITimeBasedDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\Controls\ModelListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="View\DetailsPages\PlaceDetailsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="View\DetailsPages\WorkerDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\MainPages\GlobalSearchPage.xaml">

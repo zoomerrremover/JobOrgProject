@@ -4,14 +4,32 @@
              x:Class="TheJobOrganizationApp.View.DetailsPages.AssignmentDetailsPage"
              x:DataType="viewModels:AssignmentVM"
              xmlns:viewModels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
-             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls">
-    <Grid RowDefinitions="Auto,Auto"
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
+             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <dataTemplate:PickableWorkerTemplate x:Key="pickableWorkerTemplate"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="Auto,Auto,Auto"
+          RowSpacing="10"
           Padding="35">
         <controls:BaseDetails
             Grid.Row="0"/>
+        <controls:StringPicker
+            BindingContext="{Binding JobPicker}"
+            PickerTitle="Job"/>
+        <controls:ITimeBasedDetails
+            BindingContext="{Binding TimeSelector}"/>
+        <controls:StringPicker
+            PickerTitle="Place"
+            BindingContext="{Binding PlacePicker}"/>
         <controls:ModelListView
-            BindingContext="{Binding }"
-
+            Grid.Row = "1"
+            BindingContext="{Binding WorkersCollectionView}"
+            ListTitle="Workers"
+            DataTemplate="{StaticResource pickableWorkerTemplate}"/>
     </Grid>
              
 </ContentPage>
