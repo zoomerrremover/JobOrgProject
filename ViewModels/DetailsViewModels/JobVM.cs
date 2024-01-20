@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Linq;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.UtilityClasses;
@@ -29,25 +30,29 @@ public partial class JobVM:ThingVM
     }
     void Initialize()
     {
-        InitializeContractors();
+        InitializeContractorPicker();
         InitializeAssignments();
         InitializeTimeBasedVM();
-        InitializePlace();
+        InitializePlacePicker();
     }
 
     #endregion
     #region Contractor
-    void InitializeContractors()
+    public StringPickerVM ContractorPickerVM { get; set; }
+    void InitializeContractorPicker()
     {
-        Contractors = dataStorage.GetItems<Contractor>();
-        PickedContractor = BindingObject.Contractor;
-    }
-    public ObservableCollection<Contractor> Contractors { get; set; }
-    [ObservableProperty]
-    Contractor pickedContractor;
-    partial void OnPickedContractorChanged(Contractor value)
-    {
-        BindingObject.Contractor = value;
+
+        var localContractors = dataStorage.GetItems<Contractor>().Select(job => job as Thing).ToObservableCollection();
+        var initialValue = BindingObject.Contractor;
+        ContractorPickerVM = new StringPickerVM(localContractors, initialValue)
+            .WithPermissions(EditPermission)
+            .WithNoneOption()
+            .WithAction(ChangeContractor);
+        void ChangeContractor(string oldValue, string newValue)
+        {
+            var newContractor = newValue != "None" ? localContractors.Single(job => job.Name == newValue) as Contractor : null;
+            BindingObject.Contractor = newContractor;
+        }
     }
     #endregion
     #region Assignments
@@ -90,18 +95,21 @@ public partial class JobVM:ThingVM
     }
     #endregion
     #region Place
-    ObservableCollection<Place> places;
-    public ObservableCollection<string> DisplayablePlaces { get => places.Select(place => place.ToString()).ToObservableCollection(); }
-    [ObservableProperty]
-    string pickedPlaced;
-    partial void OnPickedPlacedChanged(string value)
+    public StringPickerVM PlacePickerVM { get; set; }
+    void InitializePlacePicker()
     {
-        BindingObject.Place = value == "None" ? null:places.Single(place => place.Name == value);
-    }
-    void InitializePlace()
-    {
-        places = dataStorage.GetItems<Place>();
-        PickedPlaced = BindingObject.Place.ToString();
+
+        var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
+        var initialValue = BindingObject.Place;
+        PlacePickerVM = new StringPickerVM(localPlaces, initialValue)
+            .WithPermissions(EditPermission)
+            .WithNoneOption()
+            .WithAction(ChangeJobAction);
+        void ChangeJobAction(string oldValue, string newValue)
+        {
+            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place: null;
+            BindingObject.Place = newPlace;
+        }
     }
     #endregion
 

@@ -11,7 +11,7 @@ using TheJobOrganizationApp.ViewModels.ModelWrappers;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 
 [DetailsViewModel(ClassLinked = typeof(Assignment))]
-public partial class AssignmentVM:ThingVM
+public partial class AssignmentVM : ThingVM
 {
     #region CTORS
     new public Assignment BindingObject { get; set; }
@@ -35,8 +35,8 @@ public partial class AssignmentVM:ThingVM
         DisplayableWorkers = new ModelCollectionView(models)
             .WithEditButton(EditPermission);
         TimeSelector = new(BindingObject);
-        Jobs = dataStorage.GetItems<Job>();
-        PickedJob = Jobs.Single(job=>job.Tasks.Contains(BindingObject));
+        InitializeJobPicker();
+        InitializePlacePicker();
     }
     #endregion
     #region TimeSelector
@@ -47,26 +47,40 @@ public partial class AssignmentVM:ThingVM
 
     void InitializeJobPicker()
     {
-        var localJobs = dataStorage.GetItems<Job>().Select(job=> job as Thing).ToObservableCollection();
+
+        var localJobs = dataStorage.GetItems<Job>();
         var initialValue = localJobs.Single(job => job.Tasks.Contains(BindingObject));
-        JobPicker = new(localJobs, initialValue);
+        var jobsCastedToThing = localJobs.Select(job => job as Thing).ToObservableCollection();
+        JobPicker = new StringPickerVM(jobsCastedToThing, initialValue)
+            .WithPermissions(EditPermission)
+            .WithNoneOption()
+            .WithAction(ChangeJobAction);
+        void ChangeJobAction(string oldValue, string newValue)
+        {
+            var oldJob = oldValue != "None"?localJobs.Single(job => job.Name == oldValue):null;
+            var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
+            oldJob.Tasks.Remove(BindingObject);
+            newJob.Tasks.Add(BindingObject);
+        }
     }
+
     #endregion
     #region Displayable place
-    [ObservableProperty]
-    ObservableCollection<Place> places;
-    [ObservableProperty]
-    Place pickedPlace;
-    protected override void NameEditButtonPressed()
+    public StringPickerVM StringPickerVM { get; set; }
+    void InitializePlacePicker()
     {
-        foreach(var job in Jobs)
+
+        var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
+        var initialValue = BindingObject.Place;
+        StringPickerVM = new StringPickerVM(localPlaces, initialValue)
+            .WithPermissions(EditPermission)
+            .WithNoneOption()
+            .WithAction(ChangeJobAction);
+        void ChangeJobAction(string oldValue, string newValue)
         {
-            job.Tasks.Remove(BindingObject);
+            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
+            BindingObject.Place = newPlace;
         }
-        BindingObject.Place = PickedPlace;
-        PickedJob.Tasks.Add(BindingObject);
-        dataStorage.TriggerUpdate<Job>();
-        base.NameEditButtonPressed();
     }
     #endregion
     #region DisplayableWorkersFeature

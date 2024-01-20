@@ -25,7 +25,12 @@ public partial class StringPickerVM:ObservableObject
     public StringPickerVM(ObservableCollection<Thing> objectsBase,Thing InitialValue = null)
     {
         objects = objectsBase;
-        pickedObject = InitialValue.Name; 
+        pickedObject = InitialValue.Name is null ? "None" : InitialValue.Name;
+    }
+    public StringPickerVM WithAction(Action<string,string> action)
+    {
+        ChoiceChangedAction = action;
+        return this;
     }
     public StringPickerVM WithPermissions(bool EditPermission = false,bool AddPermision = false)
     {

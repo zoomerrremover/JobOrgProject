@@ -11,6 +11,8 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
 [DetailsViewModel(ClassLinked = typeof(Worker))]
 public partial class WorkerVM:ThingVM
 {
+    #region CTORS
+    new public Worker BindingObject { get; set; }
     public new static ModelView CreateFromTheModel(Thing model)
     {
         if (model is Worker)
@@ -23,58 +25,43 @@ public partial class WorkerVM:ThingVM
 
     public WorkerVM(Worker worker):base(worker)
     {
-        Worker = worker;
-        InitializeComponents();
+        BindingObject = worker;
+        Initialize();
     }
-    [ObservableProperty]
-    Worker worker;
-    [ObservableProperty]
-    LogicSwitch nameEditMode = new();
-    [ObservableProperty]
-    LogicSwitch descriptionEditMode = new();
-
-
-    //Choosable postion feature
-    //--------------------------------------------------------------------------
-    [ObservableProperty]
-    List<Position> possiblePositions;
-
-    [ObservableProperty]
-    string displayablePositionGet;
-    public int DisplayablePositionSet
+    public void Initialize()
     {
-        get
-        {
-            return PossiblePositions.IndexOf(Worker.Position);
-        }
-        set
-        {
-            Worker.Position = PossiblePositions[value];
-            DisplayablePositionGet = PossiblePositions[value].Name;
-        }
+        InitializeCurrentAssignment();
+        InitializePositionPicker();
+        InitializeHasItemsVM();
+        InitializeContactsVM();
     }
-    //Editable Description
-    //--------------------------------------------------------------------------
-    [ObservableProperty]
-    string displayableDescriptionGet;
-    public string DisplayableDescriptionSet
+    #endregion
+    #region Position
+    public StringPickerVM PositionPickerVM { get; set; }
+    void InitializePositionPicker()
     {
-        get { return DisplayableDescriptionGet; }
-        set
+
+        var localPositions = dataStorage.GetItems<Position>().Select(job => job as Thing).ToObservableCollection();
+        var initialValue = BindingObject.Position;
+        PositionPickerVM = new StringPickerVM(localPositions, initialValue)
+            .WithPermissions(EditPermission)
+            .WithNoneOption()
+            .WithAction(ChangeJobAction);
+        void ChangeJobAction(string oldValue, string newValue)
         {
-            DisplayableDescriptionGet = value;
-            Worker.Description = value;
+            var newPlace = newValue != "None" ? localPositions.Single(job => job.Name == newValue) as Position: null;
+            BindingObject.Position = newPlace;
         }
     }
-    //--------------------------------------------------------------------------
-    //Current assignment feature
+    #endregion
+    #region Current Assignment
     ObservableCollection<Assignment> assignments = new();
     public ObservableCollection<Assignment> Assignments
     {
         get
         {
             assignments.Clear();
-            foreach (var task in dataStorage.GetItems<Assignment>().Where(w => w.Workers.Contains(Worker)))
+            foreach (var task in dataStorage.GetItems<Assignment>().Where(w => w.Workers.Contains(BindingObject)))
             {
                 assignments.Add(task);
             }
@@ -86,16 +73,11 @@ public partial class WorkerVM:ThingVM
     Assignment currentTask;
     [ObservableProperty]
     Assignment nextTask;
-
-
-    public new void InitializeComponents()
+    private void InitializeCurrentAssignment()
     {
-        DisplayablePositionGet = Worker.Position.Name;
-        PossiblePositions = dataStorage.GetItems<Position>().ToList();
         NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
         CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
     }
-
     public string TaskName
     {
         get => CurrentTask is null ? "None , Next task" : CurrentTask.Name;
@@ -122,14 +104,20 @@ public partial class WorkerVM:ThingVM
             return task.ToString("hh:mm");
         }
     }
+    #endregion
+    #region Items
+    public HasItemsVM HasItemsVM { get; set; }
 
-    public static bool Initialize(IDataStorage st)
+    void InitializeHasItemsVM()
     {
-        dataStorage = st;
-        return true;
+        HasItemsVM = new(BindingObject);
     }
-
-
-
-
+    #endregion
+    #region Contacts
+    HasContactsVM HasContactsVM { get; set; }
+    void InitializeContactsVM()
+    {
+        HasContactsVM = new(BindingObject);
+    }
+    #endregion
 }

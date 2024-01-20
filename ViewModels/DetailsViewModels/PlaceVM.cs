@@ -29,6 +29,7 @@ public partial class PlaceVM : ThingVM
     public void Initiate()
     {
         InitiateLocationVM();
+        InitializeHasItemsVM();
     }
     #endregion
     #region Location
