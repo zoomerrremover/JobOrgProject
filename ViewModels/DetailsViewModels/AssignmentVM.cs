@@ -32,8 +32,8 @@ public partial class AssignmentVM : ThingVM
     private void Initialize()
     {
         var models = InitializeModels();
-        WorkersCollectionView = new ModelCollectionView(models)
-            .WithEditButton(EditPermission);
+        WorkersCollectionView = new ModelCollectionView(models, typeof(Worker));         
+        WorkersCollectionView.WithEditButton(EditPermission, ChangeEditMode);
         TimeSelector = new(BindingObject);
         InitializeJobPicker();
         InitializePlacePicker();
@@ -85,10 +85,14 @@ public partial class AssignmentVM : ThingVM
     #endregion
     #region DisplayableWorkersFeature
     public ModelCollectionView WorkersCollectionView {  get; set; }
+
+    [ObservableProperty]
+    bool inEditMode = false;
+    void ChangeEditMode() => InEditMode = !InEditMode;
     [RelayCommand]
     /// <summary>
     /// Should be called when user have choosen worker.
-     /// </summary>
+    /// </summary>
     void EditWorker(PickableWorker obj)
     {
         obj.data = !obj.data;

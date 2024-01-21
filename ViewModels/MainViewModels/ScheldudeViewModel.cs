@@ -10,6 +10,7 @@ using TheJobOrganizationApp.View;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using System.Linq;
+using TheJobOrganizationApp.Services.Interfaces;
 
 namespace TheJobOrganizationApp.ViewModels.MainViewModels;
 
@@ -44,7 +45,7 @@ public partial class ScheldudeViewModel
         });
     }
 
-    public ScheldudeViewModel(WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IConnectionService apiservice,IDataStorage storage)
+    public ScheldudeViewModel(IInitializator initializator, WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IConnectionService apiservice,IDataStorage storage)
     {
         Data = storage;
         appointments = new();

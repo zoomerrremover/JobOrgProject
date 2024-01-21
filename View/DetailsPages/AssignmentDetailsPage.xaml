@@ -12,11 +12,11 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid RowDefinitions="Auto,Auto,Auto"
-          RowSpacing="10"
+    <ScrollView>
+        <VerticalStackLayout
+          Spacing="10"
           Padding="35">
-        <controls:BaseDetails
-            Grid.Row="0"/>
+        <controls:BaseDetails/>
         <controls:StringPicker
             BindingContext="{Binding JobPicker}"
             PickerTitle="Job"/>
@@ -30,6 +30,6 @@
             BindingContext="{Binding WorkersCollectionView}"
             ListTitle="Workers"
             DataTemplate="{StaticResource pickableWorkerTemplate}"/>
-    </Grid>
-             
+    </VerticalStackLayout>
+    </ScrollView>         
 </ContentPage>

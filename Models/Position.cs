@@ -11,5 +11,5 @@ public class Position:Thing
 
     public int VisibilityLevel { get; set; }
 
-    public List<Rule> Permissions {  get; set; }
+    public List<Rule> Permissions { get; set; } = new();
 }

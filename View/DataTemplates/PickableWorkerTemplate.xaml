@@ -9,7 +9,7 @@
         <HorizontalStackLayout>
             <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
             <CheckBox
-                IsChecked="{Binding IsPicked}"
+                IsChecked="{Binding data}"
                 VerticalOptions="Center">
                 <CheckBox.GestureRecognizers>
                     <TapGestureRecognizer 

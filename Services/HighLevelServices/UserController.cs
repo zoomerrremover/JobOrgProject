@@ -31,8 +31,9 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
             else
             {
                 var type = Object.GetType();
-                var permission = Permissions.Find(p=>p.Model == type);
-                return permission.Status.Contains(Type);
+                var permissions = Permissions.Find(p=>p.Model == type);
+                var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
+                return permission;
             }
         }
 

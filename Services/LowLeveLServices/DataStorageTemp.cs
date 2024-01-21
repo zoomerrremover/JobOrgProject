@@ -103,7 +103,7 @@ public class DataStorageTemp : IDataStorage
     }
     public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action,Type type)
     {
-        if (type.IsClass) ObjectKeeper[type].CollectionChanged += action;
+        if (type.BaseType == typeof(Thing)) ObjectKeeper[type].CollectionChanged += action;
         else if(type.IsInterface)
         {
             foreach(var collection in ObjectKeeper.Where(i => i.Key.GetInterfaces().Contains(type)))

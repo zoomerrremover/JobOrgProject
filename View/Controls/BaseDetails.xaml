@@ -5,50 +5,45 @@
              xmlns:baseViewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              x:DataType="baseViewmodels:ThingVM">
-    <Grid RowDefinitions="Auto,Auto"
-            RowSpacing="20">
-        <Frame Background="{StaticResource BlockColor}">
-            <Grid ColumnDefinitions="Auto,*,50"
-       RowDefinitions="50,*">
-                <VerticalStackLayout Grid.Column="0"
-                            Grid.RowSpan="2">
-                    <Entry HorizontalOptions="StartAndExpand"
-                        VerticalOptions="Start"
-                        Text="{Binding DisplayableName}"
-                        InputTransparent="{Binding NameInEditMode}"
-                        Style="{StaticResource EditableEntry}"
-                        FontSize="25"/>
-                    <Label Text="{Binding DisplayableID}"
-                                    VerticalOptions="Start" 
-                                    HorizontalOptions="StartAndExpand"
-                                    Style="{StaticResource SmallLabel}"/>
-                </VerticalStackLayout>
-                <ImageButton Grid.Column="2"
-                    Background="{StaticResource ControlColor}"
-                    CornerRadius="10"
-                    Command="{Binding NameEditButtonPressedCommand}"
-                    Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
-                 </Grid>
-                </Frame>
-                <Frame Background="{StaticResource BlockColor}"
-                CornerRadius="10"
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    BorderColor="Transparent">
-                <Grid ColumnDefinitions="*,50"
-                RowDefinitions="50,*"
-                ColumnSpacing="10">
-                 <Editor
-                    Grid.RowSpan="2"
+    <VerticalStackLayout>
+        <Frame>
+            <Grid
+                ColumnDefinitions="200,*,30"
+                RowDefinitions="30,30,50">
+                <Entry  
                     Grid.Column="0"
-                    Text="{Binding DisplayableDescription}"
-                    IsVisible="{Binding DescriptionInEditMode}"/>
-                <ImageButton Grid.Column="2"
-                    Background="{StaticResource ControlColor}"
-                    Command="{Binding DescriptionEditButtonPressedCommand}"
-                    CornerRadius="10"
-                    Source="C:\Users\loxar\OneDrive\Documents\University\COMP1005\TheJobOrganizationApp\Resources\Icons\edit25.png" />
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    IsEnabled="{Binding NameInEditMode}"
+                    Text="{Binding DisplayableName}"/>
+                <Label 
+                    Grid.Column="0"
+                    Grid.Row="2"
+                    Text="{Binding DisplayableID}"/>
+                <Button
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    IsEnabled="{Binding EditPermission}"
+                    Command="{Binding NameEditButtonPressedCommand}"
+                    Text="Edit"/>
             </Grid>
         </Frame>
-    </Grid>
+        <Frame>
+            <Grid
+                RowDefinitions="30,300"
+                ColumnDefinitions="*,30">
+                <Editor
+                    Grid.Column="0"
+                    Grid.RowSpan="2"
+                    IsEnabled="{Binding DescriptionInEditMode}"
+                    Text="{Binding DisplayableDescription}"/>
+                <Button
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    IsEnabled="{Binding EditPermission}"
+                    Command="{Binding DescriptionEditButtonPressedCommand}"
+                    />
+            </Grid>
+        </Frame>
+    </VerticalStackLayout>
 </ContentView>

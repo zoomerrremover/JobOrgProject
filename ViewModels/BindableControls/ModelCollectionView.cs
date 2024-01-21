@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using TheJobOrganizationApp.Services;
+using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
@@ -16,13 +17,11 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 /// which can be incorporated as needed via specific methods.
 /// </summary>
 
-public partial class ModelCollectionView : ObservableObject
+public partial class ModelCollectionView : ModelView
 {
     #region Constructors and main enumerables
     public ObservableCollection<object> DisplayableList { get; set; } = new();
     ObservableCollection<object> elements { get; init; }
-
-    static IDataStorage DataStorage { get; set; }
 
     /// <summary>
     /// Create new instance of observavle ModelCollectionView . You can add additional
@@ -30,14 +29,10 @@ public partial class ModelCollectionView : ObservableObject
     /// <param name="elements">All the elements it can display.</param>
     /// </summary>
     /// 
-    public ModelCollectionView(IDataStorage dataStorange)
+    public ModelCollectionView(IEnumerable<object> elements,Type typeToSubscribeTo = null)
     {
-        DataStorage = dataStorange;
-    }
-    public ModelCollectionView(IEnumerable<object> elements)
-    {
-        var type = elements.First().GetType();
-        DataStorage.SubscribeForUpdates(LoadCollection, type);
+        typeToSubscribeTo??=elements.First().GetType();
+        dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
         this.elements = elements.ToObservableCollection();
         LoadCollection();
     }
