@@ -1,7 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
-using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.ViewModels.BindableControls;

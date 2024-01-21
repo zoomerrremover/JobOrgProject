@@ -27,9 +27,14 @@ public partial class AssignmentVM : ThingVM
     public AssignmentVM(Assignment item) : base(item)
     {
         BindingObject = item;
-        Initialize();
+        
     }
-    private void Initialize()
+    public static async void Load(object vm) {
+        var wm = vm as AssignmentVM;
+        wm.Initialize();
+            }
+
+    async void Initialize()
     {
         var models = InitializeModels();
         WorkersCollectionView = new ModelCollectionView(models, typeof(Worker));         
@@ -104,7 +109,7 @@ public partial class AssignmentVM : ThingVM
         {
             BindingObject.Workers.Remove(obj.model);
         }
-        WorkersCollectionView.DisplayableList.TriggerEvent();
+        dataStorage.TriggerUpdate<Worker>();
     }/// <summary>
      /// Initializes models into adaptor (for UI).
      /// </summary>
@@ -112,6 +117,7 @@ public partial class AssignmentVM : ThingVM
     List<PickableWorker> InitializeModels()
     {
         var ReturnWorkers = new List<PickableWorker>();
+        PickableWorker.ActivatedAction = EditWorker;
         var workers = dataStorage.GetItems<Worker>();
         foreach (var (worker, boolValue) in from worker in workers
                                             let NameLocal = worker.Name.ToLower()

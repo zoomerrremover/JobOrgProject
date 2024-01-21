@@ -13,7 +13,7 @@
                 VerticalOptions="Center">
                 <CheckBox.GestureRecognizers>
                     <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:AssignmentVM}}, Path=EditWorkerCommand}"
+                                        Command="{Binding PressedCommand}"
                                         CommandParameter="{Binding .}">
                     </TapGestureRecognizer>
                 </CheckBox.GestureRecognizers>

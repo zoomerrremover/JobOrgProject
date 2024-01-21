@@ -5,16 +5,17 @@
              xmlns:baseViewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              x:DataType="baseViewmodels:ThingVM">
-    <VerticalStackLayout>
+    <VerticalStackLayout
+        Spacing="10">
         <Frame>
             <Grid
                 ColumnDefinitions="200,*,30"
-                RowDefinitions="30,30,50">
+                RowDefinitions="30,10,50">
                 <Entry  
                     Grid.Column="0"
                     Grid.Row="0"
                     Grid.RowSpan="2"
-                    IsEnabled="{Binding NameInEditMode}"
+                    InputTransparent="{Binding NameInEditMode}"
                     Text="{Binding DisplayableName}"/>
                 <Label 
                     Grid.Column="0"
@@ -24,8 +25,7 @@
                     Grid.Column="2"
                     Grid.Row="0"
                     IsEnabled="{Binding EditPermission}"
-                    Command="{Binding NameEditButtonPressedCommand}"
-                    Text="Edit"/>
+                    Command="{Binding NameEditButtonPressedCommand}"/>
             </Grid>
         </Frame>
         <Frame>
@@ -35,7 +35,7 @@
                 <Editor
                     Grid.Column="0"
                     Grid.RowSpan="2"
-                    IsEnabled="{Binding DescriptionInEditMode}"
+                    InputTransparent="{Binding DescriptionInEditMode}"
                     Text="{Binding DisplayableDescription}"/>
                 <Button
                     Grid.Column="1"

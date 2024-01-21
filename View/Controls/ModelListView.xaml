@@ -11,7 +11,7 @@
     </ContentView.Resources>
     <Frame>
         <Grid
-            RowDefinitions="10,30,60,*"
+            RowDefinitions="15,45,60,*"
             ColumnDefinitions="35,*,60,30,30">
             <Label
                 Grid.Row="0"
@@ -45,7 +45,7 @@
                 Grid.Row="5"
                 ItemsSource="{Binding DisplayableList}"
                 ItemTemplate="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
-                Path=ListDataTemplate}"/>
+                Path=DataTemplate}"/>
 
         </Grid>
     </Frame>

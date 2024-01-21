@@ -6,13 +6,17 @@
              xmlns:class ="clr-namespace:TheJobOrganizationApp.View.Controls"
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls">
     <Frame>
-        <HorizontalStackLayout>
-            <Label                
+        <Grid
+            ColumnDefinitions="50,*,200">
+            <Label
+                Grid.Column="0"
+                VerticalOptions="Center"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:StringPicker}},
                 Path=PickerTitle}"/>
             <Picker
+                Grid.Column="2"
                 ItemsSource="{Binding DisplayableObjects}"
                 SelectedItem="{Binding PickedObject}"/>
-        </HorizontalStackLayout>
+        </Grid>
     </Frame>
 </ContentView>
