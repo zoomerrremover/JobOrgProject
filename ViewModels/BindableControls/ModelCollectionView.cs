@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Text;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels.Base;
 
@@ -41,6 +42,7 @@ public partial class ModelCollectionView : ModelView
     {
         LoadCollection();
     }
+
     #endregion
     #region AddButton
     public bool AddButtonEnabled { get; private set; } = false;

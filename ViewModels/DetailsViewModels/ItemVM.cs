@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
@@ -30,6 +31,7 @@ public partial class ItemVM : ThingVM
     public void Initialize()
     {
         InitializeHolders();
+        displayablePrice = BindingObject.Price.ToString();
         
     }
 
@@ -61,14 +63,18 @@ public partial class ItemVM : ThingVM
     #region Price
     [ObservableProperty]
     string displayablePrice;
-    protected override void NameEditButtonPressed()
+    [ObservableProperty]
+    bool priceInEditMode = true;
+    [RelayCommand]
+    public void PriceEditButtonPressed()
     {
-
-        float localPrice;
-        float.TryParse(DisplayablePrice,out localPrice);
-        BindingObject.Price = localPrice;
-        
-        base.NameEditButtonPressed();
+        PriceInEditMode = !PriceInEditMode;
+        if(PriceInEditMode)
+        {
+            float localPrice;
+            float.TryParse(DisplayablePrice, out localPrice);
+            BindingObject.Price = localPrice;
+        }
     }
     #endregion
     #region Selectors for HolderView

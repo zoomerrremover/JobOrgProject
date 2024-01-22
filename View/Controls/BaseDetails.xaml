@@ -9,20 +9,28 @@
         Spacing="10">
         <Frame>
             <Grid
-                ColumnDefinitions="200,*,30"
-                RowDefinitions="30,10,50">
+                ColumnDefinitions="10,190,*,30"
+                RowDefinitions="30,10,20,50"
+                RowSpacing="10">
                 <Entry  
                     Grid.Column="0"
                     Grid.Row="0"
+                    Grid.ColumnSpan="2"
                     Grid.RowSpan="2"
+                    VerticalOptions="Center"
                     InputTransparent="{Binding NameInEditMode}"
                     Text="{Binding DisplayableName}"/>
-                <Label 
-                    Grid.Column="0"
+                <Label
+                    Grid.Column="1"
                     Grid.Row="2"
+                    Text="ID:"/>
+                <Label 
+                    Grid.Column="1"
+                    Grid.ColumnSpan="3"
+                    Grid.Row="3"
                     Text="{Binding DisplayableID}"/>
                 <Button
-                    Grid.Column="2"
+                    Grid.Column="3"
                     Grid.Row="0"
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding NameEditButtonPressedCommand}"/>
@@ -30,7 +38,7 @@
         </Frame>
         <Frame>
             <Grid
-                RowDefinitions="30,300"
+                RowDefinitions="30,200"
                 ColumnDefinitions="*,30">
                 <Editor
                     Grid.Column="0"

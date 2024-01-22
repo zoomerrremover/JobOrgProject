@@ -87,6 +87,9 @@
     <MauiXaml Update="View\DataTemplates\AssignmentDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\DataTemplates\HolderDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\DataTemplates\ItemDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
