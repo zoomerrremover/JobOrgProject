@@ -113,7 +113,7 @@ public partial class WorkerVM:ThingVM
     }
     #endregion
     #region Contacts
-    HasContactsVM HasContactsVM { get; set; }
+    public HasContactsVM HasContactsVM { get; set; }
     void InitializeContactsVM()
     {
         HasContactsVM = new(BindingObject);

@@ -22,18 +22,21 @@ public record HistoryRecord
         ID = Guid.NewGuid();
         Time = DateTime.UtcNow;
     }
-    public override string ToString()
+    public string Message
     {
-        switch (ActionType)
+        get
         {
-            case HistoryActionType.Added:
-                return $"{User.UserName} has created {Subject}.";
-            case HistoryActionType.Deleted:
-                return $"{User.UserName} has deleted {Subject}.";
-            case HistoryActionType.Changed:
-                return $"{User.UserName} has changed {FieldName} from {Value} to {Value2}.";
-            default:
-                return "Undisplayable history event";
+            switch (ActionType)
+            {
+                case HistoryActionType.Added:
+                    return $"{User.UserName} has created {Subject}.";
+                case HistoryActionType.Deleted:
+                    return $"{User.UserName} has deleted {Subject}.";
+                case HistoryActionType.Changed:
+                    return $"{User.UserName} has changed {FieldName} from {Value} to {Value2}.";
+                default:
+                    return "Undisplayable history event";
+            }
         }
     }
 

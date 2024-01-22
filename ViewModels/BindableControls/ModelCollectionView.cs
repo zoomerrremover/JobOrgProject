@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Text;
+using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels.Base;
 
@@ -33,7 +34,7 @@ public partial class ModelCollectionView : ModelView
     public ModelCollectionView(IEnumerable<object> elements,Type typeToSubscribeTo = null)
     {
         typeToSubscribeTo??=elements.First().GetType();
-        dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
+        if(typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
         this.elements = elements.ToObservableCollection();
         LoadCollection();
     }

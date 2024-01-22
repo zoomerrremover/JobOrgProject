@@ -16,20 +16,21 @@
         <VerticalStackLayout
           Spacing="10"
           Padding="35">
-        <controls:BaseDetails/>
-        <controls:StringPicker
+            <controls:BaseDetails/>
+            <controls:StringPicker
             BindingContext="{Binding JobPicker}"
             PickerTitle="Job"/>
-        <controls:ITimeBasedDetails
+            <controls:ITimeBasedDetails
             BindingContext="{Binding TimeSelector}"/>
-        <controls:StringPicker
+            <controls:StringPicker
             PickerTitle="Place"
             BindingContext="{Binding PlacePicker}"/>
-        <controls:ModelListView
+            <controls:ModelListView
             Grid.Row = "1"
             BindingContext="{Binding WorkersCollectionView}"
             ListTitle="Workers"
             DataTemplate="{StaticResource pickableWorkerTemplate}"/>
-    </VerticalStackLayout>
+            <controls:HistoryRecords/>
+        </VerticalStackLayout>
     </ScrollView>         
 </ContentPage>

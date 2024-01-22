@@ -14,7 +14,7 @@ public abstract class Thing
 
     public string Description { get; set; }
 
-    public ObservableCollection<HistoryRecord> History;
+    public ObservableCollection<HistoryRecord> History { get; set; } = new();
 
 
     public Thing()

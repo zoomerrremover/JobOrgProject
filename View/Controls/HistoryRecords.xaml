@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.Controls.HistoryRecords"
+             x:DataType="viewmodels:ThingVM"
+             xmlns:controls ="clr-namespace:TheJobOrganizationApp.View.Controls"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
+             xmlns:dataTemplates="clr-namespace:TheJobOrganizationApp.View.DataTemplates">
+
+    <ContentView.Resources>
+        <dataTemplates:HistoryRecordDataTemplate x:Key="HistoryRecordDataTemplate"/>
+    </ContentView.Resources>
+    <controls:ModelListView
+        ListTitle="History"
+        BindingContext="{Binding HistoryCollectionView}"
+        DataTemplate="{StaticResource HistoryRecordDataTemplate}"/>
+</ContentView>

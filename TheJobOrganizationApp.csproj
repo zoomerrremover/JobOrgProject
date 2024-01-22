@@ -78,6 +78,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <MauiXaml Update="View\Controls\HistoryRecords.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\Controls\IHasLocation.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -85,6 +88,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\DataTemplates\AssignmentDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\DataTemplates\HistoryRecordDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\DataTemplates\HolderDataTemplate.xaml">

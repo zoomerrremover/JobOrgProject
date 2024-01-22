@@ -6,5 +6,31 @@
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
              x:DataType="viewmodels:WorkerVM">
-
+    <ScrollView>
+        <VerticalStackLayout
+          Spacing="10"
+          Padding="35">
+            <Grid
+                ColumnDefinitions="*,50,*"
+                RowDefinitions="250">
+                <Frame
+                    Grid.Column="1"
+                    Grid.Row="0">
+                </Frame>
+            </Grid>
+            <controls:BaseDetails/>
+            <controls:StringPicker
+                PickerTitle="Position"
+                BindingContext="{Binding PositionPickerVM}"/>
+            <Frame>
+                <Grid>
+                    
+                </Grid>
+            </Frame>
+            <controls:IHasContactsDetails
+                BindingContext="{Binding HasContactsVM}"/>
+            <controls:IHasItemsDetails
+                BindingContext="{Binding HasItemsVM}"/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
