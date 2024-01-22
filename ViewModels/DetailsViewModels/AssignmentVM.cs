@@ -27,21 +27,20 @@ public partial class AssignmentVM : ThingVM
     public AssignmentVM(Assignment item) : base(item)
     {
         BindingObject = item;
-        
+        Initialize();
+
     }
     public static async void Load(object vm) {
         var wm = vm as AssignmentVM;
-        wm.Initialize();
+        wm.WorkersCollectionView.LoadCollection();
             }
 
     async void Initialize()
     {
-        var models = InitializeModels();
-        WorkersCollectionView = new ModelCollectionView(models, typeof(Worker));         
-        WorkersCollectionView.WithEditButton(EditPermission, ChangeEditMode);
         TimeSelector = new(BindingObject);
         InitializeJobPicker();
         InitializePlacePicker();
+        InitializeWorkersCollectionView();
     }
     #endregion
     #region TimeSelector
@@ -110,10 +109,17 @@ public partial class AssignmentVM : ThingVM
             BindingObject.Workers.Remove(obj.model);
         }
         dataStorage.TriggerUpdate<Worker>();
-    }/// <summary>
-     /// Initializes models into adaptor (for UI).
-     /// </summary>
+    }
 
+    private void InitializeWorkersCollectionView()
+    {
+        var models = InitializeModels();
+        WorkersCollectionView = new ModelCollectionView(models, typeof(Worker))
+            .WithEditButton(EditPermission, ChangeEditMode);
+    }
+    /// <summary>
+    /// Initializes models into adaptor (for UI).
+    /// </summary>
     List<PickableWorker> InitializeModels()
     {
         var ReturnWorkers = new List<PickableWorker>();

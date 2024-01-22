@@ -33,10 +33,12 @@ public partial class ModelCollectionView : ModelView
     /// 
     public ModelCollectionView(IEnumerable<object> elements,Type typeToSubscribeTo = null)
     {
-        typeToSubscribeTo??=elements.First().GetType();
-        if(typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
+        if (elements.Count()!=0)
+        {
+            typeToSubscribeTo ??= elements.First().GetType();
+            if (typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
+        }
         this.elements = elements.ToObservableCollection();
-        LoadCollection();
     }
 
     private void LoadCollection(object sender, NotifyCollectionChangedEventArgs e)
@@ -114,10 +116,13 @@ public partial class ModelCollectionView : ModelView
         filters.ForEach(w => filterSelectorMethods[w.Item1] = w.Item2);
         filterSelectorMethods.Keys.ForEach(AvaliableFilters.Add);
         selectedString = AvaliableFilters.First().ToString();
-        LoadCollection();
         return this;
     }
-    void LoadCollection()
+
+    /// <summary>
+    /// This is method for displaying data , it SHOULD be called async
+    /// </summary>
+    public void LoadCollection()
     {
         ApplySearchEntry();
         if (FiltersAreVisible)

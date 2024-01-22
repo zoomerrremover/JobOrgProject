@@ -16,6 +16,34 @@
                 <Frame
                     Grid.Column="1"
                     Grid.Row="0">
+                    <Grid
+                        ColumnDefinitions="50,50,*,250"
+                        ColumnSpacing="5">
+                        <Label
+                            Text="Text1"/>
+                        <VerticalStackLayout
+                            Grid.Column="1">
+                            <Label
+                                Text="Text2"/>
+                            <Label
+                                Text="Text3"/>
+                        </VerticalStackLayout>
+                        <HorizontalStackLayout
+                            Grid.Column="3">
+                            <VerticalStackLayout>
+                                <Label
+                                    Text="Start Time:"/>
+                                <Label
+                                    Text="12:00"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout>
+                                <Label
+                                    Text="Finish Time:"/>
+                                <Label
+                                    Text="13:00"/>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+                    </Grid>
                 </Frame>
             </Grid>
             <controls:BaseDetails/>
