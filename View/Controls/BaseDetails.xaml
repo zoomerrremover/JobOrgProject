@@ -38,7 +38,7 @@
         </Frame>
         <Frame>
             <Grid
-                RowDefinitions="30,200"
+                RowDefinitions="30,150"
                 ColumnDefinitions="*,30">
                 <Editor
                     Grid.Column="0"

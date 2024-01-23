@@ -33,7 +33,7 @@ public partial class AssignmentVM : ThingVM
     public static async void Load(object vm) {
         var wm = vm as AssignmentVM;
         wm.WorkersCollectionView.LoadCollection();
-            }
+        }
 
     async void Initialize()
     {

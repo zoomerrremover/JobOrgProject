@@ -39,7 +39,9 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
 
         public bool GetPermission(Type Object, RuleType Type)
         {
-            throw new NotImplementedException();
+            var permissions = Permissions.Find(p => p.Model == Object);
+            var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
+            return permission;
         }
 
         public void SetPermissions(IUser user)

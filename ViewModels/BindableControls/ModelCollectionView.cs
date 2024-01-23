@@ -3,9 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
@@ -38,7 +36,7 @@ public partial class ModelCollectionView : ModelView
             typeToSubscribeTo ??= elements.First().GetType();
             if (typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
         }
-        this.elements = elements.ToObservableCollection();
+        this.elements = elements is not null ? elements.ToObservableCollection():new ObservableCollection<object>();
     }
 
     private void LoadCollection(object sender, NotifyCollectionChangedEventArgs e)
@@ -118,7 +116,6 @@ public partial class ModelCollectionView : ModelView
         selectedString = AvaliableFilters.First().ToString();
         return this;
     }
-
     /// <summary>
     /// This is method for displaying data , it SHOULD be called async
     /// </summary>
@@ -140,10 +137,16 @@ public partial class ModelCollectionView : ModelView
     }
     void ApplyFilters()
     {
-        var choosedFilter = filterSelectorMethods[SelectedString];
-        if (choosedFilter != null)
+        try { 
+            var choosedFilter = filterSelectorMethods[SelectedString];
+            if (choosedFilter != null)
+            {
+                choosedFilter.Invoke(DisplayableList);
+            }     
+            }
+        catch(Exception ex)
         {
-            choosedFilter.Invoke(DisplayableList);
+            errorService.CallException($"There was an issue with the filter {ex}");
         }
     }
     #endregion

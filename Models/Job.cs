@@ -7,7 +7,7 @@ namespace TheJobOrganizationApp.Models
     [Model(DisplayableInTheGlobalSearch = true)]
     public class Job:Thing,ITimeBased 
     {
-        public List<Assignment> Tasks;
+        public List<Assignment> Tasks { get; set; } = new List<Assignment>();
 
         public Contractor Contractor;
 

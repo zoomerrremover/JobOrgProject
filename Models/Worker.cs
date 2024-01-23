@@ -17,7 +17,7 @@ public class Worker : Thing,IUser, IHasLocation, IHasContacts , IHasItems , IHas
     public string Location { get ; set ; }
     public string PhoneNumber { get ; set ; }
     public string Buissness { get ; set ; }
-    public List<Item> Items { get ; set ; }
+    public List<Item> Items { get; set; } = new();
     public Color Color { get; set; }
     public bool IsPicked { get; set; }
     public Position Position { get; set; }

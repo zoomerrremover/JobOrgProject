@@ -21,6 +21,10 @@ public partial class HasItemsVM : ModelView
     {
         InitializeItemCollectionView();
     }
+    public void Load()
+    {
+        ItemsCollectionView.LoadCollection();
+    }
     #endregion
     #region Items
     public ModelCollectionView ItemsCollectionView { get; set; }
@@ -40,7 +44,7 @@ public partial class HasItemsVM : ModelView
     }
     void NameSelector(ObservableCollection<object> items)
     {
-        var listedItems = items.Select(item => item as Item).OrderBy(i => i.Name);
+        var listedItems = new List<Item>(items.Select(item => item as Item).OrderBy(i => i.Name));
         items.Clear();
         foreach (var item in listedItems)
         {
@@ -49,7 +53,7 @@ public partial class HasItemsVM : ModelView
     }
     void QuantitySelector(ObservableCollection<object> items)
     {
-        var listedItems = items.Select(item=>item as Item).OrderByDescending(i => i.Qty);
+        var listedItems = new List<Item>(items.Select(item => item as Item).OrderByDescending(i => i.Qty));
         items.Clear();
         foreach (var item in listedItems)
         {

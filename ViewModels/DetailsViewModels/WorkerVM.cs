@@ -34,6 +34,15 @@ public partial class WorkerVM:ThingVM
         InitializeHasItemsVM();
         InitializeContactsVM();
     }
+    public static async void Load(object vm)
+    {
+        var wm = vm as WorkerVM;
+        wm.LoadAsync();
+    }
+    public void LoadAsync()
+    {
+        HasItemsVM.Load();
+    }
     #endregion
     #region Position
     public StringPickerVM PositionPickerVM { get; set; }
