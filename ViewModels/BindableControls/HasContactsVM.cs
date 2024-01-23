@@ -10,13 +10,25 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 public partial class HasContactsVM
     : ModelView
 {
-    [ObservableProperty]
     IHasContacts bindingObject;
     public HasContactsVM(IHasContacts bindingObject)
     {
-
         this.bindingObject = bindingObject;
-
+    }
+    public string DisplayableMobilePN
+    {
+        get => bindingObject.PhoneNumber;
+        set => bindingObject.PhoneNumber = value;
+    }
+    public string DisplayableBuissnessPN
+    {
+        get => bindingObject.Buissness;
+        set => bindingObject.Buissness = value;
+    }
+    public string DisplayableEmail
+    {
+        get => bindingObject.Email;
+        set => bindingObject.Email = value;
     }
 
 }

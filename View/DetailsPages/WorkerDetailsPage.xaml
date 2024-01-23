@@ -21,6 +21,9 @@
                         <Button
                             Grid.Row="1"
                             VerticalOptions="End"
+                            Background="Black"
+                            Opacity="0.2"
+                            IsVisible="{Binding EditPermission}"
                             Text="Edit"/>
                     </Grid>
                 </Frame>
@@ -33,33 +36,42 @@
                 Grid.Column="1"
                 Grid.Row="0">
                 <Grid
-                    ColumnDefinitions="50,50,*,150"
+                    ColumnDefinitions="120,*,*"
+                    RowDefinitions="100,*"
                     ColumnSpacing="5"
+                    RowSpacing="10"
                     Padding="10">
                     <Label
                         Grid.Column="0"
-                        Text="Text1"/>
+                        VerticalOptions="Center"
+                        Text="{Binding DisplayableAssignmentName}"/>
                     <VerticalStackLayout
-                        Grid.Column="1">
+                        Grid.Column="2"
+                        VerticalOptions="Center"
+                        Spacing="10">
                         <Label
-                            Text="Text2"/>
+                            MaxLines="2"
+                            Text="{Binding DisplayableAddressline}"/>
                         <Label
-                            Text="Text3"/>
+                            MaxLines="2"
+                            Text="{Binding DisplayableJob}"/>
                     </VerticalStackLayout>
                     <HorizontalStackLayout
-                            Grid.Column="3"
-                            Spacing="10">
+                            Grid.ColumnSpan="3"
+                            Grid.Row="1"
+                            HorizontalOptions="Center"  
+                            Spacing="50">
                         <VerticalStackLayout>
                             <Label
                                 Text="Start Time:"/>
                             <Label
-                                Text="12:00"/>
+                                Text="{Binding DisplayableStartTime}"/>
                         </VerticalStackLayout>
                         <VerticalStackLayout>
                             <Label
                                 Text="Finish Time:"/>
                             <Label
-                                Text="13:00"/>
+                                Text="{Binding DisplayableFinishTime}"/>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
                 </Grid>
