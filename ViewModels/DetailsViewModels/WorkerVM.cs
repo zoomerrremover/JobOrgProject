@@ -83,34 +83,34 @@ public partial class WorkerVM:ThingVM
     Assignment nextTask;
     private void InitializeCurrentAssignment()
     {
-        var tasks = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now);
-        if (tasks.Count()>0)
-        {
-            CurrentTask = tasks.First();
+        NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
+        CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
+    }
+    public string TaskName
+    {
+        get => CurrentTask is null ? "None , Next task" : CurrentTask.Name;
+    }
+    public string SecondaryText
+    {
+        get => CurrentTask is null ? NextTask.Name : dataStorage.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name;
+    }
+    public string Addressline
+    {
+        get => CurrentTask is null ? NextTask.Place.Name : CurrentTask.Place.Name;
+    }
+    public bool IsCurrentTaskActive { get => CurrentTask is null ? false : true; }
+
+    public string BStartTime { get {
+                                var task = CurrentTask is null ? NextTask.StartTime : CurrentTask.StartTime;
+                                return task.ToString("hh:mm"); }
+                              }
+    public string BFinishTime 
+    {
+        get
+        {  
+            var task = CurrentTask is null ? NextTask.FinishTime : CurrentTask.FinishTime;
+            return task.ToString("hh:mm");
         }
-        else
-        {
-            var FutureTask = Assignments.Where(a => a.StartTime < DateTime.Now).First();
-        }
-    }
-    public string DisplayableAssignmentName
-    {
-        get => CurrentTask is null ? "None" : CurrentTask.Name;
-    }
-    public string DisplayableJob
-    {
-        get=>dataStorage.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name; 
-    }
-    public string DisplayableAddressline
-    {
-        get => CurrentTask is null ? "" : CurrentTask.Place.Name;
-    }
-    public string DisplayableStartTime {
-        get => CurrentTask.StartTime.ToString("hh:mm");
-    }
-    public string DisplayableFinishTime 
-    {
-        get=>CurrentTask.FinishTime.ToString("hh:mm");
     }
     #endregion
     #region Items
