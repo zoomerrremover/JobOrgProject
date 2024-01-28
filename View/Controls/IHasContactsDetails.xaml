@@ -5,42 +5,26 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              x:DataType="viewmodels:HasContactsVM">
-    <Frame 
-                   CornerRadius="50"
-                   Grid.ColumnSpan="2"
-                   BorderColor="Transparent">
-        <Frame.Background>
-            <StaticResource Key="BlockColor" />
-        </Frame.Background>
-        <!--<Grid
-            Grid.Column="1"
-            RowDefinitions="60,*"
-            ColumnDefinitions="70,*"
-            Background="Transparent">
-            <Label Text="Contacts"
-                   TextColor="White"
-                   FontSize="Micro"
-                   Grid.Row="0"
-                   Grid.Column="0"
-                   VerticalOptions="Center"
-       HorizontalOptions="Center"/>
-
-            <VerticalStackLayout 
-                           Grid.Row="1"
-                           HorizontalOptions="CenterAndExpand"
-                           Grid.ColumnSpan="2">
-                <Label Text="{Binding Email}"
-                           FontSize="Medium"
-                           TextColor="White"></Label>
-                <Label Text="{Binding PhoneNumber}"
-                           FontSize="Medium"
-                           HorizontalOptions="Center"
-                           TextColor="White"></Label>
-                <Label Text="{Binding Buissness}"
-                           FontSize="Medium"
-                           HorizontalOptions="Center"
-                           TextColor="White"></Label>
-            </VerticalStackLayout>
-        </Grid>-->
+    <Frame>
+        <VerticalStackLayout>
+            <Label
+                Text="Cell"/>
+            <Entry
+                HorizontalOptions="Center"
+                WidthRequest="125"  
+                Text="{Binding Cell}"/>
+            <Label
+                Text="Email"/>
+            <Entry
+                HorizontalOptions="Center"
+                WidthRequest="125"                 
+                Text="{Binding Email}"/>
+            <Label
+                Text="Buisiness"/>
+            <Entry
+                HorizontalOptions="Center"
+                WidthRequest="125"                
+                Text="{Binding Buisiness}"/>
+        </VerticalStackLayout>
     </Frame>
 </ContentView>

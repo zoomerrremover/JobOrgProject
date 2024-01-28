@@ -79,38 +79,28 @@ public partial class WorkerVM:ThingVM
     }
     [ObservableProperty]
     Assignment currentTask;
-    [ObservableProperty]
-    Assignment nextTask;
     private void InitializeCurrentAssignment()
     {
-        NextTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
-        CurrentTask = Assignments.Where(w => w.StartTime <= DateTime.Now && w.FinishTime >= DateTime.Now).First();
-    }
-    public string TaskName
+        CurrentTask = Assignments.Where(a => a.StartTime < DateTime.Now).OrderBy(a => a.StartTime).First();
+    }  
+    public string TaskNameText
     {
-        get => CurrentTask is null ? "None , Next task" : CurrentTask.Name;
+        get => CurrentTask is null ? "None" : CurrentTask.Name;
     }
-    public string SecondaryText
+    public string TaskJobText
     {
-        get => CurrentTask is null ? NextTask.Name : dataStorage.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name;
+        get => dataStorage.GetItems<Job>().Where(j => j.Tasks.Contains(CurrentTask)).First().Name;
     }
-    public string Addressline
+    public string TaskAddresslineText
     {
-        get => CurrentTask is null ? NextTask.Place.Name : CurrentTask.Place.Name;
+        get => CurrentTask is null ? null : CurrentTask.Place.Name;
     }
-    public bool IsCurrentTaskActive { get => CurrentTask is null ? false : true; }
-
-    public string BStartTime { get {
-                                var task = CurrentTask is null ? NextTask.StartTime : CurrentTask.StartTime;
-                                return task.ToString("hh:mm"); }
-                              }
-    public string BFinishTime 
+    public string TaskStartTimeText { 
+        get => CurrentTask is null ? null : CurrentTask.StartTime.ToString("hh:mm");
+                                }
+    public string TaskFinishTimeText 
     {
-        get
-        {  
-            var task = CurrentTask is null ? NextTask.FinishTime : CurrentTask.FinishTime;
-            return task.ToString("hh:mm");
-        }
+        get => CurrentTask is null ? null : CurrentTask.FinishTime.ToString("hh:mm");
     }
     #endregion
     #region Items

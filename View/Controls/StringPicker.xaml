@@ -7,10 +7,11 @@
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls">
     <Frame>
         <Grid
-            ColumnDefinitions="50,*,200">
+            ColumnDefinitions="75,*,200">
             <Label
                 Grid.Column="0"
                 VerticalOptions="Center"
+                MaxLines="1"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:StringPicker}},
                 Path=PickerTitle}"/>
             <Picker

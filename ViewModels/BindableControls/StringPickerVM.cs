@@ -20,12 +20,12 @@ public partial class StringPickerVM:ObservableObject
             }
 
     [ObservableProperty]
-    string pickedObject;
+    string pickedObject = "";
 
     public StringPickerVM(ObservableCollection<Thing> objectsBase,Thing InitialValue = null)
     {
         objects = objectsBase;
-        pickedObject = InitialValue.Name is null ? "None" : InitialValue.Name;
+        pickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
     }
     public StringPickerVM WithAction(Action<string,string> action)
     {
@@ -50,13 +50,15 @@ public partial class StringPickerVM:ObservableObject
         AddButtonAction = addButtonAction;
         return this;
     }
-    partial void OnPickedObjectChanging(string oldValue, string newValue) 
-        => ChoiceChangedAction.Invoke(oldValue,newValue);
+    partial void OnPickedObjectChanging(string oldValue, string newValue)
+    {
+        if (ChoiceChangedAction is not null) ChoiceChangedAction.Invoke(oldValue, newValue);
+    }
     [RelayCommand]
     void AddButtonPressed()=> AddButtonAction.Invoke();
 
     Action AddButtonAction { get; set; }
-    Action<string,string> ChoiceChangedAction { get; set; }
+    Action<string, string> ChoiceChangedAction { get; set; }
     
     public bool EditPermission { get; private set; }
 

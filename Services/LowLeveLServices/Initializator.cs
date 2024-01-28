@@ -46,6 +46,7 @@ namespace TheJobOrganizationApp.Services.LowLeveLServices
                 rules.Add(rule);
             }
             Position position = new Position() { Name = "Admin",Permissions=rules};
+            DataStorange.AddThing(position);
             user.Position = position;
             UserController.SetPermissions(user);
           // App Starting logic
