@@ -9,10 +9,10 @@ public class PageFactory: IPageFactory
 {
     Dictionary<string, DataTemplate> Controls = new();
     IConverter Convertor;
-    public PageFactory(IErrorService errorService,IConverter adaptor,IDataStorage dataStorange,IUserController userController)
+    public PageFactory(IReflectionContent refCont,IErrorService errorService,IConverter adaptor,IDataStorage dataStorange,IUserController userController)
     {
         Convertor = adaptor;
-        ModelView.SetStaticFields(errorService,dataStorange, userController,this);
+        ModelView.SetStaticFields(refCont,errorService,dataStorange, userController,this);
     }
 
     public ContentPage MakeACreatePage(Type type)

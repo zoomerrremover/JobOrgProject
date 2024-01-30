@@ -99,6 +99,9 @@
     <MauiXaml Update="View\DataTemplates\ItemDataTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\DataTemplates\PermissionDataTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\DataTemplates\PickableWorkerTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
@@ -139,6 +142,9 @@
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\DetailsPages\PlaceDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\DetailsPages\PositionDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="View\MainPages\GlobalSearchPage.xaml">

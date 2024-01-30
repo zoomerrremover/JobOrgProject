@@ -1,15 +1,12 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.BindableControls;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
 {
+    [DetailsViewModel(ClassLinked = typeof(Position))]
     public partial class PositionVM:ThingVM
     {
         #region CTORs
@@ -24,7 +21,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         {
             this.BindingObject = BindingObject;
             InitializeComponents();
-
+            InitializePermissionEditors();
         }
         #endregion
         #region Permissions
@@ -33,20 +30,31 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
             PermissionEditors = new List<PermissionEditor>();
             foreach(var modelType in reflectionContent.Models)
             {
-                var permEditorLoc = new PermissionEditor(modelType);
+                var permEditorLoc = new PermissionEditor(BindingObject,modelType);
                 PermissionEditors.Add(permEditorLoc);
             }
         }
         public List<PermissionEditor> PermissionEditors { get; set; }
-        [RelayCommand]
-        void SaveButtonPresses()
+
+        [ObservableProperty]
+        bool permissionsInEditMode;
+
+        partial void OnPermissionsInEditModeChanged(bool value)
         {
+            if (!value)
+            {
+                SavePermissions();
+            }
+        }
+        void SavePermissions()
+        {
+            BindingObject.Permissions.Clear();
             foreach(PermissionEditor editor in PermissionEditors)
             {
-                if(editor.EditPermission = true)
-                BindingObject.Permissions
+                BindingObject.Permissions.Add(editor.ProcessPermissions());
             }
         }
         #endregion
+
     }
 }

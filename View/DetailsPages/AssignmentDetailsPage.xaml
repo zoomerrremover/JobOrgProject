@@ -9,7 +9,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <dataTemplate:PickableWorkerTemplate x:Key="pickableWorkerTemplate"/>
-
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
