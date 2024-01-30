@@ -18,17 +18,19 @@ namespace TheJobOrganizationApp.ViewModels.Base
 
         protected static IErrorService errorService;
 
+        protected static IReflectionContent reflectionContent;
+
         public bool EditPermission { get => userController.GetPermission(BindingObject, RuleType.Edit); }
 
-        [ObservableProperty]
-        Thing bindingObject;
+        protected Thing BindingObject;
 
-        public static void SetStaticFields(IErrorService ErrorService,IDataStorage DataStorage,IUserController UserController,IPageFactory PageFactory)
+        public static void SetStaticFields(IReflectionContent ReflectionContent,IErrorService ErrorService,IDataStorage DataStorage,IUserController UserController,IPageFactory PageFactory)
         {
             dataStorage = DataStorage;
             userController = UserController;
             pageFactory = PageFactory;
             errorService = ErrorService;
+            reflectionContent = ReflectionContent;
         }
         public ModelView()
         {
