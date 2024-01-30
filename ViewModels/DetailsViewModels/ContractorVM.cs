@@ -49,7 +49,7 @@ public partial class ContractorVM:ThingVM
     }
     public ModelCollectionView JobsCollectionView { get; set; }
     #endregion
-    #region Contacts VM
+    #region Contacts
     public HasContactsVM HasContactsVM { get; set; }
     #endregion
 }

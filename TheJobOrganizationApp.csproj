@@ -132,6 +132,15 @@
     <MauiXaml Update="View\Controls\ModelListView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\DetailsPages\ContractorDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\DetailsPages\JobDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="View\DetailsPages\PlaceDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\MainPages\GlobalSearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

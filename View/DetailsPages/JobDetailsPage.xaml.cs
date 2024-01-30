@@ -2,10 +2,10 @@ using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 
 namespace TheJobOrganizationApp.View.DetailsPages;
-[DetailsPage(ClassLinked = typeof(Place))]
-public partial class PlaceDetailsPage : ContentPage
+[DetailsPage(ClassLinked = typeof(Job))]
+public partial class JobDetailsPage : ContentPage
 {
-	public PlaceDetailsPage()
+	public JobDetailsPage()
 	{
 		InitializeComponent();
 	}

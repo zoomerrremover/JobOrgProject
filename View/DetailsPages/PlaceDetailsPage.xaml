@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TheJobOrganizationApp.View.ModelPages.PlaceDetails"
+             x:Class="TheJobOrganizationApp.View.DetailsPages.PlaceDetailsPage"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
              x:DataType="viewmodels:PlaceVM">
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="10"
+            Padding="35">
+            <controls:BaseDetails/>
+            <controls:IHasItemsDetails
+                    BindingContext="{Binding HasItemsVM}"/>
+            <controls:HistoryRecords/>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

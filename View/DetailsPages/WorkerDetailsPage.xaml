@@ -81,6 +81,7 @@
                 BindingContext="{Binding HasContactsVM}"/>
             <controls:IHasItemsDetails
                 BindingContext="{Binding HasItemsVM}"/>
+            <controls:HistoryRecords/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
