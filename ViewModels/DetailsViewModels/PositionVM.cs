@@ -55,6 +55,17 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
             }
         }
         #endregion
+        #region Workers with Pos
+        void InitializeWrokerColView()
+        {
+            var Workers = dataStorage.GetItems<Worker>();
+            var FilteredWorkers = Workers.Where(w => w.Position == BindingObject);
+            WorkerCollectionView = new ModelCollectionView(FilteredWorkers)
+                .WithEditButton(EditPermission);
+        }
+        public ModelCollectionView WorkerCollectionView { get; set; }
+
+        #endregion
 
     }
 }

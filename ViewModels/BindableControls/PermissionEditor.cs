@@ -13,15 +13,26 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls
 {
     public class PermissionEditor
     {
+        Rule positionRule;
         public PermissionEditor(Position position,Type modelBinded)
         {
-            Rule positionRule = position.Permissions.Single(r=>r.Model==modelBinded);
             modelName = modelBinded.Name;
             model = modelBinded;
-            CreatePermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Create) : false;
-            EditPermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Edit) : false;
-            DeletePermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Delete) : false;
-        }
+            try
+            {
+                positionRule = position.Permissions.Where(r => r.Model == modelBinded).First();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                CreatePermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Create) : false;
+                EditPermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Edit) : false;
+                DeletePermission = positionRule is not null ? positionRule.Status.Contains(RuleType.Delete) : false;
+            }
+            }
         public Rule ProcessPermissions()
         {
             var localRule = new Rule() { Model = model,

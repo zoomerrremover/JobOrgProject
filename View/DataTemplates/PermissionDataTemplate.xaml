@@ -16,20 +16,26 @@
             Grid.Row="1">
             <HorizontalStackLayout>
                 <CheckBox
+                    VerticalOptions="Center"
                     IsChecked="{Binding CreatePermission}"/>
                 <Label
+                    VerticalOptions="Center"
                     Text="Create"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <CheckBox
+                    VerticalOptions="Center"
                     IsChecked="{Binding EditPermission}"/>
                 <Label
+                    VerticalOptions="Center"
                     Text="Edit"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <CheckBox
+                    VerticalOptions="Center"
                     IsChecked="{Binding DeletePermission}"/>
                 <Label
+                    VerticalOptions="Center"
                     Text="Delete"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>

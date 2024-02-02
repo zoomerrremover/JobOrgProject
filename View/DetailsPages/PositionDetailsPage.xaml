@@ -19,8 +19,9 @@
             <controls:BaseDetails/>
             <Frame>
                 <Grid
-                    ColumnDefinitions="30,*,30"
-                    RowDefinitions="30,*">
+                    ColumnDefinitions="Auto,*,30"
+                    RowDefinitions="30,*"
+                    RowSpacing ="10">
                     <Label
                         Text="Permissions"/>
                     <Button
@@ -28,7 +29,9 @@
                     <CollectionView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
-                        ItemsSource="{Binding PermissionEditors}"/>
+                        HorizontalOptions="Center"
+                        ItemsSource="{Binding PermissionEditors}"
+                        ItemTemplate="{StaticResource permissionDataTemplate}"/>
                 </Grid>
             </Frame>
         </VerticalStackLayout>
