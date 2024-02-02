@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <dataTemplate:PermissionDataTemplate x:Key="permissionDataTemplate"/>
+            <dataTemplate:PickableWorkerTemplate x:Key="pickableWorkerDataTemplate"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -34,6 +35,10 @@
                         ItemTemplate="{StaticResource permissionDataTemplate}"/>
                 </Grid>
             </Frame>
+            <controls:ModelListView
+                ListTitle="Workers"
+                BindingContext="{Binding WorkerCollectionView}"
+                DataTemplate="{StaticResource pickableWorkerDataTemplate}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

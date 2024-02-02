@@ -3,6 +3,7 @@ using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.BindableControls;
+using TheJobOrganizationApp.ViewModels.ModelWrappers;
 
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
 {
@@ -22,6 +23,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
             this.BindingObject = BindingObject;
             InitializeComponents();
             InitializePermissionEditors();
+            InitializeWrokerColView();
         }
         #endregion
         #region Permissions
@@ -56,12 +58,29 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         }
         #endregion
         #region Workers with Pos
+        public bool InEditMode { get; set; } = false;
+
+        IEnumerable<PickableWorker> workers;
         void InitializeWrokerColView()
         {
             var Workers = dataStorage.GetItems<Worker>();
-            var FilteredWorkers = Workers.Where(w => w.Position == BindingObject);
-            WorkerCollectionView = new ModelCollectionView(FilteredWorkers)
-                .WithEditButton(EditPermission);
+            workers = Workers.Select(w=>new PickableWorker(w,w.Position == BindingObject));
+            WorkerCollectionView = new ModelCollectionView(workers)
+                .WithEditButton(EditPermission,EditButtonPressed);
+        }
+        void EditButtonPressed()
+        {
+            InEditMode = !InEditMode;
+            if (!InEditMode)
+            {
+                foreach(var pickableWorker in workers)
+                {
+                    if (pickableWorker.data)
+                    {
+                        pickableWorker.model.Position = BindingObject;
+                    }
+                }
+            }
         }
         public ModelCollectionView WorkerCollectionView { get; set; }
 
