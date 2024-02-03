@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
+using TheJobOrganizationApp;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
@@ -21,7 +22,7 @@ public partial class ModelCollectionView : ModelView
 {
     #region Constructors and main enumerables
     public ObservableCollection<object> DisplayableList { get; set; } = new();
-    ObservableCollection<object> elements { get; init; }
+    ObservableCollection<object> elements { get; set; }
 
     /// <summary>
     /// Create new instance of observavle ModelCollectionView . You can add additional
@@ -31,12 +32,25 @@ public partial class ModelCollectionView : ModelView
     /// 
     public ModelCollectionView(IEnumerable<object> elements,Type typeToSubscribeTo = null)
     {
-        if (elements.Count()!=0)
+        elements = new();
+        Initiate(elements,typeToSubscribeTo);
+    }
+    public ModelCollectionView()
+    {
+        elements = new();
+    }
+    public void Initiate(IEnumerable<object> elements, Type typeToSubscribeTo = null)
+    {
+        if (elements.Count() != 0)
         {
             typeToSubscribeTo ??= elements.First().GetType();
             if (typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);
         }
-        this.elements = elements is not null ? elements.ToObservableCollection():new ObservableCollection<object>();
+        foreach(var element in elements)
+        {
+            this.elements.Add(element);
+        }
+        LoadCollection();
     }
 
     private void LoadCollection(object sender, NotifyCollectionChangedEventArgs e)
@@ -119,7 +133,7 @@ public partial class ModelCollectionView : ModelView
     /// <summary>
     /// This is method for displaying data , it SHOULD be called async
     /// </summary>
-    public void LoadCollection()
+    void LoadCollection()
     {
         ApplySearchEntry();
         if (FiltersAreVisible)

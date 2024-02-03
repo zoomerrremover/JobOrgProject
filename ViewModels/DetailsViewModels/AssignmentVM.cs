@@ -30,9 +30,9 @@ public partial class AssignmentVM : ThingVM
         Initialize();
 
     }
-    public static async void Load(object vm) {
-        var wm = vm as AssignmentVM;
-        wm.WorkersCollectionView.LoadCollection();
+    public async void Load(object vm) {
+        var models = InitializeModels();
+        WorkersCollectionView.Initiate(models,typeof(Worker));
         }
 
     async void Initialize()
@@ -113,8 +113,8 @@ public partial class AssignmentVM : ThingVM
 
     private void InitializeWorkersCollectionView()
     {
-        var models = InitializeModels();
-        WorkersCollectionView = new ModelCollectionView(models, typeof(Worker))
+
+        WorkersCollectionView = new ModelCollectionView()
             .WithEditButton(EditPermission, ChangeEditMode);
     }
     /// <summary>
