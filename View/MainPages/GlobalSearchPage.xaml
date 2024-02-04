@@ -29,6 +29,9 @@
             SelectionMode="Single"/>
 
 
-
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                   Color="Black"
+                   Grid.Row="2"/>
     </Grid>
+    
 </ContentPage>

@@ -2,8 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services.HighLevelServices;
-using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
 
@@ -22,9 +21,21 @@ public partial class StringPickerVM:ObservableObject
     [ObservableProperty]
     string pickedObject = "";
 
-    public StringPickerVM(ObservableCollection<Thing> objectsBase,Thing InitialValue = null)
+    public StringPickerVM(IEnumerable<Thing> objectsBase,Thing InitialValue = null)
     {
-        objects = objectsBase;
+        objects = new();
+        InitializeContent(objectsBase, InitialValue);
+    }
+    public StringPickerVM()
+    {
+        objects = new();
+    }
+    public void InitializeContent(IEnumerable<Thing> objectsBase, Thing InitialValue = null)
+    {
+        foreach (Thing thing in objectsBase)
+        {
+            objects.Add(thing);
+        }
         pickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
     }
     public StringPickerVM WithAction(Action<string,string> action)

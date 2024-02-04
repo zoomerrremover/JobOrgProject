@@ -30,9 +30,13 @@ public partial class ItemVM : ThingVM
     }
     public void Initialize()
     {
-        InitializeHolders();
+        HoldersCollectionView = new ModelCollectionView()
+                                    .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
         displayablePrice = BindingObject.Price.ToString();
         
+    }
+    public override void LoadContent() {
+        InitializeHolders();
     }
 
     #endregion
@@ -42,8 +46,7 @@ public partial class ItemVM : ThingVM
     {
         var localHolders = dataStorage.GetItemsWithInterface<IHasItems>();
         var values = GetHoldersWithItemQTY(localHolders);
-        HoldersCollectionView = new ModelCollectionView(values.OfType<object>())
-            .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
+        HoldersCollectionView.Initiate(values);
     }
     private List<ThingItemMerge> GetHoldersWithItemQTY(IEnumerable<Thing> localHolders)
     {

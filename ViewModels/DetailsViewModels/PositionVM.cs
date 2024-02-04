@@ -21,7 +21,12 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         public PositionVM(Position BindingObject): base(BindingObject)
         {
             this.BindingObject = BindingObject;
-            InitializeComponents();
+            InitializePermissionEditors();
+            WorkerCollectionView = new ModelCollectionView()
+                .WithEditButton(EditPermission, EditButtonPressed);
+        }
+        public override void LoadContent()
+        {
             InitializePermissionEditors();
             InitializeWrokerColView();
         }
@@ -65,8 +70,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         {
             var Workers = dataStorage.GetItems<Worker>();
             workers = Workers.Select(w=>new PickableWorker(w,w.Position == BindingObject));
-            WorkerCollectionView = new ModelCollectionView(workers)
-                .WithEditButton(EditPermission,EditButtonPressed);
+            WorkerCollectionView.Initiate(workers);
         }
         void EditButtonPressed()
         {

@@ -30,6 +30,11 @@ public partial class ContractorVM:ThingVM
     void Initialize()
     {
         HasContactsVM = new(BindingObject);
+        var permission = EditPermission && userController.GetPermission(typeof(Job), RuleType.Create);
+        JobsCollectionView = new ModelCollectionView().WithAddButton(permission, CreateJob);
+    }
+    public override void LoadContent()
+    {
         InitializeJobs();
     }
 
@@ -40,8 +45,7 @@ public partial class ContractorVM:ThingVM
         var jobs = from job in dataStorage.GetItems<Job>()
                    where job.Contractor == BindingObject
                    select job;
-        var permission = EditPermission && userController.GetPermission(typeof(Job), RuleType.Create);
-        JobsCollectionView = new ModelCollectionView(jobs).WithAddButton(permission, CreateJob);
+        JobsCollectionView.Initiate(jobs,typeof(Job));
     }
     private void CreateJob()
     {

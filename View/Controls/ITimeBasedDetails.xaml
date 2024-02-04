@@ -15,7 +15,7 @@
                 <Label Text="Start time:"/>
                 <DatePicker Date="{Binding DisplayableStartDate}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker Time="{Binding DisplayableStartDate, Mode=TwoWay}"
+                <TimePicker Time="{Binding DisplayableStartTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
             </VerticalStackLayout>
             <VerticalStackLayout
@@ -23,7 +23,7 @@
                 <Label Text="Finish time:"/>
                 <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker Time="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                <TimePicker Time="{Binding DisplayableFinishTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
             </VerticalStackLayout>
             <Button Command="{Binding SaveButtonPressedCommand}"

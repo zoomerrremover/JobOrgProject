@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<base:BaseDetailsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DetailsPages.AssignmentDetailsPage"
              x:DataType="viewModels:AssignmentVM"
              xmlns:viewModels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates">
+             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates"
+             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
     <ContentPage.Resources>
         <ResourceDictionary>
             <dataTemplate:PickableWorkerTemplate x:Key="pickableWorkerTemplate"/>
@@ -17,19 +18,19 @@
           Padding="35">
             <controls:BaseDetails/>
             <controls:StringPicker
-            BindingContext="{Binding JobPicker}"
-            PickerTitle="Job"/>
+                BindingContext="{Binding JobPicker}"
+                PickerTitle="Job"/>
             <controls:ITimeBasedDetails
-            BindingContext="{Binding TimeSelector}"/>
+                BindingContext="{Binding TimeSelector}"/>
             <controls:StringPicker
-            PickerTitle="Place"
-            BindingContext="{Binding PlacePicker}"/>
+                PickerTitle="Place"
+                BindingContext="{Binding PlacePicker}"/>
             <controls:ModelListView
-            Grid.Row = "1"
-            BindingContext="{Binding WorkersCollectionView}"
-            ListTitle="Workers"
-            DataTemplate="{StaticResource pickableWorkerTemplate}"/>
+                Grid.Row = "1"
+                BindingContext="{Binding WorkersCollectionView}"
+                ListTitle="Workers"
+                DataTemplate="{StaticResource pickableWorkerTemplate}"/>
             <controls:HistoryRecords/>
         </VerticalStackLayout>
-    </ScrollView>         
-</ContentPage>
+    </ScrollView>
+</base:BaseDetailsPage>

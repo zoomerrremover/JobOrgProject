@@ -26,6 +26,10 @@ public partial class PlaceVM : ThingVM
         BindingObject = place;
         Initiate();
     }
+    public override void LoadContent()
+    {
+        HasItemsVM.Initialize();
+    }
     public void Initiate()
     {
         InitiateLocationVM();

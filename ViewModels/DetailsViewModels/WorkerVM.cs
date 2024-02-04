@@ -21,7 +21,10 @@ public partial class WorkerVM:ThingVM
         }
         else return null;
     }
-
+    public override void LoadContent()
+    {
+        HasItemsVM.Initialize();
+    }
     public WorkerVM(Worker worker):base(worker)
     {
         BindingObject = worker;
@@ -41,7 +44,7 @@ public partial class WorkerVM:ThingVM
     }
     public void LoadAsync()
     {
-        HasItemsVM.Load();
+        //HasItemsVM.Load();
     }
     #endregion
     #region Position

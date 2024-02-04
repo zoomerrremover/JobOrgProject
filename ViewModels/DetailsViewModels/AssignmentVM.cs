@@ -30,17 +30,41 @@ public partial class AssignmentVM : ThingVM
         Initialize();
 
     }
-    public async void Load(object vm) {
+    public override void LoadContent() {
         var models = InitializeModels();
         WorkersCollectionView.Initiate(models,typeof(Worker));
-        }
-
-    async void Initialize()
-    {
-        TimeSelector = new(BindingObject);
         InitializeJobPicker();
         InitializePlacePicker();
-        InitializeWorkersCollectionView();
+        }
+
+    void Initialize()
+    {
+        var localJobs = dataStorage.GetItems<Job>();
+        TimeSelector = new(BindingObject);
+        JobPicker = new StringPickerVM()
+                        .WithPermissions(EditPermission)
+                            .WithNoneOption()
+                                .WithAction(ChangeJobAction);
+
+        void ChangeJobAction(string oldValue, string newValue)
+        {
+            var oldJob = oldValue != "None" ? localJobs.Single(job => job.Name == oldValue) : null;
+            var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
+            oldJob.Tasks.Remove(BindingObject);
+            newJob.Tasks.Add(BindingObject);
+        }
+        var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
+        PlacePicker = new StringPickerVM()
+                        .WithPermissions(EditPermission)
+                            .WithNoneOption()
+                                .WithAction(ChangePlaceAction);
+        void ChangePlaceAction(string oldValue, string newValue)
+        {
+            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
+            BindingObject.Place = newPlace;
+        }
+        WorkersCollectionView = new ModelCollectionView()
+                                    .WithEditButton(EditPermission, ChangeEditMode);
     }
     #endregion
     #region TimeSelector
@@ -55,17 +79,7 @@ public partial class AssignmentVM : ThingVM
         var localJobs = dataStorage.GetItems<Job>();
         var initialValue = localJobs.Single(job => job.Tasks.Contains(BindingObject));
         var jobsCastedToThing = localJobs.Select(job => job as Thing).ToObservableCollection();
-        JobPicker = new StringPickerVM(jobsCastedToThing, initialValue)
-            .WithPermissions(EditPermission)
-            .WithNoneOption()
-            .WithAction(ChangeJobAction);
-        void ChangeJobAction(string oldValue, string newValue)
-        {
-            var oldJob = oldValue != "None"?localJobs.Single(job => job.Name == oldValue):null;
-            var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
-            oldJob.Tasks.Remove(BindingObject);
-            newJob.Tasks.Add(BindingObject);
-        }
+        JobPicker.InitializeContent(jobsCastedToThing, initialValue);
     }
 
     #endregion
@@ -76,15 +90,6 @@ public partial class AssignmentVM : ThingVM
 
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Place;
-        PlacePicker = new StringPickerVM(localPlaces, initialValue)
-            .WithPermissions(EditPermission)
-            .WithNoneOption()
-            .WithAction(ChangeJobAction);
-        void ChangeJobAction(string oldValue, string newValue)
-        {
-            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
-            BindingObject.Place = newPlace;
-        }
     }
     #endregion
     #region DisplayableWorkersFeature
@@ -111,12 +116,6 @@ public partial class AssignmentVM : ThingVM
         dataStorage.TriggerUpdate<Worker>();
     }
 
-    private void InitializeWorkersCollectionView()
-    {
-
-        WorkersCollectionView = new ModelCollectionView()
-            .WithEditButton(EditPermission, ChangeEditMode);
-    }
     /// <summary>
     /// Initializes models into adaptor (for UI).
     /// </summary>

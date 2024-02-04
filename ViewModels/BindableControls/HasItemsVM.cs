@@ -15,21 +15,16 @@ public partial class HasItemsVM : ModelView
     public HasItemsVM(IHasItems BindingObject)
     {
         this.BindingObject = BindingObject;
-        Initialize();
     }
-    void Initialize()
-    {
-        InitializeItemCollectionView();
-    }
-    public void Load()
-    {
-        ItemsCollectionView.LoadCollection();
-    }
+    //public void LoadAsync()
+    //{
+    //    ItemsCollectionView.LoadCollection();
+    //}
     #endregion
     #region Items
     public ModelCollectionView ItemsCollectionView { get; set; }
 
-    void InitializeItemCollectionView()
+    public void Initialize()
     {
         var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
         ItemsCollectionView = new ModelCollectionView(BindingObject.Items)

@@ -32,6 +32,8 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         [ObservableProperty]
 
         string selectedModel = typeof(Item).Name;
+        [ObservableProperty]
+        bool isLoading = false;
 
         IReflectionContent ReflectionContent;
 
@@ -85,15 +87,16 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         }
         PageFactory factory;
         [RelayCommand]
-        public void GoToDetails(Thing SelectedObject)
+        async void GoToDetails(Thing SelectedObject)
         {
-            if(SelectedObject is null)
+            IsLoading = true;
+            if (SelectedObject is null)
             {
                 return;
             }
             var pageToLoad = factory.MakeADetailsPage(SelectedObject);
-            Shell.Current.Navigation.PushAsync(pageToLoad);
-
+            await Shell.Current.Navigation.PushAsync(pageToLoad);
+            IsLoading = false;
         }
 
         void InitiateModelChoice()

@@ -32,7 +32,7 @@ public partial class ModelCollectionView : ModelView
     /// 
     public ModelCollectionView(IEnumerable<object> elements,Type typeToSubscribeTo = null)
     {
-        elements = new();
+        this.elements = new();
         Initiate(elements,typeToSubscribeTo);
     }
     public ModelCollectionView()

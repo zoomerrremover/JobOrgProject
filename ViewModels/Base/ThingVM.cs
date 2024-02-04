@@ -20,8 +20,11 @@ namespace TheJobOrganizationApp.ViewModels.Base
         public ThingVM(Thing BindingObject)
         {
             this.BindingObject = BindingObject;
-            InitializeComponents();
 
+        }
+        public virtual void LoadContent()
+        {
+            InitializeComponents();
         }
         public void InitializeComponents()
         {

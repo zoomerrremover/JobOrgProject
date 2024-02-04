@@ -28,10 +28,20 @@ public partial class JobVM:ThingVM
         BindingObject = item;
         Initialize();
     }
+
+    public override void LoadContent()
+    {
+        InitializeAssignments();
+    }
     void Initialize()
     {
         InitializeContractorPicker();
-        InitializeAssignments();
+        var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
+        AssignmentCollectionView = new ModelCollectionView()
+                                       .WithAddButton(permission, CreateAssignment)
+                                       .WithFilters(("Name", NameSelector),
+                                                    ("Most Recent", TimeMostRecentSelector),
+                                                    ("Least Recent", TimeLessRecentSelector));
         InitializeTimeBasedVM();
         InitializePlacePicker();
     }
@@ -62,7 +72,8 @@ public partial class JobVM:ThingVM
 
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Place;
-        PlacePickerVM = new StringPickerVM(localPlaces, initialValue)
+        PlacePickerVM.InitializeContent(localPlaces, initialValue);
+        PlacePickerVM = new StringPickerVM()
             .WithPermissions(EditPermission)
             .WithNoneOption()
             .WithAction(ChangeJobAction);
@@ -84,12 +95,7 @@ public partial class JobVM:ThingVM
     public ModelCollectionView AssignmentCollectionView { get; set; }
     void InitializeAssignments()
     {
-        var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
-        AssignmentCollectionView = new ModelCollectionView(BindingObject.Tasks)
-                                       .WithAddButton(permission,CreateAssignment)
-                                       .WithFilters(("Name",NameSelector),
-                                                    ("Most Recent",TimeMostRecentSelector),
-                                                    ("Least Recent",TimeLessRecentSelector));
+        AssignmentCollectionView.Initiate(BindingObject.Tasks);
     }
 
     void CreateAssignment()

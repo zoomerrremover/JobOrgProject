@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<base:BaseDetailsPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DetailsPages.PositionDetailsPage"
              x:DataType="viewmodels:PositionVM"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates">
+             xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates"
+             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
     <ContentPage.Resources>
         <ResourceDictionary>
             <dataTemplate:PermissionDataTemplate x:Key="permissionDataTemplate"/>
@@ -41,4 +42,4 @@
                 DataTemplate="{StaticResource pickableWorkerDataTemplate}"/>
         </VerticalStackLayout>
     </ScrollView>
-</ContentPage>
+</base:BaseDetailsPage>

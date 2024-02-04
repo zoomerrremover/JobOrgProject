@@ -23,6 +23,8 @@ public partial class TimeBasedVM : ModelView
     {
         DisplayableStartDate = BindingObject.StartTime;
         DisplayableStartDate = BindingObject.FinishTime;
+        DisplayableStartTime = new TimeSpan(BindingObject.StartTime.Hour, BindingObject.StartTime.Minute,BindingObject.StartTime.Second);
+        DisplayableFinishTime = new TimeSpan(BindingObject.FinishTime.Hour, BindingObject.FinishTime.Minute, BindingObject.FinishTime.Second);
     }
 
     #endregion
@@ -31,6 +33,10 @@ public partial class TimeBasedVM : ModelView
     DateTime displayableStartDate;
     [ObservableProperty]
     DateTime displayableFinishDate;
+    [ObservableProperty]
+    TimeSpan displayableStartTime;
+    [ObservableProperty]
+    TimeSpan displayableFinishTime;
     [ObservableProperty]
     bool inputTransparency = true;
 
@@ -43,6 +49,7 @@ public partial class TimeBasedVM : ModelView
             {
                 BindingObject.FinishTime = DisplayableFinishDate;
                 BindingObject.StartTime = DisplayableStartDate;
+
                 dataStorage.TriggerUpdate(BindingObject);
 
             }
