@@ -23,6 +23,7 @@ public partial class WorkerVM:ThingVM
     }
     public override void LoadContent()
     {
+        base.LoadContent();
         HasItemsVM.Initialize();
     }
     public WorkerVM(Worker worker):base(worker)

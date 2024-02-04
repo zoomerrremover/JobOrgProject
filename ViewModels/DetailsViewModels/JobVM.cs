@@ -31,6 +31,7 @@ public partial class JobVM:ThingVM
 
     public override void LoadContent()
     {
+        base.LoadContent();
         InitializeAssignments();
     }
     void Initialize()

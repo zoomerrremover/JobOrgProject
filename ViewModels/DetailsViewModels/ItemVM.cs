@@ -36,6 +36,7 @@ public partial class ItemVM : ThingVM
         
     }
     public override void LoadContent() {
+        base.LoadContent();
         InitializeHolders();
     }
 

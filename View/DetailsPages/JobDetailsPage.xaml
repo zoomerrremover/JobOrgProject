@@ -8,12 +8,12 @@
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
              xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates"
              xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
-    <ContentPage.Resources>
+    <base:BaseDetailsPage.Resources>
         <ResourceDictionary>
             <dataTemplate:AssignmentDataTemplate x:Key="assignmentDataTemplate"/>
 
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </base:BaseDetailsPage.Resources>
     <ScrollView>
         <VerticalStackLayout
           Spacing="10"

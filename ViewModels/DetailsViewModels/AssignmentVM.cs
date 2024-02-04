@@ -31,6 +31,7 @@ public partial class AssignmentVM : ThingVM
 
     }
     public override void LoadContent() {
+        base.LoadContent();
         var models = InitializeModels();
         WorkersCollectionView.Initiate(models,typeof(Worker));
         InitializeJobPicker();

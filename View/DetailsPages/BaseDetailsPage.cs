@@ -2,7 +2,7 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.View.DetailsPages;
 
-public abstract class BaseDetailsPage : ContentPage
+public class BaseDetailsPage : ContentPage
 {
     protected async override void OnAppearing()
     {

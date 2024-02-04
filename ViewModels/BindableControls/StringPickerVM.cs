@@ -14,9 +14,7 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 public partial class StringPickerVM:ObservableObject
 {
     ObservableCollection<Thing> objects { get; init; }
-    public ObservableCollection<string> DisplayableObjects {
-        get => objects.Select(x => x.Name).ToObservableCollection();
-            }
+    public ObservableCollection<string> DisplayableObjects { get; set; }
 
     [ObservableProperty]
     string pickedObject = "";
@@ -24,17 +22,27 @@ public partial class StringPickerVM:ObservableObject
     public StringPickerVM(IEnumerable<Thing> objectsBase,Thing InitialValue = null)
     {
         objects = new();
+        DisplayableObjects = new();
         InitializeContent(objectsBase, InitialValue);
     }
     public StringPickerVM()
     {
         objects = new();
+        DisplayableObjects = new();
     }
     public void InitializeContent(IEnumerable<Thing> objectsBase, Thing InitialValue = null)
     {
         foreach (Thing thing in objectsBase)
         {
             objects.Add(thing);
+            try
+            {
+                DisplayableObjects.Add(thing.Name);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
         pickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
     }

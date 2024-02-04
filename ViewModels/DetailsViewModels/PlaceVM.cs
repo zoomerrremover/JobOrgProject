@@ -28,6 +28,7 @@ public partial class PlaceVM : ThingVM
     }
     public override void LoadContent()
     {
+        base.LoadContent();
         HasItemsVM.Initialize();
     }
     public void Initiate()

@@ -27,8 +27,8 @@ public class PageFactory: IPageFactory
 
     public ContentPage MakeADetailsPage(Thing model)
     {
-        var ViewModel = Convertor.ConvertToViewModel(model);
         var Page = Convertor.ConvertToContentPage(model);
+        var ViewModel = Convertor.ConvertToViewModel(model);
         Page.BindingContext =ViewModel;
         return Page;
 

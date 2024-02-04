@@ -20,18 +20,20 @@ namespace TheJobOrganizationApp.ViewModels.Base
         public ThingVM(Thing BindingObject)
         {
             this.BindingObject = BindingObject;
+            HistoryCollectionView = new ModelCollectionView();
 
         }
         public virtual void LoadContent()
         {
-            InitializeComponents();
+            InitializeTextFields();
+            InitializeHistoryCollectionView();
         }
-        public void InitializeComponents()
+
+        private void InitializeTextFields()
         {
             DisplayableName = BindingObject.Name;
             DisplayableDescription = BindingObject.Description;
             DisplayableID = BindingObject.Id.ToString();
-            InitializeHistoryCollectionView();
         }
         #endregion
         #region Name
@@ -75,7 +77,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
 
         void InitializeHistoryCollectionView()
         {
-            HistoryCollectionView = new ModelCollectionView(BindingObject.History);
+            HistoryCollectionView.Initiate(BindingObject.History);
 
         }
         #endregion

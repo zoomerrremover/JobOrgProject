@@ -3,6 +3,7 @@ using System.Reflection;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.View.DetailsPages;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.Services.HighLevelServices
@@ -57,7 +58,7 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
                                 DetailsViewModels[viewModelLinkedClass] = type;
                             }
                             break;
-                        case Type t when t.BaseType == typeof(ContentPage) & Attribute.IsDefined(t, typeof(DetailsPageAttribute)):
+                        case Type t when t.BaseType == typeof(BaseDetailsPage) & Attribute.IsDefined(t, typeof(DetailsPageAttribute)):
                             var pageAttribute = (DetailsPageAttribute)Attribute.GetCustomAttribute(type, typeof(DetailsPageAttribute));
                             var pageLinkedClass = pageAttribute.ClassLinked;
                             if (pageLinkedClass is not null)

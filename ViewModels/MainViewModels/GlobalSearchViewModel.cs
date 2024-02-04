@@ -89,14 +89,24 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         [RelayCommand]
         async void GoToDetails(Thing SelectedObject)
         {
-            IsLoading = true;
-            if (SelectedObject is null)
+            try
             {
-                return;
+                IsLoading = true;
+                if (SelectedObject is null)
+                {
+                    return;
+                }
+                var pageToLoad = factory.MakeADetailsPage(SelectedObject);
+                await Shell.Current.Navigation.PushAsync(pageToLoad);
             }
-            var pageToLoad = factory.MakeADetailsPage(SelectedObject);
-            await Shell.Current.Navigation.PushAsync(pageToLoad);
-            IsLoading = false;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
 
         void InitiateModelChoice()

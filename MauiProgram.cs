@@ -4,15 +4,12 @@ using TheJobOrganizationApp.ViewModels;
 using Syncfusion.Maui.Core.Hosting;
 using TheJobOrganizationApp.Services;
 using Mopups.Hosting;
-using CommunityToolkit.Maui.Maps;
 using Mopups.Services;
 using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.Services.HighLevelServices;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
-using TheJobOrganizationApp.ViewModels.Base;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TheJobOrganizationApp
 {
@@ -31,6 +28,7 @@ namespace TheJobOrganizationApp
                     fonts.AddFont("SF-Pro.ttf", "MainFont");
                     fonts.AddFont("SF-Pro-Display-Medium.otf", "BoldFont");
                 });
+            #region Services
             builder.Services.AddSingleton(MopupService.Instance);
             builder.Services.AddTransient<IErrorService, ErrorService>();
             builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
@@ -38,6 +36,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IUserController, UserController>();
             builder.Services.AddSingleton<ISettings,AppSettings>();
             builder.Services.AddTransient<IInitializator,Initializator>();
+            #endregion
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
             builder.Services.AddSingleton<IXAMLContent, RuntimeContent>

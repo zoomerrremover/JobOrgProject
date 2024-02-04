@@ -27,6 +27,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         }
         public override void LoadContent()
         {
+            base.LoadContent();
             InitializePermissionEditors();
             InitializeWrokerColView();
         }

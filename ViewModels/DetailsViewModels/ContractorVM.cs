@@ -35,6 +35,7 @@ public partial class ContractorVM:ThingVM
     }
     public override void LoadContent()
     {
+        base.LoadContent();
         InitializeJobs();
     }
 
