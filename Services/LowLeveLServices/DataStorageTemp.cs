@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp;
 
 namespace TheJobOrganizationApp.Services;
 

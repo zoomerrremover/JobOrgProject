@@ -10,6 +10,7 @@ using TheJobOrganizationApp.Services.HighLevelServices;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
+using TheJobOrganizationApp.View.DetailsPages;
 
 namespace TheJobOrganizationApp
 {
@@ -36,6 +37,8 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IUserController, UserController>();
             builder.Services.AddSingleton<ISettings,AppSettings>();
             builder.Services.AddTransient<IInitializator,Initializator>();
+            builder.Services.AddTransient<FakeDataFactory>();
+            builder.Services.AddTransient<PageFactory>();
             #endregion
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
@@ -47,18 +50,21 @@ namespace TheJobOrganizationApp
             #region User Controller
             builder.Services.AddSingleton<IUserController, UserController>();
             #endregion
-            builder.Services.AddTransient<FakeDataFactory>();
-            builder.Services.AddTransient<PageFactory>();
+            #region ViewModels
             builder.Services.AddTransient<ScheldudeViewModel>();
             builder.Services.AddTransient<GlobalSearchViewModel>();
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
+            #endregion
+            #region Pages
             builder.Services.AddTransient<WorkerPickerPage>();
             builder.Services.AddTransient<LogInPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddTransient<GlobalSearchPage>();
+            builder.Services.AddTransient<AssignmentDetailsPage>();
             builder.Services.AddTransient<SettingsPage>();
+            #endregion
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

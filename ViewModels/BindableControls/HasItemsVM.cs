@@ -15,6 +15,11 @@ public partial class HasItemsVM : ModelView
     public HasItemsVM(IHasItems BindingObject)
     {
         this.BindingObject = BindingObject;
+        var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
+        ItemsCollectionView = new ModelCollectionView()
+                                       .WithAddButton(permission, AddButton)
+                                       .WithFilters(("Name", NameSelector),
+                                                    ("Quantity", QuantitySelector));
     }
     //public void LoadAsync()
     //{
@@ -26,11 +31,7 @@ public partial class HasItemsVM : ModelView
 
     public void Initialize()
     {
-        var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
-        ItemsCollectionView = new ModelCollectionView(BindingObject.Items)
-                                       .WithAddButton(permission, AddButton)
-                                       .WithFilters(("Name", NameSelector),
-                                                    ("Quantity", QuantitySelector));
+        ItemsCollectionView.Initiate(BindingObject.Items);
     }
 
     void AddButton()
