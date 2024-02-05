@@ -5,17 +5,18 @@
              x:DataType="viewmodels:ScheldudeViewModel"
              x:Class="TheJobOrganizationApp.ScheldudePage"
              xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler">
-    <Grid ColumnDefinitions="150,150,*,160" 
-          RowDefinitions="45,*">
-        <Button Text="Pick workers"
-                Grid.Column="0"
-                Command="{Binding WorkerPickerCommand}"/>
-        <Button Text="Pick appointments"
-                Grid.Column="1"
-                Command="{Binding WorkerPickerCommand}"/>
-        <Button Text="Create appointment"
-                Grid.Column="3"
-                Command="{Binding WorkerPickerCommand}"/>
+    <Grid 
+          RowDefinitions="45,*"
+          ColumnDefinitions="*,*"
+          ColumnSpacing="20"
+          Padding="10">
+            
+            <Button Text="Pick workers"
+                    Grid.Column="0"
+                    Command="{Binding WorkerPickerCommand}"/>
+            <Button Text="Create appointment"
+                    Grid.Column="1"
+                    Command="{Binding WorkerPickerCommand}"/>
         <scheduler:SfScheduler Grid.Row="1"
                                Grid.ColumnSpan="4"
                                AllowedViews="Day,Week,Month"

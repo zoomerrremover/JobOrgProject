@@ -32,7 +32,7 @@ public partial class ItemVM : ThingVM
     {
         HoldersCollectionView = new ModelCollectionView()
                                     .WithFilters(("Name", NameSelector), ("Quantity", QuantitySelector));
-        displayablePrice = BindingObject.Price.ToString();
+        DisplayablePrice = BindingObject.Price.ToString();
         
     }
     public override void LoadContent() {

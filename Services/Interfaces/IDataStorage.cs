@@ -12,7 +12,6 @@ namespace TheJobOrganizationApp.Services
         public void RegisterModel(Type type);
         public void AddThing<T>(T thing) where T : Thing;
         public void AddThing<T>(IEnumerable<T> thing) where T : Thing;
-        public void TriggerUpdate<T>(T key = null) where T : class;
         public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action, Type type);
         public void RemoveThing<T>(T thing)where T : Thing;
         public bool InitializeDatabase()

@@ -10,4 +10,10 @@ public partial class GlobalSearchPage : ContentPage
 		BindingContext = bc;
 		InitializeComponent();
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        var vm = BindingContext as GlobalSearchViewModel;
+        vm.LoadContent();
+    }
 }

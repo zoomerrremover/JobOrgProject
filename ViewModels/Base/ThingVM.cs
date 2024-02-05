@@ -49,7 +49,6 @@ namespace TheJobOrganizationApp.ViewModels.Base
             {
                 BindingObject.Name = DisplayableName;
             }
-            dataStorage.TriggerUpdate(BindingObject);
         }
         #endregion
         #region ID
@@ -69,7 +68,6 @@ namespace TheJobOrganizationApp.ViewModels.Base
             {
                 BindingObject.Description = DisplayableDescription;
             }
-            dataStorage.TriggerUpdate(BindingObject);
         }
         #endregion
         #region History

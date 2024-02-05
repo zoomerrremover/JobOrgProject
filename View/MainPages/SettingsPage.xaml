@@ -5,14 +5,24 @@
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="TheJobOrganizationApp.View.SettingsPage"
              Title="SettingsPage">
-    <VerticalStackLayout>
-        <Label Text="Lang"/>
-        <Picker/>
-        <Label Text="App Theme"/>
-        <Switch/>
-        <Label Text="GeoLocation"/>
-        <Switch/>
-        <Label Text="Notifications"/>
-        <Switch/>
+    <VerticalStackLayout
+        Padding="35"
+        Spacing="10">
+        <HorizontalStackLayout>
+            <Label Text="Lang"/>
+            <Picker/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="App Theme"/>
+            <Switch/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="GeoLocation"/>
+            <Switch/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Notifications"/>
+            <Switch/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

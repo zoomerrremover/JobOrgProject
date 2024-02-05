@@ -44,7 +44,7 @@ public partial class StringPickerVM:ObservableObject
                 Console.WriteLine(ex);
             }
         }
-        pickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
+        PickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
     }
     public StringPickerVM WithAction(Action<string,string> action)
     {

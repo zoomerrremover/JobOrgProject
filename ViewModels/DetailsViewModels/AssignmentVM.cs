@@ -114,7 +114,6 @@ public partial class AssignmentVM : ThingVM
         {
             BindingObject.Workers.Remove(obj.model);
         }
-        dataStorage.TriggerUpdate<Worker>();
     }
 
     /// <summary>

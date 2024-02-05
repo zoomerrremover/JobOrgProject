@@ -13,9 +13,7 @@ public partial class HasContactsVM
     IHasContacts bindingObject;
     public HasContactsVM(IHasContacts bindingObject)
     {
-
         this.bindingObject = bindingObject;
-
     }
 
     public string Cell

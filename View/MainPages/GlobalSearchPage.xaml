@@ -7,22 +7,21 @@
              xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
              Title="GlobalSearchPage">
-    <Grid RowDefinitions="60,60,*" >
-        <Grid ColumnDefinitions="*,60" Grid.Row="0">
-            <Entry Grid.Column="0"
+    <Grid RowDefinitions="60,60,*"
+          Padding="10"
+          ColumnSpacing="15">
+        <Entry Grid.Column="0"
                    Text="{Binding SearchPromt}"></Entry>
-            <Button Grid.Column="1"></Button>
-        </Grid>
-        <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="1" Margin="8" >
+            <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="1" Margin="8" >
             <HorizontalStackLayout Spacing="8">
-                <Button Text="Add"/>
-                <Button Text="Delete"></Button>
+                <Button/>
+                <Button/>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"
                     ItemsSource="{Binding DisplayedPickerItems}"
                     SelectedItem="{Binding SelectedModel}"></Picker>
         </Grid>
-        <CollectionView 
+        <CollectionView
             ItemsSource="{Binding ObsModels}"
             Grid.Row="2" 
             ItemTemplate="{Binding CurrentTemplate}"
@@ -31,6 +30,8 @@
 
         <ActivityIndicator IsRunning="{Binding IsLoading}"
                    Color="Black"
+                   WidthRequest="100"
+                   HeightRequest="100"
                    Grid.Row="2"/>
     </Grid>
     
