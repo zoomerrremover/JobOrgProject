@@ -8,8 +8,8 @@
     <Frame HeightRequest="75"  Margin="0">
         <Frame.GestureRecognizers>
             <TapGestureRecognizer 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
-                                        CommandParameter="{Binding .}"/>
+               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+               CommandParameter="{Binding .}"/>
         </Frame.GestureRecognizers>
         <Grid ColumnDefinitions="150,150,350"
                ColumnSpacing="60">

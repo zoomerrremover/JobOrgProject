@@ -20,6 +20,8 @@ namespace TheJobOrganizationApp.ViewModels.Base
 
         protected static IReflectionContent reflectionContent;
 
+        [ObservableProperty]
+        bool isLoading = false;
         public bool EditPermission { get => userController.GetPermission(BindingObject, RuleType.Edit); }
 
         protected Thing BindingObject;

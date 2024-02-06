@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
+using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
@@ -11,14 +12,12 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 public partial class TimeBasedVM : ModelView
 {
     #region CTORS
-    [ObservableProperty]
-    ITimeBased bindingObject;
+    new ITimeBased BindingObject;
     public TimeBasedVM(ITimeBased BindingObject)
     {
         this.BindingObject = BindingObject;
         InitializeData();
     }
-
     void InitializeData()
     {
         DisplayableStartDate = BindingObject.StartTime;
@@ -43,27 +42,32 @@ public partial class TimeBasedVM : ModelView
     [RelayCommand]
     void OnSaveButtonPressed()
     {
-        if(!InputTransparency)
-        {
-            if (DisplayableStartDate < DisplayableFinishDate)
+        if (EditPermission) { 
+            InputTransparency = !InputTransparency;
+            if (InputTransparency)
             {
-                BindingObject.FinishTime = DisplayableFinishDate;
-                BindingObject.StartTime = DisplayableStartDate;
+                if (DisplayableStartDate < DisplayableFinishDate)
+                {
+                    BindingObject.FinishTime = new(DisplayableFinishDate.Year,
+                        DisplayableFinishDate.Month,
+                        DisplayableFinishDate.Day,
+                        DisplayableFinishTime.Hours,
+                        DisplayableFinishTime.Minutes, 0);
+                    BindingObject.StartTime = new(DisplayableStartDate.Year,
+                        DisplayableStartDate.Month,
+                        DisplayableStartDate.Day,
+                        DisplayableStartTime.Hours,
+                        DisplayableStartTime.Minutes, 0);
+                }
+                else
+                {
+                    errorService.CallError("The dates does not match !");
+                    InitializeData();
+                }
             }
-            else
-            {
-                DisplayTimeError.Invoke();
-                DisplayableFinishDate = BindingObject.FinishTime;
-                DisplayableFinishDate = BindingObject.StartTime;
-            }
-        }
-        else
-        {
-            InputTransparency = false;
         }
 
     }
 
-    public event Action DisplayTimeError = () => { };
     #endregion
 }

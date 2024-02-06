@@ -28,7 +28,6 @@ namespace TheJobOrganizationApp.ViewModels.Base
             InitializeTextFields();
             InitializeHistoryCollectionView();
         }
-
         private void InitializeTextFields()
         {
             DisplayableName = BindingObject.Name;
@@ -52,7 +51,8 @@ namespace TheJobOrganizationApp.ViewModels.Base
         }
         #endregion
         #region ID
-        public string DisplayableID { get; private set; }
+        [ObservableProperty]
+        public string displayableID;
         #endregion
         #region Description
         [ObservableProperty]

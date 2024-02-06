@@ -12,6 +12,12 @@ public partial class ScheldudePage : ContentPage
         InitializeComponent();
 
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        var bc = BindingContext as ScheldudeViewModel;
+        bc.InitializeAppointments();
+    }
 
 
 }

@@ -49,10 +49,15 @@ public partial class AssignmentVM : ThingVM
 
         void ChangeJobAction(string oldValue, string newValue)
         {
-            var oldJob = oldValue != "None" ? localJobs.Single(job => job.Name == oldValue) : null;
-            var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
-            oldJob.Tasks.Remove(BindingObject);
-            newJob.Tasks.Add(BindingObject);
+            if (EditPermission && !IsLoading)
+            {
+                IsLoading = true;
+                var oldJob = oldValue != "None" ? localJobs.Single(job => job.Name == oldValue) : null;
+                var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
+                oldJob.Tasks.Remove(BindingObject);
+                newJob.Tasks.Add(BindingObject);
+                IsLoading = false;
+            }
         }
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         PlacePicker = new StringPickerVM()
@@ -61,8 +66,13 @@ public partial class AssignmentVM : ThingVM
                                 .WithAction(ChangePlaceAction);
         void ChangePlaceAction(string oldValue, string newValue)
         {
-            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
-            BindingObject.Place = newPlace;
+            if (EditPermission && !IsLoading)
+            {
+                IsLoading = true;
+                var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
+                BindingObject.Place = newPlace;
+                IsLoading = false;
+            }
         }
         WorkersCollectionView = new ModelCollectionView()
                                     .WithEditButton(EditPermission, ChangeEditMode);
@@ -105,14 +115,19 @@ public partial class AssignmentVM : ThingVM
     /// </summary>
     void EditWorker(PickableWorker obj)
     {
-        obj.data = !obj.data;
-        if (obj.data)
+        if (EditPermission && !IsLoading)
         {
-            BindingObject.Workers.Add(obj.model);
-        }
-        else
-        {
-            BindingObject.Workers.Remove(obj.model);
+            IsLoading = true;
+            obj.data = !obj.data;
+            if (obj.data)
+            {
+                BindingObject.Workers.Add(obj.model);
+            }
+            else
+            {
+                BindingObject.Workers.Remove(obj.model);
+            }
+            IsLoading = false;
         }
     }
 

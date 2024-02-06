@@ -28,7 +28,7 @@ public partial class ScheldudeViewModel
 
     ObservableCollection<Assignment> GlobalAssignments;
 
-    void InitializeAppointments (object sender = null,EventArgs e = null)
+    public void InitializeAppointments (object sender = null,EventArgs e = null)
     {
         appointments.Clear ();
         tasksOnTheScreen.Clear ();
