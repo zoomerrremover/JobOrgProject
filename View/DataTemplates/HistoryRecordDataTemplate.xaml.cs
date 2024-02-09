@@ -1,6 +1,6 @@
 namespace TheJobOrganizationApp.View.DataTemplates;
 
-public partial class HistoryRecordDataTemplate : ContentView
+public partial class HistoryRecordDataTemplate : DataTemplate
 {
 	public HistoryRecordDataTemplate()
 	{

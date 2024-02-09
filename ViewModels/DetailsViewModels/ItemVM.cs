@@ -73,10 +73,11 @@ public partial class ItemVM : ThingVM
     public void PriceEditButtonPressed()
     {
         PriceInEditMode = !PriceInEditMode;
-        if(PriceInEditMode)
+        float localPrice;
+        float.TryParse(DisplayablePrice, out localPrice);
+        if (EditPermission && PriceInEditMode && BindingObject.Price != localPrice)
         {
-            float localPrice;
-            float.TryParse(DisplayablePrice, out localPrice);
+            CreateChangeHistoryRecord("Price", BindingObject.Price.ToString(), localPrice.ToString());
             BindingObject.Price = localPrice;
         }
     }

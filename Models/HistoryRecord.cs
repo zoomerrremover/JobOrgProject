@@ -1,4 +1,5 @@
 ﻿
+using System.Text;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Models.Misc;
@@ -15,8 +16,8 @@ public record HistoryRecord
     public HistoryActionType ActionType { get; set; }
     public DateTime Time {  get; set; }
     public string FieldName {  get; set; }
-    public string Value { get; set; }
-    public string Value2 { get; set; }
+    public string OldValue { get; set; }
+    public string NewValue { get; set; }
     public HistoryRecord()
     {
         ID = Guid.NewGuid();
@@ -26,17 +27,25 @@ public record HistoryRecord
     {
         get
         {
+            StringBuilder message = new(User.UserName);
             switch (ActionType)
             {
                 case HistoryActionType.Added:
-                    return $"{User.UserName} has created {Subject}.";
+                    message.Append($"Created this {Subject.GetType().Name}.");
+                    break;
                 case HistoryActionType.Deleted:
-                    return $"{User.UserName} has deleted {Subject}.";
+                    message.Append($" has deleted {Subject.GetType().Name}.");
+                    break;
                 case HistoryActionType.Changed:
-                    return $"{User.UserName} has changed {FieldName} from {Value} to {Value2}.";
+                    message.Append($" has changed {FieldName}");
+                    var changPart = OldValue is not null? $"{FieldName} from {OldValue} to {NewValue}.":"";
+                    message.Append(changPart);
+                    break;
                 default:
                     return "Undisplayable history event";
             }
+            message.Append($" on {Time.ToString("d")} at {Time.ToString("t")}");
+            return message.ToString();
         }
     }
 

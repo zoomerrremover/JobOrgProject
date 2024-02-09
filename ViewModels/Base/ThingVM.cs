@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.BindableControls;
 
 namespace TheJobOrganizationApp.ViewModels.Base
@@ -44,10 +43,17 @@ namespace TheJobOrganizationApp.ViewModels.Base
         protected virtual void NameEditButtonPressed()
         {
             NameInEditMode = !NameInEditMode;
-            if (NameInEditMode)
+            if (NameInEditMode && BindingObject.Name != DisplayableName)
             {
+                
+                CreateChangeHistoryRecord($"{nameof(BindingObject.Name)}", BindingObject.Name, DisplayableName);
                 BindingObject.Name = DisplayableName;
             }
+        }
+        protected virtual void CreateChangeHistoryRecord(string property, string oldValue = null, string newValue = null)
+        {
+            userController.CreateHistoryRecord(BindingObject, Models.Misc.HistoryActionType.Changed, property, oldValue, newValue);
+            InitializeHistoryCollectionView();
         }
         #endregion
         #region ID
@@ -64,8 +70,9 @@ namespace TheJobOrganizationApp.ViewModels.Base
         protected virtual void DescriptionEditButtonPressed()
         {
             DescriptionInEditMode = !DescriptionInEditMode;
-            if (DescriptionInEditMode)
+            if (DescriptionInEditMode && BindingObject.Description != DisplayableDescription)
             {
+                CreateChangeHistoryRecord($"{nameof(BindingObject.Description)}", BindingObject.Description , DisplayableDescription);
                 BindingObject.Description = DisplayableDescription;
             }
         }

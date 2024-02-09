@@ -48,16 +48,28 @@ public partial class TimeBasedVM : ModelView
             {
                 if (DisplayableStartDate < DisplayableFinishDate)
                 {
-                    BindingObject.FinishTime = new(DisplayableFinishDate.Year,
+                    var localFinishTime = new DateTime(DisplayableFinishDate.Year,
                         DisplayableFinishDate.Month,
                         DisplayableFinishDate.Day,
                         DisplayableFinishTime.Hours,
                         DisplayableFinishTime.Minutes, 0);
-                    BindingObject.StartTime = new(DisplayableStartDate.Year,
+                    var localStartTime = new DateTime(DisplayableStartDate.Year,
                         DisplayableStartDate.Month,
                         DisplayableStartDate.Day,
                         DisplayableStartTime.Hours,
                         DisplayableStartTime.Minutes, 0);
+                    if (localFinishTime != BindingObject.FinishTime)
+                    {
+                        userController.CreateHistoryRecord(BindingObject as Thing, Models.Misc.HistoryActionType.Changed,
+                            "finish time", BindingObject.FinishTime.ToString("t/d"), localFinishTime.ToString("t/d"));
+                        BindingObject.FinishTime = localFinishTime;
+                    }
+                    if (localStartTime != BindingObject.StartTime)
+                    {
+                        userController.CreateHistoryRecord(BindingObject as Thing, Models.Misc.HistoryActionType.Changed,
+                            "start time", BindingObject.StartTime.ToString("t/d"), localStartTime.ToString("t/d"));
+                        BindingObject.FinishTime = localFinishTime;
+                    }
                 }
                 else
                 {

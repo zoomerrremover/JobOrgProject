@@ -11,16 +11,18 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
         public int VisibilityLevel { get => User.Position.VisibilityLevel; }
         List<Rule> Permissions { get => User.Position.Permissions; }
         IUser User { get;set; }
-        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object value = null, object value2 = null)
+        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object oldValue = null, object newValue = null)
         {
             var newHistoryRecord = new HistoryRecord()
             {
                 User = User,
+                Subject = Object,
                 ActionType = type,
                 FieldName = propertyName,
-                Value = value.ToString(),
-                Value2 = value2.ToString()
+                OldValue = oldValue.ToString(),
+                NewValue = newValue.ToString()
             };
+            Object.History.Add(newHistoryRecord);
         }
         public bool GetPermission(Thing Object, RuleType Type)
         {

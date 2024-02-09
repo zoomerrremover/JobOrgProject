@@ -37,6 +37,7 @@
                 BindingContext="{Binding HoldersCollectionView}"
                 ListTitle="Holders"
                 DataTemplate="{StaticResource holderTemplate}"/>
+            <controls:HistoryRecords/>
         </VerticalStackLayout>
     </ScrollView>
 </base:BaseDetailsPage>

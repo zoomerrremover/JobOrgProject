@@ -58,11 +58,12 @@ public partial class WorkerVM:ThingVM
         PositionPickerVM = new StringPickerVM(localPositions, initialValue)
             .WithPermissions(EditPermission)
             .WithNoneOption()
-            .WithAction(ChangeJobAction);
-        void ChangeJobAction(string oldValue, string newValue)
+            .WithAction(ChangePositionAction);
+        void ChangePositionAction(string oldValue, string newValue)
         {
-            var newPlace = newValue != "None" ? localPositions.Single(job => job.Name == newValue) as Position: null;
-            BindingObject.Position = newPlace;
+            var newPosition = newValue != "None" ? localPositions.Single(job => job.Name == newValue) as Position: null;
+            CreateChangeHistoryRecord("position", BindingObject.Position.ToString(), newPosition.ToString());
+            BindingObject.Position = newPosition;
         }
     }
     #endregion

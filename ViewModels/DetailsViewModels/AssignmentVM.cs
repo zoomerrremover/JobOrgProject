@@ -1,7 +1,6 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
@@ -56,6 +55,7 @@ public partial class AssignmentVM : ThingVM
                 var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
                 oldJob.Tasks.Remove(BindingObject);
                 newJob.Tasks.Add(BindingObject);
+                CreateChangeHistoryRecord("job", oldValue, newValue);
                 IsLoading = false;
             }
         }
@@ -71,6 +71,7 @@ public partial class AssignmentVM : ThingVM
                 IsLoading = true;
                 var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
                 BindingObject.Place = newPlace;
+                CreateChangeHistoryRecord("location",oldValue,newValue);
                 IsLoading = false;
             }
         }
@@ -127,6 +128,7 @@ public partial class AssignmentVM : ThingVM
             {
                 BindingObject.Workers.Remove(obj.model);
             }
+            CreateChangeHistoryRecord("worker list");
             IsLoading = false;
         }
     }

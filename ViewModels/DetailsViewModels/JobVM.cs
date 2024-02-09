@@ -33,6 +33,7 @@ public partial class JobVM:ThingVM
     {
         base.LoadContent();
         InitializeAssignments();
+        InitializePlacePicker();
     }
     void Initialize()
     {
@@ -43,8 +44,18 @@ public partial class JobVM:ThingVM
                                        .WithFilters(("Name", NameSelector),
                                                     ("Most Recent", TimeMostRecentSelector),
                                                     ("Least Recent", TimeLessRecentSelector));
+        PlacePickerVM = new StringPickerVM()
+                .WithPermissions(EditPermission)
+                .WithNoneOption()
+                .WithAction(ChangePlaceAction);
+        void ChangePlaceAction(string oldValue, string newValue)
+        {
+            var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
+            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
+            CreateChangeHistoryRecord("place", oldValue, newValue);
+            BindingObject.Place = newPlace;
+        }
         InitializeTimeBasedVM();
-        InitializePlacePicker();
     }
 
     #endregion
@@ -62,6 +73,7 @@ public partial class JobVM:ThingVM
         void ChangeContractor(string oldValue, string newValue)
         {
             var newContractor = newValue != "None" ? localContractors.Single(job => job.Name == newValue) as Contractor : null;
+            CreateChangeHistoryRecord("contractor",oldValue, newValue);
             BindingObject.Contractor = newContractor;
         }
     }
@@ -74,15 +86,6 @@ public partial class JobVM:ThingVM
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Place;
         PlacePickerVM.InitializeContent(localPlaces, initialValue);
-        PlacePickerVM = new StringPickerVM()
-            .WithPermissions(EditPermission)
-            .WithNoneOption()
-            .WithAction(ChangeJobAction);
-        void ChangeJobAction(string oldValue, string newValue)
-        {
-            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
-            BindingObject.Place = newPlace;
-        }
     }
     #endregion
     #region Time

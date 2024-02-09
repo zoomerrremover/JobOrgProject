@@ -40,6 +40,7 @@
                 ListTitle="Workers"
                 BindingContext="{Binding WorkerCollectionView}"
                 DataTemplate="{StaticResource pickableWorkerDataTemplate}"/>
+            <controls:HistoryRecords/>
         </VerticalStackLayout>
     </ScrollView>
 </base:BaseDetailsPage>

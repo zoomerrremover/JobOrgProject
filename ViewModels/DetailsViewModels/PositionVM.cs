@@ -61,6 +61,8 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
             {
                 BindingObject.Permissions.Add(editor.ProcessPermissions());
             }
+            CreateChangeHistoryRecord("permissions");
+
         }
         #endregion
         #region Workers with Pos
@@ -76,13 +78,20 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         void EditButtonPressed()
         {
             InEditMode = !InEditMode;
-            if (!InEditMode)
+            if (EditPermission && !InEditMode)
             {
                 foreach(var pickableWorker in workers)
                 {
                     if (pickableWorker.data)
                     {
+                        userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
+                            "position", pickableWorker.model.Position, BindingObject);
                         pickableWorker.model.Position = BindingObject;
+                    }
+                    else if(!pickableWorker.data && pickableWorker.model.Position == BindingObject) {
+                        userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
+    "position", pickableWorker.model.Position, "None");
+                        pickableWorker.model.Position = null;
                     }
                 }
             }

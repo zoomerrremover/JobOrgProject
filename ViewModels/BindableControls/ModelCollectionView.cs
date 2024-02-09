@@ -41,6 +41,7 @@ public partial class ModelCollectionView : ModelView
     }
     public void Initiate(IEnumerable<object> elements, Type typeToSubscribeTo = null)
     {
+        this.elements.Clear();
         if (elements.Count() != 0)
         {
             typeToSubscribeTo ??= elements.First().GetType();
@@ -53,10 +54,6 @@ public partial class ModelCollectionView : ModelView
         LoadCollection();
     }
 
-    private void LoadCollection(object sender, NotifyCollectionChangedEventArgs e)
-    {
-        LoadCollection();
-    }
 
     #endregion
     #region AddButton
@@ -133,7 +130,7 @@ public partial class ModelCollectionView : ModelView
     /// <summary>
     /// This is method for displaying data , it SHOULD be called async
     /// </summary>
-    void LoadCollection()
+    void LoadCollection(object sender = null, NotifyCollectionChangedEventArgs e = null)
     {
         ApplySearchEntry();
         if (FiltersAreVisible)
