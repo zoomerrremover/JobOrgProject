@@ -12,6 +12,6 @@ namespace TheJobOrganizationApp.Services.Interfaces
         public void SetPermissions(IUser user);
         public bool GetPermission(Thing Object, RuleType Type);
         public bool GetPermission(Type Object, RuleType Type);
-        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object value = null, object value2 = null);
+        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, string value = null, string value2 = null);
     }
 }

@@ -10,10 +10,10 @@ namespace TheJobOrganizationApp.Services
     {
         public DateTime ContentVersion { get; }
         public void RegisterModel(Type type);
-        public void AddThing<T>(T thing) where T : Thing;
-        public void AddThing<T>(IEnumerable<T> thing) where T : Thing;
+        public void AddThing(Thing thing);
+        public void AddThing<T>(IEnumerable<T> thing);
         public void SubscribeForUpdates(NotifyCollectionChangedEventHandler action, Type type);
-        public void RemoveThing<T>(T thing)where T : Thing;
+        public void RemoveThing(Thing thing);
         public bool InitializeDatabase()
         {
             return true;

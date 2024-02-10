@@ -11,7 +11,7 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
         public int VisibilityLevel { get => User.Position.VisibilityLevel; }
         List<Rule> Permissions { get => User.Position.Permissions; }
         IUser User { get;set; }
-        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, object oldValue = null, object newValue = null)
+        public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, string oldValue = null, string newValue = null)
         {
             var newHistoryRecord = new HistoryRecord()
             {
@@ -19,8 +19,8 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
                 Subject = Object,
                 ActionType = type,
                 FieldName = propertyName,
-                OldValue = oldValue.ToString(),
-                NewValue = newValue.ToString()
+                OldValue = oldValue,
+                NewValue = newValue
             };
             Object.History.Add(newHistoryRecord);
         }

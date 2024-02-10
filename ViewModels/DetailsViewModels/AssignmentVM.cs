@@ -29,13 +29,21 @@ public partial class AssignmentVM : ThingVM
         Initialize();
 
     }
-    public override void LoadContent() {
+    public override void LoadContent()
+    {
         base.LoadContent();
-        var models = InitializeModels();
-        WorkersCollectionView.Initiate(models,typeof(Worker));
+        InitializeWorkerPicker();
         InitializeJobPicker();
         InitializePlacePicker();
-        }
+        InitializeTimeSelector();
+
+    }
+
+    private void InitializeWorkerPicker()
+    {
+        var models = InitializeModels();
+        WorkersCollectionView.Initiate(models, typeof(Worker));
+    }
 
     void Initialize()
     {
@@ -50,13 +58,11 @@ public partial class AssignmentVM : ThingVM
         {
             if (EditPermission && !IsLoading)
             {
-                IsLoading = true;
-                var oldJob = oldValue != "None" ? localJobs.Single(job => job.Name == oldValue) : null;
-                var newJob = newValue != "None" ? localJobs.Single(job => job.Name == newValue) : null;
-                oldJob.Tasks.Remove(BindingObject);
-                newJob.Tasks.Add(BindingObject);
+                var oldJob = oldValue != "None" ? localJobs.Where(job => job.Name == oldValue).FirstOrDefault() : null;
+                var newJob = newValue != "None" ? localJobs.Where(job => job.Name == newValue).FirstOrDefault() : null;
+                if(oldJob != null) oldJob.Tasks.Remove(BindingObject);
+                if (newJob != null) newJob.Tasks.Add(BindingObject);
                 CreateChangeHistoryRecord("job", oldValue, newValue);
-                IsLoading = false;
             }
         }
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
@@ -68,11 +74,9 @@ public partial class AssignmentVM : ThingVM
         {
             if (EditPermission && !IsLoading)
             {
-                IsLoading = true;
-                var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
+                var newPlace = newValue != "None" ? localPlaces.Where(job => job.Name == newValue).FirstOrDefault() as Place : null;
                 BindingObject.Place = newPlace;
                 CreateChangeHistoryRecord("location",oldValue,newValue);
-                IsLoading = false;
             }
         }
         WorkersCollectionView = new ModelCollectionView()
@@ -80,6 +84,10 @@ public partial class AssignmentVM : ThingVM
     }
     #endregion
     #region TimeSelector
+    void InitializeTimeSelector()
+    {
+        TimeSelector.InitializeData();
+    }
     public TimeBasedVM TimeSelector { get; set; }
     #endregion
     #region Pickable Job feature
@@ -89,7 +97,7 @@ public partial class AssignmentVM : ThingVM
     {
 
         var localJobs = dataStorage.GetItems<Job>();
-        var initialValue = localJobs.Single(job => job.Tasks.Contains(BindingObject));
+        Job initialValue = localJobs.Where(job => job.Tasks.Contains(BindingObject)).FirstOrDefault();
         var jobsCastedToThing = localJobs.Select(job => job as Thing).ToObservableCollection();
         JobPicker.InitializeContent(jobsCastedToThing, initialValue);
     }
@@ -99,9 +107,9 @@ public partial class AssignmentVM : ThingVM
     public StringPickerVM PlacePicker { get; set; }
     void InitializePlacePicker()
     {
-
         var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Place;
+        PlacePicker.InitializeContent(localPlaces, initialValue);
     }
     #endregion
     #region DisplayableWorkersFeature
@@ -114,9 +122,9 @@ public partial class AssignmentVM : ThingVM
     /// <summary>
     /// Should be called when user have choosen worker.
     /// </summary>
-    void EditWorker(PickableWorker obj)
+    async void EditWorker(PickableWorker obj)
     {
-        if (EditPermission && !IsLoading)
+        if (EditPermission && !IsLoading && InEditMode)
         {
             IsLoading = true;
             obj.data = !obj.data;
@@ -129,6 +137,7 @@ public partial class AssignmentVM : ThingVM
                 BindingObject.Workers.Remove(obj.model);
             }
             CreateChangeHistoryRecord("worker list");
+            await Task.Run(InitializeWorkerPicker);
             IsLoading = false;
         }
     }

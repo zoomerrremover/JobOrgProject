@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Models.Interfaces;
-using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.Services.UtilityClasses;
-using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls
 {
-    public class PermissionEditor
+    public partial class PermissionEditor:ObservableObject
     {
         Rule positionRule;
         public PermissionEditor(Position position,Type modelBinded)
@@ -34,7 +28,7 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls
             }
             }
         public Rule ProcessPermissions()
-        {
+            {
             var localRule = new Rule() { Model = model,
                                          Status = new()};
             if (EditPermission)
@@ -53,9 +47,11 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls
         }
         Type model { get; set; }
         public string modelName { get; private set; }
-        public bool EditPermission { get; set; }
-        public bool CreatePermission { get;set; }
-        public bool DeletePermission { get;set; }
-
+        [ObservableProperty]
+        public bool editPermission;
+        [ObservableProperty]
+        public bool createPermission;
+        [ObservableProperty]
+        public bool deletePermission;
     }
 }

@@ -14,5 +14,11 @@ namespace TheJobOrganizationApp.Models
         public DateTime StartTime { get  ; set  ; }
         public DateTime FinishTime { get  ; set  ; }
         public Place Place { get  ; set  ; }
+
+        public Job()
+        {
+            StartTime = DateTime.Now;
+            FinishTime = StartTime.AddHours(1);
+        }
     }
 }

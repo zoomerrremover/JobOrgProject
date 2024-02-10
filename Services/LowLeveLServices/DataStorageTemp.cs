@@ -28,23 +28,24 @@ public class DataStorageTemp : IDataStorage
         return true;
 
     }
-    public void RemoveThing<T>(T thing) where T : Thing
+    public void RemoveThing(Thing thing)
     {
-        var Ts = typeof(T);
-        ObjectKeeper[typeof(T)].Remove(thing);
+        var type = thing.GetType();
+        ObjectKeeper[type].Remove(thing);
     }
-    public void AddThing<T>(T thing)where T : Thing
+    public void AddThing(Thing thing)
     {
-        var Ts = typeof(T);
-        ObjectKeeper[typeof(T)].Add(thing);
+        var type = thing.GetType();
+        ObjectKeeper[type].Add(thing);
     }
 
-    public void AddThing<T>(IEnumerable<T> thing) where T : Thing
+    public void AddThing<T>(IEnumerable<T> thing)
     {
-        var Ts = typeof(T);
+        if (thing.First().GetType().BaseType != typeof(Thing)) return;
+        var type = thing.First().GetType();
         foreach(var model in thing)
         {
-            ObjectKeeper[Ts].Add(model);
+            ObjectKeeper[type].Add(model as Thing);
         }
     }
 

@@ -12,25 +12,31 @@
             <dataTemplate:PickableWorkerTemplate x:Key="pickableWorkerTemplate"/>
         </ResourceDictionary>
     </base:BaseDetailsPage.Resources>
-    <ScrollView>
-        <VerticalStackLayout
-          Spacing="10"
-          Padding="35">
-            <controls:BaseDetails/>
-            <controls:StringPicker
-                BindingContext="{Binding JobPicker}"
-                PickerTitle="Job"/>
-            <controls:ITimeBasedDetails
-                BindingContext="{Binding TimeSelector}"/>
-            <controls:StringPicker
-                PickerTitle="Place"
-                BindingContext="{Binding PlacePicker}"/>
-            <controls:ModelListView
-                Grid.Row = "1"
-                BindingContext="{Binding WorkersCollectionView}"
-                ListTitle="Workers"
-                DataTemplate="{StaticResource pickableWorkerTemplate}"/>
-            <controls:HistoryRecords/>
-        </VerticalStackLayout>
-    </ScrollView>
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Spacing="10"
+                Padding="35">
+                <controls:BaseDetails/>
+                <controls:StringPicker
+                    BindingContext="{Binding JobPicker}"
+                    PickerTitle="Job"/>
+                <controls:ITimeBasedDetails
+                    BindingContext="{Binding TimeSelector}"/>
+                <controls:StringPicker
+                    PickerTitle="Place"
+                    BindingContext="{Binding PlacePicker}"/>
+                <controls:ModelListView
+                    Grid.Row = "1"
+                    BindingContext="{Binding WorkersCollectionView}"
+                    ListTitle="Workers"
+                    DataTemplate="{StaticResource pickableWorkerTemplate}"/>
+                <controls:HistoryRecords/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                   Color="Black"
+                   WidthRequest="100"
+                   HeightRequest="100"/>
+    </Grid>
 </base:BaseDetailsPage>

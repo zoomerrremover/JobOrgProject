@@ -17,7 +17,7 @@
             <HorizontalStackLayout>
                 <CheckBox
                     VerticalOptions="Center"
-                    IsChecked="{Binding CreatePermission}"/>
+                    IsChecked="{Binding CreatePermission,Mode=TwoWay}"/>
                 <Label
                     VerticalOptions="Center"
                     Text="Create"/>

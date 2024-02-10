@@ -8,6 +8,17 @@ public class BaseDetailsPage : ContentPage
     {
         base.OnAppearing();
         var BindingContextCasted = BindingContext as ThingVM;
-        await Task.Run(BindingContextCasted.LoadContent);
+        Loaded += LoadContentEvent;
+        void LoadContentEvent(object sender,EventArgs e)
+        {
+            BindingContextCasted.LoadContent();
+        }
+    }
+    protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
+    {
+        var BindingContextCasted = BindingContext as ThingVM;
+        BindingContextCasted.IsLoading = true;
+        base.OnNavigatedFrom(args);
+        BindingContextCasted.IsLoading = false;
     }
 }

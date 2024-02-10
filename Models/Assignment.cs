@@ -13,5 +13,10 @@ namespace TheJobOrganizationApp.Models
         public DateTime FinishTime { get; set; }
         public Place Place { get ; set ; }
         public List<Item> Items { get; set; } = new();
+        public Assignment()
+        {
+            StartTime = DateTime.Now;
+            FinishTime = StartTime.AddHours(1);
+        }
     }
 } 

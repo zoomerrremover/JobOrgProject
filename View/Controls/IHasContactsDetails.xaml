@@ -24,7 +24,7 @@
             <Entry
                 HorizontalOptions="Center"
                 WidthRequest="125"                
-                Text="{Binding Buisiness}"/>
+                Text="{Binding Buisness}"/>
         </VerticalStackLayout>
     </Frame>
 </ContentView>

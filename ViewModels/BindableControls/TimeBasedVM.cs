@@ -16,9 +16,8 @@ public partial class TimeBasedVM : ModelView
     public TimeBasedVM(ITimeBased BindingObject)
     {
         this.BindingObject = BindingObject;
-        InitializeData();
     }
-    void InitializeData()
+    public void InitializeData()
     {
         DisplayableStartDate = BindingObject.StartTime;
         DisplayableStartDate = BindingObject.FinishTime;
@@ -42,7 +41,8 @@ public partial class TimeBasedVM : ModelView
     [RelayCommand]
     void OnSaveButtonPressed()
     {
-        if (EditPermission) { 
+        if (EditPermission && !IsLoading) { 
+            IsLoading = true;
             InputTransparency = !InputTransparency;
             if (InputTransparency)
             {
@@ -76,7 +76,9 @@ public partial class TimeBasedVM : ModelView
                     errorService.CallError("The dates does not match !");
                     InitializeData();
                 }
+
             }
+            IsLoading = false;
         }
 
     }

@@ -42,7 +42,8 @@ public partial class ModelCollectionView : ModelView
     public void Initiate(IEnumerable<object> elements, Type typeToSubscribeTo = null)
     {
         this.elements.Clear();
-        if (elements.Count() != 0)
+        DisplayableList.Clear();
+        if (elements is not null&&elements.Count() != 0)
         {
             typeToSubscribeTo ??= elements.First().GetType();
             if (typeToSubscribeTo.BaseType == typeof(Thing)) dataStorage.SubscribeForUpdates(LoadCollection, typeToSubscribeTo);

@@ -7,6 +7,7 @@ using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.MainViewModels
@@ -29,6 +30,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         Thing selectedObject;
         [ObservableProperty]
         DataTemplate currentTemplate;
+        IUserController UserController;
         void InitiateModelChoice()
         {
             foreach (var type in ReflectionContent.Models)
@@ -51,14 +53,13 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
                 newValue = oldValue;
                 return;
             }
-            IsLoading = true;
             try
             {
+                IsLoading = true;
                 var localType = typePickerItems.Find(w => w.Name == newValue);
                 Models = dataStorage.GetItems<Thing>(localType);
                 Models.CollectionChanged += LoadModels;
                 CurrentTemplate = Converter.ConvertToDataTemplate(localType);
-                IsLoading = false;
                 LoadModels();
             }
             catch (Exception e)
@@ -67,6 +68,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
                 OnSelectedModelChanging(oldValue, oldValue);
 
             }
+            finally { IsLoading = false; }
         }
         #endregion
         #region Ctors and others
@@ -104,8 +106,9 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         {
             OnSelectedModelChanging(null, selectedModel);
         }
-        public GlobalSearchViewModel(IErrorService ErrorService,PageFactory Factory,IReflectionContent ReflectionContent,IDataStorage DataBase,IConverter Converter)
+        public GlobalSearchViewModel(IErrorService ErrorService,PageFactory Factory,IReflectionContent ReflectionContent,IDataStorage DataBase,IConverter Converter,IUserController userController)
         {
+            UserController = userController;
             DisplayedPickerItems = new();
             typePickerItems = new();
             factory = Factory;
@@ -115,6 +118,30 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
             this.Converter = Converter;
             InitiateModelChoice();
         }
+        [RelayCommand]
+        async Task GotToCreateItem()
+        {
+            if (!IsLoading)
+            {
+                IsLoading = true;
+                var model = ReflectionContent.Models.Single(t => t.Name == SelectedModel);
+                var permission = UserController.GetPermission(model, RuleType.Create);
+                if (permission)
+                {
+                    try
+                    {
+                        var page = factory.MakeACreatePage(model);
+                        await Shell.Current.Navigation.PushAsync(page);
+                    }
+                    catch (Exception ex)
+                    {
+                        errorService.CallError("Failed to load this page");
+                    }
+                }
+                IsLoading = false;
+            }
+        }
+
         [RelayCommand]
         async Task GoToDetails(Thing SelectedObject)
         {

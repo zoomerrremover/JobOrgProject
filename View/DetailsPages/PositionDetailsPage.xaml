@@ -27,7 +27,8 @@
                     <Label
                         Text="Permissions"/>
                     <Button
-                        Grid.Column="2"/>
+                        Grid.Column="2"
+                        Command="{Binding PermissionEditButtonPressedCommand}"/>
                     <CollectionView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"

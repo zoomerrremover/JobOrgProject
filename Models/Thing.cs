@@ -10,9 +10,9 @@ public abstract class Thing
 
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = "Enter the name";
 
-    public string Description { get; set; }
+    public string Description { get; set; } = string.Empty;
 
     public ObservableCollection<HistoryRecord> History { get; set; } = new();
 

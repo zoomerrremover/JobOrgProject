@@ -14,7 +14,8 @@
                    Text="{Binding SearchPromt}"></Entry>
             <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="1" Margin="8" >
             <HorizontalStackLayout Spacing="8">
-                <Button/>
+                <Button 
+                    Command="{Binding GotToCreateItemCommand}"/>
                 <Button/>
             </HorizontalStackLayout>
             <Picker Grid.Column="2"

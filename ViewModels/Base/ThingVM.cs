@@ -85,6 +85,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
             HistoryCollectionView.Initiate(BindingObject.History);
 
         }
+
         #endregion
     }
 }

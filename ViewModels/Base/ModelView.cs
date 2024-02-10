@@ -22,6 +22,19 @@ namespace TheJobOrganizationApp.ViewModels.Base
 
         [ObservableProperty]
         bool isLoading = false;
+
+        async partial void OnIsLoadingChanged(bool value)
+        {
+            if (IsLoading)
+            {
+                await Task.Delay(300000);
+                if (IsLoading)
+                {
+                    errorService.CallError("There have been unterminated loading task");
+                    IsLoading = false;
+                }
+            }
+        }
         public bool EditPermission { get => userController.GetPermission(BindingObject, RuleType.Edit); }
 
         protected Thing BindingObject;

@@ -32,6 +32,10 @@ public partial class StringPickerVM:ObservableObject
     }
     public void InitializeContent(IEnumerable<Thing> objectsBase, Thing InitialValue = null)
     {
+        objects.Clear();
+        DisplayableObjects.Clear();
+        if (NoneOptionEnabled) DisplayableObjects.Add("None");
+        if (objectsBase == null || objectsBase.Count() == 0) return;
         foreach (Thing thing in objectsBase)
         {
             objects.Add(thing);
@@ -44,7 +48,12 @@ public partial class StringPickerVM:ObservableObject
                 Console.WriteLine(ex);
             }
         }
-        PickedObject = InitialValue is null ? "None" : DisplayableObjects.Single(obj => InitialValue.Name == obj);
+        if(InitialValue is null)
+        {
+            PickedObject = DisplayableObjects[0];
+            return;
+        }
+        PickedObject = DisplayableObjects.Single(obj => InitialValue.Name == obj);
     }
     public StringPickerVM WithAction(Action<string,string> action)
     {
@@ -71,7 +80,10 @@ public partial class StringPickerVM:ObservableObject
     }
     partial void OnPickedObjectChanging(string oldValue, string newValue)
     {
-        if (ChoiceChangedAction is not null) ChoiceChangedAction.Invoke(oldValue, newValue);
+        if (ChoiceChangedAction is not null)
+        {
+            ChoiceChangedAction.Invoke(oldValue, newValue);
+        }
     }
     [RelayCommand]
     void AddButtonPressed()=> AddButtonAction.Invoke();

@@ -26,7 +26,7 @@ public partial class JobVM:ThingVM
     public JobVM(Job item) : base(item)
     {
         BindingObject = item;
-        Initialize();
+        Declare();
     }
 
     public override void LoadContent()
@@ -34,10 +34,18 @@ public partial class JobVM:ThingVM
         base.LoadContent();
         InitializeAssignments();
         InitializePlacePicker();
-    }
-    void Initialize()
-    {
         InitializeContractorPicker();
+        TimeBasedVM.InitializeData();
+    }
+    void Declare()
+    {
+        DeclareContractorPicker();
+        DeclarePlacePicker();
+        DecalreTimeBasedVM();
+    }
+
+    private void DeclarePlacePicker()
+    {
         var permission = userController.GetPermission(typeof(Assignment), RuleType.Create);
         AssignmentCollectionView = new ModelCollectionView()
                                        .WithAddButton(permission, CreateAssignment)
@@ -50,32 +58,41 @@ public partial class JobVM:ThingVM
                 .WithAction(ChangePlaceAction);
         void ChangePlaceAction(string oldValue, string newValue)
         {
-            var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
-            var newPlace = newValue != "None" ? localPlaces.Single(job => job.Name == newValue) as Place : null;
-            CreateChangeHistoryRecord("place", oldValue, newValue);
-            BindingObject.Place = newPlace;
+            if (EditPermission)
+            {
+                var localPlaces = dataStorage.GetItems<Place>().Select(job => job as Thing).ToObservableCollection();
+                var newPlace = newValue != "None" ? localPlaces.Where(job => job.Name == newValue).FirstOrDefault() as Place : null;
+                CreateChangeHistoryRecord("place", oldValue, newValue);
+                BindingObject.Place = newPlace;
+            }
         }
-        InitializeTimeBasedVM();
     }
 
     #endregion
     #region Contractor
     public StringPickerVM ContractorPickerVM { get; set; }
-    void InitializeContractorPicker()
+    void DeclareContractorPicker()
     {
-
-        var localContractors = dataStorage.GetItems<Contractor>().Select(job => job as Thing).ToObservableCollection();
-        var initialValue = BindingObject.Contractor;
-        ContractorPickerVM = new StringPickerVM(localContractors, initialValue)
+        ContractorPickerVM = new StringPickerVM()
             .WithPermissions(EditPermission)
             .WithNoneOption()
             .WithAction(ChangeContractor);
         void ChangeContractor(string oldValue, string newValue)
         {
-            var newContractor = newValue != "None" ? localContractors.Single(job => job.Name == newValue) as Contractor : null;
-            CreateChangeHistoryRecord("contractor",oldValue, newValue);
-            BindingObject.Contractor = newContractor;
+            if (EditPermission)
+            {
+                var localContractors = dataStorage.GetItems<Contractor>().Select(job => job as Thing).ToObservableCollection();
+                var newContractor = newValue != "None" ? localContractors.Where(job => job.Name == newValue).FirstOrDefault() as Contractor : null;
+                CreateChangeHistoryRecord("contractor", oldValue, newValue);
+                BindingObject.Contractor = newContractor;
+            }
         }
+    }
+    void InitializeContractorPicker()
+    {
+        var localContractors = dataStorage.GetItems<Contractor>().Select(job => job as Thing).ToObservableCollection();
+        var initialValue = BindingObject.Contractor;
+        ContractorPickerVM.InitializeContent(localContractors,initialValue);
     }
     #endregion
     #region Place
@@ -90,7 +107,7 @@ public partial class JobVM:ThingVM
     #endregion
     #region Time
     public TimeBasedVM TimeBasedVM { get; set; }
-    void InitializeTimeBasedVM()
+    void DecalreTimeBasedVM()
     {
         TimeBasedVM = new(BindingObject);
     }

@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.Base;
@@ -22,9 +24,21 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         {
             this.BindingObject = BindingObject;
             InitializePermissionEditors();
+            DeclareWorkerCollectionView();
+        }
+
+        private void DeclareWorkerCollectionView()
+        {
+            PickableWorker.ActivatedAction = WorkerActivatedAction;
             WorkerCollectionView = new ModelCollectionView()
                 .WithEditButton(EditPermission, EditButtonPressed);
         }
+
+        private static void WorkerActivatedAction(PickableWorker w)
+        {
+            w.data = !w.data;
+        }
+
         public override void LoadContent()
         {
             base.LoadContent();
@@ -35,23 +49,25 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         #region Permissions
         public void InitializePermissionEditors()
         {
-            PermissionEditors = new List<PermissionEditor>();
+            PermissionEditors = new();
             foreach(var modelType in reflectionContent.Models)
             {
                 var permEditorLoc = new PermissionEditor(BindingObject,modelType);
                 PermissionEditors.Add(permEditorLoc);
             }
         }
-        public List<PermissionEditor> PermissionEditors { get; set; }
+        public ObservableCollection<PermissionEditor> PermissionEditors { get; set; }
 
         [ObservableProperty]
         bool permissionsInEditMode;
 
-        partial void OnPermissionsInEditModeChanged(bool value)
+        [RelayCommand]
+        async Task OnPermissionEditButtonPressed()
         {
-            if (!value)
+            PermissionsInEditMode = !PermissionsInEditMode;
+            if (!PermissionsInEditMode)
             {
-                SavePermissions();
+                await Task.Run(SavePermissions);
             }
         }
         void SavePermissions()
@@ -85,12 +101,12 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
                     if (pickableWorker.data)
                     {
                         userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
-                            "position", pickableWorker.model.Position, BindingObject);
+                            "position", pickableWorker.model.Position.ToString(), BindingObject.ToString());
                         pickableWorker.model.Position = BindingObject;
                     }
                     else if(!pickableWorker.data && pickableWorker.model.Position == BindingObject) {
                         userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
-    "position", pickableWorker.model.Position, "None");
+    "position", pickableWorker.model.Position.ToString(), "None");
                         pickableWorker.model.Position = null;
                     }
                 }
