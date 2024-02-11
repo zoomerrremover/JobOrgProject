@@ -28,11 +28,13 @@
                         Text="Permissions"/>
                     <Button
                         Grid.Column="2"
-                        Command="{Binding PermissionEditButtonPressedCommand}"/>
+                        Command="{Binding PermissionEditButtonPressedCommand}"
+                        IsEnabled="{Binding EditPermission}"/>
                     <CollectionView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"
                         HorizontalOptions="Center"
+                        InputTransparent="{Binding PermissionsInEditMode}"
                         ItemsSource="{Binding PermissionEditors}"
                         ItemTemplate="{StaticResource permissionDataTemplate}"/>
                 </Grid>

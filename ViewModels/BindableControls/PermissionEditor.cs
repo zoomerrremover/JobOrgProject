@@ -8,6 +8,11 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls
     public partial class PermissionEditor:ObservableObject
     {
         Rule positionRule;
+        public static bool Permission { get; private set; }
+        public static void SetPermission(bool perm)
+        {
+            Permission = perm;
+        }
         public PermissionEditor(Position position,Type modelBinded)
         {
             modelName = modelBinded.Name;

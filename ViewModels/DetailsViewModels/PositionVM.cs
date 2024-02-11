@@ -23,8 +23,14 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         public PositionVM(Position BindingObject): base(BindingObject)
         {
             this.BindingObject = BindingObject;
-            InitializePermissionEditors();
+            DeclarePermissionEditor();
             DeclareWorkerCollectionView();
+        }
+
+        private void DeclarePermissionEditor()
+        {
+            PermissionEditors = new();
+            PermissionEditor.SetPermission(EditPermission);
         }
 
         private void DeclareWorkerCollectionView()
@@ -49,7 +55,6 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         #region Permissions
         public void InitializePermissionEditors()
         {
-            PermissionEditors = new();
             foreach(var modelType in reflectionContent.Models)
             {
                 var permEditorLoc = new PermissionEditor(BindingObject,modelType);
@@ -59,7 +64,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         public ObservableCollection<PermissionEditor> PermissionEditors { get; set; }
 
         [ObservableProperty]
-        bool permissionsInEditMode;
+        bool permissionsInEditMode = true;
 
         [RelayCommand]
         async Task OnPermissionEditButtonPressed()

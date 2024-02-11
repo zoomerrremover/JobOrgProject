@@ -10,7 +10,8 @@
         <Label
             Grid.ColumnSpan="2"
             VerticalOptions="Start"
-            Text="{Binding modelName}"/>
+            Text="{Binding modelName}"
+            InputTransparent="{Binding Permission}"/>
         <VerticalStackLayout
             Grid.Column="1"
             Grid.Row="1">
