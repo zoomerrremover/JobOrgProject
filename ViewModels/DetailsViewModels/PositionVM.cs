@@ -35,14 +35,30 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
 
         private void DeclareWorkerCollectionView()
         {
-            PickableWorker.ActivatedAction = WorkerActivatedAction;
             WorkerCollectionView = new ModelCollectionView()
                 .WithEditButton(EditPermission, EditButtonPressed);
         }
 
-        private static void WorkerActivatedAction(PickableWorker w)
+        private async void WorkerActivatedAction(PickableWorker pickableWorker)
         {
-            w.data = !w.data;
+            if (InEditMode && EditPermission)
+            {
+                pickableWorker.data = !pickableWorker.data;
+                if (pickableWorker.data)
+                {
+                    userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
+                        "position", pickableWorker.model.Position.ToString(), BindingObject.ToString());
+                    pickableWorker.model.Position = BindingObject;
+                }
+                else if (!pickableWorker.data && pickableWorker.model.Position == BindingObject)
+                {
+                    userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
+"position", pickableWorker.model.Position.ToString(), "None");
+                    pickableWorker.model.Position = null;
+                }
+                await Task.Run(InitializeWrokerColView);
+            }
+            
         }
 
         public override void LoadContent()
@@ -92,6 +108,7 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         IEnumerable<PickableWorker> workers;
         void InitializeWrokerColView()
         {
+            PickableWorker.ActivatedAction = WorkerActivatedAction;
             var Workers = dataStorage.GetItems<Worker>();
             workers = Workers.Select(w=>new PickableWorker(w,w.Position == BindingObject));
             WorkerCollectionView.Initiate(workers);
@@ -99,23 +116,6 @@ namespace TheJobOrganizationApp.ViewModels.DetailsViewModels
         void EditButtonPressed()
         {
             InEditMode = !InEditMode;
-            if (EditPermission && !InEditMode)
-            {
-                foreach(var pickableWorker in workers)
-                {
-                    if (pickableWorker.data)
-                    {
-                        userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
-                            "position", pickableWorker.model.Position.ToString(), BindingObject.ToString());
-                        pickableWorker.model.Position = BindingObject;
-                    }
-                    else if(!pickableWorker.data && pickableWorker.model.Position == BindingObject) {
-                        userController.CreateHistoryRecord(pickableWorker.model, Models.Misc.HistoryActionType.Changed,
-    "position", pickableWorker.model.Position.ToString(), "None");
-                        pickableWorker.model.Position = null;
-                    }
-                }
-            }
         }
         public ModelCollectionView WorkerCollectionView { get; set; }
 

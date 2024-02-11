@@ -135,7 +135,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
                     }
                     catch (Exception ex)
                     {
-                        errorService.CallError("Failed to load this page");
+                        errorService.CallError($"Failed to load this page. The exception was {ex.Message}");
                     }
                 }
                 IsLoading = false;

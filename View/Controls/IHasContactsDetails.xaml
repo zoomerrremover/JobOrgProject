@@ -7,23 +7,34 @@
              x:DataType="viewmodels:HasContactsVM">
     <Frame>
         <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label
+                        Text="Contacts"
+                        HorizontalOptions="Start"/>
+                <Button
+                    HorizontalOptions="End"
+                    IsEnabled="{Binding EditButtonPressedCommand}"/>
+            </HorizontalStackLayout>
             <Label
                 Text="Cell"/>
             <Entry
                 HorizontalOptions="Center"
-                WidthRequest="125"  
+                WidthRequest="125" 
+                InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Cell}"/>
             <Label
                 Text="Email"/>
             <Entry
                 HorizontalOptions="Center"
-                WidthRequest="125"                 
+                WidthRequest="125"
+                InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Email}"/>
             <Label
                 Text="Buisiness"/>
             <Entry
                 HorizontalOptions="Center"
-                WidthRequest="125"                
+                WidthRequest="125"
+                InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Buisness}"/>
         </VerticalStackLayout>
     </Frame>

@@ -26,10 +26,13 @@ public partial class HasContactsVM
     string buisness;
     [ObservableProperty]
     string email;
+    [ObservableProperty]
+    bool notInEditMode = true;
     [RelayCommand]
     void OnEditButtonPressed()
     {
-        if(EditPermission && !IsLoading)
+        NotInEditMode = !notInEditMode;
+        if(EditPermission && !IsLoading && NotInEditMode)
         {
             IsLoading = true;
             const string phoneNumberPattern = @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";

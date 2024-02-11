@@ -27,6 +27,7 @@
                                 InputTransparent="{Binding InputTransparency}"/>
             </VerticalStackLayout>
             <Button Command="{Binding SaveButtonPressedCommand}"
+                    IsEnabled="{Binding EditPermission}"
                     Grid.Column="3"
                     VerticalOptions="Start"
                     HorizontalOptions="End"

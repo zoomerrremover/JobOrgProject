@@ -79,12 +79,16 @@ public partial class JobVM:ThingVM
             .WithAction(ChangeContractor);
         void ChangeContractor(string oldValue, string newValue)
         {
-            if (EditPermission)
+            if (EditPermission && !IsLoading)
             {
                 var localContractors = dataStorage.GetItems<Contractor>().Select(job => job as Thing).ToObservableCollection();
                 var newContractor = newValue != "None" ? localContractors.Where(job => job.Name == newValue).FirstOrDefault() as Contractor : null;
                 CreateChangeHistoryRecord("contractor", oldValue, newValue);
                 BindingObject.Contractor = newContractor;
+            }
+            else
+            {
+                ContractorPickerVM.PickedObject = oldValue;
             }
         }
     }
