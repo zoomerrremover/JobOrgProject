@@ -11,9 +11,4 @@ public partial class WorkerDetails : BaseDetailsPage
 	{
 		InitializeComponent();
 	}
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        WorkerVM.Load(BindingContext);
-    }
 }

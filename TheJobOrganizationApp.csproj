@@ -135,6 +135,9 @@
     <MauiXaml Update="View\DetailsPages\AssignmentDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\DetailsPages\BaseDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\DetailsPages\ContractorDetailsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

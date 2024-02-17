@@ -118,10 +118,10 @@ public partial class AssignmentVM : ThingVM
     [ObservableProperty]
     bool inEditMode = false;
     void ChangeEditMode() => InEditMode = !InEditMode;
-    [RelayCommand]
     /// <summary>
     /// Should be called when user have choosen worker.
     /// </summary>
+    [RelayCommand]
     async void EditWorker(PickableWorker obj)
     {
         if (EditPermission && !IsLoading && InEditMode)

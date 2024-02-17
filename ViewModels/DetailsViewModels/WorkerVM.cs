@@ -25,6 +25,7 @@ public partial class WorkerVM:ThingVM
     {
         base.LoadContent();
         HasItemsVM.Initialize();
+        InitializePositionPicker();
     }
     public WorkerVM(Worker worker):base(worker)
     {
@@ -34,18 +35,9 @@ public partial class WorkerVM:ThingVM
     public void Initialize()
     {
         InitializeCurrentAssignment();
-        InitializePositionPicker();
-        InitializeHasItemsVM();
+        DeclarePositionPicker();
+        DeclareHasItems();
         InitializeContactsVM();
-    }
-    public static async void Load(object vm)
-    {
-        var wm = vm as WorkerVM;
-        wm.LoadAsync();
-    }
-    public void LoadAsync()
-    {
-        //HasItemsVM.Load();
     }
     #endregion
     #region Position
@@ -55,15 +47,24 @@ public partial class WorkerVM:ThingVM
 
         var localPositions = dataStorage.GetItems<Position>().Select(job => job as Thing).ToObservableCollection();
         var initialValue = BindingObject.Position;
-        PositionPickerVM = new StringPickerVM(localPositions, initialValue)
+        PositionPickerVM.InitializeContent(localPositions, initialValue);
+    }
+
+    private void DeclarePositionPicker()
+    {
+        PositionPickerVM = new StringPickerVM()
             .WithPermissions(EditPermission)
             .WithNoneOption()
             .WithAction(ChangePositionAction);
         void ChangePositionAction(string oldValue, string newValue)
         {
-            var newPosition = newValue != "None" ? localPositions.Single(job => job.Name == newValue) as Position: null;
-            CreateChangeHistoryRecord("position", BindingObject.Position.ToString(), newPosition.ToString());
-            BindingObject.Position = newPosition;
+            var localPositions = dataStorage.GetItems<Position>().Select(job => job as Thing).ToObservableCollection();
+            if (newValue is not null)
+            {
+                var newPosition = newValue != "None" ? localPositions.Single(job => job.Name == newValue) as Position : null;
+                CreateChangeHistoryRecord("position", BindingObject.Position.ToString(), newPosition.ToString());
+                BindingObject.Position = newPosition;
+            }
         }
     }
     #endregion
@@ -111,7 +112,7 @@ public partial class WorkerVM:ThingVM
     #region Items
     public HasItemsVM HasItemsVM { get; set; }
 
-    void InitializeHasItemsVM()
+    void DeclareHasItems()
     {
         HasItemsVM = new(BindingObject);
     }

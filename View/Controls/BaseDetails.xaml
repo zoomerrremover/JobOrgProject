@@ -2,52 +2,72 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.BaseDetails"
+             x:DataType="baseViewmodels:ThingVM"
              xmlns:baseViewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.Base"
-             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             x:DataType="baseViewmodels:ThingVM">
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <ContentView.Resources>
+        <view:Styles/>
+    </ContentView.Resources>
     <VerticalStackLayout
         Spacing="10">
-        <Frame>
+        <Frame
+            Style="{StaticResource LightBlueBlock}">
             <Grid
-                ColumnDefinitions="10,190,*,30"
-                RowDefinitions="30,10,20,50"
-                RowSpacing="10">
+                ColumnDefinitions="30,190,*,30"
+                RowDefinitions="11,19,35,15,5,20">
+                <Label
+                    Text="Name:"
+                    Style="{StaticResource WhiteTextSmall}"/>
                 <Entry  
                     Grid.Column="0"
-                    Grid.Row="0"
+                    Grid.Row="1"
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2"
-                    VerticalOptions="Center"
+                    Style="{StaticResource EntryWhiteText}"
                     InputTransparent="{Binding NameInEditMode}"
                     Text="{Binding DisplayableName}"/>
                 <Label
-                    Grid.Column="1"
-                    Grid.Row="2"
-                    Text="ID:"/>
+                    Grid.Column="0"
+                    Grid.Row="3"
+                    Text="ID:"
+                    Style="{StaticResource WhiteTextSmall}"/>
                 <Label 
                     Grid.Column="1"
-                    Grid.ColumnSpan="3"
-                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="5"
+                    HorizontalOptions="Start"
+                    Style="{StaticResource WhiteTextMedium}"
                     Text="{Binding DisplayableID}"/>
-                <Button
+                <ImageButton
                     Grid.Column="3"
                     Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Style="{StaticResource EditButton}"
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding NameEditButtonPressedCommand}"/>
             </Grid>
         </Frame>
-        <Frame>
+        <Frame
+            Style="{StaticResource LightBlueBlock}">
             <Grid
-                RowDefinitions="30,150"
-                ColumnDefinitions="*,30">
+                RowDefinitions="11,19,150"
+                ColumnDefinitions="Auto,*,30">
+                <Label
+                    Text="Description:"
+                    Style="{StaticResource WhiteTextSmall}"/>
                 <Editor
                     Grid.Column="0"
+                    Grid.Row="1"
                     Grid.RowSpan="2"
+                    Grid.ColumnSpan="2"
+                    Style="{StaticResource WhiteTextEditor}"
                     InputTransparent="{Binding DescriptionInEditMode}"
                     Text="{Binding DisplayableDescription}"/>
-                <Button
-                    Grid.Column="1"
+                <ImageButton
+                    Grid.Column="2"
                     Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Style="{StaticResource EditButton}"
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding DescriptionEditButtonPressedCommand}"
                     />

@@ -2,17 +2,13 @@ using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.View.DetailsPages;
 
-public class BaseDetailsPage : ContentPage
+public partial class BaseDetailsPage : ContentPage
 {
     protected async override void OnAppearing()
     {
         base.OnAppearing();
         var BindingContextCasted = BindingContext as ThingVM;
-        Loaded += LoadContentEvent;
-        void LoadContentEvent(object sender,EventArgs e)
-        {
-            BindingContextCasted.LoadContent();
-        }
+        await Task.Run(BindingContextCasted.LoadContent);
     }
     protected override void OnNavigatedFrom(NavigatedFromEventArgs args)
     {

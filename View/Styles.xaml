@@ -23,24 +23,33 @@
         <Setter Property ="TextColor" Value="#CAF0F8"></Setter>
         <Setter Property="FontFamily" Value="BoldFont"></Setter>
     </Style>
-    <Style x:Key="SmallLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property ="TextColor" Value="White"></Setter>
-        <Setter Property="FontFamily" Value="MainFont"></Setter>
+    <Style x:Key="WhiteTextSmall" TargetType="Label">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="TextColor" Value="White"/>
     </Style>
-    <Style x:Key="MicroLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property ="TextColor" Value="White"></Setter>
-        <Setter Property="FontFamily" Value="MainFont"></Setter>
+    <Style x:Key="WhiteTextMedium" TargetType="Label">
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="TextColor" Value="White"/>
     </Style>
-    <Style x:Key="MeiumBold" TargetType="Label">
-        <Setter Property="FontSize" Value="25" />
-        <Setter Property ="TextColor" Value="White"></Setter>
-        <Setter Property="FontFamily" Value="BoldFont"></Setter>
+    <Style x:Key="DarkBlueBlock" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#023E8A"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="75"/>
     </Style>
-    <Style x:Key="EditableEntry" TargetType="Entry">
-        <Setter Property ="TextColor" Value="White"></Setter>
-        <Setter Property="FontFamily" Value="BoldFont"></Setter>
-        <Setter Property="Background" Value="Transparent"></Setter>
+    <Style x:Key="LightBlueBlock" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#3D52D5"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="75"/>
+    </Style>
+    <Style x:Key="EntryWhiteText" TargetType="Entry">
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="EditButton" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="#090C9B"/>
+        <Setter Property="CornerRadius" Value="10"/>
+
+    </Style>
+    <Style x:Key="WhiteTextEditor" TargetType="Editor">
+        <Setter Property="TextColor" Value="White"></Setter>
     </Style>
 </ResourceDictionary>
