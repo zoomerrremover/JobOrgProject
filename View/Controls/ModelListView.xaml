@@ -9,10 +9,12 @@
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame>
+    <Frame
+        Style="{StaticResource Block04}">
         <VerticalStackLayout
             Spacing="5">
             <Label
+                Style="{StaticResource WhiteTextSmall}"
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
@@ -21,6 +23,7 @@
                 ColumnDefinitions="*,Auto"
                 ColumnSpacing="5">
                 <Entry
+                     Style="{StaticResource EntryWhiteText}"
                      Text="{Binding SearchEntry}"
                      MinimumWidthRequest="200"
                      Grid.Column="0"
@@ -34,11 +37,13 @@
                         IsVisible="{Binding FiltersAreVisible}"
                         ItemsSource="{Binding AvaliableFilters}"
                         SelectedItem="{Binding SelectedString}"/>
-                    <Button
+                    <ImageButton
+                        Style="{StaticResource AddButton}"
                         IsVisible="{Binding AddButtonIsVisible}"
                         IsEnabled="{Binding AddButtonEnabled}"
                         Command="{Binding AddButtonPressedCommand}"/>
                     <Button
+                        Style="{StaticResource EditButton}"
                         IsVisible="{Binding EditButtonIsVisible}"
                         IsEnabled="{Binding EditButtonEnabled}"
                         Command="{Binding EditButtonPressedCommand}"/>

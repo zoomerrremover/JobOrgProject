@@ -2,31 +2,49 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.ITimeBasedDetails"
+             x:DataType="viewmodels:TimeBasedVM"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
-             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             x:DataType="viewmodels:TimeBasedVM">
-    <Frame >
+             xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls">
+    <ContentView.Resources>
+        <view:Styles/>
+    </ContentView.Resources>
+    <Frame
+        Style="{StaticResource JetBlock}">
         <Grid ColumnDefinitions="Auto,Auto,*,30"
               ColumnSpacing="10"
               Padding="5">
             <VerticalStackLayout
                 Grid.Column="0">
-                <Label Text="Start time:"/>
-                <DatePicker Date="{Binding DisplayableStartDate}"
+                <Label 
+                    Style="{StaticResource WhiteTextMedium}"
+                    Text="Start time:"/>
+                <DatePicker 
+                                Style="{StaticResource DateEditorWhiteText}"
+                                Date="{Binding DisplayableStartDate}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker Time="{Binding DisplayableStartTime, Mode=TwoWay}"
+                <TimePicker     
+                                Style="{StaticResource TimeEditorWhiteText}"
+                                Time="{Binding DisplayableStartTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 Grid.Column="1">
-                <Label Text="Finish time:"/>
-                <DatePicker Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
+                <Label 
+                    Style="{StaticResource WhiteTextMedium}"
+                    Text="Finish time:"/>
+                <DatePicker 
+                                Style="{StaticResource DateEditorWhiteText}"
+                                Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker Time="{Binding DisplayableFinishTime, Mode=TwoWay}"
+                <TimePicker 
+                                Style="{StaticResource DateEditorWhiteText}"
+                                Time="{Binding DisplayableFinishTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
             </VerticalStackLayout>
-            <Button Command="{Binding SaveButtonPressedCommand}"
+            <ImageButton 
+                    Style="{StaticResource EditButton}"
+                    Command="{Binding SaveButtonPressedCommand}"
                     IsEnabled="{Binding EditPermission}"
                     Grid.Column="3"
                     VerticalOptions="Start"

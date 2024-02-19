@@ -26,28 +26,41 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
         }
         public bool GetPermission(Thing Object, RuleType Type)
         {
-            if (Object.Equals(User))
+            if (Object != null && Type != null)
             {
-                return true;
+                if (Object.Equals(User))
+                {
+                    return true;
+                }
+                else
+                {
+                    var type = Object.GetType();
+                    var permissions = Permissions.Find(p => p.Model == type);
+                    var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
+                    return permission;
+                }
             }
-            else
-            {
-                var type = Object.GetType();
-                var permissions = Permissions.Find(p=>p.Model == type);
-                var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
-                return permission;
-            }
+
+            return false;
         }
 
         public bool GetPermission(Type Object, RuleType Type)
         {
-            var permissions = Permissions.Find(p => p.Model == Object);
-            var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
-            return permission;
+            if (Object != null && Type != null)
+            {
+                var permissions = Permissions.Find(p => p.Model == Object);
+                var permission = permissions is not null ? permissions.Status.Contains(Type) : false;
+                return permission;
+            }
+            return false;
         }
 
         public void SetPermissions(IUser user)
         {
+            if(user == null)
+            {
+                throw new ArgumentNullException("User");
+            }
             User = user;
         }
     }

@@ -4,17 +4,24 @@
              x:Class="TheJobOrganizationApp.View.Controls.StringPicker"
              x:DataType="viewmodels:StringPickerVM"
              xmlns:class ="clr-namespace:TheJobOrganizationApp.View.Controls"
-             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls">
-    <Frame>
+             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <ContentView.Resources>
+        <view:Styles/>
+    </ContentView.Resources>
+    <Frame
+        Style="{StaticResource Block03}">
         <Grid
             ColumnDefinitions="75,*,200">
             <Label
+                Style="{StaticResource WhiteTextMedium}"
                 Grid.Column="0"
                 VerticalOptions="Center"
                 MaxLines="1"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:StringPicker}},
                 Path=PickerTitle}"/>
             <Picker
+                Style="{StaticResource PickerWhiteText}"
                 Grid.Column="2"
                 ItemsSource="{Binding DisplayableObjects}"
                 SelectedItem="{Binding PickedObject}"/>

@@ -11,10 +11,10 @@
     <VerticalStackLayout
         Spacing="10">
         <Frame
-            Style="{StaticResource LightBlueBlock}">
+            Style="{StaticResource Block01}">
             <Grid
-                ColumnDefinitions="30,190,*,30"
-                RowDefinitions="11,19,35,15,5,20">
+                ColumnDefinitions="Auto,190,*,30"
+                RowDefinitions="14,16,35,15,5,20">
                 <Label
                     Text="Name:"
                     Style="{StaticResource WhiteTextSmall}"/>
@@ -48,7 +48,7 @@
             </Grid>
         </Frame>
         <Frame
-            Style="{StaticResource LightBlueBlock}">
+            Style="{StaticResource Block02}">
             <Grid
                 RowDefinitions="11,19,150"
                 ColumnDefinitions="Auto,*,30">

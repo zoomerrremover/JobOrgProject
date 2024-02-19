@@ -19,17 +19,23 @@
             Spacing="10"
             Padding="35">
             <controls:BaseDetails/>
-            <Frame>
+            <Frame
+                Style="{StaticResource Block06}">
+                <Frame.Resources>
+                    <view:Styles/>
+                </Frame.Resources>
                 <Grid
                     ColumnDefinitions="Auto,*,30"
                     RowDefinitions="30,*"
                     RowSpacing ="10">
                     <Label
-                        Text="Permissions"/>
-                    <Button
+                        Text="Permissions"
+                        Style="{StaticResource WhiteTextMedium}"/>
+                    <ImageButton
                         Grid.Column="2"
                         Command="{Binding PermissionEditButtonPressedCommand}"
-                        IsEnabled="{Binding EditPermission}"/>
+                        IsEnabled="{Binding EditPermission}"
+                        Style="{StaticResource EditButton}"/>
                     <CollectionView
                         Grid.Row="1"
                         Grid.ColumnSpan="3"

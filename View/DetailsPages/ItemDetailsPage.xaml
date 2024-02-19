@@ -10,26 +10,31 @@
              xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
     <base:BaseDetailsPage.Resources>
         <dataTemplate:HolderDataTemplate x:Key="holderTemplate"/>
+        <view:Styles x:Key="Styles"/>
     </base:BaseDetailsPage.Resources>
     <ScrollView>
         <VerticalStackLayout
           Spacing="10"
           Padding="35">
             <controls:BaseDetails/>
-            <Frame>
+            <Frame
+                Style="{StaticResource CrimsonBlock}">
                 <Grid
                     ColumnDefinitions="50,*,150,30">
-                    <Label 
+                    <Label
+                        Style="{StaticResource WhiteTextMedium}"
                         VerticalOptions="Center"
                         Text="Price"/>
                     <Entry
+                        Style="{StaticResource EntryWhiteText}"
                         Grid.Column="2"
                         InputTransparent="{Binding PriceInEditMode}"
                         Text="{Binding DisplayablePrice}"/>
-                    <Button
-                         Grid.Column="3"
+                    <ImageButton
+                        Grid.Column="3"
                         WidthRequest="30"
                         HeightRequest="30"
+                        Style="{StaticResource EditButton}"
                         Command="{Binding PriceEditButtonPressedCommand}"/>
                 </Grid>
             </Frame>

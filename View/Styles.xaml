@@ -24,30 +24,66 @@
         <Setter Property="FontFamily" Value="BoldFont"></Setter>
     </Style>
     <Style x:Key="WhiteTextSmall" TargetType="Label">
-        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="FontSize" Value="13"/>
         <Setter Property="TextColor" Value="White"/>
     </Style>
     <Style x:Key="WhiteTextMedium" TargetType="Label">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="TextColor" Value="White"/>
     </Style>
-    <Style x:Key="DarkBlueBlock" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#023E8A"/>
+    <Style x:Key="Block01" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#303A2B"/>
         <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="75"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
-    <Style x:Key="LightBlueBlock" TargetType="Frame">
+    <Style x:Key="Block02" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="#3D52D5"/>
         <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="75"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="Block03" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#C62E65"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="Block04" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#004643"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="Block05" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#3C3744"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="Block06" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="#3C3744"/>
+        <Setter Property="BorderColor" Value="Transparent"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="EntryWhiteText" TargetType="Entry">
         <Setter Property="TextColor" Value="White"/>
     </Style>
-    <Style x:Key="EditButton" TargetType="ImageButton">
+    <Style x:Key="DateEditorWhiteText" TargetType="DatePicker">
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="TimeEditorWhiteText" TargetType="TimePicker">
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="PickerWhiteText" TargetType="Picker">
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
+    <Style x:Key="AddButton" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="BackgroundColor" Value="#090C9B"/>
         <Setter Property="CornerRadius" Value="10"/>
-
+    </Style>
+    <Style x:Key="EditButton" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+        <Setter Property="BackgroundColor" Value="#090C9B"/>
+        <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="WhiteTextEditor" TargetType="Editor">
         <Setter Property="TextColor" Value="White"></Setter>

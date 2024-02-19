@@ -11,7 +11,6 @@
     <base:BaseDetailsPage.Resources>
         <ResourceDictionary>
             <dataTemplate:AssignmentDataTemplate x:Key="assignmentDataTemplate"/>
-
         </ResourceDictionary>
     </base:BaseDetailsPage.Resources>
     <ScrollView>
