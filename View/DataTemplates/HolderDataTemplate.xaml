@@ -3,17 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DataTemplates.HolderDataTemplate"
              x:DataType="models:ThingItemMerge"
-             xmlns:models="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers">
-    <Frame>
-        <Grid
-            ColumnDefinitions="100,*,60">
-            <Label
+             xmlns:models="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels">
+    <Grid
+            ColumnDefinitions="100,*,60,60"
+            RowDefinitions="Auto,10"
+            Margin="10"
+            RowSpacing="15">
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                                        CommandParameter="{Binding .}"/>
+        </Grid.GestureRecognizers>
+        <Label
+                Style="{StaticResource WhiteTextMedium}"
                 MaxLines="1"
                 Text="{Binding thing.Name}"/>
-            <Label 
+        <Label 
+                Style="{StaticResource WhiteTextMedium}"
                 Grid.Column="2"
                 MaxLines="1"
                 Text="{Binding item.Qty}"/>
-        </Grid>
-    </Frame>
+        <Label 
+                Style="{StaticResource WhiteTextMedium}"
+                Grid.Column="3"
+                MaxLines="1"
+                Text="{Binding item.UnitsName}"/>
+        <Line
+                        Grid.Row="1"
+                        Grid.ColumnSpan="4"
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+    </Grid>
 </DataTemplate>

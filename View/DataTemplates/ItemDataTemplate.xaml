@@ -3,27 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              x:Class="TheJobOrganizationApp.View.DataTemplates.ItemDataTemplate"
+             x:DataType="models:Item"
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
-             x:DataType="models:Item">
-    <Frame HeightRequest="70"  Margin="0">
-        <Frame.GestureRecognizers>
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <Grid ColumnDefinitions="100,60,80,2,50"
+          RowDefinitions="Auto,10"
+          RowSpacing="10"
+          Margin="15">
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Grid.GestureRecognizers>
             <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
-        </Frame.GestureRecognizers>
-        <Grid ColumnDefinitions="100,60,80,2,50">
-
-            <Label Text="{Binding Name}"
-                         FontSize="Small"
-                         TextColor="Black"/>
-            <Label Text="{Binding Qty}"
-                         FontSize="Micro"
-                         TextColor="Grey"
-                         Grid.Column="2"/>
-            <Label Text="{Binding UnitsName}"
-                         FontSize="Micro"
-                         TextColor="Grey"
-                         Grid.Column="4"/>
-        </Grid>
-    </Frame>
+        </Grid.GestureRecognizers>
+        <Label 
+            Text="{Binding Name}"
+            Style="{StaticResource WhiteTextMedium}"/>
+        <Line
+            Stroke="#468FAF"
+            Grid.Row="1"
+            Grid.ColumnSpan="6"
+            X1="15"
+            X2="335"/>
+    </Grid>
 </DataTemplate>

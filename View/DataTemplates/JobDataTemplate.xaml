@@ -4,28 +4,41 @@
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
              x:Class="TheJobOrganizationApp.View.DataTemplates.JobDataTemplate"
-             x:DataType="models:Job">
-    <Frame HeightRequest="75"  Margin="0">
-        <Frame.GestureRecognizers>
+             x:DataType="models:Job"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View">
+    <Grid 
+                  ColumnDefinitions="Auto,*,Auto"
+                  RowDefinitions="Auto,Auto,10" 
+                  ColumnSpacing="15"
+                  RowSpacing="10"
+                  Margin="10"
+                  WidthRequest="350">
+        <Grid.GestureRecognizers>
             <TapGestureRecognizer 
-               Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
-               CommandParameter="{Binding .}"/>
-        </Frame.GestureRecognizers>
-        <Grid ColumnDefinitions="150,150,350"
-               ColumnSpacing="60">
-            <Label Text="{Binding Name}"
-                      FontSize="Small"
-                      TextColor="Black"/>
-            <VerticalStackLayout Grid.Column="1"
-                                  VerticalOptions="Start">
-                <Label Text="{Binding StartTime}"
-                      FontSize="Micro"
-                      TextColor="Grey"/>
-                <Label Text="{Binding FinishTime}"
-                      FontSize="Micro"
-                      TextColor="Grey"/>
-            </VerticalStackLayout>
-
-        </Grid>
-    </Frame>
+                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
+                         CommandParameter="{Binding .}"/>
+        </Grid.GestureRecognizers>
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Label Text="{Binding Name}"
+                         MaxLines="2"
+                         MaximumWidthRequest="200"
+                         VerticalOptions="Center"
+                         Style="{StaticResource WhiteTextMedium }"/>
+        <VerticalStackLayout Grid.Column="2"
+                                     VerticalOptions="Start"
+                             Margin="5">
+            <Label Text="{Binding StartTime}"
+                         Style="{StaticResource WhiteTextSmall}"/>
+            <Label Text="{Binding FinishTime}"
+                         Style="{StaticResource WhiteTextSmall}"/>
+        </VerticalStackLayout>
+        <Line
+            Grid.ColumnSpan="3"
+            Grid.Row="3"
+            Stroke="#468FAF"
+            X1="15"
+            X2="335"/>
+    </Grid>
 </DataTemplate>

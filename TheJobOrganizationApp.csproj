@@ -84,6 +84,9 @@
     <MauiXaml Update="View\Controls\IHasLocation.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\Controls\Schelduler.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\Controls\StringPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

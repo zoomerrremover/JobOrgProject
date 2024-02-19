@@ -7,20 +7,24 @@
     xmlns:view="clr-namespace:TheJobOrganizationApp.View"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarIsVisible="True"
-    Shell.NavBarIsVisible="False">
-    <TabBar>
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarBackgroundColor="#012A4A"
+    Shell.TabBarTitleColor="White"
+    Shell.TabBarUnselectedColor="#89C2D9">
+    <TabBar
+        >
         <ShellContent
-        Title="Schedule"
-        ContentTemplate="{DataTemplate local:ScheldudePage}"
-        Route="ScheldudePage" />
-        <ShellContent
-        Title="Database"
-        ContentTemplate="{DataTemplate view:GlobalSearchPage}"
-        Route="GlobalSearchPage" />
-        <ShellContent
-        Title="Settings"
-        ContentTemplate="{DataTemplate view:SettingsPage}"
-        Route="SettingsPage" />
-    </TabBar>
-
+            Title="Schedule"
+            ContentTemplate="{DataTemplate local:ScheldudePage}"
+            Route="ScheldudePage" />
+            <ShellContent
+            Title="Database"
+            ContentTemplate="{DataTemplate view:GlobalSearchPage}"
+            Route="GlobalSearchPage" />
+            <ShellContent
+            Title="Settings"
+            ContentTemplate="{DataTemplate view:SettingsPage}"
+            Route="SettingsPage" />
+        </TabBar>
+        
 </Shell>

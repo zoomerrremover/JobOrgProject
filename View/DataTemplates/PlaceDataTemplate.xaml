@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DataTemplate xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              x:Class="TheJobOrganizationApp.View.DataTemplates.PlaceDataTemplate"
-              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
-             x:DataType="models:Place">
-    <Frame HeightRequest="70"  Margin="0">
-        <Frame.GestureRecognizers>
+             x:DataType="models:Place"
+             xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <Grid ColumnDefinitions="150,450"
+                  ColumnSpacing="60"
+          RowDefinitions="Auto,10"
+          RowSpacing="15"
+          Margin="5">
+
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Grid.GestureRecognizers>
             <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
                                         CommandParameter="{Binding .}"/>
-        </Frame.GestureRecognizers>
-        <Grid ColumnDefinitions="150,450"
-                  ColumnSpacing="60">
-
-            <Label Text="{Binding Name}"
-                         FontSize="Small"
-                         TextColor="Black"/>
-            <Label Text="{Binding Address}"
-                         FontSize="Micro"
-                         TextColor="Grey"
+        </Grid.GestureRecognizers>
+        <Label          
+                         Style="{StaticResource WhiteTextMedium}"
+                         Text="{Binding Name}"/>
+        <Label 
+                         Style="{StaticResource WhiteTextMedium}"
+                         Text="{Binding Address}"
                          Grid.Column="3"
                          VerticalOptions="Center"/>
-        </Grid>
-    </Frame>
+        <Line
+            Grid.ColumnSpan="3"
+            Grid.Row="1"
+            Stroke="#468FAF"
+            X1="15"
+            X2="335"/>
+    </Grid>
 </DataTemplate>

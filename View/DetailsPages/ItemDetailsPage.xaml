@@ -7,37 +7,43 @@
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
              xmlns:dataTemplate="clr-namespace:TheJobOrganizationApp.View.DataTemplates"
-             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
+             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages"
+             Background="#012A4A">
     <base:BaseDetailsPage.Resources>
         <dataTemplate:HolderDataTemplate x:Key="holderTemplate"/>
-        <view:Styles x:Key="Styles"/>
     </base:BaseDetailsPage.Resources>
     <ScrollView>
         <VerticalStackLayout
-          Spacing="10"
+          Spacing="15"
           Padding="35">
             <controls:BaseDetails/>
-            <Frame
-                Style="{StaticResource CrimsonBlock}">
-                <Grid
-                    ColumnDefinitions="50,*,150,30">
-                    <Label
+            <Grid
+                    WidthRequest="300"
+                    ColumnDefinitions="50,*,150,30,30">
+                <Grid.Resources>
+                    <view:Styles/>
+                </Grid.Resources>
+                <Label
                         Style="{StaticResource WhiteTextMedium}"
                         VerticalOptions="Center"
                         Text="Price"/>
-                    <Entry
+                <Entry
                         Style="{StaticResource EntryWhiteText}"
+                        Placeholder="Enter the price of the item..."
                         Grid.Column="2"
                         InputTransparent="{Binding PriceInEditMode}"
                         Text="{Binding DisplayablePrice}"/>
-                    <ImageButton
+                <Label
                         Grid.Column="3"
+                        Style="{StaticResource WhiteTextMedium}"
+                        Text="{Binding BindingObject.UnitsName}"/>
+                <ImageButton
+                        Grid.Column="4"
                         WidthRequest="30"
                         HeightRequest="30"
                         Style="{StaticResource EditButton}"
                         Command="{Binding PriceEditButtonPressedCommand}"/>
-                </Grid>
-            </Frame>
+            </Grid>
             <controls:ModelListView
                 BindingContext="{Binding HoldersCollectionView}"
                 ListTitle="Holders"

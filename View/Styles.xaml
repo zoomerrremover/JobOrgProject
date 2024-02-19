@@ -5,18 +5,7 @@
 
     <LinearGradientBrush x:Key="BGColor"
         StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#03045E" Offset="1" />
-        <GradientStop Color="#CAF0F8" Offset="0.1" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="BlockColor"
-        StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#0077B6" Offset="0.1" />
-        <GradientStop Color="#48CAE4" Offset="4" />
-    </LinearGradientBrush>
-    <LinearGradientBrush x:Key="ControlColor"
-        StartPoint="0,1"  EndPoint="0,0">
-        <GradientStop Color="#023E8A" Offset="0.1" />
-        <GradientStop Color="#0077B6" Offset="2" />
+        <GradientStop Color="#A9D6E5" Offset="1" />
     </LinearGradientBrush>
     <Style x:Key="HeaderLabel" TargetType="Label">
         <Setter Property="FontSize" Value="30" />
@@ -32,27 +21,27 @@
         <Setter Property="TextColor" Value="White"/>
     </Style>
     <Style x:Key="Block01" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#303A2B"/>
+        <Setter Property="BackgroundColor" Value="#013A63"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="Block02" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#3D52D5"/>
+        <Setter Property="BackgroundColor" Value="#01497C"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="Block03" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#C62E65"/>
+        <Setter Property="BackgroundColor" Value="#01497C"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="Block04" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#004643"/>
+        <Setter Property="BackgroundColor" Value="#014F86"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="Block05" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#3C3744"/>
+        <Setter Property="BackgroundColor" Value="#2A6F97"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
@@ -62,30 +51,35 @@
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="EntryWhiteText" TargetType="Entry">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="#CAF0F8"/>
+        <Setter Property="PlaceholderColor" Value="#89C2D9"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
     </Style>
     <Style x:Key="DateEditorWhiteText" TargetType="DatePicker">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="TimeEditorWhiteText" TargetType="TimePicker">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="PickerWhiteText" TargetType="Picker">
-        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="AddButton" TargetType="ImageButton">
-        <Setter Property="WidthRequest" Value="50"/>
-        <Setter Property="HeightRequest" Value="50"/>
-        <Setter Property="BackgroundColor" Value="#090C9B"/>
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="BackgroundColor" Value="#014F86"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="EditButton" TargetType="ImageButton">
-        <Setter Property="WidthRequest" Value="50"/>
-        <Setter Property="HeightRequest" Value="50"/>
-        <Setter Property="BackgroundColor" Value="#090C9B"/>
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="BackgroundColor" Value="#014F86"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="WhiteTextEditor" TargetType="Editor">
-        <Setter Property="TextColor" Value="White"></Setter>
+        <Setter Property="TextColor" Value="#CAF0F8"></Setter>
+    </Style>
+    <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Color" Value="#CAF0F8"></Setter>
     </Style>
 </ResourceDictionary>

@@ -3,10 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DataTemplates.HistoryRecordDataTemplate"
              x:DataType="models:HistoryRecord"
-             xmlns:models="clr-namespace:TheJobOrganizationApp.Models">
-    <Frame>
+             xmlns:models="clr-namespace:TheJobOrganizationApp.Models"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <VerticalStackLayout
+        WidthRequest="300"
+        Spacing="10"
+        Margin="15">
+        <VerticalStackLayout.Resources>
+            <view:Styles/>
+        </VerticalStackLayout.Resources>
         <Label
+            Style="{StaticResource WhiteTextMedium}"
             Text="{Binding Message}"/>
-    </Frame>
-
+        <Line
+            Stroke="#468FAF"
+            X1="15"
+            X2="335"/>
+    </VerticalStackLayout>
 </DataTemplate>

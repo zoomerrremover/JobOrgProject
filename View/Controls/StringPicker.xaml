@@ -9,22 +9,28 @@
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame
-        Style="{StaticResource Block03}">
-        <Grid
-            ColumnDefinitions="75,*,200">
-            <Label
+    <Grid
+            ColumnDefinitions="75,*,200"
+            RowDefinitions="Auto,10"
+            RowSpacing="10"
+            WidthRequest="300">
+        <Label
                 Style="{StaticResource WhiteTextMedium}"
                 Grid.Column="0"
                 VerticalOptions="Center"
                 MaxLines="1"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:StringPicker}},
                 Path=PickerTitle}"/>
-            <Picker
+        <Picker
                 Style="{StaticResource PickerWhiteText}"
                 Grid.Column="2"
                 ItemsSource="{Binding DisplayableObjects}"
                 SelectedItem="{Binding PickedObject}"/>
-        </Grid>
-    </Frame>
+        <Line
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+    </Grid>
 </ContentView>

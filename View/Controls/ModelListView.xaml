@@ -9,53 +9,56 @@
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame
-        Style="{StaticResource Block04}">
-        <VerticalStackLayout
-            Spacing="5">
-            <Label
+    <VerticalStackLayout
+            Spacing="15"
+            WidthRequest="300">
+        <Label
                 Style="{StaticResource WhiteTextSmall}"
                 Grid.Row="0"
                 Grid.Column="0"
                 Text="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
                 Path=ListTitle}"/>
-            <Grid
+        <Grid
                 ColumnDefinitions="*,Auto"
                 ColumnSpacing="5">
-                <Entry
+            <Entry
                      Style="{StaticResource EntryWhiteText}"
                      Text="{Binding SearchEntry}"
                      MinimumWidthRequest="200"
                      Grid.Column="0"
                      VerticalOptions="Center"
+                     Placeholder="Type to search for items..."
                      />
-                <HorizontalStackLayout
+            <HorizontalStackLayout
                     Grid.Column="1"
                     VerticalOptions="Center">
-                    <Picker
+                <Picker
                         WidthRequest="60"
+                        Style="{StaticResource PickerWhiteText}"
                         IsVisible="{Binding FiltersAreVisible}"
                         ItemsSource="{Binding AvaliableFilters}"
                         SelectedItem="{Binding SelectedString}"/>
-                    <ImageButton
+                <ImageButton
                         Style="{StaticResource AddButton}"
                         IsVisible="{Binding AddButtonIsVisible}"
                         IsEnabled="{Binding AddButtonEnabled}"
                         Command="{Binding AddButtonPressedCommand}"/>
-                    <Button
+                <Button
                         Style="{StaticResource EditButton}"
                         IsVisible="{Binding EditButtonIsVisible}"
                         IsEnabled="{Binding EditButtonEnabled}"
                         Command="{Binding EditButtonPressedCommand}"/>
-                </HorizontalStackLayout>
-            </Grid>
-            <CollectionView
+            </HorizontalStackLayout>
+        </Grid>
+        <CollectionView
                 Grid.ColumnSpan="5"
                 Grid.Row="5"
                 ItemsSource="{Binding DisplayableList}"
                 ItemTemplate="{Binding Source={RelativeSource AncestorType={x:Type class:ModelListView}},
                 Path=DataTemplate}"/>
-
-        </VerticalStackLayout>
-    </Frame>
+        <Line
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+    </VerticalStackLayout>
 </ContentView>

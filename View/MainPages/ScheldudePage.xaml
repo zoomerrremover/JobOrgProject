@@ -4,12 +4,17 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
              x:DataType="viewmodels:ScheldudeViewModel"
              x:Class="TheJobOrganizationApp.ScheldudePage"
-             xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler">
+             xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
+             Background="#012A4A">
+    <ContentPage.Resources>
+        <view:Styles/>
+    </ContentPage.Resources>
     <Grid 
           RowDefinitions="45,*"
           ColumnDefinitions="*,*"
           ColumnSpacing="20"
-          Padding="10">
+          Padding="20">
             
             <Button Text="Pick workers"
                     Grid.Column="0"
@@ -19,8 +24,8 @@
                     Command="{Binding WorkerPickerCommand}"/>
         <scheduler:SfScheduler Grid.Row="1"
                                Grid.ColumnSpan="4"
-                               AllowedViews="Day,Week,Month"
-                               AppointmentsSource="{Binding appointments}"/>
+                               AppointmentsSource="{Binding appointments}">
+        </scheduler:SfScheduler>
 
     </Grid>
 

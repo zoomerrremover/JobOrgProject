@@ -9,40 +9,39 @@
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame
-        Style="{StaticResource JetBlock}">
-        <Grid ColumnDefinitions="Auto,Auto,*,30"
+    <Grid ColumnDefinitions="Auto,Auto,*,30"
               ColumnSpacing="10"
-              Padding="5">
-            <VerticalStackLayout
+              Padding="5"
+              WidthRequest="300">
+        <VerticalStackLayout
                 Grid.Column="0">
-                <Label 
+            <Label 
                     Style="{StaticResource WhiteTextMedium}"
                     Text="Start time:"/>
-                <DatePicker 
+            <DatePicker 
                                 Style="{StaticResource DateEditorWhiteText}"
                                 Date="{Binding DisplayableStartDate}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker     
+            <TimePicker     
                                 Style="{StaticResource TimeEditorWhiteText}"
                                 Time="{Binding DisplayableStartTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
-            </VerticalStackLayout>
-            <VerticalStackLayout
+        </VerticalStackLayout>
+        <VerticalStackLayout
                 Grid.Column="1">
-                <Label 
+            <Label 
                     Style="{StaticResource WhiteTextMedium}"
                     Text="Finish time:"/>
-                <DatePicker 
+            <DatePicker 
                                 Style="{StaticResource DateEditorWhiteText}"
                                 Date="{Binding DisplayableFinishDate, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
-                <TimePicker 
+            <TimePicker 
                                 Style="{StaticResource DateEditorWhiteText}"
                                 Time="{Binding DisplayableFinishTime, Mode=TwoWay}"
                                 InputTransparent="{Binding InputTransparency}"/>
-            </VerticalStackLayout>
-            <ImageButton 
+        </VerticalStackLayout>
+        <ImageButton 
                     Style="{StaticResource EditButton}"
                     Command="{Binding SaveButtonPressedCommand}"
                     IsEnabled="{Binding EditPermission}"
@@ -51,6 +50,5 @@
                     HorizontalOptions="End"
                     WidthRequest="30"
                     HeightRequest="30"/>
-        </Grid>
-    </Frame>
+    </Grid>
 </ContentView>

@@ -6,10 +6,11 @@
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:controls="clr-namespace:TheJobOrganizationApp.View.Controls"
-             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages">
+             xmlns:base="clr-namespace:TheJobOrganizationApp.View.DetailsPages"
+             Background="#012A4A">
     <ScrollView>
         <VerticalStackLayout
-            Spacing="10"
+            Spacing="15"
             Padding="35">
             <controls:BaseDetails/>
             <controls:IHasItemsDetails

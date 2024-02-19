@@ -9,61 +9,67 @@
         <view:Styles/>
     </ContentView.Resources>
     <VerticalStackLayout
-        Spacing="10">
-        <Frame
-            Style="{StaticResource Block01}">
-            <Grid
+        Spacing="20">
+        <Grid
                 ColumnDefinitions="Auto,190,*,30"
-                RowDefinitions="14,16,35,15,5,20">
-                <Label
+                RowDefinitions="14,16,50,15,5,50,10"
+                WidthRequest="300">
+            <Label
                     Text="Name:"
                     Style="{StaticResource WhiteTextSmall}"/>
-                <Entry  
+            <Entry  
                     Grid.Column="0"
                     Grid.Row="1"
+                    MaximumWidthRequest="270"
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2"
                     Style="{StaticResource EntryWhiteText}"
                     InputTransparent="{Binding NameInEditMode}"
                     Text="{Binding DisplayableName}"/>
-                <Label
+            <Label
                     Grid.Column="0"
                     Grid.Row="3"
                     Text="ID:"
                     Style="{StaticResource WhiteTextSmall}"/>
-                <Label 
-                    Grid.Column="1"
+            <Label 
+                    Padding="10"
+                    Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Grid.Row="5"
                     HorizontalOptions="Start"
                     Style="{StaticResource WhiteTextMedium}"
                     Text="{Binding DisplayableID}"/>
-                <ImageButton
+            <ImageButton
                     Grid.Column="3"
                     Grid.Row="0"
                     Grid.RowSpan="2"
                     Style="{StaticResource EditButton}"
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding NameEditButtonPressedCommand}"/>
-            </Grid>
-        </Frame>
-        <Frame
-            Style="{StaticResource Block02}">
-            <Grid
-                RowDefinitions="11,19,150"
+            <Line
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+        </Grid>
+        <Grid
+                WidthRequest="300"
+                RowDefinitions="14,16,5,150,15,10,10"
                 ColumnDefinitions="Auto,*,30">
-                <Label
+            <Label
                     Text="Description:"
                     Style="{StaticResource WhiteTextSmall}"/>
-                <Editor
+            <Editor
                     Grid.Column="0"
-                    Grid.Row="1"
+                    Grid.Row="3"
                     Grid.RowSpan="2"
                     Grid.ColumnSpan="2"
                     Style="{StaticResource WhiteTextEditor}"
                     InputTransparent="{Binding DescriptionInEditMode}"
                     Text="{Binding DisplayableDescription}"/>
-                <ImageButton
+            <ImageButton
                     Grid.Column="2"
                     Grid.Row="0"
                     Grid.RowSpan="2"
@@ -71,7 +77,14 @@
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding DescriptionEditButtonPressedCommand}"
                     />
-            </Grid>
-        </Frame>
+            <Line
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="3"
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+
+        </Grid>
     </VerticalStackLayout>
 </ContentView>

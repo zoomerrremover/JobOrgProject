@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <DataTemplate xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.DataTemplates.ThingDataTemplate"
+             x:DataType="models:Thing"
              xmlns:models ="clr-namespace:TheJobOrganizationApp.Models"
              xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
-             x:Class="TheJobOrganizationApp.View.DataTemplates.ThingDataTemplate"
-             x:DataType="models:Thing">
-    <Frame HeightRequest="70"  Margin="0">
-        <Frame.GestureRecognizers>
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
+    <VerticalStackLayout
+        Spacing="15"
+        Margin="15"
+        HeightRequest="50">
+        <VerticalStackLayout.Resources>
+            <view:Styles/>
+        </VerticalStackLayout.Resources>
+        <VerticalStackLayout.GestureRecognizers>
             <TapGestureRecognizer 
                  Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:GlobalSearchViewModel}}, Path=GoToDetailsCommand}"
                  CommandParameter="{Binding .}"/>
-        </Frame.GestureRecognizers>
-        <Grid ColumnDefinitions="100,60,80,2,50">
-            <Label Text="{Binding Name}"
-                     FontSize="Small"
-                     TextColor="Black"/>
-        </Grid>
-    </Frame>
+        </VerticalStackLayout.GestureRecognizers>
+        <Label Text="{Binding Name}"
+               Style="{StaticResource WhiteTextMedium}"/>
+        <Line
+            Stroke="#468FAF"
+            X1="15"
+            X2="335"/>
+    </VerticalStackLayout>
 </DataTemplate>

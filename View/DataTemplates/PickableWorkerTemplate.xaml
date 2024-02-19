@@ -4,27 +4,34 @@
              x:Class="TheJobOrganizationApp.View.DataTemplates.PickableWorkerTemplate"
              x:DataType="models:PickableWorker"
              xmlns:models="clr-namespace:TheJobOrganizationApp.ViewModels.ModelWrappers"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels">
-    <Frame HeightRequest="70"  Margin="0">
-        <HorizontalStackLayout>
-            <!--<Ellipse  Grid.Column="0" Fill="Red" WidthRequest="10" HeightRequest="10"/>-->
-            <CheckBox
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.DetailsViewModels"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View">
+    <HorizontalStackLayout
+        Spacing="15">
+        <HorizontalStackLayout.Resources>
+            <view:Styles/>
+        </HorizontalStackLayout.Resources>
+        <CheckBox
+                Style="{StaticResource CheckBoxStyle}"
                 IsChecked="{Binding data}"
                 VerticalOptions="Center">
-                <CheckBox.GestureRecognizers>
-                    <TapGestureRecognizer 
+            <CheckBox.GestureRecognizers>
+                <TapGestureRecognizer 
                                         Command="{Binding PressedCommand}"
                                         CommandParameter="{Binding .}">
-                    </TapGestureRecognizer>
-                </CheckBox.GestureRecognizers>
-            </CheckBox>
-            <Label Text="{Binding model.Name}"
-                                 FontSize="Micro"
-                                 TextColor="Black"
+                </TapGestureRecognizer>
+            </CheckBox.GestureRecognizers>
+        </CheckBox>
+        <Ellipse
+            WidthRequest="30"
+            HeightRequest="30"
+            Fill="{Binding model.Color}"/>
+        <Label 
+                                 Style="{StaticResource WhiteTextMedium}"   
+                                 Text="{Binding model.Name}"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center"></Label>
-        </HorizontalStackLayout>
-    </Frame>
+    </HorizontalStackLayout>
 </DataTemplate>
     
 

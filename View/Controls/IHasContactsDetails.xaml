@@ -8,48 +8,54 @@
     <ContentView.Resources>
         <view:Styles/>
     </ContentView.Resources>
-    <Frame
-        Style="{StaticResource LightBlueBlock}">
-        <VerticalStackLayout>
-            <Grid
+    <VerticalStackLayout
+        WidthRequest="300">
+        <Grid
                 ColumnDefinitions="Auto,*,Auto">
-                <Label
+        <Label
                         Style="{StaticResource WhiteTextSmall}"
                         Text="Contacts"
                         HorizontalOptions="Start"/>
-                <Button
+        <Button
                     Style="{StaticResource EditButton}"
                     Grid.Column="2"
                     HorizontalOptions="End"
-                    IsEnabled="{Binding EditButtonPressedCommand}"/>
-            </Grid>
-            <Label
+                    IsEnabled="{Binding EditPermission}"
+                    Command="{Binding EditButtonPressedCommand}"/>
+    </Grid>
+    <Label
                 Style="{StaticResource WhiteTextMedium}"
                 Text="Cell"/>
-            <Entry
+    <Entry
+                Placeholder="Enter the cell phone number..."
                 Style="{StaticResource EntryWhiteText}"
                 HorizontalOptions="Center"
-                WidthRequest="125" 
+                WidthRequest="200" 
                 InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Cell}"/>
-            <Label
+    <Label
                 Style="{StaticResource WhiteTextMedium}"
                 Text="Email"/>
-            <Entry
+    <Entry
+                Placeholder="Enter the buissness phone number..."
                 Style="{StaticResource EntryWhiteText}"
                 HorizontalOptions="Center"
-                WidthRequest="125"
+                WidthRequest="200"  
                 InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Email}"/>
-            <Label
+    <Label
                 Style="{StaticResource WhiteTextMedium}"
                 Text="Buisiness"/>
-            <Entry
+    <Entry
+                Placeholder="Enter the email phone number..."
                 Style="{StaticResource EntryWhiteText}"
                 HorizontalOptions="Center"
-                WidthRequest="125"
+                WidthRequest="200" 
                 InputTransparent="{Binding NotInEditMode}"
                 Text="{Binding Buisness}"/>
-        </VerticalStackLayout>
-    </Frame>
+        <Line
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
+    </VerticalStackLayout>
 </ContentView>

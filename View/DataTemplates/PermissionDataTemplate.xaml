@@ -3,42 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.DataTemplates.PermissionDataTemplate"
              x:DataType="viewmodels:PermissionEditor"
-             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls">
+             xmlns:viewmodels ="clr-namespace:TheJobOrganizationApp.ViewModels.BindableControls"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View">
     <Grid
-        RowDefinitions="30,*"
-        ColumnDefinitions="50,*">
+        ColumnDefinitions="120,*,Auto">
+        <Grid.Resources>
+            <view:Styles></view:Styles>
+        </Grid.Resources>
         <Label
-            Grid.ColumnSpan="2"
-            VerticalOptions="Start"
+            Style="{StaticResource WhiteTextMedium}"
+            VerticalOptions="Center"
             Text="{Binding modelName}"
             InputTransparent="{Binding Permission}"/>
-        <VerticalStackLayout
-            Grid.Column="1"
-            Grid.Row="1">
-            <HorizontalStackLayout>
-                <CheckBox
+        <HorizontalStackLayout
+            Grid.Column="2"
+            Spacing="10">
+            <CheckBox
                     VerticalOptions="Center"
+                    Style="{StaticResource CheckBoxStyle}"
                     IsChecked="{Binding CreatePermission,Mode=TwoWay}"/>
-                <Label
+            <CheckBox
                     VerticalOptions="Center"
-                    Text="Create"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox
-                    VerticalOptions="Center"
+                    Style="{StaticResource CheckBoxStyle}"
                     IsChecked="{Binding EditPermission}"/>
-                <Label
+            <CheckBox
                     VerticalOptions="Center"
-                    Text="Edit"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox
-                    VerticalOptions="Center"
+                    Style="{StaticResource CheckBoxStyle}"
                     IsChecked="{Binding DeletePermission}"/>
-                <Label
-                    VerticalOptions="Center"
-                    Text="Delete"/>
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Grid>
+        </HorizontalStackLayout>
+    </Grid>    
 </DataTemplate>
