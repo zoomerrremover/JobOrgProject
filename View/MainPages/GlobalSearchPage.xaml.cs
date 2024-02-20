@@ -12,8 +12,8 @@ public partial class GlobalSearchPage : ContentPage
     }
     protected override async void OnAppearing()
     {
-        base.OnAppearing();
+        await Task.Run(base.OnAppearing);
         var vm = BindingContext as GlobalSearchViewModel;
-        await Task.Run(vm.LoadContent);
+        vm.LoadContent();
     }
 }

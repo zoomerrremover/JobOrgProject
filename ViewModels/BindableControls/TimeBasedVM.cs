@@ -5,6 +5,7 @@ using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;
@@ -12,15 +13,16 @@ namespace TheJobOrganizationApp.ViewModels.BindableControls;
 public partial class TimeBasedVM : ModelView
 {
     #region CTORS
-    new ITimeBased BindingObject;
+    new public ITimeBased BindingObject { get; set; }
     public TimeBasedVM(ITimeBased BindingObject)
     {
         this.BindingObject = BindingObject;
+        EditPermission = userController.GetPermission(BindingObject as Thing, RuleType.Edit);   
     }
     public void InitializeData()
     {
         DisplayableStartDate = BindingObject.StartTime;
-        DisplayableStartDate = BindingObject.FinishTime;
+        DisplayableFinishDate = BindingObject.FinishTime;
         DisplayableStartTime = new TimeSpan(BindingObject.StartTime.Hour, BindingObject.StartTime.Minute,BindingObject.StartTime.Second);
         DisplayableFinishTime = new TimeSpan(BindingObject.FinishTime.Hour, BindingObject.FinishTime.Minute, BindingObject.FinishTime.Second);
     }
@@ -46,18 +48,18 @@ public partial class TimeBasedVM : ModelView
             InputTransparency = !InputTransparency;
             if (InputTransparency)
             {
-                if (DisplayableStartDate < DisplayableFinishDate)
+                var localFinishTime = new DateTime(DisplayableFinishDate.Year,
+                                        DisplayableFinishDate.Month,
+                                        DisplayableFinishDate.Day,
+                                        DisplayableFinishTime.Hours,
+                                        DisplayableFinishTime.Minutes, 0);
+                var localStartTime = new DateTime(DisplayableStartDate.Year,
+                    DisplayableStartDate.Month,
+                    DisplayableStartDate.Day,
+                    DisplayableStartTime.Hours,
+                    DisplayableStartTime.Minutes, 0);
+                if (localStartTime < localFinishTime)
                 {
-                    var localFinishTime = new DateTime(DisplayableFinishDate.Year,
-                        DisplayableFinishDate.Month,
-                        DisplayableFinishDate.Day,
-                        DisplayableFinishTime.Hours,
-                        DisplayableFinishTime.Minutes, 0);
-                    var localStartTime = new DateTime(DisplayableStartDate.Year,
-                        DisplayableStartDate.Month,
-                        DisplayableStartDate.Day,
-                        DisplayableStartTime.Hours,
-                        DisplayableStartTime.Minutes, 0);
                     if (localFinishTime != BindingObject.FinishTime)
                     {
                         userController.CreateHistoryRecord(BindingObject as Thing, Models.Misc.HistoryActionType.Changed,

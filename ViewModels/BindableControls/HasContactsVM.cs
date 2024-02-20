@@ -19,6 +19,7 @@ public partial class HasContactsVM
         Cell = BindingObject.PhoneNumber;
         Buisness = BindingObject.Buissness;
         Email = BindingObject.Email;
+        SetPermissions();
     }
     [ObservableProperty]
     string cell;

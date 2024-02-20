@@ -11,38 +11,52 @@
     <ContentPage.Resources>
         <view:Styles/>
     </ContentPage.Resources>
-    <Grid RowDefinitions="45,60,60,*"
+    <Grid RowDefinitions="20,45,60,35,*"
           WidthRequest="350"
+          RowSpacing="5"
           ColumnSpacing="15">
         <Entry Grid.Column="0"
                 Grid.Row="1"
                    Placeholder="Type to search items..."
                    Style="{StaticResource EntryWhiteText}"
                    Text="{Binding SearchPromt}"/>
-        <Grid ColumnDefinitions="Auto,*,Auto" Grid.Row="2" Margin="8" >
-            <HorizontalStackLayout Spacing="8">
-                <ImageButton
-                    Style="{StaticResource AddButton}"
-                    Command="{Binding GotToCreateItemCommand}"/>
-                <ImageButton
-                    Style="{StaticResource EditButton}"/>
-            </HorizontalStackLayout>
-            <Picker Grid.Column="2"
-                    Grid.Row="1"
+        <Grid ColumnDefinitions="*,Auto"
+              RowDefinitions="Auto,10"
+              RowSpacing="15"
+              Grid.Row="2"
+              Margin="8" >
+            <HorizontalStackLayout
+                 Grid.Row="0"
+                 Grid.Column="1"
+                Spacing="10">
+                <Picker 
+                    WidthRequest="90"
                     Style="{StaticResource PickerWhiteText}"
                     ItemsSource="{Binding DisplayedPickerItems}"
-                    SelectedItem="{Binding SelectedModel}"></Picker>
+                    SelectedItem="{Binding SelectedModel}"/>
+                <ImageButton
+                    Style="{StaticResource AddButton}"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    Command="{Binding GotToCreateItemCommand}"/>
+            </HorizontalStackLayout>
+                <Line
+                        Grid.Row="1"
+                        Grid.ColumnSpan="3"
+                        Stroke="#468FAF"
+                        X1="15"
+                        X2="335"/>
         </Grid>
         <CollectionView
             ItemsSource="{Binding ObsModels}"
-            Grid.Row="3" 
+            Grid.Row="4" 
             ItemTemplate="{Binding CurrentTemplate}"
             SelectionMode="None"/>
         <ActivityIndicator IsRunning="{Binding IsLoading}"
                    Color="#CAF0F8"
                    WidthRequest="100"
                    HeightRequest="100"
-                   Grid.Row="3"/>
+                   Grid.Row="4"/>
     </Grid>
     
 </ContentPage>

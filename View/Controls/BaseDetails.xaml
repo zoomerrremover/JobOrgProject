@@ -24,7 +24,7 @@
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2"
                     Style="{StaticResource EntryWhiteText}"
-                    InputTransparent="{Binding NameInEditMode}"
+                    IsEnabled="{Binding NameInEditMode}"
                     Text="{Binding DisplayableName}"/>
             <Label
                     Grid.Column="0"
@@ -67,7 +67,7 @@
                     Grid.RowSpan="2"
                     Grid.ColumnSpan="2"
                     Style="{StaticResource WhiteTextEditor}"
-                    InputTransparent="{Binding DescriptionInEditMode}"
+                    IsEnabled="{Binding DescriptionInEditMode}"
                     Text="{Binding DisplayableDescription}"/>
             <ImageButton
                     Grid.Column="2"

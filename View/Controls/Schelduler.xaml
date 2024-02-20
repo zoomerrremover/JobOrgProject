@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.Controls.Schelduler">
     <Grid
-        RowDefinitions="30,*">
+        RowDefinitions="50,Auto,*">
+        <Grid
+            ColumnDefinitions="Auto,*,Auto">
+            <HorizontalStackLayout>
+                
+            </HorizontalStackLayout>
+        </Grid>
         
     </Grid>
 </ContentView>

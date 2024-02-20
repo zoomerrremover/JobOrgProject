@@ -17,6 +17,7 @@ public partial class HasLocationVM : ModelView
     {
         this.BindingObject = BindingObject;
         CanBeEdited = canBeEdited;
+        SetPermissions();
     }
 
 }

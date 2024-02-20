@@ -35,7 +35,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
                 }
             }
         }
-        public bool EditPermission { get => userController.GetPermission(BindingObject, RuleType.Edit); }
+        public bool EditPermission { get; protected set; }
 
         protected Thing BindingObject;
 
@@ -49,7 +49,10 @@ namespace TheJobOrganizationApp.ViewModels.Base
         }
         public ModelView()
         {
-             
+        }
+        protected void SetPermissions()
+        {
+            EditPermission = userController.GetPermission(BindingObject, RuleType.Edit);
         }
         public static ModelView CreateFromTheModel(Thing model)
         {

@@ -32,13 +32,11 @@ public partial class AssignmentVM : ThingVM
     public override void LoadContent()
     {
         base.LoadContent();
+        InitializeTimeSelector();
         InitializeWorkerPicker();
         InitializeJobPicker();
         InitializePlacePicker();
-        InitializeTimeSelector();
-
     }
-
     private void InitializeWorkerPicker()
     {
         var models = InitializeModels();
@@ -92,16 +90,13 @@ public partial class AssignmentVM : ThingVM
     #endregion
     #region Pickable Job feature
     public StringPickerVM JobPicker { get; set; }
-
     void InitializeJobPicker()
     {
-
         var localJobs = dataStorage.GetItems<Job>();
         Job initialValue = localJobs.Where(job => job.Tasks.Contains(BindingObject)).FirstOrDefault();
-        var jobsCastedToThing = localJobs.Select(job => job as Thing).ToObservableCollection();
+        var jobsCastedToThing = localJobs.Select(job => job as Thing);
         JobPicker.InitializeContent(jobsCastedToThing, initialValue);
     }
-
     #endregion
     #region Displayable place
     public StringPickerVM PlacePicker { get; set; }

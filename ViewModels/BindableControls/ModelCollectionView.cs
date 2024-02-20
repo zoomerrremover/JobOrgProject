@@ -34,6 +34,7 @@ public partial class ModelCollectionView : ModelView
     {
         this.elements = new();
         Initiate(elements,typeToSubscribeTo);
+        SetPermissions();
     }
     public ModelCollectionView()
     {

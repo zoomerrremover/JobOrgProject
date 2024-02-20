@@ -11,6 +11,7 @@ using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
 using TheJobOrganizationApp.View.DetailsPages;
+using CommunityToolkit.Maui;
 
 namespace TheJobOrganizationApp
 {
@@ -24,6 +25,7 @@ namespace TheJobOrganizationApp
                 .UseMauiApp<App>()
                 .ConfigureMopups()
                 .UseMauiMaps()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("SF-Pro.ttf", "MainFont");

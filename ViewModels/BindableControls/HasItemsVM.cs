@@ -20,6 +20,7 @@ public partial class HasItemsVM : ModelView
                                        .WithAddButton(permission, AddButton)
                                        .WithFilters(("Name", NameSelector),
                                                     ("Quantity", QuantitySelector));
+        SetPermissions();
     }
     //public void LoadAsync()
     //{

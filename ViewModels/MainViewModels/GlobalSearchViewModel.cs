@@ -46,7 +46,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
 
             }
         }
-        partial void OnSelectedModelChanging(string oldValue, string newValue)
+        async partial void OnSelectedModelChanging(string oldValue, string newValue)
         {
             if (IsLoading)
             {
@@ -60,7 +60,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
                 Models = dataStorage.GetItems<Thing>(localType);
                 Models.CollectionChanged += LoadModels;
                 CurrentTemplate = Converter.ConvertToDataTemplate(localType);
-                LoadModels();
+                await Task.Run(LoadModels);
             }
             catch (Exception e)
             {
@@ -69,6 +69,11 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
 
             }
             finally { IsLoading = false; }
+        }
+
+        private void LoadModels()
+        {
+            LoadModels(null);
         }
         #endregion
         #region Ctors and others
@@ -91,7 +96,7 @@ namespace TheJobOrganizationApp.ViewModels.MainViewModels
         public ObservableCollection<Thing> ObsModels { get; set; } = new();
 
 
-        void LoadModels(object sender = null, NotifyCollectionChangedEventArgs e = null)
+        async void LoadModels(object sender = null, NotifyCollectionChangedEventArgs e = null)
         {
                 ObsModels.Clear();
                 foreach (var model in Models)

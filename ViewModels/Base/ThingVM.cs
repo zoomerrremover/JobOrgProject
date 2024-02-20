@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.ViewModels.BindableControls;
+using CommunityToolkit.Maui.Core.Platform;
 
 namespace TheJobOrganizationApp.ViewModels.Base
 {
@@ -19,6 +20,7 @@ namespace TheJobOrganizationApp.ViewModels.Base
         public ThingVM(Thing BindingObject)
         {
             this.BindingObject = BindingObject;
+            SetPermissions();
             HistoryCollectionView = new ModelCollectionView();
 
         }
@@ -29,6 +31,8 @@ namespace TheJobOrganizationApp.ViewModels.Base
         }
         private void InitializeTextFields()
         {
+            DisplayableName ??= string.Empty;
+            DisplayableDescription ??= string.Empty;
             DisplayableName = BindingObject.Name;
             DisplayableDescription = BindingObject.Description;
             DisplayableID = BindingObject.Id.ToString();
@@ -45,9 +49,16 @@ namespace TheJobOrganizationApp.ViewModels.Base
             NameInEditMode = !NameInEditMode;
             if (NameInEditMode && BindingObject.Name != DisplayableName)
             {
-                
-                CreateChangeHistoryRecord($"{nameof(BindingObject.Name)}", BindingObject.Name, DisplayableName);
-                BindingObject.Name = DisplayableName;
+                if(DisplayableName.Length==0 || DisplayableDescription.Length>24)
+                {
+                    errorService.CallError("Name length is not right !");
+                    DisplayableName = BindingObject.Name;
+                }
+                else
+                {
+                    CreateChangeHistoryRecord($"{nameof(BindingObject.Name)}", BindingObject.Name, DisplayableName);
+                    BindingObject.Name = DisplayableName;
+                }
             }
         }
         protected virtual void CreateChangeHistoryRecord(string property, string oldValue = null, string newValue = null)
@@ -72,6 +83,11 @@ namespace TheJobOrganizationApp.ViewModels.Base
             DescriptionInEditMode = !DescriptionInEditMode;
             if (DescriptionInEditMode && BindingObject.Description != DisplayableDescription)
             {
+                if (DisplayableDescription.Length == 0 || DisplayableDescription.Length > 300)
+                {
+                    errorService.CallError("Description length is not right !");
+                    DisplayableDescription = BindingObject.Description;
+                }
                 CreateChangeHistoryRecord($"{nameof(BindingObject.Description)}", BindingObject.Description , DisplayableDescription);
                 BindingObject.Description = DisplayableDescription;
             }

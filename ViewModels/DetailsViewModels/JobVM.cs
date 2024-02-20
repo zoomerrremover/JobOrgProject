@@ -29,10 +29,10 @@ public partial class JobVM:ThingVM
     public override void LoadContent()
     {
         base.LoadContent();
+        TimeBasedVM.InitializeData();
         InitializeAssignments();
         InitializePlacePicker();
         InitializeContractorPicker();
-        TimeBasedVM.InitializeData();
     }
     void Declare()
     {
