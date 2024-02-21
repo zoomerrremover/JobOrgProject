@@ -10,7 +10,7 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
     {
         public int VisibilityLevel { get => User.Position.VisibilityLevel; }
         List<Rule> Permissions { get => User.Position.Permissions; }
-        IUser User { get;set; }
+        public IUser User { get;private set; }
         public void CreateHistoryRecord(Thing Object, HistoryActionType type, string propertyName = null, string oldValue = null, string newValue = null)
         {
             var newHistoryRecord = new HistoryRecord()

@@ -8,6 +8,7 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface IUserController
     {
+        public IUser User { get; }
         public int VisibilityLevel { get; }
         public void SetPermissions(IUser user);
         public bool GetPermission(Thing Object, RuleType Type);
