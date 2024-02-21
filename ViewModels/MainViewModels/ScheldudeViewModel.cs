@@ -44,6 +44,10 @@ public partial class ScheldudeViewModel
             }
         });
     }
+    public void InitializeAppointments()
+    {
+        InitializeAppointments();
+    }
 
     public ScheldudeViewModel(IInitializator initializator, WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IConnectionService apiservice,IDataStorage storage)
     {
@@ -58,7 +62,10 @@ public partial class ScheldudeViewModel
     {
         GlobalAssignments = Data.GetItems<Assignment>();
         LinkMethods(WorkerPickerVM);
-        InitializeAppointments();
+    }
+    public async Task LoadContect()
+    {
+       await Task.Run(InitializeAppointments);
     }
     private void LinkMethods(WorkerPickerViewModel WorkerPickerVM)
     {

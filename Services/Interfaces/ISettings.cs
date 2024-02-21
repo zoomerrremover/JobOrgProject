@@ -3,8 +3,8 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface ISettings
     {
-        public void LoadFromFile();
-        public void SaveToFile();
+        public Task LoadFromFile();
+        public Task SaveToFile();
         public string ServerName { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }

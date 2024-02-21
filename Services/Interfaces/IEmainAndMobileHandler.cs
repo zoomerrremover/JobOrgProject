@@ -9,9 +9,9 @@ namespace TheJobOrganizationApp.Services.Interfaces
 {
     public interface IEmainAndMobileHandler
     {
-        public bool SendEmail(IHasContacts contact);
-        public bool SendSms(IHasContacts contact);
-        public bool ChangeEmail(string email);
+        public Task<bool> SendEmail(IHasContacts contact);
+        public Task<bool> SendSms(IHasContacts contact);
+        public Task<bool> ChangeEmail(string email);
 
 
     }

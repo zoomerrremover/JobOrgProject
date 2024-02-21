@@ -1,6 +1,7 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.ViewModels.Base;
 
@@ -14,12 +15,15 @@ public partial class SettingsViewModel:BaseViewModel
 
     IUserController userController;
 
+    IVereficationService vereficationService;
+
     [ObservableProperty]
     string email;
     [RelayCommand]
     async Task ChangeEmail()
     {
-        if (!emaiAndMobileHandler.ChangeEmail(Email))
+        var result = await emaiAndMobileHandler.ChangeEmail(Email);
+        if (!result)
         {
             Email = userController.User.EmailForLogIn;
             return;
@@ -41,6 +45,11 @@ public partial class SettingsViewModel:BaseViewModel
     {
         await Task.Run(settings.SaveToFile);
     }
+    [RelayCommand]
+    async Task OnLogOut()
+    {
+        await vereficationService.LogOut();
+    }
     [ObservableProperty]
     bool notificationPermission;
 
@@ -55,11 +64,20 @@ public partial class SettingsViewModel:BaseViewModel
     {
         settings.GeoLocationPermission = value;
     }
-
-    public SettingsViewModel(IUserController userController,ISettings settings,IEmainAndMobileHandler emaiAndMobileHandler)
+    
+    public SettingsViewModel(IVereficationService vereficationService,IDataStorage dataStorange,IUserController userController,ISettings settings,IEmainAndMobileHandler emaiAndMobileHandler)
     {
+        this.vereficationService = vereficationService;
         this.userController = userController;
         this.settings = settings;
         this.emaiAndMobileHandler = emaiAndMobileHandler;
+    }
+    public void LoadContent()
+    {
+        Email = userController.User.EmailForLogIn;
+        NotificationPermission = settings.NotificationPermission;
+        GeoLocationPermission = settings.GeoLocationPermission;
+        LoadPerPast = settings.LoadPeriodPast;
+        LoadPerFuture = settings.LoadPeriodFuture;
     }
 }

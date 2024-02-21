@@ -17,11 +17,11 @@ namespace TheJobOrganizationApp.Services.HighLevelServices
         public int LoadPeriodFuture { get; set; }
         public int LoadPeriodPast { get; set; }
 
-        public void LoadFromFile()
+        public async Task LoadFromFile()
         {
         }
 
-        public void SaveToFile()
+        public async Task SaveToFile()
         {
         }
     }
