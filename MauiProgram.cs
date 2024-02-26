@@ -37,7 +37,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
             builder.Services.AddSingleton<IConnectionService, APITemp>();
             builder.Services.AddSingleton<IUserController, UserController>();
-            builder.Services.AddSingleton<ISettings,AppSettings>();
+            builder.Services.AddSingleton<ISettings,Settings>();
             builder.Services.AddTransient<IInitializator,Initializator>();
             builder.Services.AddTransient<FakeDataFactory>();
             builder.Services.AddTransient<PageFactory>();
