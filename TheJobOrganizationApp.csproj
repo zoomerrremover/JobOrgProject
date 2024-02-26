@@ -157,6 +157,9 @@
     <MauiXaml Update="View\MainPages\GlobalSearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="View\MainPages\LoadingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="View\PopUpPages\LogInPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

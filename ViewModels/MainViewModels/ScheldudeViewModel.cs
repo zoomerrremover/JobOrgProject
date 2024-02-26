@@ -49,7 +49,7 @@ public partial class ScheldudeViewModel
         InitializeAppointments();
     }
 
-    public ScheldudeViewModel(IInitializator initializator, WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IConnectionService apiservice,IDataStorage storage)
+    public ScheldudeViewModel( WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IDataStorage storage)
     {
         Data = storage;
         appointments = new();
@@ -79,13 +79,5 @@ public partial class ScheldudeViewModel
 
         PopUpService.PushAsync(new WorkerPickerPage(WorkerPickerVM));
     }
-    async Task GoToLogInScreen()
-    {
 
-        await Shell.Current.GoToAsync($"{nameof(LogInPage)}");
-    }
-    public ScheldudeViewModel()
-    {
-          GoToLogInScreen();
-    }
 }

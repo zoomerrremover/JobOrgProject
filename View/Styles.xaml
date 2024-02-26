@@ -20,6 +20,10 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="TextColor" Value="White"/>
     </Style>
+    <Style x:Key="WhiteHeader" TargetType="Label">
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="TextColor" Value="White"/>
+    </Style>
     <Style x:Key="Block01" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="#013A63"/>
         <Setter Property="BorderColor" Value="Transparent"/>
@@ -74,6 +78,11 @@
         <Setter Property="WidthRequest" Value="30"/>
         <Setter Property="HeightRequest" Value="30"/>
         <Setter Property="BackgroundColor" Value="#48CAE4"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="TextButton" TargetType="Button">
+        <Setter Property="TextColor" Value="#CAF0F8"></Setter>
+        <Setter Property="BackgroundColor" Value="#023E8A"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="WhiteTextEditor" TargetType="Editor">

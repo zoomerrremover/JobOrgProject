@@ -12,6 +12,8 @@ using TheJobOrganizationApp.ViewModels.MainViewModels;
 using TheJobOrganizationApp.Services.LowLeveLServices;
 using TheJobOrganizationApp.View.DetailsPages;
 using CommunityToolkit.Maui;
+using TheJobOrganizationApp.Services.TemporaryServices;
+using TheJobOrganizationApp.View.MainPages;
 
 namespace TheJobOrganizationApp
 {
@@ -35,12 +37,13 @@ namespace TheJobOrganizationApp
             builder.Services.AddSingleton(MopupService.Instance);
             builder.Services.AddTransient<IErrorService, ErrorService>();
             builder.Services.AddSingleton<IDataStorage,DataStorageTemp>();
-            builder.Services.AddSingleton<IConnectionService, APITemp>();
+            builder.Services.AddSingleton<IResources, Resources>();
+            builder.Services.AddSingleton<IServerConnectionService, TEMPServiceConnection>();
             builder.Services.AddSingleton<IUserController, UserController>();
             builder.Services.AddSingleton<ISettings,Settings>();
-            builder.Services.AddTransient<IInitializator,Initializator>();
             builder.Services.AddTransient<FakeDataFactory>();
             builder.Services.AddTransient<PageFactory>();
+            builder.Services.AddTransient<IEncryptingService,EncryptingService>();
             #endregion
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();
@@ -58,10 +61,13 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<LogInViewModel>();
             builder.Services.AddTransient<WorkerPickerViewModel>();
             builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<LoadingPageViewModels>();
             #endregion
             #region Pages
-            builder.Services.AddTransient<WorkerPickerPage>();
+            builder.Services.AddTransient<LoadingPage>();
             builder.Services.AddTransient<LogInPage>();
+            builder.Services.AddTransient<LogInPage2>();
+            builder.Services.AddTransient<WorkerPickerPage>();
             builder.Services.AddTransient<ScheldudePage>();
             builder.Services.AddTransient<GlobalSearchPage>();
             builder.Services.AddTransient<AssignmentDetailsPage>();

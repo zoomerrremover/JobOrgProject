@@ -5,10 +5,8 @@ namespace TheJobOrganizationApp.Services.Interfaces
     { 
         Dictionary<string,string> Icons { get;}
         Dictionary<string,string> Strings { get;}
-        Dictionary<string, GradientBrush> Colors { get; }
         public string GetIcon(string name);
         public string GetString(string name);
-        public bool CheckResources(List<string> RequiredContent);
-        public void LoadContent();
+        public Task LoadContent();
     }
 }

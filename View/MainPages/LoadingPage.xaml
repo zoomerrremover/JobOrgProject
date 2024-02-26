@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TheJobOrganizationApp.View.MainPages.LoadingPage"
+             x:DataType="viewmodels:LoadingPageViewModels"
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
+             Background="#012A4A">
+    <Grid ColumnDefinitions="*,400,*"
+          RowDefinitions="Auto,45,10"
+          RowSpacing="50">
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            Text="Welcome to App Name!"/>
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                   Color="#CAF0F8"
+                   WidthRequest="100"
+                   HeightRequest="100"
+                   Grid.Row="4"/>
+        <ProgressBar
+            Progress="{Binding Progress}"/>
+    </Grid>
+</ContentPage>
