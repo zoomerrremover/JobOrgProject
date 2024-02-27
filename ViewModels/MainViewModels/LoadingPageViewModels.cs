@@ -13,10 +13,8 @@ public partial class LoadingPageViewModels: BaseViewModel
     IResources resources;
     ISettings settings;
     IServerConnectionService connectionService;
-    LogInPage logInPage;
-    public LoadingPageViewModels(LogInPage logInPAge,IResources resources, ISettings settings, IServerConnectionService serverConnection)
+    public LoadingPageViewModels(IResources resources, ISettings settings, IServerConnectionService serverConnection)
     {
-       logInPage = logInPAge;
        this.resources = resources;
        this.settings = settings;
        this.connectionService = serverConnection;
@@ -33,7 +31,7 @@ public partial class LoadingPageViewModels: BaseViewModel
         Progress += 0.2;
         await settings.LoadFromFile();
         Progress = 100;
-        await Shell.Current.Navigation.PushAsync(logInPage);
+        await Shell.Current.GoToAsync($"{nameof(LogInPage)}");
         IsLoading = false;
 
     }

@@ -11,6 +11,7 @@ using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.PopUpViewModels;
 using System.Linq;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.View.MainPages;
 
 namespace TheJobOrganizationApp.ViewModels.MainViewModels;
 
@@ -28,7 +29,7 @@ public partial class ScheldudeViewModel
 
     ObservableCollection<Assignment> GlobalAssignments;
 
-    public void InitializeAppointments (object sender = null,EventArgs e = null)
+    public void InitializeAppointments ()
     {
         appointments.Clear ();
         tasksOnTheScreen.Clear ();
@@ -44,9 +45,9 @@ public partial class ScheldudeViewModel
             }
         });
     }
-    public void InitializeAppointments()
+    public async void InitializeAppointments(object sender = null, EventArgs e = null)
     {
-        InitializeAppointments();
+        await Task.Run(InitializeAppointments);
     }
 
     public ScheldudeViewModel( WorkerPickerViewModel WorkerPickerVM, IPopupNavigation PopUpService,IDataStorage storage)
@@ -56,6 +57,7 @@ public partial class ScheldudeViewModel
         this.WorkerPickerVM = WorkerPickerVM;
         this.PopUpService = PopUpService;
         Initialize(WorkerPickerVM);
+        Shell.Current.GoToAsync($"{nameof(LoadingPage)}");
     }
 
     private void Initialize(WorkerPickerViewModel WorkerPickerVM)

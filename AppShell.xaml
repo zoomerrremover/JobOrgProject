@@ -11,17 +11,16 @@
     Shell.TabBarBackgroundColor="#012A4A"
     Shell.TabBarTitleColor="White"
     Shell.TabBarUnselectedColor="#89C2D9">
-    <TabBar
-        >
+    <TabBar>
         <ShellContent
-            Title="Schedule"
-            ContentTemplate="{DataTemplate local:ScheldudePage}"
-            Route="ScheldudePage" />
-            <ShellContent
+          Title="Schedule"
+          ContentTemplate="{DataTemplate local:ScheldudePage}"
+          Route="ScheldudePage" />
+        <ShellContent
             Title="Database"
             ContentTemplate="{DataTemplate view:GlobalSearchPage}"
             Route="GlobalSearchPage" />
-            <ShellContent
+        <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate view:SettingsPage}"
             Route="SettingsPage" />

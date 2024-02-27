@@ -1,7 +1,6 @@
 ﻿using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
-using Android.Gms.Common;
 
 namespace TheJobOrganizationApp.Services.TemporaryServices
 {
@@ -12,6 +11,8 @@ namespace TheJobOrganizationApp.Services.TemporaryServices
         ISettings settings { get; set; }
 
         IUserController userController { get; set; }
+
+        public bool IsConnected => throw new NotImplementedException();
 
         public List<Worker> Workers;
 

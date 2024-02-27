@@ -6,13 +6,12 @@ namespace TheJobOrganizationApp
 {
     public partial class App : Application
     {
-        public App(LoadingPage page)
+        public App()
         {
             
             InitializeComponent();
 
             MainPage = new AppShell();
-            Shell.Current.Navigation.PushAsync(page);
         }
     }
 }

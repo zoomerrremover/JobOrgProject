@@ -1,4 +1,4 @@
-﻿using TheJobOrganizationApp.ViewModels;
+﻿
 using TheJobOrganizationApp.ViewModels.MainViewModels;
 
 namespace TheJobOrganizationApp;
@@ -8,15 +8,16 @@ public partial class ScheldudePage : ContentPage
 
     public ScheldudePage(ScheldudeViewModel bc)
     {
+        Shell.SetTabBarIsVisible(this, true);
         BindingContext = bc;
         InitializeComponent();
 
     }
-    protected override void OnAppearing()
+    protected async override void OnAppearing()
     {
         base.OnAppearing();
         var bc = BindingContext as ScheldudeViewModel;
-        bc.InitializeAppointments();
+        await Task.Run(bc.InitializeAppointments);
     }
 
 

@@ -5,7 +5,7 @@ using TheJobOrganizationApp.Services.Interfaces;
 using TheJobOrganizationApp.View.MainPages;
 using TheJobOrganizationApp.ViewModels.Base;
 
-namespace TheJobOrganizationApp.ViewModels.MainViewModels
+namespace TheJobOrganizationApp.ViewModels.MainViewModels;
 
 public partial class LogInViewModel: BaseViewModel
 {
@@ -72,9 +72,9 @@ public partial class LogInViewModel: BaseViewModel
     async Task goToApp()
     {
         IsLoading = true;
-        serverConnection.LoadData();
         serverConnection.StartListening();
-        await Shell.Current.GoToAsync($"{nameof(ScheldudePage)}");//{nameof(ScheldudePage)}
+        await serverConnection.LoadData();
+        await Shell.Current.GoToAsync($"///{nameof(ScheldudePage)}");
         IsLoading = false;
     }
 }

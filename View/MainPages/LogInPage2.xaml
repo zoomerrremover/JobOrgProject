@@ -4,11 +4,36 @@
              x:Class="TheJobOrganizationApp.View.MainPages.LogInPage2"
              x:DataType="viewmodels:LogInViewModel"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
-             Title="LogInPage2">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             Background="#012A4A">
+    <Grid
+        ColumnDefinitions="*,300,*"
+        RowDefinitions="*,Auto,60,Auto,10,Auto,10,30,*">
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Label
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="Welcome to App-Name!"
+            MaxLines="1"
+            Style="{StaticResource HeaderLabel}"/>
+        <Entry
+            Grid.Column="1"
+            Grid.Row="3"
+            Placeholder="Enter Server ID"
+            Text="{Binding UserName}"
+            Style="{StaticResource EntryWhiteText}"/>
+        <Entry
+            Grid.Column="1"
+            Grid.Row="5"
+            Placeholder="Enter Server ID"
+            Text="{Binding Password}"
+            Style="{StaticResource EntryWhiteText}"/>
+        <Button
+            Grid.Column="1"
+            Grid.Row="7"
+            Command="{Binding logInToAccountCommand}"
+            Style="{StaticResource TextButton}"/>
+    </Grid>
 </ContentPage>

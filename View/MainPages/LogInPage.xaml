@@ -2,15 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TheJobOrganizationApp.View.LogInPage"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
              x:DataType="viewmodels:LogInViewModel"
-             Title="LogInPage">
-    <Grid ColumnDefinitions="400" RowDefinitions="60,60,30,60,30,60" HorizontalOptions="Center" VerticalOptions="Center">
-        <Label Grid.Row="0" Grid.Column="2" HorizontalOptions="Center">
-            <Label.Text>Welcome Back !</Label.Text>
-        </Label>
-        <Entry Grid.Row="1"></Entry>
-        <Entry Grid.Row="3"></Entry>
-        <Button Grid.Row="5" Text="Log In" Command="{Binding goToScheldudeCommand}"></Button>
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
+             xmlns:view="clr-namespace:TheJobOrganizationApp.View"
+             Background="#012A4A">
+    <Grid
+        ColumnDefinitions="*,300,*"
+        RowDefinitions="*,Auto,60,Auto,10,30,*">
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
+        <Label
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="Welcome to App-Name!"
+            MaxLines="1"
+            Style="{StaticResource HeaderLabel}"/>
+        <Entry
+            Grid.Column="1"
+            Grid.Row="3"
+            Placeholder="Enter Server ID"
+            Text="{Binding ServerName}"
+            Style="{StaticResource EntryWhiteText}"/>
+        <Button
+            Grid.Column="1"
+            Grid.Row="5"
+            Command="{Binding logInToServerCommand}"
+            Style="{StaticResource TextButton}"/>
     </Grid>
 </ContentPage>
