@@ -112,5 +112,10 @@ namespace TheJobOrganizationApp.Services.TemporaryServices
         {
             return;
         }
+
+        public Task<bool> ProfileLogOut()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

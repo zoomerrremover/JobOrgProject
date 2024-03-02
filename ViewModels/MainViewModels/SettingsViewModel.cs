@@ -15,7 +15,7 @@ public partial class SettingsViewModel:BaseViewModel
 
     IUserController userController;
 
-    IVereficationService vereficationService;
+    IServerConnectionService connectionService;
 
     [ObservableProperty]
     string email;
@@ -48,7 +48,7 @@ public partial class SettingsViewModel:BaseViewModel
     [RelayCommand]
     async Task OnLogOut()
     {
-        await vereficationService.LogOut();
+        await connectionService.ProfileLogOut();
     }
     [ObservableProperty]
     bool notificationPermission;
@@ -65,9 +65,9 @@ public partial class SettingsViewModel:BaseViewModel
         settings.GeoLocationPermission = value;
     }
     
-    public SettingsViewModel(IVereficationService vereficationService,IDataStorage dataStorange,IUserController userController,ISettings settings,IEmainAndMobileHandler emaiAndMobileHandler)
+    public SettingsViewModel(IServerConnectionService connectionService,IDataStorage dataStorange,IUserController userController,ISettings settings,IEmainAndMobileHandler emaiAndMobileHandler)
     {
-        this.vereficationService = vereficationService;
+        this.connectionService = connectionService;
         this.userController = userController;
         this.settings = settings;
         this.emaiAndMobileHandler = emaiAndMobileHandler;

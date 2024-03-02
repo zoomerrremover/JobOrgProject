@@ -44,6 +44,7 @@ namespace TheJobOrganizationApp
             builder.Services.AddTransient<FakeDataFactory>();
             builder.Services.AddTransient<PageFactory>();
             builder.Services.AddTransient<IEncryptingService,EncryptingService>();
+            builder.Services.AddTransient<IEmainAndMobileHandler,TEMPEmailService>();
             #endregion
             #region XAML and Reflection Content and Converter between them
             builder.Services.AddSingleton<IReflectionContent, RuntimeContent>();

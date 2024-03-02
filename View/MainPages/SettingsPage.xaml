@@ -1,28 +1,111 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
              x:DataType="viewmodels:SettingsViewModel"
              x:Class="TheJobOrganizationApp.View.SettingsPage"
-             Title="SettingsPage">
+             xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels"
+             xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
+             Background="#012A4A">
     <VerticalStackLayout
         Padding="35"
-        Spacing="10">
-        <HorizontalStackLayout>
-            <Label Text="Lang"/>
-            <Picker/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="App Theme"/>
-            <Switch/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="GeoLocation"/>
-            <Switch/>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <Label Text="Notifications"/>
-            <Switch/>
-        </HorizontalStackLayout>
+        Spacing="40">
+        <VerticalStackLayout.Resources>
+            <view:Styles/>
+        </VerticalStackLayout.Resources>
+        <Grid
+            ColumnDefinitions="Auto,*,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto">
+            <Label
+                Text="Account"
+                Style="{StaticResource HeaderLabel}"/>
+            <Label
+                Text="Email:"
+                Grid.Row="1"
+                Style="{StaticResource WhiteTextSmall}"/>
+            <Label 
+                Grid.Row="2"
+                Text="{Binding Email}"
+                Style="{StaticResource WhiteTextMedium}"/>
+            <ImageButton
+                Grid.Column="2"
+                Grid.Row="2"
+                Style="{StaticResource EditButton}"
+                Command="{Binding ChangeEmailCommand}"
+                HorizontalOptions="End"/>
+            <Line
+                Grid.Row="3"
+                Grid.ColumnSpan="3"
+                Fill="White"
+                X1="40"
+                X2="250"/>
+        </Grid>
+        <Grid
+            RowDefinitions="Auto,Auto,Auto"
+            ColumnDefinitions="Auto,Auto,*,Auto"
+            ColumnSpacing="25">
+            <Label
+                Text="Data Loading"
+                Grid.ColumnSpan="2"
+                Style="{StaticResource HeaderLabel}"/>
+            <Label
+                Text="Load period past(days):"
+                Grid.Row="1"
+                VerticalOptions="Center"
+                Style="{StaticResource WhiteTextMedium}"/>
+            <Picker
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Style="{StaticResource PickerWhiteText}"
+                SelectedIndex="{Binding LoadPerPast}"
+                ItemsSource="{Binding loadPerPickerContent}"/>
+            <ImageButton
+                Grid.Row="1"
+                Grid.Column="3"
+                VerticalOptions="Center"
+                Command="{Binding SaveButtonCommand}"
+                Style="{StaticResource EditButton}"/>
+            <Label
+                Grid.Row="2"
+                VerticalOptions="Center"
+                Text="Load period future(days): "
+                Style="{StaticResource WhiteTextMedium}"/>
+            <Picker
+                Grid.Row="2"
+                Grid.Column="1"
+                VerticalOptions="Center"
+                Style="{StaticResource PickerWhiteText}"
+                SelectedIndex="{Binding LoadPerFuture}"
+                ItemsSource="{Binding loadPerPickerContent}"/>
+        </Grid>
+        <Grid
+            RowDefinitions="Auto,Auto,Auto"
+            ColumnDefinitions="Auto,*,Auto">
+            <Label
+                Text="Permissions:"
+                Style="{StaticResource HeaderLabel}"/>
+            <Label 
+                   VerticalOptions="Center"
+                   Text="Geolocation tracking:"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   Style="{StaticResource WhiteTextMedium}"/>
+            <Switch
+                VerticalOptions="Center"
+                Grid.Column="2"
+                Grid.Row="1"
+                IsToggled="{Binding GeoLocationPermission}"/>
+            <Label 
+                VerticalOptions="Center"
+                Grid.Column="0"
+                Grid.Row="2"
+                Text="Notifications"
+                Style="{StaticResource WhiteTextMedium}"/>
+            <Switch
+                VerticalOptions="Center"
+                Grid.Column="2"
+                Grid.Row="2"
+                IsToggled="{Binding GeoLocationPermission}"/>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
