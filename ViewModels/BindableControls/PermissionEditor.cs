@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls
 {

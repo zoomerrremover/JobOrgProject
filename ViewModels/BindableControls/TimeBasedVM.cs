@@ -4,8 +4,8 @@ using CommunityToolkit.Mvvm.Input;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
+using TheJobOrganizationApp.Models.UtilityClasses;
 using TheJobOrganizationApp.Services.Interfaces;
-using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;

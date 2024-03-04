@@ -3,7 +3,7 @@ using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 
 namespace TheJobOrganizationApp.ViewModels.Base
 {

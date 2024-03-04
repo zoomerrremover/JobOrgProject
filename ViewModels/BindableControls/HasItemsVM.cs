@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.BindableControls;

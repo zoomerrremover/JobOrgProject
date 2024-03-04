@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
+using TheJobOrganizationApp.Models.UtilityClasses;
 using TheJobOrganizationApp.Services;
 using TheJobOrganizationApp.Services.Interfaces;
-using TheJobOrganizationApp.Services.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 
 namespace TheJobOrganizationApp.ViewModels.MainViewModels

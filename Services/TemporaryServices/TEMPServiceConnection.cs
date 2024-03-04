@@ -1,6 +1,6 @@
-﻿using TheJobOrganizationApp.Services.UtilityClasses;
-using TheJobOrganizationApp.Models;
+﻿using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Services.Interfaces;
+using TheJobOrganizationApp.Models.UtilityClasses;
 
 namespace TheJobOrganizationApp.Services.TemporaryServices
 {

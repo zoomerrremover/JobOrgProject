@@ -1,6 +1,6 @@
 ﻿
 using TheJobOrganizationApp.Atributes;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 
 namespace TheJobOrganizationApp.Models;
 

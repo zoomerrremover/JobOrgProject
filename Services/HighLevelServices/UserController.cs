@@ -1,8 +1,8 @@
 ﻿using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Models.Misc;
+using TheJobOrganizationApp.Models.UtilityClasses;
 using TheJobOrganizationApp.Services.Interfaces;
-using TheJobOrganizationApp.Services.UtilityClasses;
 
 namespace TheJobOrganizationApp.Services.HighLevelServices
 {

@@ -2,7 +2,7 @@
 using TheJobOrganizationApp.Models;
 using TheJobOrganizationApp.Models.Interfaces;
 using TheJobOrganizationApp.Models.Misc;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 
 namespace TheJobOrganizationApp.Services.Interfaces
 {

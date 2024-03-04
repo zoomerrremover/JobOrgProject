@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using TheJobOrganizationApp.Atributes;
 using TheJobOrganizationApp.Models;
-using TheJobOrganizationApp.Services.UtilityClasses;
+using TheJobOrganizationApp.Models.UtilityClasses;
 using TheJobOrganizationApp.ViewModels.Base;
 using TheJobOrganizationApp.ViewModels.BindableControls;
 namespace TheJobOrganizationApp.ViewModels.DetailsViewModels;
