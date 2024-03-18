@@ -12,12 +12,12 @@
         <VerticalStackLayout.Resources>
             <view:Styles/>
         </VerticalStackLayout.Resources>
+        <Line
+            Stroke="#468FAF"
+            X1="0"
+            X2="335"/>
         <Label
             Style="{StaticResource WhiteTextMedium}"
             Text="{Binding Message}"/>
-        <Line
-            Stroke="#468FAF"
-            X1="15"
-            X2="335"/>
     </VerticalStackLayout>
 </DataTemplate>

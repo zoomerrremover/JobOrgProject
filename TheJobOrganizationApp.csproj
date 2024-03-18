@@ -39,12 +39,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\Fonts\sf-pro-display-cufonfonts.zip" />
+    <None Remove="Resources\Icons\arrowleft24icon.png" />
+    <None Remove="Resources\Icons\arrowleft35icon.png" />
+    <None Remove="Resources\Icons\arrowright24icon.png" />
+    <None Remove="Resources\Icons\arrowright35icon.png" />
+    <None Remove="Resources\Icons\edit24icon.png" />
+    <None Remove="Resources\Icons\edit35icon.png" />
+    <None Remove="Resources\Icons\edit48icon.png" />
+    <None Remove="Resources\Icons\plus24icon.png" />
+    <None Remove="Resources\Icons\plus35icon.png" />
+    <None Remove="Resources\Icons\plus48icon.png" />
+    <None Remove="Resources\Icons\useredit24icon.png" />
+    <None Remove="Resources\Icons\useredit35icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Icons\arrowleft24icon.png" />
+    <MauiImage Include="Resources\Icons\arrowleft35icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Icons\arrowright24icon.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
     <PackageReference Include="CommunityToolkit.Maui.Maps" Version="2.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.3" />
     <PackageReference Include="Mopups" Version="1.2.0" />
     <PackageReference Include="Syncfusion.Maui.Scheduler" Version="23.1.43" />
@@ -172,5 +199,16 @@
     <MauiXaml Update="View\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+  </ItemGroup>
+  <ItemGroup>
+    <MauiImage Include="Resources\Icons\arrowright35icon.png" />
+    <MauiImage Include="Resources\Icons\edit24icon.png" />
+    <MauiImage Include="Resources\Icons\edit35icon.png" />
+    <MauiImage Include="Resources\Icons\edit48icon.png" />
+    <MauiImage Include="Resources\Icons\plus24icon.png" />
+    <MauiImage Include="Resources\Icons\plus35icon.png" />
+    <MauiImage Include="Resources\Icons\plus48icon.png" />
+    <MauiImage Include="Resources\Icons\useredit24icon.png" />
+    <MauiImage Include="Resources\Icons\useredit35icon.png" />
   </ItemGroup>
 </Project>

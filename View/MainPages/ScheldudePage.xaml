@@ -7,24 +7,61 @@
              xmlns:scheduler ="clr-namespace:Syncfusion.Maui.Scheduler;assembly=Syncfusion.Maui.Scheduler"
              xmlns:view ="clr-namespace:TheJobOrganizationApp.View"
              Background="#012A4A">
-    <ContentPage.Resources>
-        <view:Styles/>
-    </ContentPage.Resources>
     <Grid 
-          RowDefinitions="45,*"
           ColumnDefinitions="*,*"
           ColumnSpacing="20"
           Padding="20">
-            
-            <Button Text="Pick workers"
-                    Grid.Column="0"
-                    Command="{Binding WorkerPickerCommand}"/>
-            <Button Text="Create appointment"
-                    Grid.Column="1"
-                    Command="{Binding WorkerPickerCommand}"/>
+        <Grid.Resources>
+            <view:Styles/>
+        </Grid.Resources>
         <scheduler:SfScheduler Grid.Row="1"
                                Grid.ColumnSpan="4"
-                               AppointmentsSource="{Binding appointments}">
+                               AppointmentsSource="{Binding appointments}"
+                               CellBorderBrush="#CAF0F8"
+                               TodayHighlightBrush="#0077B6">
+            <scheduler:SfScheduler.DaysView>
+                <scheduler:SchedulerDaysView
+                    CurrentTimeIndicatorBrush="#CAF0F8">
+                    <scheduler:SchedulerDaysView.TimeRulerTextStyle>
+                        <scheduler:SchedulerTextStyle FontSize="15"
+                                                      TextColor="#CAF0F8"
+                                                      FontFamily="MainFont"/>
+                    </scheduler:SchedulerDaysView.TimeRulerTextStyle>
+                </scheduler:SchedulerDaysView>
+            </scheduler:SfScheduler.DaysView>
+            <scheduler:SfScheduler.HeaderView>
+                <scheduler:SchedulerHeaderView>
+                    <scheduler:SchedulerHeaderView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid
+                                ColumnDefinitions="Auto,5,Auto,*,Auto">
+                                <HorizontalStackLayout>
+                                    <ImageButton Style="{StaticResource ArrowLeft}"/>
+                                    <ImageButton Style="{StaticResource ArrowRight}"/>
+                                </HorizontalStackLayout>
+                                <Label x:Name="label"
+                                       Grid.Column="2"
+                                       Style="{StaticResource HeaderLabel}"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat = "{}{0:MMM dd, yyyy}">
+                                            <Binding Path="StartDate" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <HorizontalStackLayout
+                                    Grid.Column="4">
+                                    <ImageButton Style="{StaticResource AddButton}"/>
+                                    <ImageButton Style="{StaticResource editWorkers}"
+                                                 Command="{Binding WorkerPickerCommand}"/>
+
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </scheduler:SchedulerHeaderView.HeaderTemplate>
+                </scheduler:SchedulerHeaderView>
+            </scheduler:SfScheduler.HeaderView>
         </scheduler:SfScheduler>
 
     </Grid>

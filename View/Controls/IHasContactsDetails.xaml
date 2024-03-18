@@ -11,21 +11,23 @@
     <VerticalStackLayout
         WidthRequest="300">
         <Grid
-                ColumnDefinitions="Auto,*,Auto">
+                ColumnDefinitions="Auto,*,Auto"
+                RowDefinitions="20,10">
         <Label
                         Style="{StaticResource WhiteTextSmall}"
                         Text="Contacts"
                         HorizontalOptions="Start"/>
-        <Button
+        <ImageButton
                     Style="{StaticResource EditButton}"
                     Grid.Column="2"
+                    Grid.RowSpan="2"
                     HorizontalOptions="End"
                     IsEnabled="{Binding EditPermission}"
                     Command="{Binding EditButtonPressedCommand}"/>
     </Grid>
     <Label
                 Style="{StaticResource WhiteTextMedium}"
-                Text="Cell"/>
+                Text="Cell:"/>
     <Entry
                 Placeholder="Enter the cell phone number..."
                 Style="{StaticResource EntryWhiteText}"
@@ -35,7 +37,7 @@
                 Text="{Binding Cell}"/>
     <Label
                 Style="{StaticResource WhiteTextMedium}"
-                Text="Email"/>
+                Text="Email:"/>
     <Entry
                 Placeholder="Enter the buissness phone number..."
                 Style="{StaticResource EntryWhiteText}"
@@ -45,7 +47,7 @@
                 Text="{Binding Email}"/>
     <Label
                 Style="{StaticResource WhiteTextMedium}"
-                Text="Buisiness"/>
+                Text="Buisiness:"/>
     <Entry
                 Placeholder="Enter the email phone number..."
                 Style="{StaticResource EntryWhiteText}"
@@ -55,7 +57,7 @@
                 Text="{Binding Buisness}"/>
         <Line
                         Stroke="#468FAF"
-                        X1="15"
+                        X1="0"
                         X2="335"/>
     </VerticalStackLayout>
 </ContentView>

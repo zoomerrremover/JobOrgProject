@@ -9,48 +9,27 @@
     </LinearGradientBrush>
     <Style x:Key="HeaderLabel" TargetType="Label">
         <Setter Property="FontSize" Value="30" />
-        <Setter Property ="TextColor" Value="#CAF0F8"></Setter>
-        <Setter Property="FontFamily" Value="BoldFont"></Setter>
+        <Setter Property ="TextColor" Value="#CAF0F8"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
     </Style>
     <Style x:Key="WhiteTextSmall" TargetType="Label">
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontFamily" Value="MainFont"/>
     </Style>
     <Style x:Key="WhiteTextMedium" TargetType="Label">
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontFamily" Value="MainFont"/>
     </Style>
     <Style x:Key="WhiteHeader" TargetType="Label">
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
     </Style>
+
     <Style x:Key="Block01" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="#013A63"/>
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
-    <Style x:Key="Block02" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#01497C"/>
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
-    <Style x:Key="Block03" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#01497C"/>
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
-    <Style x:Key="Block04" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#014F86"/>
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
-    <Style x:Key="Block05" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#2A6F97"/>
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="CornerRadius" Value="10"/>
-    </Style>
-    <Style x:Key="Block06" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="#3C3744"/>
         <Setter Property="BorderColor" Value="Transparent"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
@@ -58,35 +37,69 @@
         <Setter Property="TextColor" Value="#CAF0F8"/>
         <Setter Property="PlaceholderColor" Value="#89C2D9"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
     </Style>
     <Style x:Key="DateEditorWhiteText" TargetType="DatePicker">
+        <Setter Property="FontFamily" Value="BoldFont"/>
         <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="TimeEditorWhiteText" TargetType="TimePicker">
+        <Setter Property="FontFamily" Value="BoldFont"/>
         <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="PickerWhiteText" TargetType="Picker">
+        <Setter Property="FontFamily" Value="BoldFont"/>
         <Setter Property="TextColor" Value="#CAF0F8"/>
     </Style>
     <Style x:Key="AddButton" TargetType="ImageButton">
         <Setter Property="WidthRequest" Value="30"/>
         <Setter Property="HeightRequest" Value="30"/>
-        <Setter Property="BackgroundColor" Value="#014F86"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Source" Value="../Resources/Icons/plus24icon.png"/>
+        <Setter Property="Aspect" Value="AspectFit"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="EditButton" TargetType="ImageButton">
         <Setter Property="WidthRequest" Value="30"/>
         <Setter Property="HeightRequest" Value="30"/>
-        <Setter Property="BackgroundColor" Value="#48CAE4"/>
+        <Setter Property="Aspect" Value="AspectFit"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Source" Value="../Resources/Icons/edit24icon.png"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="ArrowRight" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="Aspect" Value="AspectFit"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Source" Value="../Resources/Icons/arrowright24icon.png"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="ArrowLeft" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="Aspect" Value="AspectFit"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Source" Value="../Resources/Icons/arrowleft24icon.png"/>
+        <Setter Property="CornerRadius" Value="10"/>
+    </Style>
+    <Style x:Key="editWorkers" TargetType="ImageButton">
+        <Setter Property="WidthRequest" Value="30"/>
+        <Setter Property="HeightRequest" Value="30"/>
+        <Setter Property="Aspect" Value="AspectFit"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Source" Value="../Resources/Icons/useredit24icon.png"/>
         <Setter Property="CornerRadius" Value="10"/>
     </Style>
     <Style x:Key="TextButton" TargetType="Button">
         <Setter Property="TextColor" Value="#CAF0F8"></Setter>
         <Setter Property="BackgroundColor" Value="#023E8A"/>
         <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="FontFamily" Value="BoldFont"/>
     </Style>
     <Style x:Key="WhiteTextEditor" TargetType="Editor">
         <Setter Property="TextColor" Value="#CAF0F8"></Setter>
+        <Setter Property="FontFamily" Value="BoldFont"/>
     </Style>
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
         <Setter Property="Color" Value="#CAF0F8"></Setter>

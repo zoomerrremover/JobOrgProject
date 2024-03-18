@@ -7,7 +7,7 @@
              xmlns:view="clr-namespace:TheJobOrganizationApp.View"
              xmlns:viewmodels="clr-namespace:TheJobOrganizationApp.ViewModels.MainViewModels">
     <Grid
-            ColumnDefinitions="100,*,60,60"
+            ColumnDefinitions="100,*,Auto,10,Auto"
             RowDefinitions="Auto,10"
             Margin="10"
             RowSpacing="15">
@@ -27,17 +27,18 @@
                 Style="{StaticResource WhiteTextMedium}"
                 Grid.Column="2"
                 MaxLines="1"
+                MaximumWidthRequest="70"
                 Text="{Binding item.Qty}"/>
         <Label 
                 Style="{StaticResource WhiteTextMedium}"
-                Grid.Column="3"
+                Grid.Column="4"
                 MaxLines="1"
                 Text="{Binding item.UnitsName}"/>
         <Line
                         Grid.Row="1"
-                        Grid.ColumnSpan="4"
+                        Grid.ColumnSpan="5"
                         Stroke="#468FAF"
-                        X1="15"
+                        X1="0"
                         X2="335"/>
     </Grid>
 </DataTemplate>

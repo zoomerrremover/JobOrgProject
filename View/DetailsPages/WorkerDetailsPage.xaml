@@ -45,16 +45,10 @@
                     Grid.Column="1"
                     Grid.Row="0"
                     ColumnDefinitions="100,*,120"
-                    RowDefinitions="15,10,100,5,75"
+                    RowDefinitions="16,0,100,0,80,Auto"
                     RowSpacing="10"
                     ColumnSpacing="5"
                     Padding="10">
-                <Line
-                    Stroke="#014F86"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="3"
-                    X1="5"
-                    X2="350"/>
                 <Label
                         Style="{StaticResource WhiteTextSmall}"
                         Text="Current Task:"
@@ -79,12 +73,6 @@
                             MaxLines="2"
                             Text="{Binding TaskJobText}"/>
                 </VerticalStackLayout>
-                <Line
-                    Stroke="#468FAF"
-                    Grid.Row="3"
-                    Grid.ColumnSpan="3"
-                    X1="15"
-                    X2="335"/>
                 <HorizontalStackLayout
                             Grid.ColumnSpan="3"
                             HorizontalOptions="Center"
@@ -115,6 +103,12 @@
                         </VerticalStackLayout>
                     </Frame>
                 </HorizontalStackLayout>
+                <Line
+                    Stroke="#468FAF"
+                    Grid.Row="5"
+                    Grid.ColumnSpan="3"
+                    X1="0"
+                    X2="335"/>
             </Grid>
             <controls:IHasContactsDetails
                 BindingContext="{Binding HasContactsVM}"/>

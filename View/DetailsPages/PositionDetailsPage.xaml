@@ -22,12 +22,13 @@
             <controls:BaseDetails/>
             <Grid
                     ColumnDefinitions="Auto,*,30"
-                    RowDefinitions="30,*"
+                    RowDefinitions="20,0,*"
                     RowSpacing ="20">
                 <Grid.Resources>
                     <view:Styles/>
                 </Grid.Resources>
                 <Label
+                        Padding="30,0,0,0"
                         Text="Permissions"
                         Style="{StaticResource WhiteTextMedium}"/>
                 <ImageButton
@@ -36,14 +37,14 @@
                         IsEnabled="{Binding EditPermission}"
                         Style="{StaticResource EditButton}"/>
                 <Grid
-                        Grid.Row="1"
+                        Grid.Row="3"
                         Grid.ColumnSpan="3"
                         RowDefinitions="Auto,*,15,10"
                         ColumnDefinitions="130,Auto">
                     <HorizontalStackLayout
                         Grid.Column="1"
-                        Spacing="20"
-                        Padding="10">
+                        Spacing="25"
+                        Padding="27,0,0,0">
                         <Label
                             Style="{StaticResource WhiteTextSmall}"
                             Text="Create"/>

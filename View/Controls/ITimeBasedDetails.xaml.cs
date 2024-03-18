@@ -6,4 +6,9 @@ public partial class ITimeBasedDetails : ContentView
 	{
 		InitializeComponent();
 	}
+
+    private void Line_ChildAdded(object sender, ElementEventArgs e)
+    {
+
+    }
 }

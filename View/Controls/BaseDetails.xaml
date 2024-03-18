@@ -12,7 +12,7 @@
         Spacing="20">
         <Grid
                 ColumnDefinitions="Auto,190,*,30"
-                RowDefinitions="14,16,50,15,5,50,10"
+                RowDefinitions="20,10,50,20,5,50,10"
                 WidthRequest="300">
             <Label
                     Text="Name:"
@@ -37,7 +37,7 @@
                     Grid.ColumnSpan="2"
                     Grid.Row="5"
                     HorizontalOptions="Start"
-                    Style="{StaticResource WhiteTextMedium}"
+                    Style="{StaticResource WhiteTextSmall}"
                     Text="{Binding DisplayableID}"/>
             <ImageButton
                     Grid.Column="3"
@@ -49,14 +49,14 @@
             <Line
                         Grid.Row="7"
                         Grid.Column="0"
-                        Grid.ColumnSpan="3"
+                        Grid.ColumnSpan="4"
                         Stroke="#468FAF"
-                        X1="15"
-                        X2="335"/>
+                        X1="0"
+                        X2="400"/>
         </Grid>
         <Grid
                 WidthRequest="300"
-                RowDefinitions="14,16,5,150,15,10,10"
+                RowDefinitions="20,10,5,150,15,10,10"
                 ColumnDefinitions="Auto,*,30">
             <Label
                     Text="Description:"
@@ -82,7 +82,7 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Stroke="#468FAF"
-                        X1="15"
+                        X1="0   "
                         X2="335"/>
 
         </Grid>

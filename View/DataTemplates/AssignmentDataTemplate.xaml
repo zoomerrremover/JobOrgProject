@@ -27,17 +27,21 @@
                          Style="{StaticResource WhiteTextMedium }"/>
         <VerticalStackLayout Grid.Column="1"
                              Spacing="2"
-                                     VerticalOptions="Start"
+                              VerticalOptions="Start"
                              Margin="5">
             <Label       Text="{Binding StartTime}"
-                         HorizontalOptions="Center"
+                         HorizontalOptions="Start"
+                         WidthRequest="70"
+                         MaxLines="2"
                          Style="{StaticResource WhiteTextSmall}"/>
             <Line
-                        Stroke="#468FAF"
-                        X1="0"
-                        X2="75"/>
+                         Stroke="#468FAF"
+                         X1="0"
+                         X2="75"/>
             <Label       Text="{Binding FinishTime}"
-                         HorizontalOptions="Center"
+                         MaxLines="2"
+                         HorizontalOptions="Start"
+                         WidthRequest="70"
                          Style="{StaticResource WhiteTextSmall}"/>
         </VerticalStackLayout>
         <CollectionView
