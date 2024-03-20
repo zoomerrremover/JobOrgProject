@@ -7,20 +7,15 @@ CRManager is an innovative application designed to streamline the interaction be
 # Current progress:
 
 ## App UI and main functional:
-
-### Schedule page:
-
-[[Screenshot_1710794666 1.png]]
-### Details page :
-
-[[Screenshot_1710794697 1.png]]
-[[Screenshot_1710794700 1.png]]
-### Search page:
-[[Screenshot_1710794680 1.png]]
-
-
+### Schedule page
+![Schedule page](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794666%201.png)
+### Search page :
+![Search page](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794680%201.png)
+### Details page:
+![Details page name and description](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794697.png)
+![Details pagee]](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794700.png)
 ### Settings page:
-[[Screenshot_1710794721 2.png]]
+![Settings](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794721%201.png)
 ## Features
 ### Scheduler
 
