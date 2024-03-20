@@ -13,7 +13,7 @@ CRManager is an innovative application designed to streamline the interaction be
 ![Search page](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794680%201.png)
 ### Details page:
 ![Details page name and description](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794697.png)
-![Details pagee]](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794700.png)
+![Details pagee](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794700.png)
 ### Settings page:
 ![Settings](https://github.com/zoomerrremover/JobOrgProject/blob/master/Screenshot_1710794721%201.png)
 ## Features
