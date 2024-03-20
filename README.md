@@ -10,17 +10,17 @@ CRManager is an innovative application designed to streamline the interaction be
 
 ### Schedule page:
 
-![[Screenshot_1710794666 1.png]]
+[[Screenshot_1710794666 1.png]]
 ### Details page :
 
-![[Screenshot_1710794697 1.png]]
-![[Screenshot_1710794700 1.png]]
+[[Screenshot_1710794697 1.png]]
+[[Screenshot_1710794700 1.png]]
 ### Search page:
-![[Screenshot_1710794680 1.png]]
+[[Screenshot_1710794680 1.png]]
 
 
 ### Settings page:
-![[Screenshot_1710794721 2.png]]
+[[Screenshot_1710794721 2.png]]
 ## Features
 ### Scheduler
 
